@@ -1,0 +1,10 @@
+parameters:
+    level: 1
+    paths:
+        - app
+    excludePaths:
+        analyse:
+            - tests/*
+            - vendor/*
+    fileExtensions:
+        - php
