@@ -5,6 +5,7 @@
 
 - PHP >= 7.4
 - MySQL >= 8
+- NodeJs >= 14
 
 ## Coding standard
 
@@ -20,10 +21,17 @@ Global installation of composer is recommended [https://getcomposer.org/doc/00-i
 - `$ composer migrate`: runs all of the available migrations
 - `$ composer migrate:rollback`: rolls back *the last* batch of migrations
 - `$ composer migration:make <name>`: creates new migration
+- `$ composer stan`: perform analysis on your code
 
 ### Important!  
 
-Make sure you configure your local .env configuration values (see .env.example)
+- After configuring local repo, make sure you run `composer install` to install required packages
+- Make sure you configure your local .env configuration values (see .env.example)
+
+### Rules of thumb
+
+- Prefix all your commits with jira ticket ID and write description about work you did - ex. *SIM-100 Implemented some cool feature* 
+- Prefix all your MRs with jira ticket ID
 
 ## Tools included
 

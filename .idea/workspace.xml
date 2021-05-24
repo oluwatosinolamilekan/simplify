@@ -19,141 +19,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b12a0a5f-0d49-4124-b1f3-bdff2e267e03" name="Console command" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Console/Commands/CreateAdminUser.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
+    <list default="true" id="b12a0a5f-0d49-4124-b1f3-bdff2e267e03" name="README" comment="SIM-11 Automate code formatting with lint-staged and husky">
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.php_cs_fixer.php" beforeDir="false" afterPath="$PROJECT_DIR$/.php_cs_fixer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <list id="932c1fdb-c4e2-4de8-924e-d6ee31297a60" name="Default Changelist" comment="SIM-11 App skeleton and configuration">
-      <change afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.php_cs_fixer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.styleci.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/EncryptCookies.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/PreventRequestsDuringMaintenance.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/TrimStrings.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/TrustHosts.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/TrustProxies.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Providers/BroadcastServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/artisan" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/app.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/cache/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/blameable.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/broadcasting.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/cache.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/cors.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/hashing.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/logging.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/mail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/queue.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/services.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/session.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/phpstan.neon.dist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/phpunit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/.htaccess" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/web.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/css/app.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/en/auth.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/en/pagination.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/en/passwords.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/en/validation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/channels.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/console.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/framework/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/framework/cache/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/framework/cache/data/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/framework/testing/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/framework/views/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/logs/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/CreatesApplication.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/Feature/ExampleTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/TestCase.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/Unit/ExampleTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
-    <list id="b4b9ccd0-f083-4687-b550-35eac3469475" name="Migrations" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Enums/Role.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Enums/Status.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_05_20_171109_create_user_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_05_20_181207_create_company_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_05_20_182934_create_user_company_access_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_05_21_151251_create_address_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_05_21_153224_create_contact_details_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_05_23_153948_create_bank_information_table.php" afterDir="false" />
-    </list>
-    <list id="b88ee466-b01f-442e-9434-b52fc19d0b41" name="Models" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Models/Address.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/BankInformation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Company.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/ContactDetail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Model.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Traits/UsesTimestampScopes.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/UserCompanyAccess.php" afterDir="false" />
-    </list>
-    <list id="49165fc6-68c7-4cb8-9332-460843003135" name="Prequel" comment="">
-      <change afterPath="$PROJECT_DIR$/config/prequel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/prequel/app.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/prequel/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/prequel/favicon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/prequel/loader.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/prequel/prequel.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/vendor/prequel/de/lang.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/vendor/prequel/en/lang.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/vendor/prequel/es/lang.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/vendor/prequel/fi/lang.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/vendor/prequel/hu/lang.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/vendor/prequel/id/lang.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/vendor/prequel/nl/lang.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/vendor/prequel/pt-BR/lang.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/vendor/prequel/sv/lang.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/vendor/prequel/zh_CN/lang.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/vendor/prequel/zh_TW/lang.php" afterDir="false" />
-    </list>
-    <list id="cc27ef7d-8c2c-42c6-ba17-219f0e886c1d" name="Telescope" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Providers/TelescopeServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/telescope.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/telescope/app-dark.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/telescope/app.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/telescope/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/telescope/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/telescope/mix-manifest.json" afterDir="false" />
-    </list>
+    <list id="49165fc6-68c7-4cb8-9332-460843003135" name="Prequel" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -414,7 +292,9 @@
     <MESSAGE value="Prequel" />
     <MESSAGE value="Migrations" />
     <MESSAGE value="SIM-11 App skeleton and configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="SIM-11 App skeleton and configuration" />
+    <MESSAGE value="README" />
+    <MESSAGE value="SIM-11 Automate code formatting with lint-staged and husky" />
+    <option name="LAST_COMMIT_MESSAGE" value="SIM-11 Automate code formatting with lint-staged and husky" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -434,18 +314,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1621858032983" />
-    <state x="579" y="107" key="CommitChangelistDialog2" timestamp="1621858989920">
+    <state x="579" y="107" key="CommitChangelistDialog2" timestamp="1621896525015">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="579" y="107" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1621858989920" />
-    <state x="736" y="432" key="ComposerInitDialogKey" timestamp="1621813731532">
+    <state x="579" y="107" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1621896525015" />
+    <state x="736" y="432" key="ComposerInitDialogKey" timestamp="1621893553600">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="736" y="432" key="ComposerInitDialogKey/0.0.1920.1040@0.0.1920.1040" timestamp="1621813731532" />
-    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1621812206480">
+    <state x="736" y="432" key="ComposerInitDialogKey/0.0.1920.1040@0.0.1920.1040" timestamp="1621893553600" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1621896595814">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1621812206480" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1621896595814" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1621858114586">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
