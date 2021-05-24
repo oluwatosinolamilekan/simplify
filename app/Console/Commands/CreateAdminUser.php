@@ -63,8 +63,6 @@ class CreateAdminUser extends Command
 
         if ($this->confirm('Do you wish to continue?', true))
         {
-
-
             if (!User::create($attributes)) {
                 $this->error('Something went wrong while trying to create user!');
                 return 0;
