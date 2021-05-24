@@ -23,6 +23,6 @@
         }
     },
     "lint-staged": {
-        "*.php": "./vendor/bin/php-cs-fixer --config=.php_cs_fixer.php --allow-risky=yes fix"
+        "*.php": ["composer fix"]
     }
 }
