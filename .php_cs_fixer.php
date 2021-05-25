@@ -151,4 +151,5 @@ return $config->setRules($rules)
     ->setFinder($finder)
     ->setLineEnding(PHP_EOL)
     ->setRiskyAllowed(true)
+    ->setLineEnding(PHP_EOL)
     ->setUsingCache(true);

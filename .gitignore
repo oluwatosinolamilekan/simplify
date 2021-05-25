@@ -1,6 +1,9 @@
 /node_modules
 /public/hot
 /public/storage
+/public/vendor/prequel
+/public/vendor/telescope
+/resources/lang/vendor/prequel
 /storage/*.key
 /vendor
 .env
