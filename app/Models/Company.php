@@ -38,9 +38,6 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|Model createdBetween(string $from, string $to)
  * @method static Builder|Model updatedBetween(string $from, string $to)
  * @mixin Eloquent
- * @method static Builder|Company newModelQuery()
- * @method static Builder|Company newQuery()
- * @method static Builder|Company query()
  */
 class Company extends Model
 {
