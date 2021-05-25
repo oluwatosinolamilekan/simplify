@@ -50,6 +50,11 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
+        "install-tools": [
+            "php artisan prequel:install",
+            "php artisan telescope:install",
+            "php artisan migrate"
+        ],
         "start": "php artisan serve",
         "fix": "./vendor/bin/php-cs-fixer --config=.php_cs_fixer.php --allow-risky=yes fix",
         "stan": "php ./vendor/bin/phpstan analyze --memory-limit=10 -l 1",
