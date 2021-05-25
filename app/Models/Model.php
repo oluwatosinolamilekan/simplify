@@ -15,6 +15,7 @@ use App\Models\Traits\UsesTimestampScopes;
 use BenSampo\Enum\Traits\CastsEnums;
 use Closure;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
@@ -84,6 +85,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
  * @method static QueryBuilder whereYear($column, $operator, $value)
  * @method static QueryBuilder join($table, $first, $operator = null, $second = null, $type = 'inner', $where = false)
  * @method static QueryBuilder latest($column = 'created_at')
+ * @method static Builder|Model createdBetween(string $from, string $to)
+ * @method static Builder|User newModelQuery()
+ * @method static Builder|User newQuery()
+ * @method static Builder|User query()
+ * @method static Builder|Model updatedBetween(string $from, string $to)
  *
  * @method mixed getMeta(string $key, $default = null)
  * @method mixed updateMeta(string $key, $value, bool $save = true)

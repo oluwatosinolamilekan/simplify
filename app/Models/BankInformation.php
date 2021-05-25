@@ -12,6 +12,8 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Carbon\Carbon;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
@@ -30,6 +32,17 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @property int $updated_by
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
+ * @property-read Company $company
+ * @property-read User $creator
+ * @property-read User|null $updater
+ * @method static EloquentBuilder|Model createdBetween(string $from, string $to)
+ * @method static Builder|BankInformation createdBy($userId)
+ * @method static Builder|BankInformation newModelQuery()
+ * @method static Builder|BankInformation newQuery()
+ * @method static Builder|BankInformation query()
+ * @method static EloquentBuilder|Model updatedBetween(string $from, string $to)
+ * @method static Builder|BankInformation updatedBy($userId)
+ * @mixin Eloquent
  */
 class BankInformation extends Model
 {

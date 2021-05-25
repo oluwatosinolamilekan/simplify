@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -25,6 +26,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property array|null $notes
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
+ * @property-read Company $company
+ * @method static EloquentBuilder|Model createdBetween(string $from, string $to)
+ * @method static Builder|ContactDetail newModelQuery()
+ * @method static Builder|ContactDetail newQuery()
+ * @method static Builder|ContactDetail query()
+ * @method static EloquentBuilder|Model updatedBetween(string $from, string $to)
+ * @mixin \Eloquent
  */
 class ContactDetail extends Model
 {

@@ -13,7 +13,7 @@ namespace App\Models;
 
 use App\Enums\Role;
 use App\Enums\Status;
-use Carbon\Carbon;
+use Eloquent;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -22,27 +22,37 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 
 /**
- * Class User.
+ * App\Models\User.
  *
  * @property int $id
- * @property string $first_name
- * @property string $last_name
+ * @property string|null $first_name
+ * @property string|null $last_name
  * @property string $email
  * @property string $password
- * @property Status $status
- * @property Role $role
- * @property string $2fa_key
- * @property Status $2fa_enabled
+ * @property int $status
+ * @property int $role
+ * @property int $2fa_enabled
+ * @property string|null $2fa_key
  * @property array|null $meta
+ * @property string|null $remember_token
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
- *
- * @property string $full_name
- *
- * @method static User active()
+ * @property-read string $full_name Get User's full name
+ * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @method static Builder|User active()
+ * @method static EloquentBuilder|Model createdBetween(string $from, string $to)
+ * @method static Builder|User newModelQuery()
+ * @method static Builder|User newQuery()
+ * @method static Builder|User query()
+ * @method static EloquentBuilder|Model updatedBetween(string $from, string $to)
+ * @mixin Eloquent
  */
 class User extends Model implements
     AuthenticatableContract,
@@ -117,6 +127,8 @@ class User extends Model implements
     ];
 
     /**
+     * @comment Get User's full name
+     *
      * @return string
      */
     public function getFullNameAttribute(): string

@@ -15,6 +15,7 @@ use App\Enums\Role;
 use App\Enums\Status;
 use Awobaz\Compoships\Compoships;
 use Carbon\Carbon;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,8 +34,19 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @property int $updated_by
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
- *
  * @method static UserCompanyAccess active()
+ * @property-read Company $company
+ * @property-read User $creator
+ * @property-read User $updater
+ * @property-read User $user
+ * @method static EloquentBuilder|Model createdBetween(string $from, string $to)
+ * @method static Builder|UserCompanyAccess createdBy($userId)
+ * @method static Builder|UserCompanyAccess newModelQuery()
+ * @method static Builder|UserCompanyAccess newQuery()
+ * @method static Builder|UserCompanyAccess query()
+ * @method static EloquentBuilder|Model updatedBetween(string $from, string $to)
+ * @method static Builder|UserCompanyAccess updatedBy($userId)
+ * @mixin Eloquent
  */
 class UserCompanyAccess extends Model
 {

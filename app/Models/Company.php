@@ -13,6 +13,7 @@ namespace App\Models;
 
 use App\Enums\Status;
 use Carbon\Carbon;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
@@ -29,11 +30,17 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @property int $updated_by
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
- *
  * @property User $creator
  * @property User $updater
- *
  * @method static Company active()
+ * @method static Builder|Company createdBy($userId)
+ * @method static Builder|Company updatedBy($userId)
+ * @mixin Eloquent
+ * @method static EloquentBuilder|Model createdBetween(string $from, string $to)
+ * @method static Builder|Company newModelQuery()
+ * @method static Builder|Company newQuery()
+ * @method static Builder|Company query()
+ * @method static EloquentBuilder|Model updatedBetween(string $from, string $to)
  */
 class Company extends Model
 {
