@@ -1,6 +1,9 @@
 /node_modules
 /public/hot
 /public/storage
+/public/vendor/prequel
+/public/vendor/telescope
+/resources/lang/vendor/prequel
 /storage/*.key
 /vendor
 .env
@@ -8,6 +11,8 @@
 .phpunit.result.cache
 docker-compose.override.yml
 .idea
+.idea/
+.idea/workspace.xml
 .php-cs-fixer.cache
 Homestead.json
 Homestead.yaml
