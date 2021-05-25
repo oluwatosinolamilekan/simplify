@@ -27,6 +27,13 @@ Global installation of composer is recommended [https://getcomposer.org/doc/00-i
 
 - After configuring local repo, make sure you run `composer install` to install required packages and `composer install-tools` to run commands for dev tools installation
 - Make sure you configure your local .env configuration values (see .env.example)
+- If husky & lint-staged pre-commit hooks aren't triggering (common under Windows - see [issue](https://github.com/sapegin/mrm/issues/168)):
+ 
+```
+npm install mrm mrm-task-lint-staged --save-dev
+npx mrm lint-staged
+npm uninstall mrm mrm-task-lint-staged
+```
 
 ### Rules of thumb
 

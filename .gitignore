@@ -10,7 +10,6 @@
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml
-.idea
 .idea/
 .idea/workspace.xml
 .php-cs-fixer.cache
