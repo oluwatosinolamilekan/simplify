@@ -14,9 +14,8 @@ namespace App\Enums;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static OptionOne()
+ * @method static static Administrator()
  * @method static static OptionTwo()
- * @method static static OptionThree()
  */
 final class Role extends Enum
 {
