@@ -35,8 +35,8 @@ use Illuminate\Support\Carbon;
  * @property string|null $last_name
  * @property string $email
  * @property string $password
- * @property int $status
- * @property int $role
+ * @property Status $status
+ * @property Role $role
  * @property int $2fa_enabled
  * @property string|null $2fa_key
  * @property array|null $meta
@@ -47,11 +47,8 @@ use Illuminate\Support\Carbon;
  * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @method static Builder|User active()
- * @method static EloquentBuilder|Model createdBetween(string $from, string $to)
- * @method static Builder|User newModelQuery()
- * @method static Builder|User newQuery()
- * @method static Builder|User query()
- * @method static EloquentBuilder|Model updatedBetween(string $from, string $to)
+ * @method static Builder|Model createdBetween(string $from, string $to)
+ * @method static Builder|Model updatedBetween(string $from, string $to)
  * @mixin Eloquent
  */
 class User extends Model implements

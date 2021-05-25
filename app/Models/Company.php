@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
- * Class Company.
+ * App\Models\Company.
  *
  * @property int $id
  * @property string $name
@@ -35,12 +35,12 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Company active()
  * @method static Builder|Company createdBy($userId)
  * @method static Builder|Company updatedBy($userId)
+ * @method static Builder|Model createdBetween(string $from, string $to)
+ * @method static Builder|Model updatedBetween(string $from, string $to)
  * @mixin Eloquent
- * @method static EloquentBuilder|Model createdBetween(string $from, string $to)
  * @method static Builder|Company newModelQuery()
  * @method static Builder|Company newQuery()
  * @method static Builder|Company query()
- * @method static EloquentBuilder|Model updatedBetween(string $from, string $to)
  */
 class Company extends Model
 {

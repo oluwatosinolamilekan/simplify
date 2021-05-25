@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
- * Class BankInformation.
+ * App\Models\BankInformation.
  *
  * @property int $id
  * @property int $company_id
@@ -35,12 +35,9 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @property-read Company $company
  * @property-read User $creator
  * @property-read User|null $updater
- * @method static EloquentBuilder|Model createdBetween(string $from, string $to)
+ * @method static Builder|Model createdBetween(string $from, string $to)
+ * @method static Builder|Model updatedBetween(string $from, string $to)
  * @method static Builder|BankInformation createdBy($userId)
- * @method static Builder|BankInformation newModelQuery()
- * @method static Builder|BankInformation newQuery()
- * @method static Builder|BankInformation query()
- * @method static EloquentBuilder|Model updatedBetween(string $from, string $to)
  * @method static Builder|BankInformation updatedBy($userId)
  * @mixin Eloquent
  */
