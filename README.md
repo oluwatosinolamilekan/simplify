@@ -12,7 +12,7 @@
 - PSR-12 [https://www.php-fig.org/psr/psr-12/](https://www.php-fig.org/psr/psr-12/)
 - Laravel Coding Style Ruleset
 
-## Composer Commands for 
+## Composer Commands
 
 Global installation of composer is recommended [https://getcomposer.org/doc/00-intro.md#globally](https://getcomposer.org/doc/00-intro.md#globally)
 
@@ -48,5 +48,12 @@ npm uninstall mrm mrm-task-lint-staged
 - [Telescope](https://github.com/laravel/telescope) debug assistant for the Laravel framework  
     - To enable Telescope set .env variable TELESCOPE_ENABLED to true
     - Access URL: [http://host/telescope](http://host/telescope)
+    
+## Useful commands
+
+- `php artisan ide-helper:models` - Generate phpdocs for model classes
+- `php artisan enum:annotate` - Annotate enums
+- `php artisan make:command <name>` - Create console command
+
 
 
