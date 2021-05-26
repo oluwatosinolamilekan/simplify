@@ -89,9 +89,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
  * @method static Builder|Model newQuery()
  * @method static Builder|Model query()
  * @method static Builder|Model updatedBetween(string $from, string $to)
- *
- * @method mixed getMeta(string $key, $default = null)
- * @method mixed updateMeta(string $key, $value, bool $save = true)
  */
 abstract class Model extends EloquentModel
 {

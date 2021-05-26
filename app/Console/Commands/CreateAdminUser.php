@@ -14,6 +14,7 @@ namespace App\Console\Commands;
 use App\Enums\Role;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class CreateAdminUser extends Command
@@ -54,7 +55,9 @@ class CreateAdminUser extends Command
         $attributes['first_name'] = $this->ask('Enter first name');
         $attributes['last_name'] = $this->ask('Enter last name');
         $attributes['email'] = $this->ask('Enter email');
-        $attributes['password'] = $this->ask('Enter password (leave blank for random generated)', Str::random(10));
+
+        $password = $this->ask('Enter password (leave blank for random generated)', Str::random(10));
+        $attributes['password'] = Hash::make($password);
 
         $role = Role::fromValue(Role::Administrator);
         $attributes['role'] = $role->value;
@@ -65,11 +68,12 @@ class CreateAdminUser extends Command
             return 0;
         }
 
-        // Confirm
-        $summary = "Last name: {$attributes['last_name']} | First name: {$attributes['first_name']} | Email: {$attributes['email']} | Password: {$attributes['password']} | Role: {$role->key}";
-
         $this->line('Please review user account details');
-        $this->line($summary);
+        $this->line("Last name: {$attributes['last_name']}");
+        $this->line("First name: {$attributes['first_name']}");
+        $this->line("Email: {$attributes['email']}");
+        $this->line("Password: {$password}");
+        $this->line("Role: {$role->key}");
 
         if ($this->confirm('Do you wish to continue?', true)) {
             if (! User::create($attributes)) {
