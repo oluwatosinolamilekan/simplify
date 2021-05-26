@@ -13,15 +13,12 @@ namespace App\Models;
 
 use App\Enums\Role;
 use App\Enums\Status;
+use App\Models\Traits\UsesTimestampScopes;
+use BenSampo\Enum\Traits\CastsEnums;
 use Eloquent;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
@@ -51,16 +48,17 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Model updatedBetween(string $from, string $to)
  * @mixin Eloquent
  */
-class User extends Model implements
-    AuthenticatableContract,
-    AuthorizableContract,
-    CanResetPasswordContract
+class User extends Authenticatable
 {
     use HasFactory;
     use Notifiable;
-    use Authenticatable;
-    use Authorizable;
-    use CanResetPassword;
+    use CastsEnums;
+    use UsesTimestampScopes;
+
+    /**
+     * @var bool do not allow timestamps management. They are already being done by database.
+     */
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -119,6 +117,7 @@ class User extends Model implements
      * @var array
      */
     protected $dates = [
+        'email_verified_at',
         'created_at',
         'updated_at',
     ];
