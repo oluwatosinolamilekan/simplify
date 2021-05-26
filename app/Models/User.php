@@ -117,7 +117,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = [
-        'email_verified_at',
         'created_at',
         'updated_at',
     ];
