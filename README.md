@@ -12,7 +12,7 @@
 - PSR-12 [https://www.php-fig.org/psr/psr-12/](https://www.php-fig.org/psr/psr-12/)
 - Laravel Coding Style Ruleset
 
-## Composer Commands for 
+## Composer Commands
 
 Global installation of composer is recommended [https://getcomposer.org/doc/00-intro.md#globally](https://getcomposer.org/doc/00-intro.md#globally)
 
@@ -27,6 +27,13 @@ Global installation of composer is recommended [https://getcomposer.org/doc/00-i
 
 - After configuring local repo, make sure you run `composer install` to install required packages and `composer install-tools` to run commands for dev tools installation
 - Make sure you configure your local .env configuration values (see .env.example)
+- If husky & lint-staged pre-commit hooks aren't triggering (common under Windows - see [issue](https://github.com/sapegin/mrm/issues/168)):
+ 
+```
+npm install mrm mrm-task-lint-staged --save-dev
+npx mrm lint-staged
+npm uninstall mrm mrm-task-lint-staged
+```
 
 ### Rules of thumb
 
@@ -41,5 +48,12 @@ Global installation of composer is recommended [https://getcomposer.org/doc/00-i
 - [Telescope](https://github.com/laravel/telescope) debug assistant for the Laravel framework  
     - To enable Telescope set .env variable TELESCOPE_ENABLED to true
     - Access URL: [http://host/telescope](http://host/telescope)
+    
+## Useful commands
+
+- `php artisan ide-helper:models` - Generate phpdocs for model classes
+- `php artisan enum:annotate` - Annotate enums
+- `php artisan make:command <name>` - Create console command
+
 
 

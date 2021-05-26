@@ -14,9 +14,8 @@ namespace App\Models;
 use App\Models\Traits\UsesTimestampScopes;
 use BenSampo\Enum\Traits\CastsEnums;
 use Closure;
-use Eloquent;
 use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -25,12 +24,12 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
- * Class Model
+ * Class Model.
  *
  *
- * @method static EloquentModel|EloquentBuilder|null first($columns = ['*']) Execute the query and get the first result.
- * @method static EloquentModel|EloquentBuilder firstOrFail($columns = ['*']) Execute the query and get the first result or throw an exception.
- * @method static Collection|EloquentBuilder[] get($columns = ['*']) Execute the query as a "select" statement.
+ * @method static EloquentModel|Builder|null first($columns = ['*']) Execute the query and get the first result.
+ * @method static EloquentModel|Builder firstOrFail($columns = ['*']) Execute the query and get the first result or throw an exception.
+ * @method static Collection|Builder[] get($columns = ['*']) Execute the query as a "select" statement.
  * @method mixed value($column) Get a single column's value from the first result of a query.
  * @method mixed pluck($column) Get a single column's value from the first result of a query.
  * @method void chunk($count, callable $callback) Chunk the results of the query.
@@ -43,21 +42,21 @@ use Illuminate\Pagination\LengthAwarePaginator;
  * @method EloquentModel[] getModels($columns = ['*']) Get the hydrated models without eager loading.
  * @method array eagerLoadRelations(array $models) Eager load the relationships for the models.
  * @method array loadRelation(array $models, $name, Closure $constraints) Eagerly load the relationship on a set of models.
- * @method static EloquentBuilder where($column, $operator = null, $value = null, $boolean = 'and') Add a basic where clause to the query.
- * @method EloquentBuilder orWhere($column, $operator = null, $value = null) Add an "or where" clause to the query.
- * @method EloquentBuilder has($relation, $operator = '>=', $count = 1, $boolean = 'and', Closure $callback = null) Add a relationship count condition to the query.
- * @method static EloquentModel|EloquentBuilder find($value)
- * @method static EloquentModel|EloquentBuilder findOrFail($id, $columns = ['*'])
- * @method static EloquentModel|EloquentBuilder findOrNew($id, $columns = ['*'])
- * @method static EloquentBuilder findMany($ids, $columns = ['*']) Find multiple models by their primary keys.
- * @method static EloquentBuilder orderBy($column, $direction = 'asc')
- * @method static EloquentBuilder select($columns = ['*'])
- * @method static EloquentModel|EloquentBuilder create(array $attributes = [])
+ * @method static Builder where($column, $operator = null, $value = null, $boolean = 'and') Add a basic where clause to the query.
+ * @method Builder orWhere($column, $operator = null, $value = null) Add an "or where" clause to the query.
+ * @method Builder has($relation, $operator = '>=', $count = 1, $boolean = 'and', Closure $callback = null) Add a relationship count condition to the query.
+ * @method static EloquentModel|Builder find($value)
+ * @method static EloquentModel|Builder findOrFail($id, $columns = ['*'])
+ * @method static EloquentModel|Builder findOrNew($id, $columns = ['*'])
+ * @method static Builder findMany($ids, $columns = ['*']) Find multiple models by their primary keys.
+ * @method static Builder orderBy($column, $direction = 'asc')
+ * @method static Builder select($columns = ['*'])
+ * @method static EloquentModel|Builder create(array $attributes = [])
  * @method static EloquentModel insert(array $values)
  * @method static EloquentModel updateOrInsert(array $attributes, array $values)
  * @method static EloquentModel updateOrCreate(array $attributes, array $values)
- * @method static EloquentModel|EloquentBuilder withoutGlobalScope(Scope|string $scope)
- * @method static EloquentBuilder whereJsonContains($column, $value, $boolean = 'and', $not = false)
+ * @method static EloquentModel|Builder withoutGlobalScope(Scope|string $scope)
+ * @method static Builder whereJsonContains($column, $value, $boolean = 'and', $not = false)
  *
  * @method static QueryBuilder whereRaw($sql, array $bindings = [])
  * @method static QueryBuilder whereBetween($column, array $values)
@@ -85,13 +84,15 @@ use Illuminate\Pagination\LengthAwarePaginator;
  * @method static QueryBuilder whereYear($column, $operator, $value)
  * @method static QueryBuilder join($table, $first, $operator = null, $second = null, $type = 'inner', $where = false)
  * @method static QueryBuilder latest($column = 'created_at')
+ * @method static Builder|Model createdBetween(string $from, string $to)
+ * @method static Builder|Model newModelQuery()
+ * @method static Builder|Model newQuery()
+ * @method static Builder|Model query()
+ * @method static Builder|Model updatedBetween(string $from, string $to)
  *
  * @method mixed getMeta(string $key, $default = null)
  * @method mixed updateMeta(string $key, $value, bool $save = true)
- *
- * @mixin Eloquent
  */
-
 abstract class Model extends EloquentModel
 {
     use CastsEnums;

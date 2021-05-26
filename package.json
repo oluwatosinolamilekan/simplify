@@ -7,12 +7,22 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "prepare": "husky install"
     },
     "devDependencies": {
         "axios": "^0.21",
+        "husky": "^6.0.0",
         "laravel-mix": "^6.0.6",
+        "lint-staged": "^11.0.0",
         "lodash": "^4.17.19",
+        "mrm": "^3.0.2",
+        "mrm-task-lint-staged": "^6.0.0",
         "postcss": "^8.1.14"
+    },
+    "lint-staged": {
+        "*.php": [
+            "composer fix"
+        ]
     }
 }

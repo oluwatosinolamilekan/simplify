@@ -12,11 +12,13 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Carbon\Carbon;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class Address.
+ * App\Models\Address.
  *
  * @property int $id
  * @property int $company_id
@@ -29,6 +31,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $timezone
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
+ * @property-read Company $company
+ * @method static Builder|Model createdBetween(string $from, string $to)
+ * @method static Builder|Model updatedBetween(string $from, string $to)
+ * @mixin Eloquent
  */
 class Address extends Model
 {

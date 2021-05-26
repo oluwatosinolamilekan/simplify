@@ -14,9 +14,8 @@ namespace App\Enums;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static OptionOne()
- * @method static static OptionTwo()
- * @method static static OptionThree()
+ * @method static static Active()
+ * @method static static NotActive()
  */
 final class Status extends Enum
 {
