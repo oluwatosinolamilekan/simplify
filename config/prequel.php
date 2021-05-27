@@ -22,7 +22,7 @@ declare(strict_types=1);
         |
         */
 
-        'enabled' => env('PREQUEL_ENABLED', true),
+        'enabled' => env('PREQUEL_ENABLED', false),
 
         /*
         |--------------------------------------------------------------------------
@@ -93,9 +93,9 @@ declare(strict_types=1);
             'connection' => env('DB_CONNECTION', 'mysql'),
             'host'       => env('DB_HOST', '127.0.0.1'),
             'port'       => env('DB_PORT', '3306'),
-            'database'   => env('DB_DATABASE', 'homestead'),
-            'username'   => env('DB_USERNAME', 'homestead'),
-            'password'   => env('DB_PASSWORD', 'secret'),
+            'database'   => env('DB_DATABASE', 'simplify'),
+            'username'   => env('DB_USERNAME', 'root'),
+            'password'   => env('DB_PASSWORD', ''),
         ],
 
         /*
@@ -113,12 +113,11 @@ declare(strict_types=1);
             '#mysql50#lost+found' => ['*'],
 
             // -- Frequently ignored tables --
-            // -- Frequently ignored tables --
-            'information_schema'  => ['*'],
+             'information_schema'  => ['*'],
             // 'sys'                 => ['*'],
-            'performance_schema'  => ['*'],
-            'mysql'               => ['*'],
-            'phpmyadmin'          => ['*'],
+             'performance_schema'  => ['*'],
+             'mysql'               => ['*'],
+             'phpmyadmin'          => ['*'],
         ],
 
         /*

@@ -9,15 +9,15 @@ declare(strict_types=1);
  * the LICENSE file that was distributed with this source code.
  */
 
-    /**
-     * A helper file for Laravel, to provide autocomplete information to your IDE
-     * Generated for Laravel 8.42.1.
-     *
-     * This file should not be included in your code, only analyzed by your IDE!
-     *
-     * @author Barry vd. Heuvel <barryvdh@gmail.com>
-     * @see https://github.com/barryvdh/laravel-ide-helper
-     */
+/**
+ * A helper file for Laravel, to provide autocomplete information to your IDE
+ * Generated for Laravel 8.42.1.
+ *
+ * This file should not be included in your code, only analyzed by your IDE!
+ *
+ * @author Barry vd. Heuvel <barryvdh@gmail.com>
+ * @see https://github.com/barryvdh/laravel-ide-helper
+ */
 
 namespace Illuminate\Support\Facades {
         /**
@@ -570,6 +570,9 @@ namespace Illuminate\Support\Facades {
             }
             /**
              * @static
+             * @param mixed $request
+             * @param mixed $type
+             * @param mixed $catch
              */
             public static function handle($request, $type = 1, $catch = true)
             {

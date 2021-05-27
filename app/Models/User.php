@@ -23,6 +23,8 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * App\Models\User.
@@ -34,8 +36,8 @@ use Illuminate\Support\Carbon;
  * @property string $password
  * @property Status $status
  * @property Role $role
- * @property int $2fa_enabled
- * @property string|null $2fa_key
+ * @property string|null $two_factor_secret
+ * @property string|null $two_factor_recovery_codes
  * @property array|null $meta
  * @property string|null $remember_token
  * @property Carbon $created_at
@@ -50,8 +52,10 @@ use Illuminate\Support\Carbon;
  */
 class User extends Authenticatable
 {
+    use HasApiTokens;
     use HasFactory;
     use Notifiable;
+    use TwoFactorAuthenticatable;
     use CastsEnums;
     use UsesTimestampScopes;
 
@@ -72,8 +76,8 @@ class User extends Authenticatable
         'password',
         'status',
         'role',
-        '2fa_enabled',
-        '2fa_key',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
         'meta',
         'remember_token',
     ];
@@ -86,6 +90,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_secret',
     ];
 
     /**
@@ -96,7 +101,6 @@ class User extends Authenticatable
     protected $casts = [
         'status' => 'int',
         'role' => 'int',
-        '2fa_enabled' => 'int',
         'meta' => 'array',
     ];
 
@@ -108,7 +112,6 @@ class User extends Authenticatable
     protected $enumCasts = [
         'status' => Status::class,
         'role' => Role::class,
-        '2fa_enabled' => Status::class,
     ];
 
     /**
@@ -117,6 +120,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = [
+        'email_verified_at',
         'created_at',
         'updated_at',
     ];

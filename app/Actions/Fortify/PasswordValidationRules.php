@@ -1,0 +1,27 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the 2amigos/simplify
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace App\Actions\Fortify;
+
+use Laravel\Fortify\Rules\Password;
+
+trait PasswordValidationRules
+{
+    /**
+     * Get the validation rules used to validate passwords.
+     *
+     * @return array
+     */
+    protected function passwordRules()
+    {
+        return ['required', 'string', new Password(), 'confirmed'];
+    }
+}

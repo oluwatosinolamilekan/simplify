@@ -25,7 +25,10 @@ Global installation of composer is recommended [https://getcomposer.org/doc/00-i
 
 ### Important!  
 
-- After configuring local repo, make sure you run `composer install` to install required packages and `composer install-tools` to run commands for dev tools installation
+- After configuring local repo, make sure you run 
+    - `composer install` to install required packages 
+    - `composer install-tools` to run commands for dev tools installation
+    - `composer install-jetstream` to install jetstream starter kit
 - Make sure you configure your local .env configuration values (see .env.example)
 - If husky & lint-staged pre-commit hooks aren't triggering (common under Windows - see [issue](https://github.com/sapegin/mrm/issues/168)):
  
