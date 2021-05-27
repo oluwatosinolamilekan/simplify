@@ -11,6 +11,9 @@
         "prepare": "husky install"
     },
     "devDependencies": {
+        "@tailwindcss/forms": "^0.3.1",
+        "@tailwindcss/typography": "^0.4.0",
+        "alpinejs": "^2.7.3",
         "axios": "^0.21",
         "husky": "^6.0.0",
         "laravel-mix": "^6.0.6",
@@ -18,7 +21,9 @@
         "lodash": "^4.17.19",
         "mrm": "^3.0.2",
         "mrm-task-lint-staged": "^6.0.0",
-        "postcss": "^8.1.14"
+        "postcss": "^8.1.14",
+        "postcss-import": "^14.0.1",
+        "tailwindcss": "^2.0.1"
     },
     "lint-staged": {
         "*.php": [
