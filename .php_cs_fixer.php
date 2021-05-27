@@ -1,7 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * PHP CS Fixer - Laravel Coding Style Ruleset by laravel-shift/.php_cs.laravel.php
+ * This file is part of the 2amigos/simplify
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  */
 
 use PhpCsFixer\Config;
@@ -19,19 +24,19 @@ $rules = [
     'array_syntax' => ['syntax' => 'short'],
     'binary_operator_spaces' => [
         'default' => 'single_space',
-        'operators' => ['=>' => null]
+        'operators' => ['=>' => null],
     ],
     'blank_line_after_namespace' => true,
     'blank_line_after_opening_tag' => true,
     'blank_line_before_statement' => [
-        'statements' => ['return']
+        'statements' => ['return'],
     ],
     'braces' => true,
     'cast_spaces' => true,
     'class_definition' => true,
     'combine_consecutive_unsets' => true,
     'concat_space' => [
-        'spacing' => 'none'
+        'spacing' => 'none',
     ],
     'declare_equal_normalize' => true,
     'declare_strict_types' => true,
@@ -56,7 +61,7 @@ $rules = [
     'no_extra_blank_lines' => [
         'tokens' => [
             'extra',
-        ]
+        ],
     ],
     'no_blank_lines_after_class_opening' => true,
     'no_blank_lines_after_phpdoc' => true,
@@ -66,11 +71,11 @@ $rules = [
     'no_leading_import_slash' => true,
     'no_leading_namespace_whitespace' => true,
     'no_mixed_echo_print' => [
-        'use' => 'echo'
+        'use' => 'echo',
     ],
     'no_multiline_whitespace_around_double_arrow' => true,
     'multiline_whitespace_before_semicolons' => [
-        'strategy' => 'no_multi_line'
+        'strategy' => 'no_multi_line',
     ],
     'no_short_bool_cast' => true,
     'no_singleline_whitespace_before_semicolons' => true,
@@ -113,7 +118,7 @@ $rules = [
     'single_import_per_statement' => false,
     'single_line_after_imports' => true,
     'single_line_comment_style' => [
-        'comment_types' => ['hash']
+        'comment_types' => ['hash'],
     ],
     'single_quote' => true,
     'space_after_semicolon' => true,
@@ -125,20 +130,19 @@ $rules = [
     'trim_array_spaces' => true,
     'unary_operator_spaces' => true,
     'visibility_required' => [
-        'elements' => ['method', 'property']
+        'elements' => ['method', 'property'],
     ],
     'whitespace_after_comma_in_array' => true,
 ];
 
-
 $finder = Finder::create()
     ->in([
-        __DIR__ . '/app',
-        __DIR__ . '/config',
-        __DIR__ . '/database',
-        __DIR__ . '/resources',
-        __DIR__ . '/routes',
-        __DIR__ . '/tests',
+        __DIR__.'/app',
+        __DIR__.'/config',
+        __DIR__.'/database',
+        __DIR__.'/resources',
+        __DIR__.'/routes',
+        __DIR__.'/tests',
     ])
     ->name('*.php')
     ->notName('*.blade.php')
@@ -149,6 +153,7 @@ $config = new Config();
 
 return $config->setRules($rules)
     ->setFinder($finder)
+    ->setLineEnding(PHP_EOL)
     ->setRiskyAllowed(true)
     ->setLineEnding(PHP_EOL)
     ->setUsingCache(true);
