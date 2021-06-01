@@ -20,6 +20,10 @@ declare(strict_types=1);
  */
 
 namespace Illuminate\Support\Facades {
+
+    use Illuminate\Routing\Router;
+    use Illuminate\Routing\RouteRegistrar;
+
         /**
          * @see \Illuminate\Contracts\Foundation\Application
          */
@@ -11157,13 +11161,13 @@ namespace Illuminate\Support\Facades {
             }
         }
         /**
-         * @method static \Illuminate\Routing\RouteRegistrar as(string $value)
-         * @method static \Illuminate\Routing\RouteRegistrar domain(string $value)
-         * @method static \Illuminate\Routing\RouteRegistrar middleware(array|string|null $middleware)
-         * @method static \Illuminate\Routing\RouteRegistrar name(string $value)
-         * @method static \Illuminate\Routing\RouteRegistrar namespace(string|null $value)
-         * @method static \Illuminate\Routing\RouteRegistrar prefix(string $prefix)
-         * @method static \Illuminate\Routing\RouteRegistrar where(array $where)
+         * @method static RouteRegistrar as(string $value)
+         * @method static RouteRegistrar domain(string $value)
+         * @method static RouteRegistrar middleware(array|string|null $middleware)
+         * @method static RouteRegistrar name(string $value)
+         * @method static RouteRegistrar namespace(string|null $value)
+         * @method static RouteRegistrar prefix(string $prefix)
+         * @method static RouteRegistrar where(array $where)
          * @see \Illuminate\Routing\Router
          */
         class Route
@@ -11178,7 +11182,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function get($uri, $action = null)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->get($uri, $action);
             }
             /**
@@ -11191,7 +11195,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function post($uri, $action = null)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->post($uri, $action);
             }
             /**
@@ -11204,7 +11208,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function put($uri, $action = null)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->put($uri, $action);
             }
             /**
@@ -11217,7 +11221,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function patch($uri, $action = null)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->patch($uri, $action);
             }
             /**
@@ -11230,7 +11234,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function delete($uri, $action = null)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->delete($uri, $action);
             }
             /**
@@ -11243,7 +11247,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function options($uri, $action = null)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->options($uri, $action);
             }
             /**
@@ -11256,7 +11260,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function any($uri, $action = null)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->any($uri, $action);
             }
             /**
@@ -11268,7 +11272,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function fallback($action)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->fallback($action);
             }
             /**
@@ -11282,7 +11286,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function redirect($uri, $destination, $status = 302)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->redirect($uri, $destination, $status);
             }
             /**
@@ -11295,7 +11299,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function permanentRedirect($uri, $destination)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->permanentRedirect($uri, $destination);
             }
             /**
@@ -11311,7 +11315,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function view($uri, $view, $data = [], $status = 200, $headers = [])
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->view($uri, $view, $data, $status, $headers);
             }
             /**
@@ -11325,7 +11329,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function match($methods, $uri, $action = null)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->match($methods, $uri, $action);
             }
             /**
@@ -11338,7 +11342,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function resources($resources, $options = [])
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 $instance->resources($resources, $options);
             }
             /**
@@ -11352,7 +11356,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function resource($name, $controller, $options = [])
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->resource($name, $controller, $options);
             }
             /**
@@ -11365,7 +11369,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function apiResources($resources, $options = [])
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 $instance->apiResources($resources, $options);
             }
             /**
@@ -11379,7 +11383,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function apiResource($name, $controller, $options = [])
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->apiResource($name, $controller, $options);
             }
             /**
@@ -11392,7 +11396,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function group($attributes, $routes)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 $instance->group($attributes, $routes);
             }
             /**
@@ -11405,7 +11409,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function mergeWithLastGroup($new, $prependExistingPrefix = true)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->mergeWithLastGroup($new, $prependExistingPrefix);
             }
             /**
@@ -11416,7 +11420,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function getLastGroupPrefix()
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->getLastGroupPrefix();
             }
             /**
@@ -11430,7 +11434,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function addRoute($methods, $uri, $action)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->addRoute($methods, $uri, $action);
             }
             /**
@@ -11444,7 +11448,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function newRoute($methods, $uri, $action)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->newRoute($methods, $uri, $action);
             }
             /**
@@ -11456,7 +11460,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function respondWithRoute($name)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->respondWithRoute($name);
             }
             /**
@@ -11468,7 +11472,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function dispatch($request)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->dispatch($request);
             }
             /**
@@ -11480,7 +11484,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function dispatchToRoute($request)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->dispatchToRoute($request);
             }
             /**
@@ -11492,7 +11496,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function gatherRouteMiddleware($route)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->gatherRouteMiddleware($route);
             }
             /**
@@ -11505,7 +11509,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function prepareResponse($request, $response)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->prepareResponse($request, $response);
             }
             /**
@@ -11518,7 +11522,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function toResponse($request, $response)
             {
-                return \Illuminate\Routing\Router::toResponse($request, $response);
+                return Router::toResponse($request, $response);
             }
             /**
              * Substitute the route bindings onto the route.
@@ -11530,7 +11534,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function substituteBindings($route)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->substituteBindings($route);
             }
             /**
@@ -11543,7 +11547,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function substituteImplicitBindings($route)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 $instance->substituteImplicitBindings($route);
             }
             /**
@@ -11555,7 +11559,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function matched($callback)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 $instance->matched($callback);
             }
             /**
@@ -11566,7 +11570,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function getMiddleware()
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->getMiddleware();
             }
             /**
@@ -11574,12 +11578,12 @@ namespace Illuminate\Support\Facades {
              *
              * @param string $name
              * @param string $class
-             * @return \Illuminate\Routing\Router
+             * @return Router
              * @static
              */
             public static function aliasMiddleware($name, $class)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->aliasMiddleware($name, $class);
             }
             /**
@@ -11591,7 +11595,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function hasMiddlewareGroup($name)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->hasMiddlewareGroup($name);
             }
             /**
@@ -11602,7 +11606,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function getMiddlewareGroups()
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->getMiddlewareGroups();
             }
             /**
@@ -11610,12 +11614,12 @@ namespace Illuminate\Support\Facades {
              *
              * @param string $name
              * @param array $middleware
-             * @return \Illuminate\Routing\Router
+             * @return Router
              * @static
              */
             public static function middlewareGroup($name, $middleware)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->middlewareGroup($name, $middleware);
             }
             /**
@@ -11625,12 +11629,12 @@ namespace Illuminate\Support\Facades {
              *
              * @param string $group
              * @param string $middleware
-             * @return \Illuminate\Routing\Router
+             * @return Router
              * @static
              */
             public static function prependMiddlewareToGroup($group, $middleware)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->prependMiddlewareToGroup($group, $middleware);
             }
             /**
@@ -11640,23 +11644,23 @@ namespace Illuminate\Support\Facades {
              *
              * @param string $group
              * @param string $middleware
-             * @return \Illuminate\Routing\Router
+             * @return Router
              * @static
              */
             public static function pushMiddlewareToGroup($group, $middleware)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->pushMiddlewareToGroup($group, $middleware);
             }
             /**
              * Flush the router's middleware groups.
              *
-             * @return \Illuminate\Routing\Router
+             * @return Router
              * @static
              */
             public static function flushMiddlewareGroups()
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->flushMiddlewareGroups();
             }
             /**
@@ -11669,7 +11673,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function bind($key, $binder)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 $instance->bind($key, $binder);
             }
             /**
@@ -11683,7 +11687,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function model($key, $class, $callback = null)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 $instance->model($key, $class, $callback);
             }
             /**
@@ -11695,7 +11699,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function getBindingCallback($key)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->getBindingCallback($key);
             }
             /**
@@ -11706,7 +11710,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function getPatterns()
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->getPatterns();
             }
             /**
@@ -11719,7 +11723,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function pattern($key, $pattern)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 $instance->pattern($key, $pattern);
             }
             /**
@@ -11731,7 +11735,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function patterns($patterns)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 $instance->patterns($patterns);
             }
             /**
@@ -11742,7 +11746,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function hasGroupStack()
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->hasGroupStack();
             }
             /**
@@ -11753,7 +11757,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function getGroupStack()
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->getGroupStack();
             }
             /**
@@ -11766,7 +11770,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function input($key, $default = null)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->input($key, $default);
             }
             /**
@@ -11777,7 +11781,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function getCurrentRequest()
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->getCurrentRequest();
             }
             /**
@@ -11788,7 +11792,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function getCurrentRoute()
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->getCurrentRoute();
             }
             /**
@@ -11799,7 +11803,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function current()
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->current();
             }
             /**
@@ -11811,7 +11815,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function has($name)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->has($name);
             }
             /**
@@ -11822,7 +11826,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function currentRouteName()
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->currentRouteName();
             }
             /**
@@ -11834,7 +11838,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function is(...$patterns)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->is(...$patterns);
             }
             /**
@@ -11846,7 +11850,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function currentRouteNamed(...$patterns)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->currentRouteNamed(...$patterns);
             }
             /**
@@ -11857,7 +11861,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function currentRouteAction()
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->currentRouteAction();
             }
             /**
@@ -11869,7 +11873,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function uses(...$patterns)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->uses(...$patterns);
             }
             /**
@@ -11881,7 +11885,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function currentRouteUses($action)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->currentRouteUses($action);
             }
             /**
@@ -11893,7 +11897,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function singularResourceParameters($singular = true)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 $instance->singularResourceParameters($singular);
             }
             /**
@@ -11905,7 +11909,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function resourceParameters($parameters = [])
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 $instance->resourceParameters($parameters);
             }
             /**
@@ -11917,7 +11921,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function resourceVerbs($verbs = [])
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->resourceVerbs($verbs);
             }
             /**
@@ -11928,7 +11932,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function getRoutes()
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->getRoutes();
             }
             /**
@@ -11940,7 +11944,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function setRoutes($routes)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 $instance->setRoutes($routes);
             }
             /**
@@ -11952,7 +11956,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function setCompiledRoutes($routes)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 $instance->setCompiledRoutes($routes);
             }
             /**
@@ -11964,18 +11968,18 @@ namespace Illuminate\Support\Facades {
              */
             public static function uniqueMiddleware($middleware)
             {
-                return \Illuminate\Routing\Router::uniqueMiddleware($middleware);
+                return Router::uniqueMiddleware($middleware);
             }
             /**
              * Set the container instance used by the router.
              *
              * @param \Illuminate\Container\Container $container
-             * @return \Illuminate\Routing\Router
+             * @return Router
              * @static
              */
             public static function setContainer($container)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->setContainer($container);
             }
             /**
@@ -11988,7 +11992,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function macro($name, $macro)
             {
-                \Illuminate\Routing\Router::macro($name, $macro);
+                Router::macro($name, $macro);
             }
             /**
              * Mix another object into the class.
@@ -12001,7 +12005,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function mixin($mixin, $replace = true)
             {
-                \Illuminate\Routing\Router::mixin($mixin, $replace);
+                Router::mixin($mixin, $replace);
             }
             /**
              * Checks if macro is registered.
@@ -12012,7 +12016,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function hasMacro($name)
             {
-                return \Illuminate\Routing\Router::hasMacro($name);
+                return Router::hasMacro($name);
             }
             /**
              * Dynamically handle calls to the class.
@@ -12025,7 +12029,7 @@ namespace Illuminate\Support\Facades {
              */
             public static function macroCall($method, $parameters)
             {
-                /** @var \Illuminate\Routing\Router $instance */
+                /** @var Router $instance */
                 return $instance->macroCall($method, $parameters);
             }
         }
