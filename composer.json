@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.0",
         "protoqol/prequel": "^1.22",
-        "richan-fongdasen/eloquent-blameable": "^1.7"
+        "richan-fongdasen/eloquent-blameable": "^1.7",
+        "techtailor/rpg": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
@@ -71,7 +72,13 @@
         "stan": "php ./vendor/bin/phpstan analyze --memory-limit=10 -l 1",
         "migrate": "php artisan migrate",
         "migrate:rollback": "php artisan migrate:rollback",
-        "migration:make": "php artisan migration:make"
+        "make:migration": "php artisan make:migration",
+        "make:livewire": "php artisan make:livewire",
+        "cache:clear": [
+            "php artisan cache:clear",
+            "php artisan config:cache",
+            "php artisan optimize:clear"
+        ]
     },
     "extra": {
         "laravel": {
@@ -81,7 +88,8 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "process-timeout": 0
     },
     "minimum-stability": "dev",
     "prefer-stable": true

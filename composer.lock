@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "340c3f7fd2b92e60c61981ffafeeb8d8",
+    "content-hash": "25d619acac4660d5a823ab46fb0e9c8b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5815,6 +5815,53 @@
                 }
             ],
             "time": "2021-05-07T13:42:21+00:00"
+        },
+        {
+            "name": "techtailor/rpg",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TechTailor/RPG.git",
+                "reference": "87035a6c022f6e438bcc605462ab1fbfb03b38d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TechTailor/RPG/zipball/87035a6c022f6e438bcc605462ab1fbfb03b38d2",
+                "reference": "87035a6c022f6e438bcc605462ab1fbfb03b38d2",
+                "shasum": ""
+            },
+            "type": "laravel",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TechTailor\\RPG\\RPGServiceProvider"
+                    ],
+                    "aliases": {
+                        "RPG": "TechTailor\\RPG\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TechTailor\\RPG\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Moinuddin S. Khaja",
+                    "email": "hello@moinuddin.info"
+                }
+            ],
+            "description": "Random Password Generator for Laravel 5",
+            "support": {
+                "issues": "https://github.com/TechTailor/RPG/issues",
+                "source": "https://github.com/TechTailor/RPG/tree/master"
+            },
+            "time": "2018-03-02T20:20:35+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

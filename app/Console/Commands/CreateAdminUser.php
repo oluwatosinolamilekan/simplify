@@ -15,7 +15,7 @@ use App\Enums\Role;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use TechTailor\RPG\Facade\RPG;
 
 class CreateAdminUser extends Command
 {
@@ -56,7 +56,7 @@ class CreateAdminUser extends Command
         $attributes['last_name'] = $this->ask('Enter last name');
         $attributes['email'] = $this->ask('Enter email');
 
-        $password = $this->ask('Enter password (leave blank for random generated)', Str::random(10));
+        $password = $this->ask('Enter password (leave blank for random generated)', RPG::Generate('luds', 10));
         $attributes['password'] = Hash::make($password);
 
         $role = Role::fromValue(Role::Administrator);
