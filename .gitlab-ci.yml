@@ -1,0 +1,13 @@
+image: cypress/base:ubuntu18-node12.14.1
+
+stages:
+  - test
+test:
+  stage: test
+  script:
+    # install dependencies
+    - npm ci --prefer-offline
+    # start the server in the background
+    - npm run start:ci &
+    # run Cypress tests
+    - npx cypress run
