@@ -2,11 +2,12 @@ stages:
   - test
 
 test:
-  image: node:latest
+  image: cypress/base:12.18.0
   stage: test
   script:
     # install dependencies
     - npm ci 
+    - $(npm bin)/print-env CI
     # start the server in the background
     - npm run start:ci &
     # run Cypress tests
