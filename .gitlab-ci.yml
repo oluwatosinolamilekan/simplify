@@ -8,7 +8,6 @@ test:
     # install dependencies
     - npm install cypress
     - npm ci 
-    - $(npm bin)/print-env CI
     # start the server in the background
     - npm run start:ci &
     # run Cypress tests
