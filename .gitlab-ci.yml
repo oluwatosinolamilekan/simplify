@@ -1,4 +1,4 @@
-image: cypress/base:ubuntu18-node12.14.1
+image: cypress/base:12
 
 stages:
   - test
