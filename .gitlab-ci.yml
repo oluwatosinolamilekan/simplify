@@ -1,5 +1,12 @@
 image: php:7.4
 
+variables:
+  MYSQL_DATABASE: addio_test
+  MYSQL_ROOT_PASSWORD: ""
+  DB_HOST: mysql
+  DB_USERNAME: root
+  MYSQL_ALLOW_EMPTY_PASSWORD: "1"
+  
 before_script:
   - apt-get update && apt-get install -qq git curl libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev zip libzip-dev
   - apt-get clean
@@ -15,11 +22,8 @@ before_script:
 services:
   - mysql:8.0.25
 
-variables:
-  MYSQL_DATABASE: addio_test
-  MYSQL_ROOT_PASSWORD: ""
-  DB_HOST: mysql
-  DB_USERNAME: root
+
+
 
 stages:
   - test
