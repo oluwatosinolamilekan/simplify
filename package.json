@@ -8,13 +8,15 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "cypress:open": "cypress open"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.3.1",
         "@tailwindcss/typography": "^0.4.0",
         "alpinejs": "^2.7.3",
         "axios": "^0.21",
+        "cypress": "^7.4.0",
         "husky": "^6.0.0",
         "laravel-mix": "^6.0.6",
         "lint-staged": "^11.0.0",

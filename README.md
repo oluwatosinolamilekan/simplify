@@ -19,6 +19,7 @@ Global installation of composer is recommended [https://getcomposer.org/doc/00-i
 - `$ composer start`: starts the application
 - `$ composer fix`: runs php-cs-fixer tool configured to Laravel Coding Style Ruleset
 - `$ composer stan`: perform analysis on your code
+- `$ composer test`: runs test
 - `$ composer migrate`: runs all of the available migrations
 - `$ composer migrate:rollback`: rolls back *the last* batch of migrations
 - `$ composer make:migration <name>`: creates new migration

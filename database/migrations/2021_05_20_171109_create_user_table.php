@@ -31,8 +31,6 @@ class CreateUserTable extends Migration
             $table->string('password', 255);
             $table->tinyInteger('status')->default(Status::Active);
             $table->tinyInteger('role');
-            $table->tinyInteger('2fa_enabled')->default(Status::NotActive);
-            $table->string('2fa_key', 50)->nullable();
             $table->json('meta')->nullable();
             $table->rememberToken();
 
