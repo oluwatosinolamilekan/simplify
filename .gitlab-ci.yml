@@ -12,9 +12,6 @@ before_script:
   - php artisan env
   - cat .env
   
-services:
-  - mysql:8.0.25
-
 variables:
   MYSQL_DATABASE: addio_test
   MYSQL_ROOT_PASSWORD: addio_test
@@ -26,5 +23,7 @@ stages:
 
 unit_test:
   stage: test
+  services:
+  - mysql:8.0.25
   script:
     - php artisan test
