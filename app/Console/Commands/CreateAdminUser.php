@@ -76,11 +76,13 @@ class CreateAdminUser extends Command
         $this->line("Role: {$role->key}");
 
         if ($this->confirm('Do you wish to continue?', true)) {
-            if (! User::create($attributes)) {
+            if (! ($user = User::create($attributes))) {
                 $this->error('Something went wrong while trying to create user!');
 
                 return 0;
             }
+
+            $user->sendEmailVerificationNotification();
 
             $this->info('User successfully created!');
         }
