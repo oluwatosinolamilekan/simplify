@@ -23,4 +23,5 @@ unit_test:
     - curl --silent --show-error "https://getcomposer.org/installer" | php -- --install-dir=/usr/local/bin --filename=composer
     - cp .env.cypress .env
     - composer install
+    - php artisan env
     - php artisan test
