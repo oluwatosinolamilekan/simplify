@@ -17,7 +17,7 @@ services:
 
 variables:
   MYSQL_DATABASE: addio_test
-  MYSQL_ROOT_PASSWORD: 
+  MYSQL_ROOT_PASSWORD: ""
   DB_HOST: mysql
   DB_USERNAME: root
 
