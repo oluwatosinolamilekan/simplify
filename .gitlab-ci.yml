@@ -2,10 +2,10 @@ image: php:7.4
 
 variables:
   MYSQL_DATABASE: addio_test
-  MYSQL_ROOT_PASSWORD: ""
-  DB_HOST: 127.0.0.1
+  MYSQL_ROOT_PASSWORD: addio_test
+  DB_HOST: mysql
   DB_USERNAME: root
-  MYSQL_ALLOW_EMPTY_PASSWORD: "1"
+
 
 before_script:
   - apt-get update && apt-get install -qq git curl libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev zip libzip-dev
