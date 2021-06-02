@@ -82,6 +82,17 @@ body {
     height: 48px;
 }
 
+.guest-layout-sign-in-box input[type=checkbox]:focus {
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) rgb(89 186 190 / 25%);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) rgb(89 186 190 / 25%);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+    border: 1px solid rgb(89 186 190 / 70%);
+}
+
+.guest-layout-sign-in-box input[type=checkbox]:checked {
+    background-color: #59BABE;
+}
+
 .guest-layout-sign-in-box input[type=text]:focus,
 .guest-layout-sign-in-box input[type=email]:focus,
 .guest-layout-sign-in-box input[type=password]:focus {
