@@ -20,6 +20,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <title>Dashboard - Rubick - Tailwind HTML Admin Template</title>
         <!-- BEGIN: CSS Assets-->
         <link rel="stylesheet" href="dist/css/app.css" />
+        <link rel="stylesheet" href="css/style.css" />
         <!-- END: CSS Assets-->
     </head>
     <!-- END: Head -->

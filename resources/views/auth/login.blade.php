@@ -12,36 +12,45 @@
             </div>
         @endif
 
+        <h3 class="guest-layout-form-title">Sign In</h3>
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
             <div>
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="{{ __('Email') }}" required autofocus />
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" placeholder="{{ __('Password') }}" required autocomplete="current-password" />
             </div>
 
-            <div class="block mt-4">
+            <div class="flex items-center justify-between mt-4">
                 <label for="remember_me" class="flex items-center">
                     <x-jet-checkbox id="remember_me" name="remember" />
                     <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                    <a class="text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
+            </div>
 
-                <x-jet-button class="ml-4">
+            <div class="mt-9">
+                <x-jet-button>
                     {{ __('Log in') }}
                 </x-jet-button>
+            </div>
+
+            <div class="divider mt-8">
+                <p>or</p>
+            </div>
+
+            <div class="mt-8">
+                <a href="{{ route('register') }}" class="register-button">
+                    {{ __('Sign up') }}
+                </a>
+                <span class="terms-link">By signin up, you agree to our <a href="#">Terms and Conditions</a></span>
             </div>
         </form>
     </x-jet-authentication-card>
