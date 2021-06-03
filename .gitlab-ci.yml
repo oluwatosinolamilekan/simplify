@@ -1,0 +1,29 @@
+image: php:7.4
+
+before_script:
+  - apt-get update && apt-get install -qq git curl libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev zip libzip-dev
+  - apt-get clean
+  - pecl install mcrypt
+  - docker-php-ext-enable mcrypt
+  - docker-php-ext-install pdo_mysql zip
+  - curl --silent --show-error "https://getcomposer.org/installer" | php -- --install-dir=/usr/local/bin --filename=composer
+  - cp .env.cypress .env
+  - composer install  
+  - php artisan env
+  - cat .env
+  
+variables:
+  MYSQL_DATABASE: addio_test
+  MYSQL_ROOT_PASSWORD: addio_test
+  DB_HOST: mysql
+  DB_USERNAME: root
+
+stages:
+  - test
+
+unit_test:
+  stage: test
+  services:
+  - mysql:8.0.25
+  script:
+    - php artisan test

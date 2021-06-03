@@ -18,10 +18,12 @@ Global installation of composer is recommended [https://getcomposer.org/doc/00-i
 
 - `$ composer start`: starts the application
 - `$ composer fix`: runs php-cs-fixer tool configured to Laravel Coding Style Ruleset
+- `$ composer stan`: perform analysis on your code
+- `$ composer test`: runs test
 - `$ composer migrate`: runs all of the available migrations
 - `$ composer migrate:rollback`: rolls back *the last* batch of migrations
-- `$ composer migration:make <name>`: creates new migration
-- `$ composer stan`: perform analysis on your code
+- `$ composer make:migration <name>`: creates new migration
+- `$ composer make:livewire <name>`: creates new livewire component and view
 
 ### Important!  
 
@@ -57,6 +59,16 @@ npm uninstall mrm mrm-task-lint-staged
 - `php artisan ide-helper:models` - Generate phpdocs for model classes
 - `php artisan enum:annotate` - Annotate enums
 - `php artisan make:command <name>` - Create console command
+- `php artisan create:admin` - Create admin user
+
+## Livewire configuration
+
+Livewire configuration file can be found in `config/livewire.php` file.
+Use `composer make:livewire` command to generate components and views.
+See [https://laravel-livewire.com/docs/2.x/artisan-commands](https://laravel-livewire.com/docs/2.x/artisan-commands) for more information on command line arguments.
+- Component namespace (by config) is: `App\\View\\Components`
+- View path (by config) is: `resources\views`
+
 
 
 

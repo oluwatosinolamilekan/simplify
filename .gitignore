@@ -8,6 +8,9 @@
 /vendor
 .env
 .env.backup
+.env.cypress
+/cypress/videos
+/cypress/screenshots
 .phpunit.result.cache
 docker-compose.override.yml
 .idea/

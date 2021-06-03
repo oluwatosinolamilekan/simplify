@@ -16,6 +16,7 @@ use App\Enums\Status;
 use App\Models\Traits\UsesTimestampScopes;
 use BenSampo\Enum\Traits\CastsEnums;
 use Eloquent;
+use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -24,7 +25,6 @@ use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Sanctum\HasApiTokens;
 
 /**
  * App\Models\User.
@@ -52,9 +52,9 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens;
     use HasFactory;
     use Notifiable;
+    use MustVerifyEmail;
     use TwoFactorAuthenticatable;
     use CastsEnums;
     use UsesTimestampScopes;
@@ -102,6 +102,7 @@ class User extends Authenticatable
         'status' => 'int',
         'role' => 'int',
         'meta' => 'array',
+        'email_verified_at' => 'datetime',
     ];
 
     /**

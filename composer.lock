@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "340c3f7fd2b92e60c61981ffafeeb8d8",
+    "content-hash": "e13c27178cc147e0d1780bfa708527d9",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5817,6 +5817,53 @@
             "time": "2021-05-07T13:42:21+00:00"
         },
         {
+            "name": "techtailor/rpg",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TechTailor/RPG.git",
+                "reference": "87035a6c022f6e438bcc605462ab1fbfb03b38d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TechTailor/RPG/zipball/87035a6c022f6e438bcc605462ab1fbfb03b38d2",
+                "reference": "87035a6c022f6e438bcc605462ab1fbfb03b38d2",
+                "shasum": ""
+            },
+            "type": "laravel",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TechTailor\\RPG\\RPGServiceProvider"
+                    ],
+                    "aliases": {
+                        "RPG": "TechTailor\\RPG\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TechTailor\\RPG\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Moinuddin S. Khaja",
+                    "email": "hello@moinuddin.info"
+                }
+            ],
+            "description": "Random Password Generator for Laravel 5",
+            "support": {
+                "issues": "https://github.com/TechTailor/RPG/issues",
+                "source": "https://github.com/TechTailor/RPG/tree/master"
+            },
+            "time": "2018-03-02T20:20:35+00:00"
+        },
+        {
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "2.2.3",
             "source": {
@@ -7789,6 +7836,65 @@
                 "source": "https://github.com/justinrainbow/json-schema/tree/5.2.10"
             },
             "time": "2020-05-27T16:41:55+00:00"
+        },
+        {
+            "name": "laracasts/cypress",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracasts/cypress.git",
+                "reference": "c9b8bdabbea70fae85c0a32cda24d861c983ff0f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laracasts/cypress/zipball/c9b8bdabbea70fae85c0a32cda24d861c983ff0f",
+                "reference": "c9b8bdabbea70fae85c0a32cda24d861c983ff0f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6.0|^7.0|^8.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "laravel/legacy-factories": "^1.0",
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laracasts\\Cypress\\CypressServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laracasts\\Cypress\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@laracasts.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Cypress Boilerplate",
+            "homepage": "https://github.com/laracasts/cypress",
+            "keywords": [
+                "cypress",
+                "laracasts"
+            ],
+            "support": {
+                "issues": "https://github.com/laracasts/cypress/issues",
+                "source": "https://github.com/laracasts/cypress/tree/1.3.0"
+            },
+            "time": "2021-01-21T15:52:04+00:00"
         },
         {
             "name": "laravel/sail",
