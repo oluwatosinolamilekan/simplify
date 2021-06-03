@@ -1,7 +1,12 @@
 image: php:7.4
+variables:
+  MYSQL_DATABASE: addio_test
+  MYSQL_ROOT_PASSWORD: addio_test
+  DB_HOST: mysql
+  DB_USERNAME: root
 
 before_script:
-  - apt-get update && apt-get install -qq git curl libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev zip libzip-dev
+  - apt-get update && apt-get install -qq git curl libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev zip libzip-dev mysql-client
   - apt-get clean
   - pecl install mcrypt
   - docker-php-ext-enable mcrypt
@@ -11,13 +16,8 @@ before_script:
   - composer install  
   - php artisan env
   - cat .env
+  - mysql -h${DB_HOST} -u ${DB_USERNAME} -p${MYSQL_ROOT_PASSWORD} -e "show version();"
   
-variables:
-  MYSQL_DATABASE: addio_test
-  MYSQL_ROOT_PASSWORD: addio_test
-  DB_HOST: mysql
-  DB_USERNAME: root
-
 stages:
   - test
 
@@ -26,4 +26,5 @@ unit_test:
   services:
   - mysql:8.0.25
   script:
+    - mysql -h${DB_HOST} -u ${DB_USERNAME} -p${MYSQL_ROOT_PASSWORD} -e "show databases;"
     - php artisan test
