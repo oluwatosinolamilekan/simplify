@@ -1,15 +1,31 @@
+image: php:7.4
+variables:
+  MYSQL_DATABASE: addio_test
+  MYSQL_ROOT_PASSWORD: addio_test
+  DB_HOST: mysql
+  DB_USERNAME: root
+
+before_script:
+  - apt-get update && apt-get install -qq git curl libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev zip libzip-dev default-mysql-client
+  - apt-get clean
+  - pecl install mcrypt
+  - docker-php-ext-enable mcrypt
+  - docker-php-ext-install pdo_mysql zip
+  - curl --silent --show-error "https://getcomposer.org/installer" | php -- --install-dir=/usr/local/bin --filename=composer
+  - cp .env.testing .env
+  - cat .env
+  - composer install  
+  - php artisan env
+  - mysql -h${DB_HOST} -u ${DB_USERNAME} -p${MYSQL_ROOT_PASSWORD} -e "show databases;"
+  
 stages:
   - test
 
-test:
-  image: node:latest
+unit_test:
   stage: test
+  services:
+  - name: mysql:8.0.25
+    command: [ "--default-authentication-plugin=mysql_native_password" ]
   script:
-    ## install dependencies
-    - apt update && apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-    #- npm install cypress
-    #- npm ci 
-    ## start the server in the background
-    #- npm run start:ci &
-    ## run Cypress tests
-    #- npx cypress run
+    - mysql -h${DB_HOST} -u ${DB_USERNAME} -p${MYSQL_ROOT_PASSWORD} -e "show databases;"
+    - php artisan test
