@@ -29,5 +29,6 @@ unit_test:
     command: [ "--default-authentication-plugin=mysql_native_password" ]
   script:
     - php artisan test
+    - nohup php artisan serve &
     - npx cypress run
 
