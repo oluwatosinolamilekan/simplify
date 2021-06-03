@@ -6,7 +6,7 @@ variables:
   DB_USERNAME: root
 
 before_script:
-  - apt-get update && apt-get install -qq git curl libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev zip libzip-dev default-mysql-client
+  - apt-get update && apt-get install -qq git curl libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev zip libzip-dev default-mysql-client nodejs npm
   - apt-get clean
   - pecl install mcrypt
   - docker-php-ext-enable mcrypt
@@ -15,6 +15,7 @@ before_script:
   - cp .env.testing .env
   - cat .env
   - composer install  
+  - npm install cypress
   - php artisan env
   - mysql -h${DB_HOST} -u ${DB_USERNAME} -p${MYSQL_ROOT_PASSWORD} -e "show databases;"
   
@@ -29,3 +30,5 @@ unit_test:
   script:
     - mysql -h${DB_HOST} -u ${DB_USERNAME} -p${MYSQL_ROOT_PASSWORD} -e "show databases;"
     - php artisan test
+    - npx run cypress
+
