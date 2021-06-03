@@ -30,5 +30,5 @@ unit_test:
   script:
     - mysql -h${DB_HOST} -u ${DB_USERNAME} -p${MYSQL_ROOT_PASSWORD} -e "show databases;"
     - php artisan test
-    - npx run cypress
+    - npx cypress run
 
