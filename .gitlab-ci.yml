@@ -12,7 +12,7 @@ before_script:
   - docker-php-ext-enable mcrypt
   - docker-php-ext-install pdo_mysql zip
   - curl --silent --show-error "https://getcomposer.org/installer" | php -- --install-dir=/usr/local/bin --filename=composer
-  - echo "TEST_DB_CONNECTION=mysql\nTEST_DB_HOST=mysql\nTEST_DB_PORT=3306\nTEST_DB_DATABASE=addio_test\nTEST_DB_USERNAME=root\nTEST_DB_PASSWORD=addio_test\n" | tee .env
+  - cp .env.testing .env
   - cat .env
   - composer install  
   - php artisan env
