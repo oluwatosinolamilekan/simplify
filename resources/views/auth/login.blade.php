@@ -41,17 +41,6 @@
                     {{ __('Log in') }}
                 </x-jet-button>
             </div>
-
-            <div class="divider mt-8">
-                <p>or</p>
-            </div>
-
-            <div class="mt-8">
-                <a href="{{ route('register') }}" class="register-button">
-                    {{ __('Sign up') }}
-                </a>
-                <span class="terms-link">By signin up, you agree to our <a href="#">Terms and Conditions</a></span>
-            </div>
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
