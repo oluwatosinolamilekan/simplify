@@ -24,7 +24,8 @@ stages:
 unit_test:
   stage: test
   services:
-  - mysql:8.0.25
+  - name: mysql:8.0.25
+    command: [ "--default-authentication-plugin=mysql_native_password" ]
   script:
     - mysql -h${DB_HOST} -u ${DB_USERNAME} -p${MYSQL_ROOT_PASSWORD} -e "show databases;"
     - php artisan test
