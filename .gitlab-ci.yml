@@ -6,7 +6,7 @@ variables:
   DB_USERNAME: root
 
 before_script:
-  - apt-get update && apt-get install -qq git curl libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev zip libzip-dev mysql-client
+  - apt-get update && apt-get install -qq git curl libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev zip libzip-dev default-mysql-client
   - apt-get clean
   - pecl install mcrypt
   - docker-php-ext-enable mcrypt
