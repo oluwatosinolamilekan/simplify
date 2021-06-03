@@ -16,7 +16,7 @@ before_script:
   - composer install  
   - php artisan env
   - cat .env
-  - mysql -h${DB_HOST} -u ${DB_USERNAME} -p${MYSQL_ROOT_PASSWORD} -e "show version();"
+  - mysql -h${DB_HOST} -u ${DB_USERNAME} -p${MYSQL_ROOT_PASSWORD} -e "show databases;"
   
 stages:
   - test
