@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the 2amigos/simplify
+ * This file is part of the 2amigos/addio
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -40,6 +40,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property string|null $two_factor_recovery_codes
  * @property array|null $meta
  * @property string|null $remember_token
+ * @property Carbon $email_verified_at
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  * @property-read string $full_name Get User's full name

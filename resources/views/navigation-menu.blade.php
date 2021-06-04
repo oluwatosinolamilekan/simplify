@@ -15,7 +15,7 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('user.list') }}" :active="request()->routeIs('user.list')">
+                    <x-jet-nav-link href="{{ route('users.list') }}" :active="request()->routeIs('users.list')">
                         {{ __('Users') }}
                     </x-jet-nav-link>
                 </div>
@@ -95,7 +95,7 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('user.list') }}" :active="request()->routeIs('user.list')">
+            <x-jet-responsive-nav-link href="{{ route('users.list') }}" :active="request()->routeIs('users.list')">
                 {{ __('Users') }}
             </x-jet-responsive-nav-link>
         </div>
