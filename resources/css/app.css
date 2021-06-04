@@ -2,6 +2,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import "rubick.css";
-/*@import "theme.css";*/
+@import "theme.css";
 @import "style.css";
 
