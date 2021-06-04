@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the 2amigos/simplify
+ * This file is part of the 2amigos/addio
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -22,9 +22,7 @@ class PasswordConfirmationTest extends TestCase
 
     public function test_confirm_password_screen_can_be_rendered()
     {
-        $user = Features::hasTeamFeatures()
-                        ? User::factory()->withPersonalTeam()->create()
-                        : User::factory()->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)->get('/user/confirm-password');
 
