@@ -6,11 +6,11 @@ variables:
   DB_USERNAME: root
 
 before_script:
-  - apt-get update && apt-get install -qq git curl libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev zip libzip-dev default-mysql-client nodejs npm libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+  - apt-get update && apt-get install -qq git curl libmcrypt-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev zip libzip-dev default-mysql-client nodejs npm libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb 
   - apt-get clean
   - pecl install mcrypt
   - docker-php-ext-enable mcrypt
-  - docker-php-ext-install pdo_mysql zip
+  - docker-php-ext-install pdo_mysql zip gd
   - curl --silent --show-error "https://getcomposer.org/installer" | php -- --install-dir=/usr/local/bin --filename=composer
   - cp .env.testing .env
   - cat .env
