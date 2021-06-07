@@ -40,6 +40,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property string|null $two_factor_recovery_codes
  * @property array|null $meta
  * @property string|null $remember_token
+ * @property Carbon $email_verified_at
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  * @property-read string $full_name Get User's full name

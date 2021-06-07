@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": ">=7.4",
+        "ext-pdo": "*",
         "awobaz/compoships": "^2.1",
         "bensampo/laravel-enum": "^3.3",
         "fideloper/proxy": "^4.4",
@@ -17,10 +18,10 @@
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.0",
+        "mediconesystems/livewire-datatables": "^0.4.3",
         "protoqol/prequel": "^1.22",
         "richan-fongdasen/eloquent-blameable": "^1.7",
-        "techtailor/rpg": "^1.0",
-        "ext-pdo": "*"
+        "techtailor/rpg": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
