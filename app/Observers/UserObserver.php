@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Observers;
 
 use App\Models\User;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class UserObserver
 {
@@ -23,7 +24,9 @@ class UserObserver
      */
     public function created(User $user)
     {
-        $user->sendPasswordConfigurationNotification();
+        if (! $user->password) {
+            $user->sendPasswordConfigurationNotification();
+        }
     }
 
     /**
@@ -34,7 +37,10 @@ class UserObserver
      */
     public function updating(User $user)
     {
-        if ($user->isDirty('email')) {
+        if (
+            $user->isDirty('email') &&
+            $user instanceof MustVerifyEmail
+        ) {
             $user->email_verified_at = null;
         }
     }
@@ -47,7 +53,10 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        if ($user->wasChanged('email')) {
+        if (
+            $user->wasChanged('email') &&
+            $user instanceof MustVerifyEmail
+        ) {
             $user->sendEmailVerificationNotification();
         }
     }
