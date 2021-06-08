@@ -59,7 +59,7 @@ class CreateAdminUser extends Command
         $password = $this->ask('Enter password (leave blank for random generated)', RPG::Generate('luds', 10));
         $attributes['password'] = Hash::make($password);
 
-        $role = Role::fromValue(Role::Administrator);
+        $role = Role::fromValue(Role::SuperAdministrator);
         $attributes['role'] = $role->value;
 
         if (User::where('email', $attributes['email'])->exists()) {
