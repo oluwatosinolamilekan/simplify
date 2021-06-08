@@ -22,9 +22,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', fn () => view('welcome'));
-
+/** Authenticated */
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     require base_path('routes/user.php');
     require base_path('routes/dashboard.php');
 });
+
+/** Public routes */
+require base_path('routes/password.php');

@@ -13,6 +13,7 @@ namespace App\Models;
 
 use App\Enums\Role;
 use App\Enums\Status;
+use App\Models\Traits\MustConfigurePassword;
 use App\Models\Traits\UsesTimestampScopes;
 use BenSampo\Enum\Traits\CastsEnums;
 use Eloquent;
@@ -51,11 +52,12 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @method static Builder|Model updatedBetween(string $from, string $to)
  * @mixin Eloquent
  */
-class User extends Authenticatable
+class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVerifyEmail
 {
     use HasFactory;
     use Notifiable;
     use MustVerifyEmail;
+    use MustConfigurePassword;
     use TwoFactorAuthenticatable;
     use CastsEnums;
     use UsesTimestampScopes;
