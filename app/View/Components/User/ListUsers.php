@@ -71,6 +71,7 @@ class ListUsers extends Datatable
 
             DateColumn::name('created_at')
                 ->label('Created At')
+                ->format('m/d/Y')
                 ->filterable(),
 
             Column::callback(['id'], function ($id) {
