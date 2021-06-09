@@ -1,6 +1,6 @@
 <x-jet-form-section submit="save">
     <x-slot name="title">
-        {{ __('Create User Account') }}
+        @if($user->exists) {{__('Update')}} @else {{ __('Create') }} @endif {{ __(' User Account') }}
     </x-slot>
 
     <x-slot name="description">

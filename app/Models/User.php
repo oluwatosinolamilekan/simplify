@@ -18,8 +18,10 @@ use App\Models\Traits\UsesTimestampScopes;
 use BenSampo\Enum\Traits\CastsEnums;
 use Eloquent;
 use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -51,8 +53,10 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @method static Builder|Model createdBetween(string $from, string $to)
  * @method static Builder|Model updatedBetween(string $from, string $to)
  * @mixin Eloquent
+ *
+ * * @property-read Company $company Get User's company
  */
-class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmailContract
 {
     use HasFactory;
     use Notifiable;
@@ -140,11 +144,33 @@ class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVer
     }
 
     /**
+     * @comment Get User's company domain
+     *
+     * @return string
+     */
+    public function getSubdomainAttribute(): ?string
+    {
+        return $this->company->domain ?? null;
+    }
+
+    /**
      * @param Builder $query
      * @return Builder
      */
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('status', Status::Active);
+    }
+
+    public function company(): HasOneThrough
+    {
+        return $this->hasOneThrough(
+            Company::class,
+            UserCompanyAccess::class,
+            'user_id',
+            'id',
+            'id',
+            'company_id'
+        );
     }
 }
