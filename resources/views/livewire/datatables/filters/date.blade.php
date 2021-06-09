@@ -17,4 +17,12 @@
             </button>
         </div>
     </div>
+    <div class="w-full relative flex">
+        @foreach($this->activeDateFilters ?? [] as $index => $filter)
+            <button wire:click="removeFilter('date', '{{ $index }}')" class="m-1 pl-1 flex items-center uppercase tracking-wide bg-gray-300 text-white hover:bg-red-600 rounded-full focus:outline-none text-xs space-x-1">
+                <span>{{ $filter['start'] ?? '' }} - {{ $filter['end'] ?? '' }}</span>
+                <x-icons.x-circle />
+            </button>
+        @endforeach
+    </div>
 </div>

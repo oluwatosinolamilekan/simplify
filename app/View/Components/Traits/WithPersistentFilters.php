@@ -18,6 +18,13 @@ trait WithPersistentFilters
         $this->restoreFiltersFromSession();
     }
 
+    public function buildDatabaseQuery()
+    {
+        $this->storeFiltersInSession();
+
+        parent::buildDatabaseQuery();
+    }
+
     public function storeFiltersInSession()
     {
         if (! $this->filtersPersistent) {

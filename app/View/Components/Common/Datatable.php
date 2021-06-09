@@ -30,13 +30,6 @@ class Datatable extends LivewireDatatable
         return parent::__invoke($container, $route);
     }
 
-    public function clearAllFilters()
-    {
-        parent::clearAllFilters();
-        $this->reset('search', 'activeDateFilters', 'activeTimeFilters');
-        $this->storeFiltersInSession();
-    }
-
     public function applyFilter($filter, ...$arguments)
     {
         if (
@@ -44,7 +37,6 @@ class Datatable extends LivewireDatatable
             method_exists($this, $method = 'do'.ucfirst($filter))
         ) {
             $this->$method(...$arguments);
-            $this->storeFiltersInSession();
         }
     }
 
@@ -55,7 +47,40 @@ class Datatable extends LivewireDatatable
             method_exists($this, $method = 'remove'.ucfirst($filter))
         ) {
             $this->$method(...$arguments);
-            $this->storeFiltersInSession();
         }
+    }
+
+    public function doDateFilterStart($index, $start)
+    {
+        parent::doDateFilterStart($index, $start);
+        $this->clearEmptyDateFilter($index);
+    }
+
+    public function doDateFilterEnd($index, $start)
+    {
+        parent::doDateFilterEnd($index, $start);
+        $this->clearEmptyDateFilter($index);
+    }
+
+    public function clearEmptyDateFilter($index)
+    {
+        if (empty(array_filter($this->activeDateFilters[$index]))) {
+            unset($this->activeDateFilters[$index]);
+        }
+    }
+
+    public function removeDateFilter($index)
+    {
+        unset($this->activeDateFilters[$index]);
+    }
+
+    public function clearAllFilters()
+    {
+        parent::clearAllFilters();
+        $this->reset(
+            'search',
+            'activeDateFilters',
+            'activeTimeFilters'
+        );
     }
 }
