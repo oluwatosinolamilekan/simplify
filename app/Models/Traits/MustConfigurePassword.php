@@ -37,8 +37,8 @@ trait MustConfigurePassword
 
         $broker->sendResetLink(
             ['email' => $this->getEmailForConfiguration()],
-            function ($token) {
-                $this->notify(new ConfigurePassword($token));
+            function ($user, $token) {
+                $user->notify(new ConfigurePassword($token));
             }
         );
     }
