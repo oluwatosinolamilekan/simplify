@@ -2,20 +2,6 @@ html {
     background: linear-gradient(to bottom, #2d3748, #3b4658);
 }
 
-@-webkit-keyframes intro-x-animation {
-    100% {
-        opacity: 1;
-        transform: translateX(0px);
-    }
-}
-
-@keyframes intro-x-animation {
-    100% {
-        opacity: 1;
-        transform: translateX(0px);
-    }
-}
-
 .position-relative {
     position: relative;
 }
@@ -48,14 +34,6 @@ html {
 input[type=checkbox]:checked {
     background-color: #59BABE !important;
     border-color: #59BABE !important;
-}
-
-.toggle-password {
-    position: absolute;
-    right: 16px;
-    top: 14px;
-    z-index: 999999;
-    opacity: 0.5;
 }
 
 @media only screen and (min-width: 1279px) {
