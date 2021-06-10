@@ -40,13 +40,13 @@ return [
     | users are actually retrieved out of your database or other storage
     | mechanisms used by this application to persist your user's data.
     |
-    | Supported: "session", "token"
+    | Supported: "session", "token", "domain-session"
     |
     */
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
+            'driver' => 'domain-session',
             'provider' => 'users',
         ],
 

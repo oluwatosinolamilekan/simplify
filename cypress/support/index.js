@@ -19,7 +19,7 @@ import './laravel-routes';
 import './assertions';
 
 before(() => {
-    cy.task('activateCypressEnvFile', {}, { log: false });
+    cy.task('activateCypressEnvFile', {}, { log: true });
     cy.artisan('config:clear', {}, { log: false });
     cy.refreshDatabase()
     cy.refreshRoutes();
@@ -27,6 +27,6 @@ before(() => {
 
 after(() => {
     cy.refreshDatabase()
-    cy.task('activateLocalEnvFile', {}, { log: false });
     cy.artisan('config:clear', {}, { log: false });
+    cy.task('activateLocalEnvFile', {}, { log: true });
 });

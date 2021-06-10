@@ -51,6 +51,8 @@ class UserCompanyAccess extends Model
     use BlameableTrait;
     use Compoships;
 
+    public $table = 'user_company_access';
+
     /**
      * The attributes that are mass assignable.
      *

@@ -6,7 +6,6 @@ it('Logs in users', () => {
         cy.get('input[name="password"]').type('password');
         cy.get('button[type="submit"]').click();
 
-        cy.visit('/');
         cy.contains(user.first_name);
     });
 });
