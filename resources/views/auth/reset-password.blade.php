@@ -30,11 +30,13 @@
                         <div class="intro-x">
                             <x-jet-input id="email" class="login__input form-control py-3 px-4 border-gray-300 block mt-1 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" type="email" name="email" :value="old('email', $request->email)" placeholder="{{ __('Email') }}" required autofocus />
                         </div>
-                        <div class="intro-x mt-4">
+                        <div class="intro-x mt-4 position-relative">
                             <x-jet-input id="password" class="login__input form-control py-3 px-4 border-gray-300 block mt-1 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" type="password" name="password" placeholder="{{ __('Password') }}" required autocomplete="new-password" />
+                            <a href="javascript:;" toggle="#password" class="toggle-password"><i data-feather="eye" data-color="red" class="eye"></i><i data-feather="eye-off" class="eye-off hidden"></i></a>
                         </div>
-                        <div class="intro-x mt-4">
+                        <div class="intro-x mt-4 position-relative">
                             <x-jet-input id="password_confirmation" class="login__input form-control py-3 px-4 border-gray-300 block mt-1 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" type="password" name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required autocomplete="new-password" />
+                            <a href="javascript:;" toggle="#password_confirmation" class="toggle-password"><i data-feather="eye" data-color="red" class="eye"></i><i data-feather="eye-off" class="eye-off hidden"></i></a>
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                             <x-jet-button class="text-center py-3 px-4 w-full xl:mr-3 align-top bg-theme-18 border-theme-18 focus:ring-theme-18">

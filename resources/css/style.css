@@ -16,6 +16,10 @@ html {
     }
 }
 
+.position-relative {
+    position: relative;
+}
+
 .login .guest-layout-intro-title {
     font-size: 39px;
     color: #59BABE;
@@ -44,6 +48,14 @@ html {
 input[type=checkbox]:checked {
     background-color: #59BABE !important;
     border-color: #59BABE !important;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 16px;
+    top: 14px;
+    z-index: 999999;
+    opacity: 0.5;
 }
 
 @media only screen and (min-width: 1279px) {
