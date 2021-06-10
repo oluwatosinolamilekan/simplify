@@ -44,7 +44,16 @@ class AuthServiceProvider extends ServiceProvider
     public function registerGuards()
     {
         Auth::extend('domain-session', function ($app, $name, array $config) {
-            return new DomainSessionGuard($name, Auth::createUserProvider($config['provider']), $app['session.store']);
+            $guard = new DomainSessionGuard($name, Auth::createUserProvider($config['provider']), $app['session.store']);
+
+            // When using the remember me functionality of the authentication services we
+            // will need to be set the encryption instance of the guard, which allows
+            // secure, encrypted cookie values to get generated for those cookies.
+            $guard->setCookieJar($app['cookie']);
+            $guard->setDispatcher($app['events']);
+            $guard->setRequest($app->refresh('request', $guard, 'setRequest'));
+
+            return $guard;
         });
     }
 
