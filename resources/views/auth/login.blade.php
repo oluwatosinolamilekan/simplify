@@ -32,7 +32,7 @@
                         @csrf
                         <div class="intro-x mt-8">
                             <x-jet-input id="email" class="login__input form-control py-3 px-4 border-gray-300 block mt-1 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" type="email" name="email" :value="old('email')" placeholder="{{ __('Email') }}" required autofocus />
-                                <div class="position-relative">
+                            <div class="position-relative">
                                 <x-jet-input id="password" class="login__input form-control py-3 px-4 border-gray-300 block mt-4 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" type="password" name="password" placeholder="{{ __('Password') }}" required autocomplete="current-password" />
                                 <a href="javascript:;" toggle="#password" class="toggle-password"><i data-feather="eye" data-color="red" class="eye"></i><i data-feather="eye-off" class="eye-off hidden"></i></a>
                             </div>
