@@ -153,7 +153,7 @@
   "password.reset": {
     "name": "password.reset",
     "domain": null,
-    "action": "Laravel\\Fortify\\Http\\Controllers\\NewPasswordController@create",
+    "action": "App\\Http\\Controllers\\PasswordController@create",
     "uri": "reset-password/{token}",
     "method": [
       "GET",
@@ -172,7 +172,7 @@
   "password.update": {
     "name": "password.update",
     "domain": null,
-    "action": "Laravel\\Fortify\\Http\\Controllers\\NewPasswordController@store",
+    "action": "App\\Http\\Controllers\\PasswordController@store",
     "uri": "reset-password",
     "method": [
       "POST"
@@ -332,11 +332,51 @@
       "POST"
     ]
   },
-  "user.list": {
-    "name": "user.list",
+  "users.list": {
+    "name": "users.list",
     "domain": null,
     "action": "App\\View\\Components\\User\\ListUsers",
     "uri": "users",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "users.create": {
+    "name": "users.create",
+    "domain": null,
+    "action": "App\\View\\Components\\User\\UserForm",
+    "uri": "users/create",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "users.view": {
+    "name": "users.view",
+    "domain": null,
+    "action": "App\\View\\Components\\User\\UserDetails",
+    "uri": "users/{id}",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "users.update": {
+    "name": "users.update",
+    "domain": null,
+    "action": "App\\View\\Components\\User\\UserForm",
+    "uri": "users/{id}/update",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "users.delete": {
+    "name": "users.delete",
+    "domain": null,
+    "action": "App\\View\\Components\\User\\ListUsers",
+    "uri": "users/{id}/delete",
     "method": [
       "GET",
       "HEAD"
@@ -350,6 +390,15 @@
     "method": [
       "GET",
       "HEAD"
+    ]
+  },
+  "password.configure": {
+    "name": "password.configure",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\PasswordController@store",
+    "uri": "configure/{token}",
+    "method": [
+      "POST"
     ]
   }
 }
