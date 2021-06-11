@@ -19,7 +19,7 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
 
     Route::post('/configure/{token}', [PasswordController::class, 'store'])
         ->middleware(['guest:'.config('fortify.guard')])
-        ->name('password.configure');
+        ->name('password.store');
 
     if (Features::enabled(Features::resetPasswords())) {
         Route::get('/reset-password/{token}', [PasswordController::class, 'create'])

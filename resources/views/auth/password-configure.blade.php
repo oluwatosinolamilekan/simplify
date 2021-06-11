@@ -23,7 +23,7 @@
 
                     <x-jet-validation-errors class="mb-4 xl:max-w-sm" />
 
-                    <form method="POST" action="{{ route('password.configure', ['token' => $request->route('token')]) }}">
+                    <form method="POST" action="{{ route('password.store', ['token' => $request->route('token')]) }}">
                         @csrf
                         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
