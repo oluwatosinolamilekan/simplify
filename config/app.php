@@ -22,7 +22,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Simplify'),
+    'name' => env('APP_NAME', 'Addio'),
 
     /*
     |--------------------------------------------------------------------------
@@ -62,6 +62,16 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Base Domain
+    |--------------------------------------------------------------------------
+    |
+    | This domain is used for the domain-based routing.
+    |
+    */
+    'base_domain' => env('APP_BASE_DOMAIN', 'localhost'),
 
     'asset_url' => env('ASSET_URL', null),
 
