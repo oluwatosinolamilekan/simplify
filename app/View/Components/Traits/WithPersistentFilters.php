@@ -18,11 +18,11 @@ trait WithPersistentFilters
         $this->restoreFiltersFromSession();
     }
 
-    public function buildDatabaseQuery()
+    public function buildDatabaseQuery($export = false)
     {
         $this->storeFiltersInSession();
 
-        parent::buildDatabaseQuery();
+        parent::buildDatabaseQuery($export);
     }
 
     public function storeFiltersInSession()
