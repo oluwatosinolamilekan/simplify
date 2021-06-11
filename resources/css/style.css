@@ -2,18 +2,8 @@ html {
     background: linear-gradient(to bottom, #2d3748, #3b4658);
 }
 
-@-webkit-keyframes intro-x-animation {
-    100% {
-        opacity: 1;
-        transform: translateX(0px);
-    }
-}
-
-@keyframes intro-x-animation {
-    100% {
-        opacity: 1;
-        transform: translateX(0px);
-    }
+.position-relative {
+    position: relative;
 }
 
 .login .guest-layout-intro-title {
