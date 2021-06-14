@@ -31,61 +31,19 @@
                 <div class="mb-5">
                     <a href="" class="flex items-center mt-2">
                         <div class="w-8 h-8 image-fit">
-                            <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-5.jpg">
+                            <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="https://rubick-laravel.left4code.com/dist/images/profile-13.jpg">
                         </div>
                         <div class="ml-3">Al Pacino</div>
                         <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">alpacino@left4code.com</div>
-                    </a>
-                    <a href="" class="flex items-center mt-2">
-                        <div class="w-8 h-8 image-fit">
-                            <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-15.jpg">
-                        </div>
-                        <div class="ml-3">Denzel Washington</div>
-                        <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">denzelwashington@left4code.com</div>
-                    </a>
-                    <a href="" class="flex items-center mt-2">
-                        <div class="w-8 h-8 image-fit">
-                            <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-12.jpg">
-                        </div>
-                        <div class="ml-3">Kevin Spacey</div>
-                        <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">kevinspacey@left4code.com</div>
-                    </a>
-                    <a href="" class="flex items-center mt-2">
-                        <div class="w-8 h-8 image-fit">
-                            <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-7.jpg">
-                        </div>
-                        <div class="ml-3">Nicolas Cage</div>
-                        <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">nicolascage@left4code.com</div>
                     </a>
                 </div>
                 <div class="search-result__content__title">Products</div>
                 <a href="" class="flex items-center mt-2">
                     <div class="w-8 h-8 image-fit">
-                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/preview-15.jpg">
+                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="https://rubick-laravel.left4code.com/dist/images/profile-13.jpg">
                     </div>
                     <div class="ml-3">Samsung Galaxy S20 Ultra</div>
                     <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">Smartphone &amp; Tablet</div>
-                </a>
-                <a href="" class="flex items-center mt-2">
-                    <div class="w-8 h-8 image-fit">
-                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/preview-7.jpg">
-                    </div>
-                    <div class="ml-3">Samsung Galaxy S20 Ultra</div>
-                    <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">Smartphone &amp; Tablet</div>
-                </a>
-                <a href="" class="flex items-center mt-2">
-                    <div class="w-8 h-8 image-fit">
-                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/preview-10.jpg">
-                    </div>
-                    <div class="ml-3">Sony Master Series A9G</div>
-                    <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">Electronic</div>
-                </a>
-                <a href="" class="flex items-center mt-2">
-                    <div class="w-8 h-8 image-fit">
-                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/preview-1.jpg">
-                    </div>
-                    <div class="ml-3">Samsung Q90 QLED TV</div>
-                    <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">Electronic</div>
                 </a>
             </div>
         </div>
@@ -99,7 +57,7 @@
                 <div class="notification-content__title">Notifications</div>
                 <div class="cursor-pointer relative flex items-center ">
                     <div class="w-12 h-12 flex-none image-fit mr-1">
-                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-5.jpg">
+                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="https://rubick-laravel.left4code.com/dist/images/profile-13.jpg">
                         <div class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"></div>
                     </div>
                     <div class="ml-2 overflow-hidden">
