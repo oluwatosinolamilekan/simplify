@@ -18,26 +18,26 @@
         <!-- Scripts -->
         <script src="{{ asset('mix/js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased">
-        <x-jet-banner />
+    <body class="{{$attributes['bodyClass'] ?? ''}} bg-white">
+        {{--<x-jet-banner />--}}
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+        {{--<div class="min-h-screen bg-gray-100">--}}
+            {{--@livewire('navigation-menu')--}}
 
             <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+            {{--@if (isset($header))--}}
+                {{--<header class="bg-white shadow">--}}
+                    {{--<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">--}}
+                        {{--{{ $header }}--}}
+                    {{--</div>--}}
+                {{--</header>--}}
+            {{--@endif--}}
 
             <!-- Page Content -->
-            <main>
+            {{--<main>--}}
                 {{ $slot }}
-            </main>
-        </div>
+            {{--</main>--}}
+        {{--</div>--}}
 
         @stack('modals')
 
