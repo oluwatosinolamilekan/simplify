@@ -1,3 +1,4 @@
+<x-mobile-menu/>
 <div class="flex">
     <x-sidebar/>
     <!-- BEGIN: Content -->
