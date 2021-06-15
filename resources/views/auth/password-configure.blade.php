@@ -32,7 +32,7 @@
                         </div>
                         <div x-data="{ show: true }">
                             <div class="intro-x mt-4 relative">
-                                <input id="password" :type="show ? 'password' : 'text'" class="login__input form-control py-3 px-4 border-gray-300 block mt-4 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" name="password" placeholder="{{ __('Password') }}" required autocomplete="current-password">
+                                <input id="password" :type="show ? 'password' : 'text'" class="form-control py-3 px-4 border-gray-300 block mt-4 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18 focus:ring-opacity-50" name="password" placeholder="{{ __('Password') }}" required autocomplete="current-password">
 
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                                     <svg class="h-6 text-gray-600" fill="none" @click="show = !show"
@@ -54,7 +54,7 @@
                         </div>
                         <div x-data="{ show: true }">
                             <div class="intro-x mt-4 relative">
-                                <input id="password_confirmation" :type="show ? 'password' : 'text'" class="login__input form-control py-3 px-4 border-gray-300 block mt-4 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required autocomplete="new-password">
+                                <input id="password_confirmation" :type="show ? 'password' : 'text'" class="form-control py-3 px-4 border-gray-300 block mt-4 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18 focus:ring-opacity-50" name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required autocomplete="new-password">
 
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                                     <svg class="h-6 text-gray-600" fill="none" @click="show = !show"
