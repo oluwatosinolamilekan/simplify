@@ -1,4 +1,7 @@
-<x-jet-form-section submit="save">
+<x-slot name="header">
+    {{ __('Update User Details') }}
+</x-slot>
+<x-jet-form-section submit="save" class="mt-6">
     <x-slot name="title">
         @if($user->exists) {{__('Update')}} @else {{ __('Create') }} @endif {{ __(' User Account') }}
     </x-slot>
@@ -8,7 +11,7 @@
     </x-slot>
 
     <x-slot name="form">
-    <!-- First Name -->
+        <!-- First Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="first_name" value="{{ __('First Name') }}" />
             <x-jet-input id="first_name" type="text" class="mt-1 block w-full" wire:model.defer="user.first_name" autocomplete="name" />
