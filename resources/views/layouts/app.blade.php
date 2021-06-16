@@ -19,7 +19,16 @@
     <script src="{{ asset('mix/js/app.js') }}" defer></script>
 </head>
 <body class="{{$attributes['bodyClass'] ?? ''}} bg-white">
-    {{ $slot }}
+    <x-mobile-menu/>
+    <div class="flex">
+        <x-sidebar/>
+        <!-- BEGIN: Content -->
+        <div class="content">
+            <x-topbar :header="$header"/>
+            {{ $slot }}
+        </div>
+    </div>
+
     @stack('modals')
 
     @livewireScripts

@@ -1,9 +1,9 @@
 <x-app-layout :bodyClass="'main'">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+        {{ __('Dashboard') }}
     </x-slot>
 
-    <x-dashboard-content />
+    <div class="mt-8">
+        <h2 class="text-lg">Welcome Addio application!</h2>
+    </div>
 </x-app-layout>
