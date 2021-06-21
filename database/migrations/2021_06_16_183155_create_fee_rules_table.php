@@ -13,7 +13,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyTable extends Migration
+class CreateFeeRulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,11 +22,13 @@ class CreateCompanyTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('fee_rules', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
-            $table->string('domain', 125)->nullable();
-            $table->status();
+            $table->foreignId('term_fee_rules_id')->constrained('term_fee_rules');
+            $table->string('label', 255);
+            $table->enumValue('type');
+            $table->double('rate');
+            $table->json('configuration');
             $table->common();
         });
     }
@@ -38,6 +40,6 @@ class CreateCompanyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('fee_rules');
     }
 }

@@ -9,11 +9,12 @@ declare(strict_types=1);
  * the LICENSE file that was distributed with this source code.
  */
 
+use App\Enums\ClientType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyTable extends Migration
+class CreateClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,10 +23,13 @@ class CreateCompanyTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('clients', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->constrained('companies');
+            $table->foreignId('factor_id')->constrained('factors');
+            $table->code('ref_code');
             $table->string('name', 255);
-            $table->string('domain', 125)->nullable();
+            $table->enumValue('type', ClientType::Other);
             $table->status();
             $table->common();
         });
@@ -38,6 +42,6 @@ class CreateCompanyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('clients');
     }
 }

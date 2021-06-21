@@ -9,11 +9,12 @@ declare(strict_types=1);
  * the LICENSE file that was distributed with this source code.
  */
 
+use App\Enums\CreditRatingType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyTable extends Migration
+class CreateDebtorCreditRatingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,11 +23,14 @@ class CreateCompanyTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('debtor_credit_ratings', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
-            $table->string('domain', 125)->nullable();
-            $table->status();
+            $table->foreignId('debtor_id')->constrained('debtors');
+            $table->foreignId('debtor_credit_id')->constrained('debtor_credits');
+            $table->string('rating', 1025);
+            $table->string('limit', 1025)->nullable();
+            $table->string('data')->nullable();
+            $table->enumValue('type', CreditRatingType::Other)->nullable();
             $table->common();
         });
     }
@@ -38,6 +42,6 @@ class CreateCompanyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('debtor_credit_ratings');
     }
 }

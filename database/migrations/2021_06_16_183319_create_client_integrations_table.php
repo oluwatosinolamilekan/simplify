@@ -13,7 +13,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyTable extends Migration
+class CreateClientIntegrationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,11 +22,11 @@ class CreateCompanyTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('client_integrations', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
-            $table->string('domain', 125)->nullable();
-            $table->status();
+            $table->foreignId('client_id')->constrained('clients');
+            $table->boolean('trucker_cloud_integration')->nullable();
+            $table->boolean('open_credit_request')->nullable();
             $table->common();
         });
     }
@@ -38,6 +38,6 @@ class CreateCompanyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('client_integrations');
     }
 }

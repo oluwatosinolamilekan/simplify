@@ -13,7 +13,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyTable extends Migration
+class AddOwnerColumnOnCompanyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,12 +22,8 @@ class CreateCompanyTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 255);
-            $table->string('domain', 125)->nullable();
-            $table->status();
-            $table->common();
+        Schema::table('companies', function (Blueprint $table) {
+            $table->foreignId('owner_company_id')->nullable()->default(null)->constrained('companies');
         });
     }
 
@@ -38,6 +34,9 @@ class CreateCompanyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::table('companies', function (Blueprint $table) {
+            $table->dropForeign('owner_company_id');
+            $table->dropColumn('owner_company_id');
+        });
     }
 }

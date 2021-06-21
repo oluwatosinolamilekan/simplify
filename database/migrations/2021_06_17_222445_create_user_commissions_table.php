@@ -13,7 +13,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyTable extends Migration
+class CreateUserCommissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,11 +22,11 @@ class CreateCompanyTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('user_commissions', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
-            $table->string('domain', 125)->nullable();
-            $table->status();
+            $table->foreignId('user_id')->constrained('users');
+            $table->enumValue('type');
+            $table->double('commission');
             $table->common();
         });
     }
@@ -38,6 +38,6 @@ class CreateCompanyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('user_commissions');
     }
 }

@@ -13,7 +13,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyTable extends Migration
+class CreateCustomizationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,11 +22,15 @@ class CreateCompanyTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('customizations', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
-            $table->string('domain', 125)->nullable();
-            $table->status();
+            $table->foreignId('company_id')->constrained('companies');
+
+            $table->string('logo_path', 1025);
+            $table->code('language')->default('en');
+            $table->json('color_scheme');
+            $table->json('terminology');
+
             $table->common();
         });
     }
@@ -38,6 +42,6 @@ class CreateCompanyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('customizations');
     }
 }
