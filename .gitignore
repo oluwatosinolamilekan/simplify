@@ -10,6 +10,7 @@
 .env
 .env.backup
 .env.cypress
+.env.testing
 /cypress/videos
 /cypress/screenshots
 .phpunit.result.cache
