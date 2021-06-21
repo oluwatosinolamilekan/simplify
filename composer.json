@@ -28,6 +28,7 @@
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "friendsofphp/php-cs-fixer": "^3.0",
+        "krlove/eloquent-model-generator": "^1.3",
         "laracasts/cypress": "^1.3",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
@@ -78,6 +79,8 @@
         "migrate:rollback": "php artisan migrate:rollback",
         "make:migration": "php artisan make:migration",
         "make:livewire": "php artisan make:livewire",
+        "make:enum": "php artisan make:enum",
+        "make:model": "php artisan krlove:generate:model",
         "cache:clear": [
             "php artisan cache:clear",
             "php artisan config:cache",

@@ -4,6 +4,10 @@
     "description": "TailwindCSS HTML Admin Template",
     "author": "Left4code",
     "private": true,
+    "engines": {
+        "node": ">=14.16",
+        "npm": ">=6.14"
+    },
     "scripts": {
         "dev": "npm run development",
         "development": "mix",

@@ -9,8 +9,13 @@ declare(strict_types=1);
  * the LICENSE file that was distributed with this source code.
  */
 
+use App\Models\Model;
+
 return [
-    'default_time_format' => 'H:i',
-    'default_date_format' => 'd/m/Y',
-    'suppress_search_highlights' => false, // When searching, don't highlight matching search results when set to true
+    'model_defaults' => [
+        'namespace'       => 'App\\Models',
+        'base_class_name' => Model::class,
+        'output_path'     => 'Models',
+        'backup'          => true,
+    ],
 ];
