@@ -21,4 +21,15 @@ final class Status extends Enum
 {
     const Active = 1;
     const NotActive = 2;
+    const Deleted = 3;
+    const Suspended = 4;
+
+    const Requested = 5;
+    const Approved = 6;
+    const Funded = 7;
+
+    const Draft = 8;
+    const Authorized = 9;
+    const Unapplied = 10;
+    const Refunded = 11;
 }
