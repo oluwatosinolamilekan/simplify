@@ -9,7 +9,6 @@ declare(strict_types=1);
  * the LICENSE file that was distributed with this source code.
  */
 
-use App\Enums\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

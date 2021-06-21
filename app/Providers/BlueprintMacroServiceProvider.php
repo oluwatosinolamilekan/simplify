@@ -29,7 +29,7 @@ class BlueprintMacroServiceProvider extends ServiceProvider
             $this->foreignId('updated_by')->nullable()->constrained('users');
         });
 
-        Blueprint::macro('timestamps', function () {
+        Blueprint::macro('commonTimestamps', function () {
             $this->timestamp('created_at')->useCurrent();
             $this->timestamp('updated_at')->nullable();
         });
@@ -37,7 +37,7 @@ class BlueprintMacroServiceProvider extends ServiceProvider
         Blueprint::macro('common', function () {
             $this->json('meta')->nullable();
             $this->blameable();
-            $this->timestamps();
+            $this->commonTimestamps();
         });
 
         Blueprint::macro('enumValue', function (string $name, int $default = null) {
