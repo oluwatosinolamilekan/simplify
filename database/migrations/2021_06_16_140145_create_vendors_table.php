@@ -28,6 +28,7 @@ class CreateVendorsTable extends Migration
             $table->foreignId('factor_id')->constrained('factors');
             $table->foreignId('client_id')->constrained('clients');
             $table->code('ref_code');
+            $table->unique('ref_code');
             $table->string('name', 255);
             $table->status();
             $table->common();

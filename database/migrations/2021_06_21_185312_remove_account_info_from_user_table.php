@@ -13,7 +13,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDebtorsTable extends Migration
+class RemoveAccountInfoFromUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,16 +22,9 @@ class CreateDebtorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('debtors', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('company_id')->constrained('companies');
-            $table->foreignId('factor_id')->constrained('factors');
-            $table->foreignId('client_id')->constrained('clients');
-            $table->code('ref_code');
-            $table->unique('ref_code');
-            $table->string('name', 255);
-            $table->status();
-            $table->common();
+        Schema::table('user', function (Blueprint $table) {
+            $table->removeColumn('first_name');
+            $table->removeColumn('last_name');
         });
     }
 
@@ -42,6 +35,9 @@ class CreateDebtorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('debtors');
+        Schema::table('user', function (Blueprint $table) {
+            $table->string('first_name', 255)->nullable();
+            $table->string('last_name', 255)->nullable();
+        });
     }
 }

@@ -28,6 +28,7 @@ class CreateClientsTable extends Migration
             $table->foreignId('company_id')->constrained('companies');
             $table->foreignId('factor_id')->constrained('factors');
             $table->code('ref_code');
+            $table->unique('ref_code');
             $table->string('name', 255);
             $table->enumValue('type', ClientType::Other);
             $table->status();

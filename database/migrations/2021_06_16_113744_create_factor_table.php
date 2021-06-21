@@ -27,6 +27,7 @@ class CreateFactorTable extends Migration
             $table->id();
             $table->foreignId('company_id')->constrained('companies');
             $table->code('ref_code');
+            $table->unique('ref_code');
             $table->status(Status::Active);
             $table->common(); // meta, timestamps, blameable
         });

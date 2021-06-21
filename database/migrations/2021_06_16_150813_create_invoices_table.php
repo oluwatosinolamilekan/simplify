@@ -31,6 +31,7 @@ class CreateInvoicesTable extends Migration
             $table->foreignId('vendor_id')->constrained('vendors');
             $table->code('invoice_number');
             $table->code('reference_number');
+            $table->unique(['client_id', 'invoice_number']);
             $table->date('date');
             $table->date('due_date');
             $table->double('amount');
