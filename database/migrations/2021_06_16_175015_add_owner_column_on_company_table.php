@@ -35,8 +35,7 @@ class AddOwnerColumnOnCompanyTable extends Migration
     public function down()
     {
         Schema::table('companies', function (Blueprint $table) {
-            $table->dropForeign('owner_company_id');
-            $table->dropColumn('owner_company_id');
+            $table->dropConstrainedForeignId('owner_company_id');
         });
     }
 }

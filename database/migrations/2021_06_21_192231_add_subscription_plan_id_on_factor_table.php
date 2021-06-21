@@ -13,7 +13,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RemoveAccountInfoFromUserTable extends Migration
+class AddSubscriptionPlanIdOnFactorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,9 +22,8 @@ class RemoveAccountInfoFromUserTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->removeColumn('first_name');
-            $table->removeColumn('last_name');
+        Schema::table('factors', function (Blueprint $table) {
+            $table->foreignId('subscription_plan_id')->constrained('subscription_plans');
         });
     }
 
@@ -35,9 +34,8 @@ class RemoveAccountInfoFromUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('first_name', 255)->nullable();
-            $table->string('last_name', 255)->nullable();
+        Schema::table('factors', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('subscription_plan_id');
         });
     }
 }

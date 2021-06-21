@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Enums\Status;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\ServiceProvider;
 
@@ -43,7 +44,7 @@ class BlueprintMacroServiceProvider extends ServiceProvider
             return $this->tinyInteger($name)->default($default);
         });
 
-        Blueprint::macro('status', function (int $default = null) {
+        Blueprint::macro('status', function (int $default = Status::Active) {
             return $this->enumValue('status', $default);
         });
 
