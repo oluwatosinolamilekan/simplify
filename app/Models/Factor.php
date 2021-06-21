@@ -22,6 +22,7 @@ use Illuminate\Support\Carbon;
  *
  * @property int $id
  * @property int $company_id
+ * @property int $subscription_plan_id
  * @property string $ref_code
  * @property Status $status
  * @property array|null $meta
@@ -39,6 +40,7 @@ use Illuminate\Support\Carbon;
  * @property Team[] $teams
  * @property Term[] $terms
  * @property Vendor[] $vendors
+ * @property SubscriptionPlan $subscriptionPlan
  * @property User $creator
  * @property User $updater
  * @method static Builder|User   createdBy($userId)
@@ -53,6 +55,7 @@ class Factor extends Model
      */
     protected $fillable = [
         'company_id',
+        'subscription_plan_id',
         'ref_code',
         'status',
         'meta',
@@ -85,6 +88,14 @@ class Factor extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function subscriptionPlan()
+    {
+        return $this->belongsTo(SubscriptionPlan::class);
     }
 
     /**
