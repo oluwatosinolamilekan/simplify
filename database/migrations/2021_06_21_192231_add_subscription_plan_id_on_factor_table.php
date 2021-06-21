@@ -23,7 +23,7 @@ class AddSubscriptionPlanIdOnFactorTable extends Migration
     public function up()
     {
         Schema::table('factors', function (Blueprint $table) {
-            $table->foreignId('subscription_plan_id')->constrained('subscription_plans');
+            $table->foreignId('subscription_plan_id')->after('company_id')->constrained('subscription_plans');
         });
     }
 
