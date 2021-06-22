@@ -9,11 +9,12 @@ declare(strict_types=1);
  * the LICENSE file that was distributed with this source code.
  */
 
+use App\Enums\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyTable extends Migration
+class CreateFactorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,12 +23,13 @@ class CreateCompanyTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('factors', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
-            $table->string('domain', 125)->nullable();
-            $table->status();
-            $table->common();
+            $table->foreignId('company_id')->constrained('companies');
+            $table->code('ref_code');
+            $table->unique('ref_code');
+            $table->status(Status::Active);
+            $table->common(); // meta, timestamps, blameable
         });
     }
 
@@ -38,6 +40,6 @@ class CreateCompanyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('factors');
     }
 }

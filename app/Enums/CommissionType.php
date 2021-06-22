@@ -14,17 +14,11 @@ namespace App\Enums;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static SuperAdministrator()
- * @method static static Administrator()
- * @method static static AccountExecutive()
  * @method static static SalesRepresentative()
  * @method static static FactorBroker()
  */
-final class Role extends Enum
+final class CommissionType extends Enum
 {
-    const SuperAdministrator = 1;
-    const Administrator = 2;
-    const AccountExecutive = 3;
-    const SalesRepresentative = 4;
-    const FactorBroker = 5;
+    const SalesRepresentative = 1;
+    const FactorBroker = 2;
 }

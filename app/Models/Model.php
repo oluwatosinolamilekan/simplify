@@ -17,11 +17,13 @@ use Closure;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Pagination\LengthAwarePaginator;
+use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
  * Class Model.
@@ -94,11 +96,23 @@ abstract class Model extends EloquentModel
 {
     use CastsEnums;
     use UsesTimestampScopes;
+    use HasFactory;
+    use BlameableTrait;
 
     /**
      * @var bool do not allow timestamps management. They are already being done by database.
      */
     public $timestamps = false;
+
+    /**
+     * The attributes that should be cast to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
 
     /**
      * Determine if the given relationship (method) exists.

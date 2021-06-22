@@ -13,7 +13,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyTable extends Migration
+class CreateSubscriptionPlansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,10 +22,11 @@ class CreateCompanyTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('subscription_plans', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->string('domain', 125)->nullable();
+            $table->double('price');
+            $table->json('notes')->nullable();
             $table->status();
             $table->common();
         });
@@ -38,6 +39,6 @@ class CreateCompanyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('subscription_plans');
     }
 }
