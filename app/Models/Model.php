@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\Status;
 use App\Models\Traits\UsesTimestampScopes;
 use BenSampo\Enum\Traits\CastsEnums;
 use Closure;
@@ -138,5 +139,31 @@ abstract class Model extends EloquentModel
         }
 
         return false;
+    }
+
+    public function isDirty($attributes = null)
+    {
+        if (! $this->exists) {
+            return ! empty(array_filter($this->getDirty()));
+        }
+
+        return parent::isDirty($attributes);
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeActive(Builder $query): Builder
+    {
+        $model = $query->getModel();
+        $table = $model->getTable();
+        $schema = $model->getConnection()->getSchemaBuilder();
+
+        if ($schema->hasColumn($table, 'status')) {
+            return $query->where($model->qualifyColumn('status'), Status::Active);
+        }
+
+        return $query;
     }
 }

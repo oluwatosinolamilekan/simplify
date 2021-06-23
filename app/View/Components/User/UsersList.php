@@ -19,7 +19,7 @@ use Mediconesystems\LivewireDatatables\BooleanColumn;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
 
-class ListUsers extends Datatable
+class UsersList extends Datatable
 {
     use ConfirmModelDelete {
         confirmDeletion as confirmDelete;

@@ -90,6 +90,13 @@ class User extends Authenticatable implements MustVerifyEmailContract
     ];
 
     /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'status' => Status::Active,
+    ];
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array

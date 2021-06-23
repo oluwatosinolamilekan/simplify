@@ -30,6 +30,10 @@ use Illuminate\Database\Eloquent\Builder;
  * @property Carbon|null $updated_at
  * @property User       $creator
  * @property User       $updater
+ * @property Address    $address
+ * @property User[]     $users
+ * @property ContactDetails  $contactDetails
+ * @property BankInformation $bankInformation
  * @method static Company           active()
  * @method static Builder|Company   createdBy($userId)
  * @method static Builder|Company   updatedBy($userId)
@@ -72,12 +76,23 @@ class Company extends Model
         'status' => Status::class,
     ];
 
-    /**
-     * @param Builder $query
-     * @return Builder
-     */
-    public function scopeActive(Builder $query): Builder
+    public function address()
     {
-        return $query->where('status', Status::Active);
+        return $this->hasOne(Address::class);
+    }
+
+    public function contactDetails()
+    {
+        return $this->hasOne(Address::class);
+    }
+
+    public function bankInformation()
+    {
+        return $this->hasOne(BankInformation::class);
+    }
+
+    public function users()
+    {
+        return $this->hasManyThrough(User::class, UserCompanyAccess::class, 'company_id', 'id', 'id', 'user_id');
     }
 }

@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace App\View\Components\User;
 
+use App\Enums\Role;
+use App\Enums\Status;
 use App\Models\User;
 use App\View\Components\Traits\ConfirmModelDelete;
 use Illuminate\Validation\Rule;
@@ -31,7 +33,12 @@ class UserForm extends Component
 
     public function mount($id = null)
     {
-        $this->user = $id ? User::findOrFail($id) : new User();
+        $this->user = User::findOrNew($id);
+
+        if (! $this->user->exists) {
+            $this->user->role = Role::SuperAdministrator;
+            $this->user->status = Status::Active;
+        }
     }
 
     public function save()
@@ -45,7 +52,7 @@ class UserForm extends Component
 
     public function render()
     {
-        return view('user.form');
+        return view('user.user-form');
     }
 
     public function getRules()
@@ -58,6 +65,7 @@ class UserForm extends Component
                 $this->user->id ? Rule::unique('users', 'email')->ignore($this->user->id) : 'unique:users,email',
             ],
             'user.role' => ['required', 'int'],
+            'user.status' => ['required', 'int', Rule::in([Status::Active, Status::NotActive])],
         ];
     }
 
