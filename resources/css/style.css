@@ -1,4 +1,4 @@
-html {
+html:not(.dark) {
     background-color: white !important;
 }
 
@@ -30,6 +30,18 @@ html {
 input[type=checkbox]:checked {
     background-color: #59BABE !important;
     border-color: #59BABE !important;
+}
+
+.side-nav.darkMode .main-logo {
+    display: none;
+}
+
+.side-nav .main-logo-dark {
+    display: none;
+}
+
+.side-nav.darkMode .main-logo-dark {
+    display: block;
 }
 
 @media only screen and (min-width: 1279px) {
