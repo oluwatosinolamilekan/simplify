@@ -82,7 +82,7 @@
             @endif
         </div>
         <div class="dropdown-menu w-56">
-            <div class="dropdown-menu__content box bg-white dark:bg-dark-6 text-gray-700 overflow-hidden">
+            <div class="dropdown-menu__content box bg-white dark:bg-dark-6 text-gray-700 dark:text-white overflow-hidden">
                 <div class="p-4 border-b border-gray-500 dark:border-dark-3">
                     <div class="font-medium">{{ Auth::user()->full_name }}</div>
                 </div>
