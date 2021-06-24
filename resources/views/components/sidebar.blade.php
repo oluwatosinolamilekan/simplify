@@ -1,7 +1,10 @@
 <!-- BEGIN: Side Menu -->
-<nav class="side-nav">
-    <a href="" class="intro-x flex items-center pl-5 pt-3">
+<nav class="side-nav" x-bind:class="{ 'darkMode': darkMode }">
+    <a href="" class="intro-x flex items-center pl-5 pt-3 main-logo">
         <x-main-logo />
+    </a>
+    <a href="" class="intro-x flex items-center pl-5 pt-3 main-logo-dark">
+        <x-jet-authentication-card-logo />
     </a>
     <div class="side-nav__devider my-6 bg-gray-500"></div>
     <ul>
