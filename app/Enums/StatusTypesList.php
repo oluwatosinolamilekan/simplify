@@ -20,10 +20,8 @@ class StatusTypesList
     ];
 
     public const Factor = [
-        Status::Requested,
-        Status::Approved,
-        Status::Suspended,
-        Status::Funded,
+        Status::Active,
+        Status::NotActive,
     ];
 
     public const Invoices = [

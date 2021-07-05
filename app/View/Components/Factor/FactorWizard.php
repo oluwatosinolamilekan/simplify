@@ -51,11 +51,8 @@ class FactorWizard extends Component
         $this->bankInformation = $this->company->bankInformation ?? new BankInformation();
 
         if (! $this->factor->exists) {
-            $this->user = new User();
-            $this->user->role = Role::CompanyUser;
-
-            $this->userCompanyAccess = new UserCompanyAccess();
-            $this->userCompanyAccess->role = Role::Administrator;
+            $this->user = new User(['role' => Role::CompanyUser]);
+            $this->userCompanyAccess = new UserCompanyAccess(['role' => Role::Administrator]);
         }
     }
 
@@ -108,22 +105,19 @@ class FactorWizard extends Component
 
     public function getRules()
     {
-        $rules =
-            array_merge(
-                FactorForm::getValidationRules(),
-                SubscriptionPlanForm::getValidationRules(),
-                CompanyForm::getValidationRules($this->company),
-                BankInformationForm::getValidationRules($this->bankInformation),
-                AddressForm::getValidationRules($this->address),
-                ContactForm::getValidationRules(),
-                [
-                    'user.email' => [Rule::requiredIf(! $this->factor->exists && isset($this->user)), 'string', 'email', 'min:8', 'max:255', 'unique:users,email'],
-                    'user.role' => [Rule::requiredIf(! $this->factor->exists && isset($this->user)), 'int'],
-                ],
-                isset($this->userCompanyAccess) ? UserCompanyAccessForm::getValidationRules() : [],
-            );
-
-        return $rules;
+        return array_merge(
+            FactorForm::getValidationRules(),
+            SubscriptionPlanForm::getValidationRules(),
+            CompanyForm::getValidationRules($this->company),
+            BankInformationForm::getValidationRules($this->bankInformation),
+            AddressForm::getValidationRules($this->address),
+            ContactForm::getValidationRules(),
+            [
+                'user.email' => [Rule::requiredIf(! $this->factor->exists), 'string', 'email', 'min:8', 'max:255', 'unique:users,email'],
+                'user.role' => [Rule::requiredIf(! $this->factor->exists), 'int'],
+            ],
+            ! $this->factor->exists ? UserCompanyAccessForm::getValidationRules() : [],
+        );
     }
 
     public function getModel()

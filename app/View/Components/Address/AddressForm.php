@@ -24,11 +24,6 @@ class AddressForm extends Component
         return view('address.form');
     }
 
-    public function mount(Address $address)
-    {
-        $this->address = $address;
-    }
-
     public static function getValidationRules(?Address $model = null)
     {
         $dirty = $model && $model->isDirty();

@@ -11,7 +11,13 @@ declare(strict_types=1);
 
 namespace App\View\Components\Factor;
 
+use App\Models\Address;
+use App\Models\BankInformation;
+use App\Models\Company;
+use App\Models\ContactDetails;
 use App\Models\Factor;
+use App\View\Components\Address\AddressForm;
+use App\View\Components\BankInformation\BankInformationForm;
 use App\View\Components\Traits\ConfirmModelDelete;
 use Livewire\Component;
 
@@ -20,14 +26,43 @@ class FactorDetails extends Component
     use ConfirmModelDelete;
 
     public Factor $factor;
+    public Company $company;
+    public Address $address;
+    public ContactDetails $contact;
+    public BankInformation $bankInformation;
 
     public function mount($id)
     {
         $this->factor = Factor::with(['company', 'company.address', 'company.contactDetails', 'company.bankInformation', 'subscriptionPlan'])->findOrFail($id);
+
+        $this->company = $this->factor->company ?? new Company();
+        $this->address = $this->company->address ?? new Address();
+        $this->contact = $this->company->contactDetails ?? new ContactDetails();
+        $this->bankInformation = $this->company->bankInformation ?? new BankInformation();
     }
 
     public function render()
     {
         return view('factor.details');
+    }
+
+    public function saveAddressInformation()
+    {
+        $this->validate();
+        $this->company->address()->save($this->address);
+    }
+
+    public function saveBankInformation()
+    {
+        $this->validate();
+        $this->company->bankInformation()->save($this->bankInformation);
+    }
+
+    public function getRules()
+    {
+        return array_merge(
+            BankInformationForm::getValidationRules($this->bankInformation),
+            AddressForm::getValidationRules($this->address)
+        );
     }
 }

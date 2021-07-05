@@ -52,7 +52,7 @@ class UserForm extends Component
 
     public function render()
     {
-        return view('user.user-form');
+        return view('user.form');
     }
 
     public function getRules()

@@ -169,6 +169,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
         return $query->where('status', Status::Active);
     }
 
+    // TODO: user can belong to multiple companies
     public function company(): HasOneThrough
     {
         return $this->hasOneThrough(

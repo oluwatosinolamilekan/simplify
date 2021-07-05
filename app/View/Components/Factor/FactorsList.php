@@ -12,7 +12,9 @@ declare(strict_types=1);
 namespace App\View\Components\Factor;
 
 use App\Enums\Status;
+use App\Enums\StatusTypesList;
 use App\Models\Factor;
+use App\Models\SubscriptionPlan;
 use App\View\Components\Common\Datatable;
 use App\View\Components\Traits\ConfirmModelDelete;
 use Mediconesystems\LivewireDatatables\Column;
@@ -59,12 +61,16 @@ class FactorsList extends Datatable
 
             Column::callback('status', fn (int $status) => Status::fromValue($status)->description)
                 ->label('Status')
-                ->filterable([['id' => Status::Active, 'name' => 'Active'], ['id' => Status::NotActive, 'name' => 'Not Active']]),
-
+                ->filterable(
+                    collect(StatusTypesList::Factor)->map(fn ($status) => [
+                        'id' => $status,
+                        'name' => Status::fromValue($status)->description,
+                    ])
+                    ->all()
+                ),
             Column::name('subscriptionPlan.name')
                 ->label('Subscription Plan')
-                ->filterable()
-                ->searchable(),
+                ->filterable(SubscriptionPlan::pluck('name')->all()),
 
             DateColumn::name('created_at')
                 ->label('Created At')

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\View\Components\User;
 
+use App\Enums\Role;
 use App\Enums\Status;
 use App\Models\User;
 use App\View\Components\Common\Datatable;
@@ -38,7 +39,7 @@ class UsersList extends Datatable
 
     public function builder()
     {
-        return User::query();
+        return User::whereRole(Role::SuperAdministrator);
     }
 
     public function columns()

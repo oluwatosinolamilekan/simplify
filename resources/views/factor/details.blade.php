@@ -6,7 +6,7 @@
         <!-- Company Information -->
         <div class="mt-10 sm:mt-0">
             <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-                @include('company.details', ['company' => $factor->company, 'title' => __('Company Information'), 'description' => __('Company Basic Information.')])
+                @include('company.details', ['company' => $company, 'title' => __('Company Information'), 'description' => __('Company Basic Information.')])
 
             </div>
         </div>
@@ -16,7 +16,7 @@
         <!-- Factor Information -->
         <div class="mt-10 sm:mt-0">
             <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-                @include('factor.relation-details', ['company' => $factor->company, 'title' => __('Factor Information'), 'description' => __('Factor Basic Information.')])
+                @include('factor.relation-details', ['company' => $company, 'title' => __('Factor Information'), 'description' => __('Factor Basic Information.')])
             </div>
         </div>
 
@@ -24,9 +24,40 @@
 
         <!-- Bank Information -->
         <div class="mt-10 sm:mt-0">
+
             <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-                @if ($factor->company->bankInformation)
-                    @include('bank-information.details', ['bankInformation' => $factor->company->bankInformation, 'title' => __('Bank Information'), 'description' => __('Bank Account Information.')])
+
+                <x-jet-section-title>
+                    <x-slot name="title">{{ __('Bank Information') }}</x-slot>
+                    <x-slot name="description">{{ __('Bank account information.') }}</x-slot>
+                </x-jet-section-title>
+
+                @if ($bankInformation->exists)
+                    @include('bank-information.details', ['bankInformation' => $bankInformation])
+                @else
+                    <div class="mt-5 md:mt-0 md:col-span-2" >
+                        <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
+                            <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
+                            <a class="p-4 cursor-pointer bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
+                                + Add
+                            </a>
+                        </div>
+                        <form wire:submit.prevent="saveBankInformation">
+
+                            @include('bank-information.form', ['bankInformation' => $bankInformation])
+
+                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
+                                <!-- TODO @Sofia: Clicking this button should collapse the form above -->
+                                <a class="p-4 cursor-pointer bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
+                                    Cancel
+                                </a>
+                                <x-jet-button class="text-center xl:mr-3 align-top bg-theme-18 border-theme-18 focus:ring-theme-18" wire:loading.attr="disabled">
+                                    {{ __('Save') }}
+                                </x-jet-button>
+                            </div>
+
+                        </form>
+                    </div>
                 @endif
             </div>
         </div>
@@ -34,8 +65,39 @@
         <!-- Address Information -->
         <div class="mt-10 sm:mt-0">
             <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-                @if ($factor->company->address)
-                    @include('address.details', ['address' => $factor->company->address, 'title' => __('Address Information'), 'description' => __('Basic Address information.')])
+
+                <x-jet-section-title>
+                    <x-slot name="title">{{ __('Address Information') }}</x-slot>
+                    <x-slot name="description">{{ __('Company address information.') }}</x-slot>
+                </x-jet-section-title>
+
+            @if ($address->exists)
+                    @include('address.details', ['address' => $factor->company->address])
+                @else
+                    <div class="mt-5 md:mt-0 md:col-span-2" >
+                        <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
+                            <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
+                            <a class="p-4 cursor-pointer bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
+                                + Add
+                            </a>
+                        </div>
+
+                        <form wire:submit.prevent="saveAddressInformation">
+
+                            @include('address.form', ['address' => $address])
+
+                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
+                                <!-- TODO @Sofia: Clicking this button should collapse the form above -->
+                                <a class="p-4 cursor-pointer bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
+                                    Cancel
+                                </a>
+                                <x-jet-button class="text-center xl:mr-3 align-top bg-theme-18 border-theme-18 focus:ring-theme-18" wire:loading.attr="disabled">
+                                    {{ __('Save') }}
+                                </x-jet-button>
+                            </div>
+
+                        </form>
+                    </div>
                 @endif
             </div>
         </div>
@@ -60,7 +122,7 @@
                 {{ __('Update') }}
             </a>
 
-            <x-jet-danger-button wire:click="confirmDeletion" class="text-center xl:mr-3 align-top border-theme-18 focus:ring-theme-18" wire:loading.attr="disabled">
+            <x-jet-danger-button wire:click="confirmDeletion" class="bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" wire:loading.attr="disabled">
                 {{ __('Delete') }}
             </x-jet-danger-button>
 

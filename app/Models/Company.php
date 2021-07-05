@@ -83,7 +83,7 @@ class Company extends Model
 
     public function contactDetails()
     {
-        return $this->hasOne(Address::class);
+        return $this->hasOne(ContactDetails::class);
     }
 
     public function bankInformation()
@@ -93,6 +93,13 @@ class Company extends Model
 
     public function users()
     {
-        return $this->hasManyThrough(User::class, UserCompanyAccess::class, 'company_id', 'id', 'id', 'user_id');
+        return $this->hasManyThrough(
+            User::class,
+            UserCompanyAccess::class,
+            'company_id',
+            'id',
+            'id',
+            'user_id'
+        );
     }
 }
