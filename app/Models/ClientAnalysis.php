@@ -57,6 +57,13 @@ class ClientAnalysis extends Model
     ];
 
     /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'business_type' => BusinessType::Other,
+    ];
+
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array

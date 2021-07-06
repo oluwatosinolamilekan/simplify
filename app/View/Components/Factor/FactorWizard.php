@@ -43,7 +43,13 @@ class FactorWizard extends Component
 
     public function mount($id = null)
     {
-        $this->factor = Factor::with(['company', 'company.address', 'company.contactDetails', 'company.bankInformation', 'subscriptionPlan'])->findOrNew($id);
+        $this->factor = Factor::with([
+            'company',
+            'company.address',
+            'company.contactDetails',
+            'company.bankInformation',
+            'subscriptionPlan',
+        ])->findOrNew($id);
 
         $this->company = $this->factor->company ?? new Company();
         $this->address = $this->company->address ?? new Address();

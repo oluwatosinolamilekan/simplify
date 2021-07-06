@@ -21,7 +21,12 @@ class CompanyForm extends Component
 
     public function render()
     {
-        return view('company.company-form');
+        return view('company.form');
+    }
+
+    public function getRules()
+    {
+        return self::getValidationRules($this->company);
     }
 
     public static function getValidationRules(Company $model = null)
@@ -33,10 +38,5 @@ class CompanyForm extends Component
             ],
 
         ];
-    }
-
-    public function getRules()
-    {
-        return self::getValidationRules($this->company);
     }
 }

@@ -88,6 +88,14 @@ class Client extends Model
     ];
 
     /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'status' => Status::Active,
+        'type' => ClientType::Other,
+    ];
+
+    /**
      * The attributes that should be cast to enum types.
      *
      * @var array

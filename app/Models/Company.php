@@ -34,6 +34,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @property User[]     $users
  * @property ContactDetails  $contactDetails
  * @property BankInformation $bankInformation
+ * @property CompanyIdentity $identity
  * @method static Company           active()
  * @method static Builder|Company   createdBy($userId)
  * @method static Builder|Company   updatedBy($userId)
@@ -89,6 +90,11 @@ class Company extends Model
     public function bankInformation()
     {
         return $this->hasOne(BankInformation::class);
+    }
+
+    public function identity()
+    {
+        return $this->hasOne(CompanyIdentity::class);
     }
 
     public function users()

@@ -14,9 +14,9 @@ use App\View\Components\Factor\FactorsList;
 use App\View\Components\Factor\FactorWizard;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('factors')->group(function () {
-    Route::get('', FactorsList::class)->name('factors.list');
-    Route::get('/create', FactorWizard::class)->name('factors.create');
-    Route::get('{id}', FactorDetails::class)->name('factors.view');
-    Route::get('{id}/update', FactorWizard::class)->name('factors.update');
+Route::prefix('factors')->name('factors.')->group(function () {
+    Route::get('', FactorsList::class)->name('list');
+    Route::get('/create', FactorWizard::class)->name('create');
+    Route::get('{factor_id}', FactorDetails::class)->name('view');
+    Route::get('{factor_id}/update', FactorWizard::class)->name('update');
 });
