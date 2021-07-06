@@ -141,7 +141,7 @@ abstract class Model extends EloquentModel
         return false;
     }
 
-    public function isDirty($attributes = null)
+    public function isDirty($attributes = [])
     {
         if (! $this->exists) {
             return ! empty(array_filter($this->getDirty()));
