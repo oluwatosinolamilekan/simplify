@@ -90,6 +90,13 @@ class User extends Authenticatable implements MustVerifyEmailContract
     ];
 
     /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'status' => Status::Active,
+    ];
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
@@ -162,6 +169,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
         return $query->where('status', Status::Active);
     }
 
+    // TODO: user can belong to multiple companies
     public function company(): HasOneThrough
     {
         return $this->hasOneThrough(

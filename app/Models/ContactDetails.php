@@ -25,16 +25,28 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property array $emails
  * @property array $phone_numbers
  * @property array|null $notes
+ * @property array|null $meta
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  * @property-read Company $company
+ * @property-read User $creator
+ * @property-read User $updater
  * @method static Builder|Model createdBetween(string $from, string $to)
  * @method static Builder|Model updatedBetween(string $from, string $to)
+ * @method static Builder|ContactDetails createdBy($userId)
+ * @method static Builder|ContactDetails updatedBy($userId)
  * @mixin Eloquent
  */
-class ContactDetail extends Model
+class ContactDetails extends Model
 {
     use HasFactory;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'contact_details';
 
     /**
      * The attributes that are mass assignable.
@@ -46,6 +58,9 @@ class ContactDetail extends Model
         'emails',
         'phone_numbers',
         'notes',
+        'meta',
+        'created_by',
+        'updated_by',
     ];
 
     /**
@@ -57,6 +72,7 @@ class ContactDetail extends Model
         'emails' => 'array',
         'phone_numbers' => 'array',
         'notes' => 'array',
+        'meta' => 'array',
     ];
 
     /**

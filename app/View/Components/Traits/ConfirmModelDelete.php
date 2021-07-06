@@ -41,6 +41,7 @@ trait ConfirmModelDelete
 
     public function cancelDeletion()
     {
+        $this->resetDeleteModel();
         $this->resetErrorBag();
         $this->confirmingDeletion = false;
     }

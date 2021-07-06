@@ -24,6 +24,14 @@
                 </div>
             </a>
         </li>
+        <li>
+            <a href="{{ route('factors.list') }}" class="side-menu {{request()->routeIs('factors.list') ? 'side-menu--active' : ''}}">
+                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                <div class="side-menu__title">
+                    {{ __('Factors') }}
+                </div>
+            </a>
+        </li>
     </ul>
 </nav>
 <!-- END: Side Menu -->

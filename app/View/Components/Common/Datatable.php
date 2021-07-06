@@ -20,6 +20,8 @@ class Datatable extends LivewireDatatable
 {
     use WithPersistentFilters;
 
+    public $hideable = 'select';
+    public $exportable = true;
     public $filtersPersistent = true;
     public $route = null;
 

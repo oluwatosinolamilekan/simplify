@@ -18,5 +18,11 @@
                 <div class="menu__title"> {{ __('Users') }} </div>
             </a>
         </li>
+        <li>
+            <a href="{{ route('factors.list') }}" class="menu text-gray-600">
+                <div class="menu__icon"> <i data-feather="users"></i> </div>
+                <div class="menu__title"> {{ __('Factors') }} </div>
+            </a>
+        </li>
     </ul>
 </div>

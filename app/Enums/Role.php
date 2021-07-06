@@ -16,15 +16,20 @@ use BenSampo\Enum\Enum;
 /**
  * @method static static SuperAdministrator()
  * @method static static Administrator()
+ * @method static static CompanyUser()
  * @method static static AccountExecutive()
  * @method static static SalesRepresentative()
  * @method static static FactorBroker()
  */
 final class Role extends Enum
 {
+    /** System roles */
     const SuperAdministrator = 1;
     const Administrator = 2;
-    const AccountExecutive = 3;
-    const SalesRepresentative = 4;
-    const FactorBroker = 5;
+    const CompanyUser = 3;
+
+    /** Company roles */
+    const AccountExecutive = 4;
+    const SalesRepresentative = 5;
+    const FactorBroker = 6;
 }

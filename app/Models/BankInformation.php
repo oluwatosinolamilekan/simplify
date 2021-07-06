@@ -73,6 +73,15 @@ class BankInformation extends Model
     ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'meta' => 'array',
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function company(): BelongsTo

@@ -9,36 +9,33 @@ declare(strict_types=1);
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace App\View\Components\User;
+namespace App\View\Components\Factor;
 
 use App\Enums\Status;
-use App\Models\User;
+use App\Enums\StatusTypesList;
+use App\Models\Factor;
+use App\Models\SubscriptionPlan;
 use App\View\Components\Common\Datatable;
 use App\View\Components\Traits\ConfirmModelDelete;
-use Mediconesystems\LivewireDatatables\BooleanColumn;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
 
-class ListUsers extends Datatable
+class FactorsList extends Datatable
 {
     use ConfirmModelDelete {
         confirmDeletion as confirmDelete;
-        cancelDeletion as cancelDelete;
-        deleteModel as deleteModel;
     }
 
-    public $hideable = 'select';
-    public $exportable = true;
-    public $user = null;
+    public $factor = null;
 
     public function render()
     {
-        return view('user.list');
+        return view('factor.list');
     }
 
     public function builder()
     {
-        return User::query();
+        return Factor::with('company');
     }
 
     public function columns()
@@ -46,28 +43,34 @@ class ListUsers extends Datatable
         return [
             Column::checkbox(),
 
-            Column::name('first_name')
-                ->label('First Name')
-                ->filterable()
-                ->searchable(),
-            Column::name('last_name')
-                ->label('Last Name')
-                ->filterable()
-                ->searchable(),
-
-            Column::name('email')
+            Column::name('ref_code')
                 ->searchable()
                 ->filterable()
                 ->truncate(15)
                 ->view('components.tables.email-row'),
 
+            Column::name('company.name')
+                ->label('Name')
+                ->filterable()
+                ->searchable(),
+
+            Column::name('company.domain')
+                ->label('Domain')
+                ->filterable()
+                ->searchable(),
+
             Column::callback('status', fn (int $status) => Status::fromValue($status)->description)
                 ->label('Status')
-                ->filterable([['id' => Status::Active, 'name' => 'Active'], ['id' => Status::NotActive, 'name' => 'Not Active']]),
-
-            BooleanColumn::name('email_verified_at')
-                ->label('Email Verified')
-                ->filterable(),
+                ->filterable(
+                    collect(StatusTypesList::Factor)->map(fn ($status) => [
+                        'id' => $status,
+                        'name' => Status::fromValue($status)->description,
+                    ])
+                    ->all()
+                ),
+            Column::name('subscriptionPlan.name')
+                ->label('Subscription Plan')
+                ->filterable(SubscriptionPlan::pluck('name')->all()),
 
             DateColumn::name('created_at')
                 ->label('Created At')
@@ -77,7 +80,7 @@ class ListUsers extends Datatable
             Column::callback(['id'], function ($id) {
                 return view(
                     'components.tables.table-actions',
-                    ['id' => $id, 'view' => 'users.view', 'update' => 'users.update', 'delete' => 'delete']
+                    ['id' => $id, 'view' => 'factors.view', 'update' => 'factors.update', 'delete' => 'delete']
                 );
             }),
         ];
@@ -85,18 +88,17 @@ class ListUsers extends Datatable
 
     public function confirmUserDeletion($id)
     {
-        $this->user = User::findOrFail($id);
+        $this->factor = Factor::with('company')->findOrFail($id);
         $this->confirmDelete();
     }
 
     public function getDeleteModel()
     {
-        return $this->user;
+        return $this->factor;
     }
 
-    public function cancelDeletion()
+    public function resetDeleteModel()
     {
-        $this->user = null;
-        $this->cancelDelete();
+        $this->factor = null;
     }
 }
