@@ -22,11 +22,7 @@ use Mediconesystems\LivewireDatatables\DateColumn;
 
 class UsersList extends Datatable
 {
-    use ConfirmModelDelete {
-        confirmDeletion as confirmDelete;
-        cancelDeletion as cancelDelete;
-        deleteModel as deleteModel;
-    }
+    use ConfirmModelDelete;
 
     public $hideable = 'select';
     public $exportable = true;
@@ -84,10 +80,10 @@ class UsersList extends Datatable
         ];
     }
 
-    public function confirmUserDeletion($id)
+    public function confirmItemDeletion($id)
     {
         $this->user = User::findOrFail($id);
-        $this->confirmDelete();
+        $this->confirmDeletion();
     }
 
     public function getDeleteModel()

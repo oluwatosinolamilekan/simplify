@@ -60,42 +60,46 @@ class FactorWizard extends Component
     {
         $this->validate();
 
-        // TODO: should be separate service + reusable middlewares
+        // TODO @Jovana: should be separate service + reusable middlewares
 
-        DB::beginTransaction();
+        try {
+            DB::beginTransaction();
 
-        $this->company->save();
+            $this->company->save();
 
-        $this->factor->company()->associate($this->company);
-        $this->factor->save();
+            $this->factor->company()->associate($this->company);
+            $this->factor->save();
 
-        if ($this->contact->isDirty()) {
-            $this->contact->company()->associate($this->company);
-            $this->contact->save();
+            if ($this->contact->isDirty()) {
+                $this->contact->company()->associate($this->company);
+                $this->contact->save();
+            }
+
+            if ($this->address->isDirty()) {
+                $this->address->company()->associate($this->company);
+                $this->address->save();
+            }
+
+            if ($this->bankInformation->isDirty()) {
+                $this->bankInformation->company()->associate($this->company);
+                $this->bankInformation->save();
+            }
+
+            if (isset($this->user) && isset($this->userCompanyAccess)) {
+                $this->user->save();
+
+                $this->userCompanyAccess->user()->associate($this->user);
+                $this->userCompanyAccess->company()->associate($this->company);
+
+                $this->userCompanyAccess->save();
+            }
+
+            DB::commit();
+
+            $this->emit('saved');
+        } catch (Throwable $exception) {
+            $this->exceptionAlert($exception);
         }
-
-        if ($this->address->isDirty()) {
-            $this->address->company()->associate($this->company);
-            $this->address->save();
-        }
-
-        if ($this->bankInformation->isDirty()) {
-            $this->bankInformation->company()->associate($this->company);
-            $this->bankInformation->save();
-        }
-
-        if (isset($this->user) && isset($this->userCompanyAccess)) {
-            $this->user->save();
-
-            $this->userCompanyAccess->user()->associate($this->user);
-            $this->userCompanyAccess->company()->associate($this->company);
-
-            $this->userCompanyAccess->save();
-        }
-
-        DB::commit();
-
-        $this->emit('saved');
     }
 
     public function render()
