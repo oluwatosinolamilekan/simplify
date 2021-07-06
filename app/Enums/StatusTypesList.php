@@ -24,6 +24,16 @@ class StatusTypesList
         Status::NotActive,
     ];
 
+    public const User = [
+        Status::Active,
+        Status::NotActive,
+    ];
+
+    public const UserCompanyAccess = [
+        Status::Active,
+        Status::NotActive,
+    ];
+
     public const Invoices = [
         Status::Requested,
         Status::Approved,

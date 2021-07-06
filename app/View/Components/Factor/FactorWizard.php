@@ -22,12 +22,12 @@ use App\Models\UserCompanyAccess;
 use App\View\Components\Address\AddressForm;
 use App\View\Components\BankInformation\BankInformationForm;
 use App\View\Components\Company\CompanyForm;
+use App\View\Components\Company\User\CompanyUserForm;
 use App\View\Components\Contact\ContactForm;
 use App\View\Components\Traits\ConfirmModelDelete;
-use App\View\Components\UserCompanyAccess\UserCompanyAccessForm;
 use DB;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Throwable;
 
 class FactorWizard extends Component
 {
@@ -116,11 +116,7 @@ class FactorWizard extends Component
             BankInformationForm::getValidationRules($this->bankInformation),
             AddressForm::getValidationRules($this->address),
             ContactForm::getValidationRules(),
-            [
-                'user.email' => [Rule::requiredIf(! $this->factor->exists), 'string', 'email', 'min:8', 'max:255', 'unique:users,email'],
-                'user.role' => [Rule::requiredIf(! $this->factor->exists), 'int'],
-            ],
-            ! $this->factor->exists ? UserCompanyAccessForm::getValidationRules() : [],
+            ! $this->factor->exists ? CompanyUserForm::getValidationRules($this->user) : [],
         );
     }
 

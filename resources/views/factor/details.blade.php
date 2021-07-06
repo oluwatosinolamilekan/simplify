@@ -125,21 +125,13 @@
             <x-jet-danger-button wire:click="confirmDeletion" class="bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" wire:loading.attr="disabled">
                 {{ __('Delete') }}
             </x-jet-danger-button>
-
-
-            <!-- Delete Factor Confirmation Modal -->
-            <x-dialogs.delete-confirmation>
-                <x-slot name="title">Delete Factor</x-slot>
-                <x-slot name="description">Are you sure you want to delete factor? Once it is deleted, all of its resources and data will be permanently deleted.</x-slot>
-            </x-dialogs.delete-confirmation>
-
-            <!-- Delete Completed Modal -->
-            <x-dialogs.delete-completed :actions="['factors.list' => 'Back To Factor List']">
-                <x-slot name="title">Factor Deleted</x-slot>
-                <x-slot name="description">Factor successfully deleted.</x-slot>
-            </x-dialogs.delete-completed>
         </div>
 
         <!-- Users -->
-        <livewire:factor.factor-users-list :factor="$factor"/>
+        <div>
+            <x-jet-nav-link href="{{route('companies.users.create', ['company_id' => $company->id])}}" :active="true">+ Add new user</x-jet-nav-link>
+
+            <livewire:company.user.company-users-list :company="$company"/>
+        </div>
+
 </div>

@@ -91,9 +91,8 @@ class UsersList extends Datatable
         return $this->user;
     }
 
-    public function cancelDeletion()
+    public function resetDeleteModel()
     {
         $this->user = null;
-        $this->cancelDelete();
     }
 }
