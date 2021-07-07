@@ -39,8 +39,6 @@ class ClientList extends Datatable
     public function columns()
     {
         return [
-            Column::checkbox(),
-
             Column::name('ref_code')
                 ->searchable()
                 ->filterable()
@@ -61,6 +59,10 @@ class ClientList extends Datatable
                 ->filterable(),
             Column::name('company.identity.dot_number')
                 ->label('DOT Number')
+                ->filterable(),
+
+            Column::name('office')
+                ->label('Office')
                 ->filterable(),
 
             Column::callback('type', fn (int $type) => ClientType::fromValue($type)->description)
@@ -91,7 +93,7 @@ class ClientList extends Datatable
             Column::callback(['id'], function ($id) {
                 return view(
                     'components.tables.table-actions',
-                    ['id' => $id, 'view' => 'factors.view', 'update' => 'factors.update', 'delete' => 'delete']
+                    ['id' => $id, 'view' => 'clients.view', 'update' => 'clients.update', 'delete' => 'delete']
                 );
             }),
         ];

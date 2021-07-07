@@ -17,7 +17,7 @@ use URL;
 
 trait ConfirmModelDelete
 {
-    use ExceptionAlerts;
+    use WithAlerts;
 
     /* Previous URL for redirection after delete  */
     public $previous = null;

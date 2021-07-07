@@ -10,6 +10,20 @@
                 <x-jet-input-error for="client.ref_code" class="mt-2" />
             </div>
 
+            <!-- Client Name -->
+            <div class="col-span-6 sm:col-span-3">
+                <x-jet-label for="name" value="{{ __('Client Name') }}" />
+                <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="client.name" />
+                <x-jet-input-error for="client.name" class="mt-2" />
+            </div>
+
+            <!-- Client Name -->
+            <div class="col-span-6 sm:col-span-3">
+                <x-jet-label for="office" value="{{ __('Office') }}" />
+                <x-jet-input id="office" type="text" class="mt-1 block w-full" wire:model.defer="client.office" />
+                <x-jet-input-error for="client.office" class="mt-2" />
+            </div>
+
             <!-- Type -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="type" value="{{ __('Type') }}" />

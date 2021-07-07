@@ -39,8 +39,6 @@ class FactorsList extends Datatable
     public function columns()
     {
         return [
-            Column::checkbox(),
-
             Column::name('ref_code')
                 ->searchable()
                 ->filterable()

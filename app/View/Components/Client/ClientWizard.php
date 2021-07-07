@@ -31,6 +31,7 @@ use App\View\Components\Contact\ContactForm;
 use App\View\Components\Traits\ConfirmModelDelete;
 use DB;
 use Livewire\Component;
+use Log;
 use Throwable;
 
 class ClientWizard extends Component
@@ -67,9 +68,16 @@ class ClientWizard extends Component
         $this->bankInformation = $this->company->bankInformation ?? new BankInformation();
 
         if (! $this->client->exists) {
-            $this->user = new User(['role' => Role::CompanyUser]);
-            $this->userCompanyAccess = new UserCompanyAccess(['role' => Role::Administrator]);
+            $this->user = new User();
+            $this->userCompanyAccess = new UserCompanyAccess();
         }
+    }
+
+    /* Realtime validation */
+
+    public function updated($property)
+    {
+        $this->validateOnly($property);
     }
 
     public function saveClient()
@@ -86,54 +94,56 @@ class ClientWizard extends Component
             $this->client->company()->associate($this->company);
             $this->client->save();
 
-            if ($this->contact->isDirty()) {
-                $this->contact->company()->associate($this->company);
-                $this->contact->save();
-            }
-
-            if ($this->companyIdentity->isDirty()) {
-                $this->companyIdentity->company()->associate($this->company);
-                $this->companyIdentity->save();
-            }
-
-            if ($this->clientAnalysis->isDirty()) {
-                $this->companyIdentity->company()->associate($this->company);
-                $this->companyIdentity->save();
-            }
-
-            if ($this->address->isDirty()) {
-                $this->address->company()->associate($this->company);
-                $this->address->save();
-            }
-
-            if ($this->bankInformation->isDirty()) {
-                $this->bankInformation->company()->associate($this->company);
-                $this->bankInformation->save();
-            }
-
-            if (isset($this->user) && isset($this->userCompanyAccess)) {
-                $this->user->save();
-
-                $this->userCompanyAccess->user()->associate($this->user);
-                $this->userCompanyAccess->company()->associate($this->company);
-
-                $this->userCompanyAccess->save();
-            }
-
             DB::commit();
 
-            $this->emit('saved');
+            $this->successAlert();
         } catch (Throwable $exception) {
+            DB::rollBack();
             $this->exceptionAlert($exception);
         }
     }
 
     public function saveContact()
     {
+        $this->validate();
+        try {
+            DB::beginTransaction();
+
+            $this->address->company()->associate($this->company);
+            $this->address->save();
+
+            $this->bankInformation->company()->associate($this->company);
+            $this->bankInformation->save();
+
+            DB::commit();
+
+            $this->successAlert();
+        } catch (Throwable $exception) {
+            DB::rollBack();
+            $this->exceptionAlert($exception);
+        }
     }
 
     public function saveIdentity()
     {
+        $this->validate();
+
+        try {
+            DB::beginTransaction();
+
+            $this->companyIdentity->company()->associate($this->company);
+            $this->companyIdentity->save();
+
+            $this->companyIdentity->company()->associate($this->company);
+            $this->companyIdentity->save();
+
+            DB::commit();
+
+            $this->successAlert();
+        } catch (Throwable $exception) {
+            DB::rollBack();
+            $this->exceptionAlert($exception);
+        }
     }
 
     public function saveCredit()
@@ -142,10 +152,50 @@ class ClientWizard extends Component
 
     public function saveBankInformation()
     {
+        $this->validate();
+
+        try {
+            DB::beginTransaction();
+
+            $this->bankInformation->company()->associate($this->company);
+            $this->bankInformation->save();
+
+            DB::commit();
+
+            $this->successAlert();
+        } catch (Throwable $exception) {
+            DB::rollBack();
+            $this->exceptionAlert($exception);
+        }
     }
 
     public function saveUser()
     {
+        $this->validate();
+
+        try {
+            DB::beginTransaction();
+
+            if (isset($this->user) && isset($this->userCompanyAccess)) {
+                /* If user is fresh new record ("create" scenario) - try to find user with given email first */
+                if (! $this->user->exists) {
+                    $this->user = User::firstOrNew(['email' => $this->user->email], ['role' => Role::CompanyUser]);
+                }
+
+                $this->user->save();
+
+                $this->userCompanyAccess->user()->associate($this->user);
+                $this->userCompanyAccess->company()->associate($this->company);
+
+                $this->userCompanyAccess->save();
+            }
+            DB::commit();
+
+            $this->successAlert();
+        } catch (Throwable $exception) {
+            DB::rollBack();
+            $this->exceptionAlert($exception);
+        }
     }
 
     public function render()
@@ -164,12 +214,7 @@ class ClientWizard extends Component
             BankInformationForm::getValidationRules($this->bankInformation),
             AddressForm::getValidationRules($this->address),
             ContactForm::getValidationRules(),
-            ! $this->client->exists ? CompanyUserForm::getValidationRules($this->user) : [],
+            isset($this->user, $this->userCompanyAccess) && ($this->user->isDirty() || $this->userCompanyAccess->isDirty()) ? CompanyUserForm::getValidationRules() : [],
         );
-    }
-
-    public function getModel()
-    {
-        return $this->client ?? null;
     }
 }

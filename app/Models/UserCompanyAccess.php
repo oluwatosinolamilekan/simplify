@@ -87,6 +87,7 @@ class UserCompanyAccess extends Model
      */
     protected $attributes = [
         'status' => Status::Active,
+        'role' => Role::Employee,
     ];
 
     /**

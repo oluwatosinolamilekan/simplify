@@ -34,7 +34,9 @@ class ClientForm extends Component
     public static function getValidationRules()
     {
         return [
+            'client.name' => ['required', 'string', 'min:2', 'max:255'],
             'client.ref_code' => ['required', 'string', 'min:2', 'max:125'],
+            'client.office' => ['string', 'min:2', 'max:255'],
             'client.status' => ['required', 'int', Rule::in([Status::Active, Status::NotActive])],
             'client.type' => ['required', 'int', Rule::in(ClientType::getValues())],
         ];

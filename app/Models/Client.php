@@ -28,6 +28,7 @@ use Illuminate\Support\Carbon;
  * @property int $factor_id
  * @property string $ref_code
  * @property string $name
+ * @property string $office
  * @property ClientType $type
  * @property Status $status
  * @property array|null $meta
@@ -69,6 +70,7 @@ class Client extends Model
         'factor_id',
         'ref_code',
         'name',
+        'office',
         'type',
         'status',
         'meta',

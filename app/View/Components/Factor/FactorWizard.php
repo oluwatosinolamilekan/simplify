@@ -92,6 +92,11 @@ class FactorWizard extends Component
             }
 
             if (isset($this->user) && isset($this->userCompanyAccess)) {
+                /* If user is fresh new record ("create" scenario) - try to find user with given email first */
+                if (! $this->user->exists) {
+                    $this->user = User::firstOrNew(['email' => $this->user->email], ['role' => Role::CompanyUser]);
+                }
+
                 $this->user->save();
 
                 $this->userCompanyAccess->user()->associate($this->user);
@@ -122,7 +127,7 @@ class FactorWizard extends Component
             BankInformationForm::getValidationRules($this->bankInformation),
             AddressForm::getValidationRules($this->address),
             ContactForm::getValidationRules(),
-            ! $this->factor->exists ? CompanyUserForm::getValidationRules($this->user) : [],
+            ! $this->factor->exists ? CompanyUserForm::getValidationRules() : [],
         );
     }
 

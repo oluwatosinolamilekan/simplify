@@ -13,7 +13,7 @@ namespace App\View\Components\Traits;
 
 use Throwable;
 
-trait ExceptionAlerts
+trait WithAlerts
 {
     /**
      * Display alert for given exception.
@@ -23,11 +23,28 @@ trait ExceptionAlerts
      */
     public function exceptionAlert(Throwable $exception)
     {
-        $this->alert('error', 'Something went wrong', [
+        $this->alert('success', 'Something went wrong', [
             'position' =>  'top-end',
             'timer' =>  5000,
             'toast' =>  true,
             'text' =>  $exception->getMessage(),
+            'showCancelButton' =>  false,
+            'showConfirmButton' =>  false,
+        ]);
+    }
+
+    /**
+     * Display alert for given exception.
+     *
+     * @param string|null $message
+     * @return void
+     */
+    public function successAlert(?string $message = null)
+    {
+        $this->alert('success', $message ?? 'Done.', [
+            'position' =>  'top-end',
+            'timer' =>  5000,
+            'toast' =>  true,
             'showCancelButton' =>  false,
             'showConfirmButton' =>  false,
         ]);

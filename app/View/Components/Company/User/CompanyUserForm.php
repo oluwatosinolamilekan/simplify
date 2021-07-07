@@ -51,15 +51,17 @@ class CompanyUserForm extends Component
             /* If user is fresh new record ("create" scenario) - try to find user with given email first */
             if (! $this->user->exists) {
                 $this->user = User::firstOrNew(['email' => $this->user->email], ['role' => Role::CompanyUser]);
-                $this->user->save();
-                $this->userCompanyAccess->user()->associate($this->user);
             }
+
+            $this->user->save();
+            $this->userCompanyAccess->user()->associate($this->user);
 
             $this->userCompanyAccess->save();
 
             DB::commit();
 
             $this->emit('saved');
+            $this->successAlert();
         } catch (Throwable $exception) {
             $this->exceptionAlert($exception);
         }
@@ -72,10 +74,10 @@ class CompanyUserForm extends Component
 
     public function getRules()
     {
-        return self::getValidationRules($this->user);
+        return self::getValidationRules();
     }
 
-    public static function getValidationRules($user = null)
+    public static function getValidationRules()
     {
         // TODO @Jovana: try move all validation rules to models
         return [
@@ -96,7 +98,7 @@ class CompanyUserForm extends Component
              */
 
             'user.email' => ['required', 'string', 'email', 'min:8', 'max:255'],
-            'user.role' => [Rule::requiredIf(! isset($user) || ! $user->exists), 'int'],
+            'user.role' => ['required', 'int'],
         ];
     }
 }

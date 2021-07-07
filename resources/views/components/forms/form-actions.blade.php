@@ -4,7 +4,7 @@
         {{ __('Saved.') }}
     </x-jet-action-message>
 
-    <x-jet-button class="text-center xl:mr-3 align-top bg-theme-18 border-theme-18 focus:ring-theme-18" wire:loading.attr="disabled" disabled="{{ $disabled }}">
+    <x-jet-button class="text-center xl:mr-3 align-top bg-theme-18 border-theme-18 focus:ring-theme-18" wire:loading.attr="disabled">
         {{ __('Save') }}
     </x-jet-button>
 

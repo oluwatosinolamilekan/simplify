@@ -94,6 +94,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
      */
     protected $attributes = [
         'status' => Status::Active,
+        'role' => Role::CompanyUser,
     ];
 
     /**
