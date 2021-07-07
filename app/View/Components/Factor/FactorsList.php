@@ -22,9 +22,7 @@ use Mediconesystems\LivewireDatatables\DateColumn;
 
 class FactorsList extends Datatable
 {
-    use ConfirmModelDelete {
-        confirmDeletion as confirmDelete;
-    }
+    use ConfirmModelDelete;
 
     public $factor = null;
 
@@ -86,10 +84,10 @@ class FactorsList extends Datatable
         ];
     }
 
-    public function confirmUserDeletion($id)
+    public function confirmItemDeletion($id)
     {
         $this->factor = Factor::with('company')->findOrFail($id);
-        $this->confirmDelete();
+        $this->confirmDeletion();
     }
 
     public function getDeleteModel()

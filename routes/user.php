@@ -14,9 +14,9 @@ use App\View\Components\User\UserForm;
 use App\View\Components\User\UsersList;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('users')->group(function () {
-    Route::get('', UsersList::class)->name('users.list');
-    Route::get('/create', UserForm::class)->name('users.create');
-    Route::get('{id}', UserDetails::class)->name('users.view');
-    Route::get('{id}/update', UserForm::class)->name('users.update');
+Route::prefix('users')->as('users.')->group(function () {
+    Route::get('', UsersList::class)->name('list');
+    Route::get('create', UserForm::class)->name('create');
+    Route::get('{user_id}', UserDetails::class)->name('view');
+    Route::get('{user_id}/update', UserForm::class)->name('update');
 });

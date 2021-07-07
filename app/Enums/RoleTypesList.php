@@ -15,10 +15,10 @@ class RoleTypesList
 {
     public const System = [
         Role::SuperAdministrator,
-        Role::Administrator,
     ];
 
     public const Company = [
+        Role::Administrator,
         Role::AccountExecutive,
         Role::SalesRepresentative,
         Role::FactorBroker,

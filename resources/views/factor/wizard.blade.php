@@ -70,24 +70,21 @@
             <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
 
                 <x-jet-section-title>
-                    <x-slot name="title">{{ __( 'Administrator Information') }} {{$this->user->email}}</x-slot>
+                    <x-slot name="title">{{ __( 'Administrator Information') }}</x-slot>
                     <x-slot name="description">{{ 'Fill administrator account information.'}}</x-slot>
                 </x-jet-section-title>
 
                 <div class="mt-5 md:mt-0 md:col-span-2">
                     <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
                         <div class="grid grid-cols-6 gap-6">
-                            <!-- Email -->
-                            <div class="col-span-6 sm:col-span-3">
-                                <x-jet-label for="email" value="{{ __('Email') }}" />
-                                <input id="email" type="text" class="mt-1 block w-full" wire:model.defer="user.email" autocomplete="email" />
-                                <x-jet-input-error for="user.email" class="mt-2" />
-                            </div>
+                            @include('company.user.partials.user-form', ['user' => $user])
                         </div>
 
                         <x-jet-section-border />
 
-                        @include('user-company-access.form', ['userCompanyAccess' => $userCompanyAccess])
+                        <div class="grid grid-cols-6 gap-6">
+                            @include('company.user.partials.company-access-form', ['userCompanyAccess' => $userCompanyAccess, 'roles' => [\App\Enums\Role::Administrator]])
+                        </div>
 
                     </div>
                 </div>
@@ -144,18 +141,6 @@
                     <x-jet-danger-button wire:click="confirmDeletion" class="text-center xl:mr-3 align-top border-theme-18 focus:ring-theme-18" wire:loading.attr="disabled">
                         {{ __('Delete') }}
                     </x-jet-danger-button>
-
-                    <!-- Delete Factor Confirmation Modal -->
-                    <x-dialogs.delete-confirmation>
-                        <x-slot name="title">Delete Factor</x-slot>
-                        <x-slot name="description">Are you sure you want to delete factor? Once it is deleted, all of its resources and data will be permanently deleted.</x-slot>
-                    </x-dialogs.delete-confirmation>
-
-                    <!-- Delete Completed Modal -->
-                    <x-dialogs.delete-completed :actions="['factors.list' => 'Back To Factor List']">
-                        <x-slot name="title">Factor Deleted</x-slot>
-                        <x-slot name="description">Factor successfully deleted.</x-slot>
-                    </x-dialogs.delete-completed>
                 @endif
             </div>
     </form>

@@ -31,9 +31,9 @@ class FactorDetails extends Component
     public ContactDetails $contact;
     public BankInformation $bankInformation;
 
-    public function mount($id)
+    public function mount($factor_id)
     {
-        $this->factor = Factor::with(['company', 'company.address', 'company.contactDetails', 'company.bankInformation', 'subscriptionPlan'])->findOrFail($id);
+        $this->factor = Factor::with(['company', 'company.address', 'company.contactDetails', 'company.bankInformation', 'subscriptionPlan'])->findOrFail($factor_id);
 
         $this->company = $this->factor->company ?? new Company();
         $this->address = $this->company->address ?? new Address();

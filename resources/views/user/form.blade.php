@@ -71,18 +71,6 @@
             <x-jet-danger-button wire:click="confirmDeletion" class="text-center xl:mr-3 align-top border-theme-18 focus:ring-theme-18" wire:loading.attr="disabled">
                 {{ __('Delete') }}
             </x-jet-danger-button>
-
-            <!-- Delete User Confirmation Modal -->
-            <x-dialogs.delete-confirmation>
-                <x-slot name="title">Delete Account</x-slot>
-                <x-slot name="description">Are you sure you want to delete user's account? Once it is deleted, all of its resources and data will be permanently deleted.</x-slot>
-            </x-dialogs.delete-confirmation>
-
-            <!-- Delete Completed Modal -->
-            <x-dialogs.delete-completed :actions="['users.list' => 'Back To Users List']">
-                <x-slot name="title">Account Deleted</x-slot>
-                <x-slot name="description">Account successfully deleted.</x-slot>
-            </x-dialogs.delete-completed>
         @endif
     </x-slot>
 </x-jet-form-section>

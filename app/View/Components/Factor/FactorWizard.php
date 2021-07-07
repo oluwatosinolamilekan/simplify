@@ -22,12 +22,12 @@ use App\Models\UserCompanyAccess;
 use App\View\Components\Address\AddressForm;
 use App\View\Components\BankInformation\BankInformationForm;
 use App\View\Components\Company\CompanyForm;
+use App\View\Components\Company\User\CompanyUserForm;
 use App\View\Components\Contact\ContactForm;
 use App\View\Components\Traits\ConfirmModelDelete;
-use App\View\Components\UserCompanyAccess\UserCompanyAccessForm;
 use DB;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Throwable;
 
 class FactorWizard extends Component
 {
@@ -66,42 +66,46 @@ class FactorWizard extends Component
     {
         $this->validate();
 
-        // TODO: should be separate service + reusable middlewares
+        // TODO @Jovana: should be separate service + reusable middlewares
 
-        DB::beginTransaction();
+        try {
+            DB::beginTransaction();
 
-        $this->company->save();
+            $this->company->save();
 
-        $this->factor->company()->associate($this->company);
-        $this->factor->save();
+            $this->factor->company()->associate($this->company);
+            $this->factor->save();
 
-        if ($this->contact->isDirty()) {
-            $this->contact->company()->associate($this->company);
-            $this->contact->save();
+            if ($this->contact->isDirty()) {
+                $this->contact->company()->associate($this->company);
+                $this->contact->save();
+            }
+
+            if ($this->address->isDirty()) {
+                $this->address->company()->associate($this->company);
+                $this->address->save();
+            }
+
+            if ($this->bankInformation->isDirty()) {
+                $this->bankInformation->company()->associate($this->company);
+                $this->bankInformation->save();
+            }
+
+            if (isset($this->user) && isset($this->userCompanyAccess)) {
+                $this->user->save();
+
+                $this->userCompanyAccess->user()->associate($this->user);
+                $this->userCompanyAccess->company()->associate($this->company);
+
+                $this->userCompanyAccess->save();
+            }
+
+            DB::commit();
+
+            $this->emit('saved');
+        } catch (Throwable $exception) {
+            $this->exceptionAlert($exception);
         }
-
-        if ($this->address->isDirty()) {
-            $this->address->company()->associate($this->company);
-            $this->address->save();
-        }
-
-        if ($this->bankInformation->isDirty()) {
-            $this->bankInformation->company()->associate($this->company);
-            $this->bankInformation->save();
-        }
-
-        if (isset($this->user) && isset($this->userCompanyAccess)) {
-            $this->user->save();
-
-            $this->userCompanyAccess->user()->associate($this->user);
-            $this->userCompanyAccess->company()->associate($this->company);
-
-            $this->userCompanyAccess->save();
-        }
-
-        DB::commit();
-
-        $this->emit('saved');
     }
 
     public function render()
@@ -118,11 +122,7 @@ class FactorWizard extends Component
             BankInformationForm::getValidationRules($this->bankInformation),
             AddressForm::getValidationRules($this->address),
             ContactForm::getValidationRules(),
-            [
-                'user.email' => [Rule::requiredIf(! $this->factor->exists), 'string', 'email', 'min:8', 'max:255', 'unique:users,email'],
-                'user.role' => [Rule::requiredIf(! $this->factor->exists), 'int'],
-            ],
-            ! $this->factor->exists ? UserCompanyAccessForm::getValidationRules() : [],
+            ! $this->factor->exists ? CompanyUserForm::getValidationRules($this->user) : [],
         );
     }
 
