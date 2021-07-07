@@ -22,7 +22,7 @@
     <!-- Scripts -->
     <script src="{{ asset('mix/js/app.js') }}" defer></script>
 </head>
-<body class="{{$attributes['bodyClass'] ?? ''}} {{1 ? '' : 'bg-white'}}">
+<body class="{{$attributes['bodyClass'] ?? ''}}">
     <x-mobile-menu/>
     <div class="flex">
         <x-sidebar/>

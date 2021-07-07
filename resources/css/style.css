@@ -40,6 +40,11 @@ input[type=checkbox]:checked {
     display: none;
 }
 
+.side-nav .main-logo-dark svg.xl\:block {
+    width: 143px;
+    height: 31px;
+}
+
 .side-nav.darkMode .main-logo-dark {
     display: block;
 }
