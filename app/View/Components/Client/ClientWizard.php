@@ -72,7 +72,7 @@ class ClientWizard extends Component
         }
     }
 
-    public function save()
+    public function saveClient()
     {
         $this->validate();
 
@@ -126,6 +126,26 @@ class ClientWizard extends Component
         } catch (Throwable $exception) {
             $this->exceptionAlert($exception);
         }
+    }
+
+    public function saveContact()
+    {
+    }
+
+    public function saveIdentity()
+    {
+    }
+
+    public function saveCredit()
+    {
+    }
+
+    public function saveBankInformation()
+    {
+    }
+
+    public function saveUser()
+    {
     }
 
     public function render()

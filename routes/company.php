@@ -19,8 +19,8 @@ Route::prefix('companies')->name('companies.')->group(function () {
         // Users
     Route::prefix('{company_id}/users')->as('users.')->group(function () {
         Route::get('', CompanyUsersList::class)->name('list');
-        Route::get('{user_id}', CompanyUserDetails::class)->name('view');
         Route::get('create', CompanyUserForm::class)->name('create');
+        Route::get('{user_id}', CompanyUserDetails::class)->name('view');
         Route::get('update/{user_id}', CompanyUserForm::class)->name('update');
     });
 });

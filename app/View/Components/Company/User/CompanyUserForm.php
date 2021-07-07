@@ -31,13 +31,9 @@ class CompanyUserForm extends Component
 
     public $roles = RoleTypesList::Company; // allowed roles
 
-    public function mount($company_id, $user_id = null)
+    public function mount(int $company_id, int $user_id = null)
     {
-        $attributes = ['company_id' => $company_id];
-
-        if ($user_id) {
-            $attributes['user_id'] = $user_id;
-        }
+        $attributes = ['company_id' => $company_id, 'user_id' => $user_id];
 
         $this->userCompanyAccess = UserCompanyAccess::firstOrNew($attributes);
 
