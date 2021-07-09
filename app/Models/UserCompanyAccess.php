@@ -29,6 +29,11 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @property Status $status
  * @property Role $role
  * @property array|null $permissions
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $middle_name
+ * @property array|null $emails
+ * @property array|null $phone_numbers
  * @property array|null $meta
  * @property int $created_by
  * @property int $updated_by
@@ -64,9 +69,23 @@ class UserCompanyAccess extends Model
         'status',
         'role',
         'permissions',
+        'first_name',
+        'last_name',
+        'middle_name',
+        'emails',
+        'phone_numbers',
         'meta',
         'created_by',
         'updated_by',
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'status' => Status::Active,
     ];
 
     /**
@@ -77,6 +96,8 @@ class UserCompanyAccess extends Model
     protected $casts = [
         'status' => 'int',
         'permissions' => 'array',
+        'emails' => 'array',
+        'phone_numbers' => 'array',
         'meta' => 'array',
     ];
 

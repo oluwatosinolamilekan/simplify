@@ -1,5 +1,5 @@
 <x-slot name="header">
-    {{ __('Update User Details') }}
+    {{ __('User Details') }}
 </x-slot>
 <x-jet-form-section submit="save" class="mt-6">
     <x-slot name="title">
@@ -35,15 +35,24 @@
         <!-- Role -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="role" value="{{ __('Role') }}" />
-            <select id="role" wire:model.defer="user.role" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                <option value="">Select Role</option>
-                @foreach(\App\Enums\Role::getInstances() as $role)
-                    <option value={{$role->value}}>
-                        {{ $role->description }}
-                    </option>
-                @endforeach
+            <select id="role" wire:model.defer="user.role" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" disabled>
+                <option value="{{\App\Enums\Role::SuperAdministrator}}">{{\App\Enums\Role::SuperAdministrator()->description}}</option>
             </select>
             <x-jet-input-error for="user.role" class="mt-2" />
+        </div>
+
+        <!-- Status -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="status" value="{{ __('Status') }}" />
+            <select id="status" wire:model.defer="user.status" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                <option value={{\App\Enums\Status::Active}} selected>
+                    {{ \App\Enums\Status::Active()->description }}
+                </option>
+                <option value={{\App\Enums\Status::NotActive}}>
+                    {{ \App\Enums\Status::NotActive()->description }}
+                </option>
+            </select>
+            <x-jet-input-error for="user.status" class="mt-2" />
         </div>
     </x-slot>
 

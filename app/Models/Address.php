@@ -29,11 +29,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $zip_code
  * @property string $mail_code
  * @property string $timezone
+ * @property array|null $meta
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  * @property-read Company $company
+ * @property-read User $creator
+ * @property-read User $updater
  * @method static Builder|Model createdBetween(string $from, string $to)
  * @method static Builder|Model updatedBetween(string $from, string $to)
+ * @method static Builder|Address createdBy($userId)
+ * @method static Builder|Address updatedBy($userId)
  * @mixin Eloquent
  */
 class Address extends Model
@@ -54,6 +59,9 @@ class Address extends Model
         'zip_code',
         'mail_code',
         'timezone',
+        'meta',
+        'created_by',
+        'updated_by',
     ];
 
     /**
@@ -64,6 +72,15 @@ class Address extends Model
     protected $dates = [
         'created_at',
         'updated_at',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'meta' => 'array',
     ];
 
     /**

@@ -64,6 +64,13 @@ class Factor extends Model
     ];
 
     /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'status' => Status::Active,
+    ];
+
+    /**
      * The attributes that should be casted to native types.
      *
      * @var array
@@ -87,7 +94,7 @@ class Factor extends Model
      */
     public function company()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     /**

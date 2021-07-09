@@ -56,15 +56,15 @@
 
                 <!-- Status -->
                 <div class="col-span-6 sm:col-span-4">
-                    <x-jet-label for="role" value="{{ __('Status') }}" />
+                    <x-jet-label for="status" value="{{ __('Status') }}" />
                     @if($user->status->is(\App\Enums\Status::Active))
                         <x-icons.check-circle class="text-green-600 mx-0 inline" />
                     @else
                         <x-icons.x-circle class="text-red-300 mx-0 inline" />
                     @endif
                     <span class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                            {{$user->status->description}}
-                        </span>
+                        {{$user->status->description}}
+                    </span>
                 </div>
 
                 <!-- Two Factor Enabled -->
