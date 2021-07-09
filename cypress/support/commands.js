@@ -1,45 +1,22 @@
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
-
-//  Logs in user
-//   cy.typeLogin({email: '1111@aaa.com' , password: 'aaaaa'})
-
+//Logs in user
+//cy.typeLogin({email: '1111@aaa.com' , password: 'aaaaa'})
 Cypress.Commands.add('typeLogin' , (user) => {
-
-
     cy.get('input[name="email"]').type(user.email);
     cy.get('input[name="password"]').type(user.password);
     cy.get('button[type="submit"]').click();
-
-
 })
 
 //Log out user
 //cy.Logout(user)
-
 Cypress.Commands.add('Logout' , (user) => {
 
     cy.get('div[role="button"]').eq(1).click();
     cy.contains(user.first_name);
     cy.get('a').contains(' Log Out ').click();
-
 })
 
 //Empty Mailtrap inbox
-// cy.cleanInbox();
+//cy.cleanInbox();
 Cypress.Commands.add('cleanInbox', ()=> {
     cy.request({
         method: 'PATCH',
@@ -82,21 +59,18 @@ Cypress.Commands.add('getMail', (label, user) => {
             cy.document().invoke('write', response.body)
             cy.get('a').contains('Reset Password').invoke('removeAttr', 'target').click();
         })
-
     })
 })
 
 //After inputting wrong credentials error message shows and stay on login page
 //cy.errorMessageLogin()
-
 Cypress.Commands.add('errorMessageLogin', (label1)=> {
     cy.get('div.font-medium.text-red-600').should('contain','Whoops! Something went wrong.')
     cy.get('ul.mt-3.list-disc.list-inside.text-sm.text-red-600 > li').eq(0).contains(label1);
     cy.location('pathname').should('eq','/login');
-
 })
 
-///Go to Users List page and add new user
+//Go to Users List page and add new user
 //cy.addUser(user)
 Cypress.Commands.add('addUser', (user) => {
     cy.get('nav.side-nav > ul > li').eq(1).find('a').click();
@@ -109,8 +83,3 @@ Cypress.Commands.add('addUser', (user) => {
     cy.get('button[type="submit"]').click();
 })
 
-//input password and confirm password
-
-Cypress.Commands.add('typePassword', ()=> {
-
-})
