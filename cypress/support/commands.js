@@ -1,14 +1,14 @@
 //Logs in user
-//cy.typeLogin({email: '1111@aaa.com' , password: 'aaaaa'})
-Cypress.Commands.add('typeLogin' , (user) => {
+//cy.userLogin({email: 'testuser@domain.com' , password: 'testpassword'})
+Cypress.Commands.add('userLogin' , (user) => {
     cy.get('input[name="email"]').type(user.email);
-    cy.get('input[name="password"]').type(user.password);
+    cy.get('input[name="password"]').type('password'); // see user factory for details - password is always set to 'password'
     cy.get('button[type="submit"]').click();
 })
 
 //Log out user
-//cy.Logout(user)
-Cypress.Commands.add('Logout' , (user) => {
+//cy.userLogout(user)
+Cypress.Commands.add('userLogout' , (user) => {
     cy.get('div[id="manage_profile_icon"]').click();
     cy.contains(user.first_name);
     cy.get('a[id="dropdown_logout"]').click();
