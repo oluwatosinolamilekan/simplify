@@ -74,13 +74,13 @@
     <!-- END: Notifications -->
     <!-- BEGIN: Account Menu -->
     <div class="intro-x dropdown w-8 h-8">
-        <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" id="manage_profile_icon" role="button" aria-expanded="false">
+        <a class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" id="manage_profile_icon" role="button" aria-expanded="false">
             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                 <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->full_name }}" />
             @else
                 <div class="h-full flex items-center justify-center"><i data-feather="user"></i></div>
             @endif
-        </div>
+        </a>
         <div class="dropdown-menu w-56">
             <div class="dropdown-menu__content box bg-white dark:bg-dark-6 text-gray-700 dark:text-white overflow-hidden">
                 <div class="p-4 border-b border-gray-500 dark:border-dark-3">
