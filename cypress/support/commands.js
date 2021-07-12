@@ -9,10 +9,9 @@ Cypress.Commands.add('typeLogin' , (user) => {
 //Log out user
 //cy.Logout(user)
 Cypress.Commands.add('Logout' , (user) => {
-
-    cy.get('div[role="button"]').eq(1).click();
+    cy.get('div[id="manage_profile_icon"]').click();
     cy.contains(user.first_name);
-    cy.get('a').contains(' Log Out ').click();
+    cy.get('a[id="dropdown_logout"]').click();
 })
 
 //Empty Mailtrap inbox
@@ -73,8 +72,8 @@ Cypress.Commands.add('errorMessageLogin', (label1)=> {
 //Go to Users List page and add new user
 //cy.addUser(user)
 Cypress.Commands.add('addUser', (user) => {
-    cy.get('nav.side-nav > ul > li').eq(1).find('a').click();
-    cy.get('a').contains(' + Add new user ').click();
+    cy.get('a[id="sidebar_users_list"]').click();
+    cy.get('a[id="add_new_user"]').click();
 
     cy.get('input[id="first_name"]').type(user.first_name);
     cy.get('input[id="last_name"]').type(user.last_name);
