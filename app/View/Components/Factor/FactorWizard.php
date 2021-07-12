@@ -103,6 +103,13 @@ class FactorWizard extends Component
         return view('factor.wizard');
     }
 
+    /* Realtime validation */
+
+    public function updated($property)
+    {
+        $this->validateOnly($property);
+    }
+
     public function getRules()
     {
         return array_merge(
