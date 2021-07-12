@@ -74,7 +74,7 @@
     <!-- END: Notifications -->
     <!-- BEGIN: Account Menu -->
     <div class="intro-x dropdown w-8 h-8">
-        <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" role="button" aria-expanded="false">
+        <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" id="manage_profile_icon" role="button" aria-expanded="false">
             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                 <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->full_name }}" />
             @else
@@ -87,7 +87,7 @@
                     <div class="font-medium">{{ Auth::user()->full_name }}</div>
                 </div>
                 <div>
-                    <a href="{{ route('profile.show') }}" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-18 hover:text-white dark:hover:bg-dark-3"> <i data-feather="user" class="w-4 h-4 mr-2"></i> {{ __('Profile') }} </a>
+                    <a href="{{ route('profile.show') }}" id="dropdown_profile" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-18 hover:text-white dark:hover:bg-dark-3"> <i data-feather="user" class="w-4 h-4 mr-2"></i> {{ __('Profile') }} </a>
                     @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                         <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
                             {{ __('API Tokens') }}
@@ -97,7 +97,7 @@
                 <div class="border-t border-gray-500 dark:border-dark-3">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();"
+                        <a href="{{ route('logout') }}" id="dropdown_logout" onclick="event.preventDefault(); this.closest('form').submit();"
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-18 hover:text-white dark:hover:bg-dark-3"> <i data-feather="toggle-right" class="w-4 h-4 mr-2"></i> {{ __('Log Out') }} </a>
                     </form>
                 </div>
