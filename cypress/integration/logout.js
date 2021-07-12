@@ -8,11 +8,11 @@ it('Logs out users', () => {
 
         cy.contains(user.first_name);
 
-        cy.get('div[id="manage_profile_icon"]').should('be.visible', { timeout: 10000 });
+        cy.get('#manage_profile_icon').should('be.visible', { timeout: 10000 });
 
         // logout
-        cy.get('div[id="manage_profile_icon"]').click();
-        cy.get('a[id="dropdown_logout"]').click();
+        cy.get('#manage_profile_icon').click();
+        cy.get('#dropdown_logout').click();
 
         cy.location('pathname').should('eq', '/login');
 
