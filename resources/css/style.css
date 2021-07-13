@@ -49,25 +49,70 @@ input[type=checkbox]:checked {
     display: block;
 }
 
-@media only screen and (min-width: 1279px) {
-    body.login {
-        padding: 0 !important;
-    }
+/* CHECKBOX TOGGLE SWITCH */
+/* @apply rules for documentation, these do not work as inline style */
+.toggle-checkbox:checked {
+    @apply: right-0 border-green-400;
+    right: 0;
+}
+.toggle-checkbox:checked + .toggle-box {
+    @apply: bg-green-400;
+}
 
-    .bg-layout {
-        position: relative;
-        background-color: white;
-        border-top-left-radius: 20px;
-        border-bottom-left-radius: 20px;
-    }
+.input-symbol-currency, .input-symbol-rate {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.input-symbol-currency input, .input-symbol-rate input {
+    padding-right: 25px;
+    width: 100%;
+}
+
+.input-symbol-currency:after, .input-symbol-rate:after {
+    position: absolute;
+    transform: translateY(-50%);
+    margin: auto;
+    right: 10px;
+    top: 55%;
+}
+
+.input-symbol-currency:after {
+    content: "$";
+}
+
+.input-symbol-rate:after {
+    content: "%";
+}
+
+select.form-control
+{
+    -webkit-appearance: auto !important;
+    -moz-appearance: auto !important;
+     appearance: auto !important;
+}
+
+
+@media only screen and (min-width: 1279px) {
+body.login {
+    padding: 0 !important;
+}
+
+.bg-layout {
+    position: relative;
+    background-color: white;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
 }
 
 @media only screen and (max-width: 1279px) {
-    .login .bg-layout:before {
-        display: none;
-    }
+.login .bg-layout:before {
+    display: none;
+}
 
-    .login {
-        background: linear-gradient(to bottom, #2d3748, #3b4658);
-    }
+.login {
+    background: linear-gradient(to bottom, #2d3748, #3b4658);
+}
 }

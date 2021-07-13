@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace App\View\Components\Company;
 
 use App\Models\CompanyIdentity;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class CompanyIdentityForm extends Component
@@ -24,23 +23,8 @@ class CompanyIdentityForm extends Component
         return view('company.identity.form');
     }
 
-    public static function getValidationRules(?CompanyIdentity $model = null)
-    {
-        $dirty = $model && $model->isDirty();
-
-        return [
-            'companyIdentity.company_code' => ['string', 'min:2', 'max:255', 'unique:company_identities,company_code'],
-            'companyIdentity.alternate_name' => ['string', 'min:2', 'max:255'],
-            'companyIdentity.mc_number' => [Rule::requiredIf($dirty), 'string', 'min:2', 'max:125'],
-            'companyIdentity.dot_number' => [Rule::requiredIf($dirty), 'string', 'min:2', 'max:125'],
-            'companyIdentity.fed_tax_id' => ['string', 'min:2', 'max:125'],
-            'companyIdentity.duns_id' => ['string', 'min:2', 'max:125'],
-            'companyIdentity.edi_id' => ['string', 'min:2', 'max:125'],
-        ];
-    }
-
     public function getRules()
     {
-        return self::getValidationRules();
+        return $this->companyIdentity->getRules();
     }
 }

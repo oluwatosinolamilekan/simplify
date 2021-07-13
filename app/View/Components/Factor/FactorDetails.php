@@ -16,8 +16,6 @@ use App\Models\BankInformation;
 use App\Models\Company;
 use App\Models\ContactDetails;
 use App\Models\Factor;
-use App\View\Components\Address\AddressForm;
-use App\View\Components\BankInformation\BankInformationForm;
 use App\View\Components\Traits\ConfirmModelDelete;
 use Livewire\Component;
 
@@ -61,8 +59,8 @@ class FactorDetails extends Component
     public function getRules()
     {
         return array_merge(
-            BankInformationForm::getValidationRules($this->bankInformation),
-            AddressForm::getValidationRules($this->address)
+            $this->bankInformation->getRules(false),
+            $this->address->getRules(false)
         );
     }
 }

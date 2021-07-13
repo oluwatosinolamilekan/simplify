@@ -15,6 +15,7 @@ use App\Enums\BusinessType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\ClientAnalysis.
@@ -88,5 +89,17 @@ class ClientAnalysis extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        $dirty = $this->isDirty();
+
+        return [
+            'clientAnalysis.industry' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
+            'clientAnalysis.region' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
+            'clientAnalysis.loan_grade' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
+            'clientAnalysis.business_type' => [Rule::requiredIf($required || $dirty), 'required', 'int', Rule::in(BusinessType::getValues())],
+        ];
     }
 }

@@ -25,11 +25,6 @@ class ClientFactorForm extends Component
 
     public function getRules()
     {
-        return self::getValidationRules();
-    }
-
-    public static function getValidationRules()
-    {
         return [
             'client.factor_id' => ['required', 'int', 'exists:factors,id'],
         ];

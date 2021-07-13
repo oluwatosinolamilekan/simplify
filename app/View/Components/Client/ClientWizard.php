@@ -16,40 +16,35 @@ use App\Models\Address;
 use App\Models\BankInformation;
 use App\Models\Client;
 use App\Models\ClientAnalysis;
+use App\Models\ClientFundingInstructions;
 use App\Models\Company;
 use App\Models\CompanyIdentity;
 use App\Models\ContactDetails;
-use App\Models\Factor;
 use App\Models\User;
 use App\Models\UserCompanyAccess;
-use App\View\Components\Address\AddressForm;
-use App\View\Components\BankInformation\BankInformationForm;
-use App\View\Components\Company\CompanyForm;
-use App\View\Components\Company\CompanyIdentityForm;
-use App\View\Components\Company\User\CompanyUserForm;
-use App\View\Components\Contact\ContactForm;
+use App\View\Components\Component;
 use App\View\Components\Traits\ConfirmModelDelete;
+use App\View\Components\Traits\WithNested;
 use DB;
-use Livewire\Component;
-use Log;
 use Throwable;
 
 class ClientWizard extends Component
 {
     use ConfirmModelDelete;
+    use WithNested;
 
     public Client $client;
     public ClientAnalysis $clientAnalysis;
-    public Factor $factor;
     public Company $company;
     public CompanyIdentity $companyIdentity;
     public Address $address;
     public ContactDetails $contact;
     public BankInformation $bankInformation;
+    public ClientFundingInstructions $fundingInstructions;
     public ?User $user;
     public ?UserCompanyAccess $userCompanyAccess;
 
-    public function mount($id = null)
+    public function mount($client_id = null)
     {
         $this->client = Client::with([
             'company',
@@ -58,7 +53,7 @@ class ClientWizard extends Component
             'company.contactDetails',
             'company.bankInformation',
             'analysis',
-        ])->findOrNew($id);
+        ])->findOrNew($client_id);
 
         $this->company = $this->client->company ?? new Company();
         $this->companyIdentity = $this->company->identity ?? new CompanyIdentity();
@@ -66,18 +61,10 @@ class ClientWizard extends Component
         $this->address = $this->company->address ?? new Address();
         $this->contact = $this->company->contactDetails ?? new ContactDetails();
         $this->bankInformation = $this->company->bankInformation ?? new BankInformation();
+        $this->fundingInstructions = $this->client->fundingInstructions ?? new ClientFundingInstructions();
 
-        if (! $this->client->exists) {
-            $this->user = new User();
-            $this->userCompanyAccess = new UserCompanyAccess();
-        }
-    }
-
-    /* Realtime validation */
-
-    public function updated($property)
-    {
-        $this->validateOnly($property);
+        $this->user = new User();
+        $this->userCompanyAccess = new UserCompanyAccess();
     }
 
     public function saveClient()
@@ -93,6 +80,9 @@ class ClientWizard extends Component
 
             $this->client->company()->associate($this->company);
             $this->client->save();
+
+            $this->fundingInstructions->client()->associate($this->client);
+            $this->fundingInstructions->save();
 
             DB::commit();
 
@@ -176,7 +166,7 @@ class ClientWizard extends Component
         try {
             DB::beginTransaction();
 
-            if (isset($this->user) && isset($this->userCompanyAccess)) {
+            if (! $this->client->exists) {
                 /* If user is fresh new record ("create" scenario) - try to find user with given email first */
                 if (! $this->user->exists) {
                     $this->user = User::firstOrNew(['email' => $this->user->email], ['role' => Role::CompanyUser]);
@@ -205,16 +195,26 @@ class ClientWizard extends Component
 
     public function getRules()
     {
+        /*
+         * Email uniqueness should not be validated
+         * If user with given email address exists - company access is granted for that user
+         * Email address update is not allowed
+         */
+
+        $userRules = $this->user->getRules();
+        $userRules['user.email'] = ['required', 'string', 'email', 'min:8', 'max:255'];
+
         return array_merge(
-            ClientForm::getValidationRules(),
-            ClientFactorForm::getValidationRules(),
-            CompanyIdentityForm::getValidationRules($this->companyIdentity),
-            ClientAnalysisForm::getValidationRules($this->clientAnalysis),
-            CompanyForm::getValidationRules($this->company),
-            BankInformationForm::getValidationRules($this->bankInformation),
-            AddressForm::getValidationRules($this->address),
-            ContactForm::getValidationRules(),
-            isset($this->user, $this->userCompanyAccess) && ($this->user->isDirty() || $this->userCompanyAccess->isDirty()) ? CompanyUserForm::getValidationRules() : [],
+            $this->client->getRules(),
+            $this->company->getRules(),
+            $this->companyIdentity->getRules(),
+            $this->clientAnalysis->getRules(),
+            $this->bankInformation->getRules(false),
+            $this->address->getRules(false),
+            $this->contact->getRules(false),
+            $this->fundingInstructions->getRules(false),
+            $this->userCompanyAccess->getRules(! $this->client->exists),
+            $userRules
         );
     }
 }

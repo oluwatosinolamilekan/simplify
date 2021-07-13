@@ -13,12 +13,14 @@ namespace App\Models;
 
 use App\Enums\ClientType;
 use App\Enums\Status;
+use App\Enums\StatusTypesList;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\Client.
@@ -172,11 +174,11 @@ class Client extends Model
     }
 
     /**
-     * @return HasMany
+     * @return HasOne
      */
     public function fundingInstructions()
     {
-        return $this->hasMany(ClientFundingInstructions::class);
+        return $this->hasOne(ClientFundingInstructions::class);
     }
 
     /**
@@ -225,5 +227,17 @@ class Client extends Model
     public function teams()
     {
         return $this->hasManyThrough(Team::class, TeamClient::class);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'client.name' => ['string', 'min:2', 'max:255'],
+            'client.ref_code' => [Rule::requiredIf($required), 'string', 'min:2', 'max:125'],
+            'client.office' => ['string', 'min:2', 'max:255'],
+            'client.status' => [Rule::requiredIf($required), 'int', Rule::in(StatusTypesList::Client)],
+            'client.type' => [Rule::requiredIf($required), 'int', Rule::in(ClientType::getValues())],
+            'client.factor_id' => [Rule::requiredIf($required), 'int', 'exists:factors,id'],
+        ];
     }
 }

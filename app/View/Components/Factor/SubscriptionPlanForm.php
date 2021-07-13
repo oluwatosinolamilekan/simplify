@@ -28,11 +28,6 @@ class SubscriptionPlanForm extends Component
 
     public function getRules()
     {
-        return self::getValidationRules();
-    }
-
-    public static function getValidationRules()
-    {
         return [
             'factor.subscription_plan_id' => ['required', 'exists:subscription_plans,id'],
         ];

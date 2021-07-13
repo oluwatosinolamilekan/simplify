@@ -19,6 +19,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Validation\Rule;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
@@ -147,6 +148,24 @@ class UserCompanyAccess extends Model
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('status', Status::Active);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        $dirty = $this->isDirty();
+
+        return [
+            'userCompanyAccess.company_id' => ['int'],
+            'userCompanyAccess.first_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
+            'userCompanyAccess.last_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
+            'userCompanyAccess.middle_name' => ['string', 'min:2', 'max:255'],
+            'userCompanyAccess.role' => [Rule::requiredIf($required || $dirty), 'int'],
+            'userCompanyAccess.status' => [Rule::requiredIf($required || $dirty), 'int', Rule::in([Status::Active, Status::NotActive])],
+            'userCompanyAccess.emails' => ['array'],
+            'userCompanyAccess.emails.*' => ['string', 'email', 'min:8', 'max:255'],
+            'userCompanyAccess.phone_numbers' => ['array'],
+            'userCompanyAccess.phone_numbers.*' => ['string', 'phone_number:15'],
+        ];
     }
 
     /**

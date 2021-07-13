@@ -16,6 +16,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\ContactDetail.
@@ -91,5 +92,19 @@ class ContactDetails extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class, 'company_id');
+    }
+
+    public function getRules(bool $required = true)
+    {
+        $dirty = $this->isDirty();
+
+        return [
+            'contact.emails' => [Rule::requiredIf($required || $dirty), 'array'],
+            'contact.emails.*' => ['string', 'email', 'min:8', 'max:255'],
+            'contact.phone_numbers' => [Rule::requiredIf($required || $dirty), 'array'],
+            'contact.phone_numbers.*' => ['string', 'phone_number:15'],
+            'contact.notes' => [Rule::requiredIf($required || $dirty), 'array'],
+            'contact.notes.*' => ['string', 'min:2', 'max:125'],
+        ];
     }
 }

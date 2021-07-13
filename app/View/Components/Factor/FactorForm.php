@@ -27,14 +27,6 @@ class FactorForm extends Component
 
     public function getRules()
     {
-        return self::getValidationRules();
-    }
-
-    public static function getValidationRules()
-    {
-        return [
-            'factor.ref_code' => ['required', 'string', 'min:2', 'max:125'],
-            'factor.status' => ['required', 'int', Rule::in([Status::Active, Status::NotActive])],
-        ];
+        return $this->factor->getRules();
     }
 }

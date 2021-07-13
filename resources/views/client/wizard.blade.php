@@ -73,6 +73,19 @@
                     </div>
                 </div>
 
+                <!-- Funding Instructions -->
+                <div class="mt-10 sm:mt-0">
+                    <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
+
+                        <x-jet-section-title>
+                            <x-slot name="title">{{ __('Funding Instructions') }}</x-slot>
+                            <x-slot name="description">{{ __('Fill funding instructions.') }}</x-slot>
+                        </x-jet-section-title>
+
+                        @include('client.funding-instructions-form', ['fundingInstructions' => $fundingInstructions])
+                    </div>
+                </div>
+
                 <!-- Actions -->
                 @include('components.forms.form-actions', ['delete' => $client->exists, 'disabled' => false])
 

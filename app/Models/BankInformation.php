@@ -16,6 +16,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Validation\Rule;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
@@ -87,5 +88,18 @@ class BankInformation extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class, 'company_id');
+    }
+
+    public function getRules(bool $required = true)
+    {
+        $dirty = $this->isDirty();
+
+        return [
+            'bankInformation.bank_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
+            'bankInformation.account_holder_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
+            'bankInformation.account_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
+            'bankInformation.routing_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
+            'bankInformation.swift_code' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
+        ];
     }
 }

@@ -15,6 +15,7 @@ use App\Enums\Status;
 use Carbon\Carbon;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\Company.
@@ -107,5 +108,15 @@ class Company extends Model
             'id',
             'user_id'
         );
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'company.name' => ['required', 'string', 'min:2', 'max:255'],
+            'company.domain' => ['required', 'string', 'min:2', 'max:125',
+                $this->exists ? Rule::unique('companies', 'domain')->ignore($this->id) : 'unique:companies,domain',
+            ],
+        ];
     }
 }

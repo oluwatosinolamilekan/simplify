@@ -14,9 +14,8 @@ namespace App\View\Components\User;
 use App\Enums\Role;
 use App\Enums\Status;
 use App\Models\User;
+use App\View\Components\Component;
 use App\View\Components\Traits\ConfirmModelDelete;
-use Illuminate\Validation\Rule;
-use Livewire\Component;
 
 class UserForm extends Component
 {
@@ -24,16 +23,9 @@ class UserForm extends Component
 
     public User $user;
 
-    protected $validationAttributes = [
-        'user.first_name' => 'first name',
-        'user.last_name' => 'last name',
-        'user.email' => 'email address',
-        'user.role' => 'role',
-    ];
-
-    public function mount($id = null)
+    public function mount($user_id = null)
     {
-        $this->user = User::findOrNew($id);
+        $this->user = User::findOrNew($user_id);
 
         if (! $this->user->exists) {
             $this->user->role = Role::SuperAdministrator;
@@ -57,16 +49,7 @@ class UserForm extends Component
 
     public function getRules()
     {
-        return [
-            'user.first_name' => ['required', 'string', 'min:2', 'max:255'],
-            'user.last_name' => ['required', 'string', 'min:2', 'max:255'],
-            'user.email' => [
-                'required', 'string', 'email', 'min:8', 'max:255',
-                $this->user->id ? Rule::unique('users', 'email')->ignore($this->user->id) : 'unique:users,email',
-            ],
-            'user.role' => ['required', 'int'],
-            'user.status' => ['required', 'int', Rule::in([Status::Active, Status::NotActive])],
-        ];
+        return $this->user->getRules();
     }
 
     public function getDeleteModel()

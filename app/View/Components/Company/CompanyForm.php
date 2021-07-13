@@ -12,8 +12,7 @@ declare(strict_types=1);
 namespace App\View\Components\Company;
 
 use App\Models\Company;
-use Illuminate\Validation\Rule;
-use Livewire\Component;
+use App\View\Components\Component;
 
 class CompanyForm extends Component
 {
@@ -26,17 +25,6 @@ class CompanyForm extends Component
 
     public function getRules()
     {
-        return self::getValidationRules($this->company);
-    }
-
-    public static function getValidationRules(Company $model = null)
-    {
-        return [
-            'company.name' => ['required', 'string', 'min:2', 'max:255'],
-            'company.domain' => ['required', 'string', 'min:2', 'max:125',
-                $model && $model->id ? Rule::unique('companies', 'domain')->ignore($model->id) : 'unique:companies,domain',
-            ],
-
-        ];
+        return $this->company->getRules(true);
     }
 }

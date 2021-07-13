@@ -166,4 +166,9 @@ abstract class Model extends EloquentModel
 
         return $query;
     }
+
+    public function getRules(bool $required = true)
+    {
+        return [];
+    }
 }

@@ -19,14 +19,9 @@ use App\Models\ContactDetails;
 use App\Models\Factor;
 use App\Models\User;
 use App\Models\UserCompanyAccess;
-use App\View\Components\Address\AddressForm;
-use App\View\Components\BankInformation\BankInformationForm;
-use App\View\Components\Company\CompanyForm;
-use App\View\Components\Company\User\CompanyUserForm;
-use App\View\Components\Contact\ContactForm;
+use App\View\Components\Component;
 use App\View\Components\Traits\ConfirmModelDelete;
 use DB;
-use Livewire\Component;
 use Throwable;
 
 class FactorWizard extends Component
@@ -41,7 +36,7 @@ class FactorWizard extends Component
     public ?User $user;
     public ?UserCompanyAccess $userCompanyAccess;
 
-    public function mount($id = null)
+    public function mount($factor_id = null)
     {
         $this->factor = Factor::with([
             'company',
@@ -49,17 +44,15 @@ class FactorWizard extends Component
             'company.contactDetails',
             'company.bankInformation',
             'subscriptionPlan',
-        ])->findOrNew($id);
+        ])->findOrNew($factor_id);
 
         $this->company = $this->factor->company ?? new Company();
         $this->address = $this->company->address ?? new Address();
         $this->contact = $this->company->contactDetails ?? new ContactDetails();
         $this->bankInformation = $this->company->bankInformation ?? new BankInformation();
 
-        if (! $this->factor->exists) {
-            $this->user = new User(['role' => Role::CompanyUser]);
-            $this->userCompanyAccess = new UserCompanyAccess(['role' => Role::Administrator]);
-        }
+        $this->user = new User(['role' => Role::CompanyUser]);
+        $this->userCompanyAccess = new UserCompanyAccess(['role' => Role::Administrator]);
     }
 
     public function save()
@@ -91,7 +84,7 @@ class FactorWizard extends Component
                 $this->bankInformation->save();
             }
 
-            if (isset($this->user) && isset($this->userCompanyAccess)) {
+            if (! $this->factor->exists) {
                 /* If user is fresh new record ("create" scenario) - try to find user with given email first */
                 if (! $this->user->exists) {
                     $this->user = User::firstOrNew(['email' => $this->user->email], ['role' => Role::CompanyUser]);
@@ -118,23 +111,25 @@ class FactorWizard extends Component
         return view('factor.wizard');
     }
 
-    /* Realtime validation */
-
-    public function updated($property)
-    {
-        $this->validateOnly($property);
-    }
-
     public function getRules()
     {
+        /*
+         * Email uniqueness should not be validated
+         * If user with given email address exists - company access is granted for that user
+         * Email address update is not allowed
+         */
+
+        $userRules = $this->user->getRules(! $this->factor->exists);
+        $userRules['user.email'] = ['required', 'string', 'email', 'min:8', 'max:255'];
+
         return array_merge(
-            FactorForm::getValidationRules(),
-            SubscriptionPlanForm::getValidationRules(),
-            CompanyForm::getValidationRules($this->company),
-            BankInformationForm::getValidationRules($this->bankInformation),
-            AddressForm::getValidationRules($this->address),
-            ContactForm::getValidationRules(),
-            ! $this->factor->exists ? CompanyUserForm::getValidationRules() : [],
+            $this->factor->getRules(),
+            $this->company->getRules(),
+            $this->bankInformation->getRules(false),
+            $this->address->getRules(false),
+            $this->contact->getRules(false),
+            $this->userCompanyAccess->getRules(! $this->factor->exists),
+            $userRules
         );
     }
 

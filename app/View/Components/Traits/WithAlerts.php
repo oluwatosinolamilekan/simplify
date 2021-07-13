@@ -23,7 +23,7 @@ trait WithAlerts
      */
     public function exceptionAlert(Throwable $exception)
     {
-        $this->alert('success', 'Something went wrong', [
+        $this->alert('error', 'Something went wrong', [
             'position' =>  'top-end',
             'timer' =>  5000,
             'toast' =>  true,

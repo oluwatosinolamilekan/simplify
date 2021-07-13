@@ -14,6 +14,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\ClientFundingInstructions.
@@ -76,10 +77,60 @@ class ClientFundingInstructions extends Model
     ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'warning_notes' => 'array',
+        'funding_notes' => 'array',
+    ];
+
+    /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'generate_invoice' => true,
+        'send_invoice' => true,
+        'efs_available' => false,
+        'fuel_advance_fee' => 0,
+        'fuel_advance_max_rate' => 0,
+        'allow_fundings' => true,
+        'allow_reserve_releases' => true,
+        'send_email_remittances' => true,
+        'warning_notes' => '[]',
+        'funding_notes' => '[]',
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        $dirty = $this && $this->isDirty();
+
+        return [
+            'fundingInstructions.generate_invoice' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'fundingInstructions.send_invoice' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'fundingInstructions.efs_available' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'fundingInstructions.fuel_advance_fee' => [Rule::requiredIf($required || $dirty), 'numeric'],
+            'fundingInstructions.fuel_advance_max_rate' => ['numeric', 'min:0', 'max:100'],
+            'fundingInstructions.max_invoice_amount' => [Rule::requiredIf($required || $dirty), 'numeric', 'min:0', 'max:10000'],
+            'fundingInstructions.allow_fundings' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'fundingInstructions.allow_reserve_releases' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'fundingInstructions.funding_limit' => [Rule::requiredIf($required || $dirty), 'numeric', 'min:0', 'max:10000'],
+            'fundingInstructions.funding_notes' => ['array'],
+            'fundingInstructions.funding_notes.*' => ['string', 'min:2', 'max:255'],
+            'fundingInstructions.outsource_collections' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'fundingInstructions.send_email_remittances' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'fundingInstructions.schedule_submission_email' => ['string', 'email', 'min:2', 'max:255'],
+            'fundingInstructions.warning_notes' => ['array'],
+            'fundingInstructions.warning_notes.*' => ['string', 'min:2', 'max:255'],
+        ];
     }
 }

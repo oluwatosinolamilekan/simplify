@@ -25,20 +25,8 @@ class ClientAnalysisForm extends Component
         return view('client.analysis-form');
     }
 
-    public static function getValidationRules(?ClientAnalysis $model = null)
-    {
-        $dirty = $model && $model->isDirty();
-
-        return [
-            'clientAnalysis.industry' => [Rule::requiredIf($dirty), 'string', 'min:2', 'max:255'],
-            'clientAnalysis.region' => [Rule::requiredIf($dirty), 'string', 'min:2', 'max:255'],
-            'clientAnalysis.loan_grade' => [Rule::requiredIf($dirty), 'string', 'min:2', 'max:255'],
-            'clientAnalysis.business_type' => [Rule::requiredIf($dirty), 'required', 'int', Rule::in(BusinessType::getValues())],
-        ];
-    }
-
     public function getRules()
     {
-        return self::getValidationRules();
+        return $this->clientAnalysis->getRules();
     }
 }

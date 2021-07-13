@@ -13,12 +13,10 @@ namespace App\View\Components\Company\User;
 
 use App\Enums\Role;
 use App\Enums\RoleTypesList;
-use App\Enums\Status;
 use App\Models\User;
 use App\Models\UserCompanyAccess;
 use App\View\Components\Traits\ConfirmModelDelete;
 use DB;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Throwable;
 
@@ -74,31 +72,20 @@ class CompanyUserForm extends Component
 
     public function getRules()
     {
-        return self::getValidationRules();
-    }
+        /*
+         * Email uniqueness should not be validated
+         * If user with given email address exists - company access is granted for that user
+         * Email address update is not allowed
+         */
 
-    public static function getValidationRules()
-    {
-        // TODO @Jovana: try move all validation rules to models
-        return [
-            'userCompanyAccess.company_id' => ['required', 'int'],
-            'userCompanyAccess.first_name' => ['required', 'string', 'min:2', 'max:255'],
-            'userCompanyAccess.last_name' => ['required', 'string', 'min:2', 'max:255'],
-            'userCompanyAccess.middle_name' => ['string', 'min:2', 'max:255'],
-            'userCompanyAccess.role' => ['required', 'int'],
-            'userCompanyAccess.status' => ['required', 'int', Rule::in([Status::Active, Status::NotActive])],
-            'userCompanyAccess.emails' => ['array'],
-            'userCompanyAccess.emails.*' => ['string', 'email', 'min:8', 'max:255'],
-            'userCompanyAccess.phone_numbers' => ['array'],
-            'userCompanyAccess.phone_numbers.*' => ['string', 'phone_number:15'],
-            /*
-             * Email uniqueness should not be validated
-             * If user with given email address exists - company access is granted for that user
-             * Email address update is not allowed
-             */
+        $userRules = $this->user->getRules();
+        $userRules['user.email'] = ['required', 'string', 'email', 'min:8', 'max:255'];
 
-            'user.email' => ['required', 'string', 'email', 'min:8', 'max:255'],
-            'user.role' => ['required', 'int'],
-        ];
+        $companyAccessRules = $this->userCompanyAccess->getRules();
+
+        return array_merge(
+            $companyAccessRules,
+            $userRules
+        );
     }
 }

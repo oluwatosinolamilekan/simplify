@@ -30,6 +30,7 @@ trait ConfirmModelDelete
     public function mountConfirmModelDelete()
     {
         $this->previous = URL::previous();
+        $this->listeners = array_merge($this->listeners, ['deleteConfirmed', 'deleteCancelled']);
     }
 
     /**
@@ -53,11 +54,6 @@ trait ConfirmModelDelete
         ]);
 
         $this->resetErrorBag();
-    }
-
-    public function getListeners()
-    {
-        return array_merge($this->listeners, ['deleteConfirmed', 'deleteCancelled']);
     }
 
     public function deleteConfirmed()

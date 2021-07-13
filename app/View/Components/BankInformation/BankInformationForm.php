@@ -39,6 +39,6 @@ class BankInformationForm extends Component
 
     public function getRules()
     {
-        return self::getValidationRules($this->bankInformation ?? null);
+        return $this->bankInformation->getRules();
     }
 }

@@ -13,6 +13,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\CompanyIdentity.
@@ -75,5 +76,20 @@ class CompanyIdentity extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function getRules(bool $required = false)
+    {
+        $dirty = $this->isDirty();
+
+        return [
+            'companyIdentity.company_code' => ['string', 'min:2', 'max:255', 'unique:company_identities,company_code'],
+            'companyIdentity.alternate_name' => ['string', 'min:2', 'max:255'],
+            'companyIdentity.mc_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
+            'companyIdentity.dot_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
+            'companyIdentity.fed_tax_id' => ['string', 'min:2', 'max:125'],
+            'companyIdentity.duns_id' => ['string', 'min:2', 'max:125'],
+            'companyIdentity.edi_id' => ['string', 'min:2', 'max:125'],
+        ];
     }
 }

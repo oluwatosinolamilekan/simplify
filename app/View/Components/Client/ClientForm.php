@@ -14,12 +14,20 @@ namespace App\View\Components\Client;
 use App\Enums\ClientType;
 use App\Enums\Status;
 use App\Models\Client;
+use App\View\Components\Traits\WithParent;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class ClientForm extends Component
 {
+    use WithParent;
+
     public Client $client;
+
+    public function mount(Client $client)
+    {
+        $this->client = $client;
+    }
 
     public function render()
     {
@@ -28,7 +36,7 @@ class ClientForm extends Component
 
     public function getRules()
     {
-        return self::getValidationRules();
+        return $this->client->getRules();
     }
 
     public static function getValidationRules()

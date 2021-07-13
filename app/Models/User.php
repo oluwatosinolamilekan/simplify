@@ -27,6 +27,7 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
 /**
@@ -181,5 +182,21 @@ class User extends Authenticatable implements MustVerifyEmailContract
             'id',
             'company_id'
         );
+    }
+
+    public function getRules(bool $required = true)
+    {
+        $dirty = $this->isDirty();
+
+        return [
+            'user.first_name' => ['string', 'min:2', 'max:255'],
+            'user.last_name' => ['string', 'min:2', 'max:255'],
+            'user.email' => [
+                Rule::requiredIf($required || $dirty), 'string', 'email', 'min:8', 'max:255',
+                $this->exists && $this->id ? Rule::unique('users', 'email')->ignore($this->id) : 'unique:users,email',
+            ],
+            'user.role' => [Rule::requiredIf($required || $dirty), 'int'],
+            'user.status' => [Rule::requiredIf($required || $dirty), 'int', Rule::in([Status::Active, Status::NotActive])],
+        ];
     }
 }
