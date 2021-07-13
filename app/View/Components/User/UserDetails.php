@@ -21,14 +21,14 @@ class UserDetails extends Component
 
     public User $user;
 
-    public function mount($id)
+    public function mount($user_id)
     {
-        $this->user = User::findOrFail($id);
+        $this->user = User::findOrFail($user_id);
     }
 
     public function render()
     {
-        return view('user.user-details');
+        return view('user.details');
     }
 
     public function getDeleteModel()

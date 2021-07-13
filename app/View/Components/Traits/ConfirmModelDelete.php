@@ -11,21 +11,26 @@ declare(strict_types=1);
 
 namespace App\View\Components\Traits;
 
+use App\View\Components\Common\Datatable;
+use Throwable;
+use URL;
+
 trait ConfirmModelDelete
 {
-    /**
-     * Indicates if deletion is being confirmed.
-     *
-     * @var bool
-     */
-    public $confirmingDeletion = false;
+    use ExceptionAlerts;
+
+    /* Previous URL for redirection after delete  */
+    public $previous = null;
 
     /**
-     * Indicates if deletion is completed.
+     * Previous URL is saved on mounting because Laravel back() method doesn't work with Livewire.
      *
-     * @var bool
+     * @return void
      */
-    public $deleteCompleted = false;
+    public function mountConfirmModelDelete()
+    {
+        $this->previous = URL::previous();
+    }
 
     /**
      * Confirm that the user would like to delete their account.
@@ -34,26 +39,64 @@ trait ConfirmModelDelete
      */
     public function confirmDeletion()
     {
-        $this->resetErrorBag();
+        $this->confirm('Delete item', [
+            'position' =>  'center',
+            'timer' =>  10000,
+            'toast' =>  false,
+            'text' =>  'Are you sure you want to delete this item? Once it is deleted, all of its resources and data will be permanently deleted.',
+            'confirmButtonText' =>  'Delete',
+            'cancelButtonText' =>  'Cancel',
+            'showCancelButton' =>  true,
+            'showConfirmButton' =>  true,
+            'onConfirmed' => 'deleteConfirmed',
+            'onCancelled' => 'deleteCancelled',
+        ]);
 
-        $this->confirmingDeletion = true;
+        $this->resetErrorBag();
     }
 
-    public function cancelDeletion()
+    public function getListeners()
     {
-        $this->resetDeleteModel();
-        $this->resetErrorBag();
-        $this->confirmingDeletion = false;
+        return array_merge($this->listeners, ['deleteConfirmed', 'deleteCancelled']);
     }
 
-    public function deleteModel()
+    public function deleteConfirmed()
     {
-        $this->confirmingDeletion = false;
+        try {
+            if (method_exists($this, 'deleteModel')) {
+                $this->deleteModel();
+            } else {
+                $this->getDeleteModel()->delete();
+            }
+        } catch (Throwable $exception) {
+            $this->exceptionAlert($exception);
 
-        $this->resetErrorBag();
+            return;
+        }
 
-        $this->getDeleteModel()->delete();
+        if ($this instanceof Datatable) {
+            $this->alert('success', 'Item deleted', [
+                'position' =>  'top-end',
+                'timer' =>  3000,
+                'toast' =>  true,
+                'text' =>  'Item successfully deleted.',
+            ]);
+            $this->emit('refreshLivewireDatatable');
+        } else {
+            $this->flash('success', 'Item deleted', [
+                'position' =>  'top-end',
+                'timer' =>  3000,
+                'toast' =>  true,
+                'text' =>  'Item successfully deleted.',
+            ]);
+            $this->redirect($this->previous);
+        }
+    }
 
-        $this->deleteCompleted = true;
+    public function deleteCancelled()
+    {
+        if (method_exists($this, 'resetDeleteModel')) {
+            $this->resetDeleteModel();
+        }
     }
 }

@@ -24,6 +24,7 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
 /**
  * App\Models\UserCompanyAccess.
  *
+ * @property int $id
  * @property int $user_id
  * @property int $company_id
  * @property Status $status
@@ -95,6 +96,7 @@ class UserCompanyAccess extends Model
      */
     protected $casts = [
         'status' => 'int',
+        'role' => 'int',
         'permissions' => 'array',
         'emails' => 'array',
         'phone_numbers' => 'array',

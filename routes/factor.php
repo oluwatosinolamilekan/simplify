@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('factors')->group(function () {
     Route::get('', FactorsList::class)->name('factors.list');
     Route::get('/create', FactorWizard::class)->name('factors.create');
-    Route::get('{id}', FactorDetails::class)->name('factors.view');
-    Route::get('{id}/update', FactorWizard::class)->name('factors.update');
+    Route::get('{factor_id}', FactorDetails::class)->name('factors.view');
+    Route::get('{factor_id}/update', FactorWizard::class)->name('factors.update');
 });
