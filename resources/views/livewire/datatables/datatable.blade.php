@@ -24,11 +24,6 @@
                     </div>
                 </div>
                 @endif
-                <div class="w-96 flex rounded-lg shadow-sm">
-                    <button wire:click="clearAllFilters" class="flex items-center space-x-2 px-3 border border-blue-400 rounded-md bg-white text-blue-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none"><span>Clear All Filters</span>
-                        <x-icons.x-circle class="m-2" />
-                    </button>
-                </div>
             </div>
 
             <div class="flex items-center space-x-1">
@@ -93,6 +88,19 @@
                                     <div>
                                         <input type="checkbox" wire:click="toggleSelectAll" @if(count($selected) === $this->results->total()) checked @endif class="form-checkbox mt-1 h-4 w-4 text-blue-600 transition duration-150 ease-in-out" />
                                     </div>
+                                </div>
+                            @elseif($column['type'] === 'actions')
+                                <div>
+                                    <button wire:click="applyAllFilters" class="flex items-center space-x-2 px-3 border border-blue-400 rounded-md bg-white text-blue-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none">
+                                        <span>Apply Filters</span>
+                                        <x-icons.x-circle class="m-2" />
+                                    </button>
+                                    @if ($this->getActiveFiltersProperty())
+                                    <button wire:click="clearAllFilters" class="flex items-center space-x-2 px-3 border border-blue-400 rounded-md bg-white text-blue-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none">
+                                        <span>Clear All</span>
+                                        <x-icons.x-circle class="m-2" />
+                                    </button>
+                                    @endif
                                 </div>
                             @else
                                 <div class="table-cell overflow-hidden align-top">

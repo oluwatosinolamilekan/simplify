@@ -9,7 +9,7 @@ declare(strict_types=1);
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace App\View\Components\Common;
+namespace App\View\Components\Common\Datatables;
 
 use App\View\Components\Traits\WithPersistentFilters;
 use Illuminate\Contracts\Container\Container;
@@ -24,6 +24,10 @@ class Datatable extends LivewireDatatable
     public $exportable = true;
     public $filtersPersistent = true;
     public $route = null;
+
+    public $textFilters = [];
+    public $booleanFilters = [];
+    public $selectFilters = [];
 
     public function __invoke(Container $container, Route $route)
     {
@@ -80,9 +84,29 @@ class Datatable extends LivewireDatatable
     {
         parent::clearAllFilters();
         $this->reset(
-            'search',
             'activeDateFilters',
-            'activeTimeFilters'
+            'activeTimeFilters',
+            'textFilters',
+            'selectFilters',
         );
+    }
+
+    public function applyAllFilters()
+    {
+        foreach ($this->textFilters as $index => $filter) {
+            $this->applyFilter('text', $index, $filter);
+        }
+
+        foreach ($this->selectFilters as $index => $filter) {
+            $this->applyFilter('select', $index, $filter);
+        }
+
+        foreach ($this->booleanFilters as $index => $filter) {
+            $this->applyFilter('boolean', $index, $filter);
+        }
+
+        $this->textFilters = [];
+        $this->selectFilters = [];
+        $this->booleanFilters = [];
     }
 }
