@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('clients')->name('clients.')->group(function () {
     Route::get('', ClientList::class)->name('list');
     Route::get('/create', ClientWizard::class)->name('create');
-    Route::get('{id}', FactorDetails::class)->name('view');
-    Route::get('{id}/update', ClientWizard::class)->name('update');
+    Route::get('{client_id}', FactorDetails::class)->name('view');
+    Route::get('{client_id}/update', ClientWizard::class)->name('update');
 });
