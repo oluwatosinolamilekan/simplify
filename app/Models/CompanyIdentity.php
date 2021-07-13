@@ -83,7 +83,10 @@ class CompanyIdentity extends Model
         $dirty = $this->isDirty();
 
         return [
-            'companyIdentity.company_code' => ['string', 'min:2', 'max:255', 'unique:company_identities,company_code'],
+            'companyIdentity.company_code' => [
+                'string', 'min:2', 'max:255',
+                $this->exists && $this->id ? Rule::unique('company_identities', 'company_code')->ignore($this->id) : 'unique:company_identities,company_code',
+            ],
             'companyIdentity.alternate_name' => ['string', 'min:2', 'max:255'],
             'companyIdentity.mc_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
             'companyIdentity.dot_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],

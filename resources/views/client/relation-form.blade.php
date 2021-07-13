@@ -27,27 +27,30 @@
             <!-- Type -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="type" value="{{ __('Type') }}" />
-                <x-forms.select id="type" wire:model="client.type" class="w-1/2 float-right">
-                    @foreach(\App\Enums\ClientType::getInstances() as $type)
-                        <option value="{{$type->value}}" @if($client->type->is($type->value)) selected @endif>
-                            {{ $type->description }}
-                        </option>
-                    @endforeach
-                </x-forms.select>
+                @php
+                    $types = collect(\App\Enums\ClientType::getInstances())
+                                ->map(fn ($type) => [
+                                    'id' => $type->value,
+                                    'name' => $type->description ,
+                                    'selected' => $client->type->is($type->value)
+                                ])
+                @endphp
+                <x-searchable-select :values="$types" wire:model="client.type"  class="w-1/2 float-right"/>
                 <x-jet-input-error for="client.type" class="mt-2" />
             </div>
 
             <!-- Status -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="status" value="{{ __('Status') }}" />
-                <x-forms.select id="status" wire:model="client.status" class="w-1/2 float-right">
-                    <option value="{{\App\Enums\Status::Active}}" @if($client->status->is(\App\Enums\Status::Active)) selected @endif>
-                        {{ \App\Enums\Status::Active()->description }}
-                    </option>
-                    <option value="{{\App\Enums\Status::NotActive}}" @if($client->status->is(\App\Enums\Status::NotActive)) selected @endif>
-                        {{ \App\Enums\Status::NotActive()->description }}
-                    </option>
-                </x-forms.select>
+                @php
+                    $statuses = collect([\App\Enums\Status::Active(), \App\Enums\Status::NotActive()])
+                                ->map(fn ($status) => [
+                                    'id' => $status->value,
+                                    'name' => $status->description ,
+                                    'selected' => $client->status->is($status->value)
+                                ])
+                @endphp
+                <x-searchable-select :values="$statuses" wire:model="client.status"  class="w-1/2 float-right"/>
                 <x-jet-input-error for="client.status" class="mt-2" />
             </div>
 

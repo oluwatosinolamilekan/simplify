@@ -81,8 +81,10 @@ class ClientWizard extends Component
             $this->client->company()->associate($this->company);
             $this->client->save();
 
-            $this->fundingInstructions->client()->associate($this->client);
-            $this->fundingInstructions->save();
+            if ($this->fundingInstructions->isDirty()) {
+                $this->fundingInstructions->client()->associate($this->client);
+                $this->fundingInstructions->save();
+            }
 
             DB::commit();
 
@@ -201,19 +203,19 @@ class ClientWizard extends Component
          * Email address update is not allowed
          */
 
-        $userRules = $this->user->getRules();
-        $userRules['user.email'] = ['required', 'string', 'email', 'min:8', 'max:255'];
+        $userRules = $this->user->getRules(false);
+        $userRules['user.email'] = ['string', 'email', 'min:8', 'max:255'];
 
         return array_merge(
             $this->client->getRules(),
             $this->company->getRules(),
-            $this->companyIdentity->getRules(),
-            $this->clientAnalysis->getRules(),
+            $this->companyIdentity->getRules(false),
+            $this->clientAnalysis->getRules(false),
             $this->bankInformation->getRules(false),
             $this->address->getRules(false),
             $this->contact->getRules(false),
             $this->fundingInstructions->getRules(false),
-            $this->userCompanyAccess->getRules(! $this->client->exists),
+            $this->userCompanyAccess->getRules(false),
             $userRules
         );
     }
