@@ -1,5 +1,5 @@
 <x-slot name="header">
-    {{ __('User Details') }}
+    {{ __('Update User Details') }}
 </x-slot>
 <x-jet-form-section submit="save" class="mt-6">
     <x-slot name="title">
@@ -71,6 +71,18 @@
             <x-jet-danger-button wire:click="confirmDeletion" class="text-center xl:mr-3 align-top" wire:loading.attr="disabled">
                 {{ __('Delete') }}
             </x-jet-danger-button>
+
+            {{--<!-- Delete User Confirmation Modal -->--}}
+            {{--<x-dialogs.delete-confirmation>--}}
+                {{--<x-slot name="title">Delete Account</x-slot>--}}
+                {{--<x-slot name="description">Are you sure you want to delete user's account? Once it is deleted, all of its resources and data will be permanently deleted.</x-slot>--}}
+            {{--</x-dialogs.delete-confirmation>--}}
+
+            {{--<!-- Delete Completed Modal -->--}}
+            {{--<x-dialogs.delete-completed :actions="['users.list' => 'Back To Users List']">--}}
+                {{--<x-slot name="title">Account Deleted</x-slot>--}}
+                {{--<x-slot name="description">Account successfully deleted.</x-slot>--}}
+            {{--</x-dialogs.delete-completed>--}}
         @endif
     </x-slot>
 </x-jet-form-section>
