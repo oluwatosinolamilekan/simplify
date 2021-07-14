@@ -4,7 +4,8 @@
             x-ref="select"
             name="{{ $name }}"
             class="m-1 text-sm leading-4 flex-grow form-select"
-            wire:model = 'selectFilters.{{ $index }}'
+            wire:input="applyFilter('select', '{{ $index }}', $event.target.value)"
+            x-on:input="$refs.select.value=''"
         >
             <option value=""></option>
             @foreach($options as $value => $label)

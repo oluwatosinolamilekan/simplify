@@ -91,10 +91,6 @@
                                 </div>
                             @elseif($column['type'] === 'actions')
                                 <div>
-                                    <button wire:click="applyAllFilters" class="flex items-center space-x-2 px-3 border border-blue-400 rounded-md bg-white text-blue-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none">
-                                        <span>Apply Filters</span>
-                                        <x-icons.x-circle class="m-2" />
-                                    </button>
                                     @if ($this->getActiveFiltersProperty())
                                     <button wire:click="clearAllFilters" class="flex items-center space-x-2 px-3 border border-blue-400 rounded-md bg-white text-blue-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none">
                                         <span>Clear All</span>

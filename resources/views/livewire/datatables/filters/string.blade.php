@@ -3,9 +3,8 @@
         x-ref="input"
         type="text"
         class="m-1 text-sm leading-4 flex-grow form-input "
-        wire:model = 'textFilters.{{ $index }}'
-        wire:keydown.enter="applyFilter('text', '{{ $index }}', $event.target.value)"
-        x-on:keydown.enter="$refs.input.value = ''"
+        wire:change="applyFilter('text', '{{ $index }}', $event.target.value)"
+        x-on:change="$refs.input.value = ''"
     />
     <div class="flex flex-wrap max-w-48 space-x-1">
         @foreach($this->activeTextFilters[$index] ?? [] as $key => $value)

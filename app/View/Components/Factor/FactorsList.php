@@ -76,10 +76,10 @@ class FactorsList extends Datatable
                 ->format('m/d/Y')
                 ->filterable(),
 
-            Column::callback(['id'], function ($id) {
+            ActionsColumn::actions(['id'], function ($id) {
                 return view(
                     'components.tables.table-actions',
-                    ['id' => $id, 'view' => 'factors.view', 'update' => 'factors.update', 'delete' => 'delete']
+                    ['id' => $id, 'view' => 'factors.view', 'update' => 'factors.update', 'delete' => 'delete', 'args' => ['factor_id' => $id]]
                 );
             }),
         ];

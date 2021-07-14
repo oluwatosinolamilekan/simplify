@@ -25,10 +25,6 @@ class Datatable extends LivewireDatatable
     public $filtersPersistent = true;
     public $route = null;
 
-    public $textFilters = [];
-    public $booleanFilters = [];
-    public $selectFilters = [];
-
     public function __invoke(Container $container, Route $route)
     {
         $this->route = $route->getName();
@@ -86,27 +82,6 @@ class Datatable extends LivewireDatatable
         $this->reset(
             'activeDateFilters',
             'activeTimeFilters',
-            'textFilters',
-            'selectFilters',
         );
-    }
-
-    public function applyAllFilters()
-    {
-        foreach ($this->textFilters as $index => $filter) {
-            $this->applyFilter('text', $index, $filter);
-        }
-
-        foreach ($this->selectFilters as $index => $filter) {
-            $this->applyFilter('select', $index, $filter);
-        }
-
-        foreach ($this->booleanFilters as $index => $filter) {
-            $this->applyFilter('boolean', $index, $filter);
-        }
-
-        $this->textFilters = [];
-        $this->selectFilters = [];
-        $this->booleanFilters = [];
     }
 }

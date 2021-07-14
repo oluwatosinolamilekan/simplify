@@ -75,7 +75,7 @@ class UsersList extends Datatable
             ActionsColumn::actions(['id'], function ($id) {
                 return view(
                     'components.tables.table-actions',
-                    ['id' => $id, 'view' => 'users.view', 'update' => 'users.update', 'delete' => 'delete']
+                    ['id' => $id, 'view' => 'users.view', 'update' => 'users.update', 'delete' => 'delete', 'args' => ['user_id' => $id]]
                 );
             }),
         ];

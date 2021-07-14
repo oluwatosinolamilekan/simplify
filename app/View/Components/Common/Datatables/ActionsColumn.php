@@ -17,10 +17,8 @@ class ActionsColumn extends Column
 {
     public static function actions($columns, $callback, $params = [])
     {
-        $column = self::callback($columns, $callback, $params);
-
-        $column->type = 'actions';
-
-        return $column;
+        return self::callback($columns, $callback, $params)
+                ->setType('actions')
+                ->excludeFromExport();
     }
 }
