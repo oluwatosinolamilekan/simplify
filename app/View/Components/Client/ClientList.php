@@ -15,7 +15,7 @@ use App\Enums\ClientType;
 use App\Enums\Status;
 use App\Enums\StatusTypesList;
 use App\Models\Client;
-use App\View\Components\Common\Datatable;
+use App\View\Components\Common\Datatables\Datatable;
 use App\View\Components\Traits\ConfirmModelDelete;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
