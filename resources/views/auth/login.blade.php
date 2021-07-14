@@ -31,10 +31,10 @@
                     <form method="POST" action="{{ route('login') }}" class="from-theme-18">
                         @csrf
                         <div class="intro-x mt-8">
-                            <x-input id="email" class="w-full" type="email" name="email" :value="old('email')" placeholder="{{ __('Email') }}" required autofocus />
+                            <x-input id="email" type="email" name="email" :value="old('email')" placeholder="{{ __('Email') }}" required autofocus />
                             <div x-data="{ show: true }">
                                 <div class="relative">
-                                    <input id="password" :type="show ? 'password' : 'text'" class="form-control py-3 px-4 border-gray-300 block mt-4 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18 focus:ring-opacity-50" name="password" placeholder="{{ __('Password') }}" required autocomplete="current-password">
+                                    <x-input id="password" name="password" placeholder="{{ __('Password') }}" required autocomplete="current-password"/>
 
                                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                                         <svg id="show_password_icon" class="h-6 text-gray-600" fill="none" @click="show = !show"

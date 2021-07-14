@@ -30,7 +30,7 @@
                         <form method="POST" action="{{ route('password.email') }}" class="from-theme-18">
                             @csrf
                             <div class="intro-x mt-8">
-                                <x-input id="email" class="w-full" type="email" name="email" :value="old('email')" placeholder="{{ __('Email') }}" required autofocus />
+                                <x-input id="email" type="email" name="email" :value="old('email')" placeholder="{{ __('Email') }}" required autofocus />
                             </div>
                             <div class="intro-x mt-5 xl:mt-8 text-center">
                                 <x-success-button class="w-full">
