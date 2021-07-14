@@ -28,7 +28,7 @@
                         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
                         <div class="intro-x">
-                            <x-jet-input id="email" class="login__input form-control py-3 px-4 border-gray-300 block mt-1 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" type="email" name="email" :value="old('email', $request->email)" placeholder="{{ __('Email') }}" required autofocus readonly/>
+                            <x-input id="email" type="email" name="email" :value="old('email', $request->email)" placeholder="{{ __('Email') }}" required autofocus readonly/>
                         </div>
                         <div x-data="{ show: true }">
                             <div class="intro-x mt-4 relative">
@@ -75,9 +75,9 @@
                             </div>
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                            <x-jet-button class="text-center py-3 px-4 w-full xl:mr-3 align-top bg-theme-18 border-theme-18 focus:ring-theme-18">
+                            <x-success-button class="py-3 px-4 w-full">
                                 {{ __('Save') }}
-                            </x-jet-button>
+                            </x-success-button>
                         </div>
                     </form>
                 </div>

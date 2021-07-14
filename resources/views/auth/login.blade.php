@@ -31,7 +31,7 @@
                     <form method="POST" action="{{ route('login') }}" class="from-theme-18">
                         @csrf
                         <div class="intro-x mt-8">
-                            <x-jet-input id="email" class="login__input form-control py-3 px-4 border-gray-300 block mt-1 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" type="email" name="email" :value="old('email')" placeholder="{{ __('Email') }}" required autofocus />
+                            <x-input id="email" class="w-full" type="email" name="email" :value="old('email')" placeholder="{{ __('Email') }}" required autofocus />
                             <div x-data="{ show: true }">
                                 <div class="relative">
                                     <input id="password" :type="show ? 'password' : 'text'" class="form-control py-3 px-4 border-gray-300 block mt-4 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18 focus:ring-opacity-50" name="password" placeholder="{{ __('Password') }}" required autocomplete="current-password">
@@ -57,7 +57,7 @@
                         </div>
                         <div class="intro-x flex text-gray-700 dark:text-gray-600 text-xs sm:text-sm mt-4">
                             <div class="flex items-center mr-auto">
-                                <x-jet-checkbox id="remember_me" name="remember" class="form-check-input border mr-2 focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" />
+                                <x-checkbox id="remember_me" name="remember" />
                                 <label class="cursor-pointer select-none" for="remember_me">Remember me</label>
                             </div>
                             @if (Route::has('password.request'))
@@ -67,7 +67,7 @@
                             @endif
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center">
-                            <x-jet-button class="text-center w-full xl:mr-3 align-top bg-theme-18 border-theme-18 focus:ring-theme-18">Log In</x-jet-button>
+                            <x-success-button class="w-full">Log In</x-success-button>
                         </div>
                         <div class="intro-x mt-10 text-gray-600 dark:text-gray-600 text-center">
                             By signin up, you agree to our

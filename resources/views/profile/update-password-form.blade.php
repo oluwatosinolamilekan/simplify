@@ -11,8 +11,8 @@
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="current_password" value="{{ __('Current Password') }}" />
             <div x-data="{ show: true }">
-                <div class="relative">
-                    <input id="current_password" :type="show ? 'password' : 'text'" class="form-control py-3 px-4 border-gray-300 dark:bg-dark-1 block mt-1 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18 focus:ring-opacity-50" wire:model.defer="state.current_password" autocomplete="current-password">
+                <div class="relative" x-data="{ show: true }">
+                    <input id="current_password" :type="show ? 'password' : 'text'" class="form-control py-3 px-4 border-gray-300 dark:bg-dark-1 block mt-1 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18 focus:ring-opacity-50" wire:model.defer="state.current_password" autocomplete="current-password"/>
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                         <svg id="show_current_password_icon" class="h-6 text-gray-600" fill="none" @click="show = !show"
                              :class="{'hidden': !show, 'block':show }" xmlns="http://www.w3.org/2000/svg"
