@@ -31,9 +31,9 @@ class UserForm extends Component
         'user.role' => 'role',
     ];
 
-    public function mount($id = null)
+    public function mount($user_id = null)
     {
-        $this->user = User::findOrNew($id);
+        $this->user = User::findOrNew($user_id);
 
         if (! $this->user->exists) {
             $this->user->role = Role::SuperAdministrator;

@@ -14,7 +14,8 @@ namespace App\View\Components\User;
 use App\Enums\Role;
 use App\Enums\Status;
 use App\Models\User;
-use App\View\Components\Common\Datatable;
+use App\View\Components\Common\Datatables\ActionsColumn;
+use App\View\Components\Common\Datatables\Datatable;
 use App\View\Components\Traits\ConfirmModelDelete;
 use Mediconesystems\LivewireDatatables\BooleanColumn;
 use Mediconesystems\LivewireDatatables\Column;
@@ -71,10 +72,10 @@ class UsersList extends Datatable
                 ->format('m/d/Y')
                 ->filterable(),
 
-            Column::callback(['id'], function ($id) {
+            ActionsColumn::actions(['id'], function ($id) {
                 return view(
                     'components.tables.table-actions',
-                    ['id' => $id, 'view' => 'users.view', 'update' => 'users.update', 'delete' => 'delete']
+                    ['id' => $id, 'view' => 'users.view', 'update' => 'users.update', 'delete' => 'delete', 'args' => ['user_id' => $id]]
                 );
             }),
         ];

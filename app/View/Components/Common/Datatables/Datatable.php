@@ -9,7 +9,7 @@ declare(strict_types=1);
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace App\View\Components\Common;
+namespace App\View\Components\Common\Datatables;
 
 use App\View\Components\Traits\WithPersistentFilters;
 use Illuminate\Contracts\Container\Container;
@@ -80,9 +80,8 @@ class Datatable extends LivewireDatatable
     {
         parent::clearAllFilters();
         $this->reset(
-            'search',
             'activeDateFilters',
-            'activeTimeFilters'
+            'activeTimeFilters',
         );
     }
 }
