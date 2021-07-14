@@ -1,3 +1,5 @@
+[x-cloak=""] { display: none; }
+
 html:not(.dark) {
     background-color: white !important;
 }

@@ -31,7 +31,7 @@ trait WithPersistentFilters
             return;
         }
 
-        session()->put("filters.{$this->route}", [
+        session()->put("filters.{$this->route}.{$this->name}", [
             'search' => $this->search,
             'activeDateFilters' => $this->activeDateFilters,
             'activeTimeFilters' => $this->activeTimeFilters,
@@ -48,7 +48,7 @@ trait WithPersistentFilters
             return;
         }
 
-        foreach (session()->get("filters.{$this->route}", []) as $property => $value) {
+        foreach (session()->get("filters.{$this->route}.{$this->name}", []) as $property => $value) {
             $this->{$property} = $value;
         }
     }
