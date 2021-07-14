@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Enums\ClientType;
 use App\Enums\Status;
 use App\Enums\StatusTypesList;
 use Illuminate\Database\Eloquent\Builder;
@@ -183,7 +182,10 @@ class Factor extends Model
     public function getRules(bool $required = true)
     {
         return [
-            'factor.ref_code' => [Rule::requiredIf($required), 'string', 'min:2', 'max:125'],
+            'factor.ref_code' => [
+                Rule::requiredIf($required), 'string', 'min:2', 'max:125',
+                $this->exists && $this->id ? Rule::unique('factors', 'ref_code')->ignore($this->id) : 'unique:factors,ref_code',
+            ],
             'factor.status' => [Rule::requiredIf($required), 'int', Rule::in(StatusTypesList::Factor)],
             'factor.subscription_plan_id' => [Rule::requiredIf($required), 'exists:subscription_plans,id'],
         ];

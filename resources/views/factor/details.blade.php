@@ -102,13 +102,42 @@
             </div>
         </div>
 
-        <x-jet-section-border />
-
-        <!-- Contact Information -->
+        <!-- Contact Details -->
         <div class="mt-10 sm:mt-0">
             <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
+
+                <x-jet-section-title>
+                    <x-slot name="title">{{ __('Contact Details') }}</x-slot>
+                    <x-slot name="description">{{ __('Company contact details.') }}</x-slot>
+                </x-jet-section-title>
+
                 @if ($factor->company->contact)
-                    @include('contact.details', ['contact' => $factor->company->contact, 'title' => __('Contact Details'), 'description' => __('Basic Contact Details.')])
+                    @include('contact.details', ['contact' => $factor->company->contact])
+                @else
+                    <div class="mt-5 md:mt-0 md:col-span-2" >
+                        <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
+                            <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
+                            <a class="p-4 cursor-pointer bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
+                                + Add
+                            </a>
+                        </div>
+
+                        <form wire:submit.prevent="saveContactDetails">
+
+                            @include('contact.form', ['contact' => $contact])
+
+                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
+                                <!-- TODO @Sofia: Clicking this button should collapse the form above -->
+                                <a class="p-4 cursor-pointer bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
+                                    Cancel
+                                </a>
+                                <x-jet-button class="text-center xl:mr-3 align-top bg-theme-18 border-theme-18 focus:ring-theme-18" wire:loading.attr="disabled">
+                                    {{ __('Save') }}
+                                </x-jet-button>
+                            </div>
+
+                        </form>
+                    </div>
                 @endif
             </div>
         </div>
