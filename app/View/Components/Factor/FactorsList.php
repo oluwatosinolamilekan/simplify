@@ -15,7 +15,8 @@ use App\Enums\Status;
 use App\Enums\StatusTypesList;
 use App\Models\Factor;
 use App\Models\SubscriptionPlan;
-use App\View\Components\Common\Datatable;
+use App\View\Components\Common\Datatables\ActionsColumn;
+use App\View\Components\Common\Datatables\Datatable;
 use App\View\Components\Traits\ConfirmModelDelete;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
@@ -73,10 +74,10 @@ class FactorsList extends Datatable
                 ->format('m/d/Y')
                 ->filterable(),
 
-            Column::callback(['id'], function ($id) {
+            ActionsColumn::actions(['id'], function ($id) {
                 return view(
                     'components.tables.table-actions',
-                    ['id' => $id, 'view' => 'factors.view', 'update' => 'factors.update', 'delete' => 'delete']
+                    ['id' => $id, 'view' => 'factors.view', 'update' => 'factors.update', 'delete' => 'delete', 'args' => ['factor_id' => $id]]
                 );
             }),
         ];
