@@ -10,9 +10,9 @@
     </x-slot>
 
     <x-slot name="footer">
-        <x-jet-secondary-button wire:click="cancelDeletion" wire:loading.attr="disabled">
+        <x-secondary-button wire:click="cancelDeletion" wire:loading.attr="disabled">
             {{ __('Cancel') }}
-        </x-jet-secondary-button>
+        </x-secondary-button>
 
         <x-jet-danger-button class="ml-2" wire:click="deleteModel({{$model ?? null}})" wire:loading.attr="disabled">
             {{ __('Delete') }}
