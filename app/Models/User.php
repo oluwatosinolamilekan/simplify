@@ -13,6 +13,7 @@ namespace App\Models;
 
 use App\Enums\Role;
 use App\Enums\Status;
+use App\Models\Traits\HasMeta;
 use App\Models\Traits\MustConfigurePassword;
 use App\Models\Traits\UsesTimestampScopes;
 use BenSampo\Enum\Traits\CastsEnums;
@@ -47,6 +48,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  * @property-read string $full_name Get User's full name
+ * @property-read array $preferences Get User's preferences
  * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @method static Builder|User active()
@@ -65,6 +67,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
     use TwoFactorAuthenticatable;
     use CastsEnums;
     use UsesTimestampScopes;
+    use HasMeta;
 
     /**
      * @var bool do not allow timestamps management. They are already being done by database.
@@ -94,6 +97,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
      */
     protected $attributes = [
         'status' => Status::Active,
+        'role' => Role::CompanyUser,
     ];
 
     /**
@@ -180,5 +184,10 @@ class User extends Authenticatable implements MustVerifyEmailContract
             'id',
             'company_id'
         );
+    }
+
+    public function getPreferencesAttribute()
+    {
+        return $this->meta['preferences'] ?? [];
     }
 }
