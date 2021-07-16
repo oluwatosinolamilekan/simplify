@@ -30,12 +30,12 @@
                         <form method="POST" action="{{ route('password.email') }}" class="from-theme-18">
                             @csrf
                             <div class="intro-x mt-8">
-                                <x-jet-input id="email" class="login__input form-control py-3 px-4 border-gray-300 block mt-1 w-full focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" type="email" name="email" :value="old('email')" placeholder="{{ __('Email') }}" required autofocus />
+                                <x-input id="email" type="email" name="email" :value="old('email')" placeholder="{{ __('Email') }}" required autofocus />
                             </div>
                             <div class="intro-x mt-5 xl:mt-8 text-center">
-                                <x-jet-button class="text-center py-3 px-4 w-full xl:mr-3 align-top bg-theme-18 border-theme-18 focus:ring-theme-18">
+                                <x-success-button class="w-full">
                                     {{ __('Email Password Reset Link') }}
-                                </x-jet-button>
+                                </x-success-button>
                             </div>
                         </form>
                     @endif

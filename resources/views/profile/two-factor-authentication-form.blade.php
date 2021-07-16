@@ -8,7 +8,7 @@
     </x-slot>
 
     <x-slot name="content">
-        <h3 class="text-lg font-medium text-gray-900">
+        <h3 class="text-lg font-medium text-gray-900 dark:text-white">
             @if ($this->enabled)
                 {{ __('You have enabled two factor authentication.') }}
             @else
@@ -60,15 +60,15 @@
             @else
                 @if ($showingRecoveryCodes)
                     <x-jet-confirms-password wire:then="regenerateRecoveryCodes">
-                        <x-jet-secondary-button class="mr-3">
+                        <x-secondary-button class="mr-3">
                             {{ __('Regenerate Recovery Codes') }}
-                        </x-jet-secondary-button>
+                        </x-secondary-button>
                     </x-jet-confirms-password>
                 @else
                     <x-jet-confirms-password wire:then="showRecoveryCodes">
-                        <x-jet-secondary-button class="mr-3">
+                        <x-secondary-button class="mr-3">
                             {{ __('Show Recovery Codes') }}
-                        </x-jet-secondary-button>
+                        </x-secondary-button>
                     </x-jet-confirms-password>
                 @endif
 

@@ -34,9 +34,9 @@
                         @csrf
 
                         <div class="intro-x mt-4">
-                            <x-jet-button type="submit" class="text-center w-full xl:mr-3 align-top bg-theme-18 border-theme-18 focus:ring-theme-18">
+                            <x-success-button type="submit" class="w-full">
                                 {{ __('Resend Verification Email') }}
-                            </x-jet-button>
+                            </x-success-button>
                         </div>
                     </form>
 

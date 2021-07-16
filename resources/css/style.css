@@ -46,6 +46,43 @@ input[type=checkbox]:checked {
     display: block;
 }
 
+#add_new_user {
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Roboto';
+    line-height: 18px;
+    color: #FFFFFF;
+    background: #59BABE;
+    padding: 12px;
+    border-radius: 5px;
+    border: none;
+}
+
+#add_new_user:hover {
+    border: none !important;
+    text-decoration: none !important;
+    background: rgb(89 186 190 / 75%);
+}
+
+.data-table-container {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 15px;
+}
+
+.normal_letter_spacing {
+    letter-spacing: normal !important;
+}
+
+.capitalize {
+    text-transform: capitalize !important;
+}
+
+.light_anchor {
+    font-size: 16px;
+    font-weight: normal;
+}
+
 @media only screen and (min-width: 1279px) {
     body.login {
         padding: 0 !important;

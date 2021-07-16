@@ -7,7 +7,7 @@
         <x-slot name="description">{{ __('Account\'s profile details and basic info.') }}</x-slot>
     </x-jet-section-title>
     <div class="mt-5 md:mt-0 md:col-span-2">
-        <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md">
+        <div class="px-4 py-5 bg-white dark:bg-dark-2 sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md">
             <div class="grid grid-cols-6 gap-6">
 
                 <!-- First Name -->
@@ -79,16 +79,14 @@
             </div>
         </div>
 
-        <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6 shadow sm:rounded-bl-md sm:rounded-br-md">
-            <a href="{{route('users.update', $this->user->id)}}" class="bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition">
+        <div class="flex items-center justify-end px-4 py-3 bg-gray-50 dark:bg-dark-2 text-right sm:px-6 shadow sm:rounded-bl-md sm:rounded-br-md">
+            <x-success-anchor href="{{route('users.update', $this->user->id)}}">
                 {{ __('Update') }}
-            </a>
+            </x-success-anchor>
             <x-jet-danger-button wire:click="confirmDeletion" wire:loading.attr="disabled">
                 {{ __('Delete') }}
             </x-jet-danger-button>
         </div>
-
-
     </div>
 </div>
 
