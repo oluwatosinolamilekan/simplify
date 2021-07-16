@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\Status;
+use App\Models\Traits\HasMeta;
 use App\Models\Traits\UsesTimestampScopes;
 use BenSampo\Enum\Traits\CastsEnums;
 use Closure;
@@ -99,6 +100,7 @@ abstract class Model extends EloquentModel
     use UsesTimestampScopes;
     use HasFactory;
     use BlameableTrait;
+    use HasMeta;
 
     /**
      * @var bool do not allow timestamps management. They are already being done by database.

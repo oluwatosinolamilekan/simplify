@@ -25,16 +25,16 @@ class DarkModeSwitcher extends Component
 
     public function mount()
     {
-        $this->enabled = Auth::user()->preferences['dark_mode'] ?? false;
+        $this->enabled = Auth::user()->getMeta('preferences.dark_mode', false);
     }
 
     public function toggle()
     {
         $this->enabled = ! $this->enabled;
 
-        $meta = Auth::user()->meta ?? [];
-        $meta['preferences'] = array_merge($meta['preferences'] ?? [], ['dark_mode' => $this->enabled]);
+        Auth::user()->updateMeta('preferences.dark_mode', $this->enabled);
+        /*$meta['preferences'] = array_merge($meta['preferences'] ?? [], ['dark_mode' => $this->enabled]);
 
-        Auth::user()->update(['meta' => $meta]);
+        Auth::user()->update(['meta' => $meta]);*/
     }
 }
