@@ -1,4 +1,4 @@
-<div>
+<div class="data-table-container bg-white p-8">
     @if($beforeTableSlot)
         <div class="mt-8">
             @include($beforeTableSlot)
@@ -8,14 +8,13 @@
         <div class="flex justify-between items-center mb-1">
             <div class="flex-grow h-10 flex items-center">
                 @if($this->searchableColumns()->count())
-                <div class="w-96 flex rounded-lg shadow-sm">
+                <div class="md:w-64 lg:w-64 flex rounded-lg shadow-sm">
                     <div class="relative flex-grow focus-within:z-10">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" stroke="currentColor" fill="none">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
+                            <i data-feather="search" width="18" height="20" class="mr-2 text-gray-400"></i>
                         </div>
-                        <input wire:model.debounce.500ms="search" class="form-input block bg-gray-50 focus:bg-white w-full rounded-md pl-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5" placeholder="Search in {{ $this->searchableColumns()->map->label->join(', ') }}" />
+
+                        <x-input wire:model.debounce.500ms="search" class="mt-auto py-2.5 px-9" placeholder="Search in {{ $this->searchableColumns()->map->label->join(', ') }}" />
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                             <button wire:click="$set('search', null)" class="text-gray-300 hover:text-red-600 focus:outline-none">
                                 <x-icons.x-circle class="h-5 w-5 stroke-current" />
@@ -33,8 +32,10 @@
                 <div x-data="{ init() {
                     window.livewire.on('startDownload', link => window.open(link,'_blank'))
                 } }" x-init="init">
-                    <button wire:click="export" class="flex items-center space-x-2 px-3 border border-green-400 rounded-md bg-white text-green-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-green-200 focus:outline-none"><span>Export</span>
-                        <x-icons.excel class="m-2" /></button>
+                    <x-light-anchor href="#" wire:click="export">
+                        <i data-feather="file-text" width="18" height="20" class="mr-2" x-cloak></i>
+                        <span>Export</span>
+                    </x-light-anchor>
                 </div>
                 @endif
 
