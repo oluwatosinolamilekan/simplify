@@ -30,7 +30,9 @@
         </div>
     </div>
 
+    <!-- BEGIN: Dark Mode Switcher-->
     <livewire:common.dark-mode-switcher />
+    <!-- END: Dark Mode Switcher-->
 
     @stack('modals')
 
