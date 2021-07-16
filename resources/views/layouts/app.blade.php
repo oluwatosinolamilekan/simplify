@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-@php $dark = session()->get('dark_mode', false); @endphp
 
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" @if (Auth::user()->preferences['dark_mode'] ?? false) class="dark" @endif>
 <head>
