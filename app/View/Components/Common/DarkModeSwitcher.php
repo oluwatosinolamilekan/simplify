@@ -33,8 +33,5 @@ class DarkModeSwitcher extends Component
         $this->enabled = ! $this->enabled;
 
         Auth::user()->updateMeta('preferences.dark_mode', $this->enabled);
-        /*$meta['preferences'] = array_merge($meta['preferences'] ?? [], ['dark_mode' => $this->enabled]);
-
-        Auth::user()->update(['meta' => $meta]);*/
     }
 }
