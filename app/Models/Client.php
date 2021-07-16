@@ -44,8 +44,8 @@ use Illuminate\Validation\Rule;
  * @property ClientAnalysis[] $analysis
  * @property ClientCommission[] $commissions
  * @property ClientContractDocument[] $contractDocuments
- * @property ClientContract[] $ccontracts
- * @property ClientCredit[] $credits
+ * @property ClientContract[] $contracts
+ * @property ClientCredit $credit
  * @property ClientFundingInstructions[] $fundingInstructions
  * @property ClientIntegrations[] $integrations
  * @property ClientTransactionFee[] $transactionFees
@@ -166,11 +166,11 @@ class Client extends Model
     }
 
     /**
-     * @return HasMany
+     * @return HasOne
      */
-    public function credits()
+    public function credit()
     {
-        return $this->hasMany(ClientCredit::class);
+        return $this->hasOne(ClientCredit::class);
     }
 
     /**

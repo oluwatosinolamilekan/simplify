@@ -7,7 +7,7 @@
             <div class="col-span-6 sm:col-span-4">
                 <x-jet-label for="company-name" value="{{ __('Name') }}" />
                 <x-jet-input id="company-name" type="text" wire:model="company.name" class="w-1/2 float-right" autocomplete="organization" />
-                <x-jet-input-error for="company.name" class="mt-2" />
+                <x-jet-input-error for="company.name" class="mt-3" />
             </div>
 
             <!-- Domain -->
@@ -17,7 +17,7 @@
                     <x-jet-input id="domain" type="text" wire:model="company.domain"/>
 
                 </div>
-                <x-jet-input-error for="company.domain" class="mt-2" />
+                <x-jet-input-error for="company.domain" class="mt-3" />
             </div>
             <div class="col-span-6 sm:col-span-2">
                 <span class="font-bold mt-1 sm:inline-block py-2">.{{getenv('APP_BASE_DOMAIN')}}</span>

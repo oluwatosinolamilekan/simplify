@@ -13,28 +13,28 @@
                     </option>
                     @endforeach
                 </select>
-                <x-jet-input-error for="clientAnalysis.business_type" class="mt-2" />
+                <x-jet-input-error for="clientAnalysis.business_type" class="mt-3" />
             </div>
 
             <!-- Industry -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="industry" value="{{ __('Industry') }}" />
                 <x-jet-input id="industry" type="text" class="mt-1 block w-full" wire:model="clientAnalysis.industry" />
-                <x-jet-input-error for="clientAnalysis.industry" class="mt-2" />
+                <x-jet-input-error for="clientAnalysis.industry" class="mt-3" />
             </div>
 
             <!-- Region TODO @Sofia: this should be select with US state codes list -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="region" value="{{ __('Region') }}" />
                 <x-jet-input id="region" type="text" class="mt-1 block w-full" wire:model="clientAnalysis.region" />
-                <x-jet-input-error for="clientAnalysis.region" class="mt-2" />
+                <x-jet-input-error for="clientAnalysis.region" class="mt-3" />
             </div>
 
             <!-- Loan Grade -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="loan_grade" value="{{ __('Loan Grade') }}" />
                 <x-jet-input id="loan_grade" type="text" class="mt-1 block w-full" wire:model="clientAnalysis.loan_grade" />
-                <x-jet-input-error for="clientAnalysis.loan_grade" class="mt-2" />
+                <x-jet-input-error for="clientAnalysis.loan_grade" class="mt-3" />
             </div>
 
         </div>

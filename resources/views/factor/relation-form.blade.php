@@ -7,7 +7,7 @@
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="ref_code" value="{{ __('Ref Code') }}" />
                 <x-jet-input id="ref_code" type="text" class="mt-1 block w-full" wire:model="factor.ref_code" />
-                <x-jet-input-error for="factor.ref_code" class="mt-2" />
+                <x-jet-input-error for="factor.ref_code" class="mt-3" />
             </div>
 
             <!-- Status -->
@@ -21,7 +21,7 @@
                         {{ \App\Enums\Status::NotActive()->description }}
                     </option>
                 </select>
-                <x-jet-input-error for="factor.status" class="mt-2" />
+                <x-jet-input-error for="factor.status" class="mt-3" />
             </div>
 
         </div>

@@ -13,6 +13,7 @@ namespace App\View\Components\Client;
 
 use App\Models\Client;
 use App\Models\ClientAnalysis;
+use App\Models\ClientCredit;
 use App\Models\ClientFundingInstructions;
 use App\View\Components\Company\CompanyComponent;
 use App\View\Components\Traits\ConfirmModelDelete;
@@ -27,23 +28,21 @@ class ClientWizard extends CompanyComponent
 
     public Client $client;
     public ClientAnalysis $clientAnalysis;
+    public ClientCredit $clientCredit;
     public ClientFundingInstructions $fundingInstructions;
 
     public function mount($client_id = null)
     {
         $this->client = Client::with([
-            'company',
-            'company.identity',
-            'company.address',
-            'company.contactDetails',
-            'company.bankInformation',
             'analysis',
+            'credit',
         ])->findOrNew($client_id);
 
         parent::mount($this->client->company_id);
 
         $this->clientAnalysis = $this->client->analysis ?? new ClientAnalysis();
         $this->fundingInstructions = $this->client->fundingInstructions ?? new ClientFundingInstructions();
+        $this->clientCredit = $this->client->clientCredit ?? new ClientCredit();
     }
 
     public function saveClient()
@@ -63,6 +62,11 @@ class ClientWizard extends CompanyComponent
             if ($this->fundingInstructions->isDirty()) {
                 $this->fundingInstructions->client()->associate($this->client);
                 $this->fundingInstructions->save();
+            }
+
+            if ($this->clientCredit->isDirty()) {
+                $this->clientCredit->client()->associate($this->client);
+                $this->clientCredit->save();
             }
 
             DB::commit();
@@ -92,10 +96,6 @@ class ClientWizard extends CompanyComponent
         }
     }
 
-    public function saveCredit()
-    {
-    }
-
     public function render()
     {
         return view('client.wizard');
@@ -107,6 +107,7 @@ class ClientWizard extends CompanyComponent
             parent::getRules(),
             $this->client->getRules(),
             $this->clientAnalysis->getRules(false),
+            $this->clientCredit->getRules(false),
             $this->fundingInstructions->getRules(false),
         );
     }

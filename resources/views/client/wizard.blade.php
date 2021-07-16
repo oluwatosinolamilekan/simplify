@@ -10,20 +10,17 @@
     <div x-data="{ tab: window.location.hash ? window.location.hash : '#tab1' }" class="box">
         <div class="nav nav-tabs flex-col sm:flex-row justify-center lg:justify-start border-b border-gray-200">
 
-            <a class="mt-5 px-4 pb-4"
-               href="#" x-on:click.prevent="tab='#tab1'" :class="{ 'active': tab=='#tab1' }" >General</a>
+            <a class="mt-5 px-4 pb-4" href="#" x-on:click.prevent="tab='#tab1'" :class="{ 'active': tab=='#tab1' }">General</a>
 
-            <a class="mt-5 px-4 pb-4"
-               href="#" x-on:click.prevent="tab='#tab2'" :class="{ 'active': tab=='#tab2' }">Identity & Analysis</a>
+            <a class="mt-5 px-4 pb-4" href="#" x-on:click.prevent="tab='#tab2'" :class="{ 'active': tab=='#tab2' }">Identity & Analysis</a>
 
-            <a class="mt-5 px-4 pb-4"
-               href="#" x-on:click.prevent="tab='#tab3'" :class="{ 'active': tab=='#tab3' }">Address & Contact Details</a>
+            <a class="mt-5 px-4 pb-4" href="#" x-on:click.prevent="tab='#tab3'" :class="{ 'active': tab=='#tab3' }">Address & Contact Details</a>
 
-            <a class="mt-5 px-4 pb-4"
-               href="#" x-on:click.prevent="tab='#tab4'" :class="{ 'active': tab=='#tab4' }">Bank Information</a>
+            <a class="mt-5 px-4 pb-4" href="#" x-on:click.prevent="tab='#tab4'" :class="{ 'active': tab=='#tab4' }">Bank Information</a>
 
-            <a class="mt-5 px-4 pb-4"
-               href="#" x-on:click.prevent="tab='#tab5'" :class="{ 'active': tab=='#tab5' }">Users</a>
+            <a class="mt-5 px-4 pb-4" href="#" x-on:click.prevent="tab='#tab5'" :class="{ 'active': tab=='#tab5' }">Commissions & Fees</a>
+
+            <a class="mt-5 px-4 pb-4" href="#" x-on:click.prevent="tab='#tab6'" :class="{ 'active': tab=='#tab6' }">Users</a>
 
         </div>
 
@@ -73,6 +70,8 @@
                     </div>
                 </div>
 
+                <x-jet-section-border />
+
                 <!-- Funding Instructions -->
                 <div class="mt-10 sm:mt-0">
                     <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
@@ -83,6 +82,21 @@
                         </x-jet-section-title>
 
                         @include('client.funding-instructions-form', ['fundingInstructions' => $fundingInstructions])
+                    </div>
+                </div>
+
+                <x-jet-section-border />
+
+                <!-- Credit -->
+                <div class="mt-10 sm:mt-0">
+                    <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
+
+                        <x-jet-section-title>
+                            <x-slot name="title">{{ __('Credit') }}</x-slot>
+                            <x-slot name="description">{{ __('Fill credit details.') }}</x-slot>
+                        </x-jet-section-title>
+
+                        @include('client.credit-form', ['credit' => $clientCredit])
                     </div>
                 </div>
 

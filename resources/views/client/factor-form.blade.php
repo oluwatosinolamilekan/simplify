@@ -17,7 +17,7 @@
 
                 <x-searchable-select :values="$factors" wire:model="client.factor_id" class="w-1/2 float-right"/>
 
-                <x-jet-input-error for="client.factor_id" class="mt-2" />
+                <x-jet-input-error for="client.factor_id" class="mt-3" />
             </div>
         </div>
     </div>

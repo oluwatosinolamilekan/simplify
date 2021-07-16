@@ -10,7 +10,7 @@
                 </div>
             @endforeach
             <div class="col-span-6 sm:col-span-6">
-                <x-jet-input-error for="factor.subscription_plan_id" class="mt-2" />
+                <x-jet-input-error for="factor.subscription_plan_id" class="mt-3" />
             </div>
         </div>
     </div>
