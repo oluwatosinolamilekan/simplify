@@ -27,6 +27,7 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
 /**
@@ -47,6 +48,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  * @property-read string $full_name Get User's full name
+ * @property-read array $preferences Get User's preferences
  * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @method static Builder|User active()
@@ -94,6 +96,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
      */
     protected $attributes = [
         'status' => Status::Active,
+        'role' => Role::CompanyUser,
     ];
 
     /**
@@ -180,5 +183,26 @@ class User extends Authenticatable implements MustVerifyEmailContract
             'id',
             'company_id'
         );
+    }
+
+    public function getPreferencesAttribute()
+    {
+        return $this->meta['preferences'] ?? [];
+    }
+
+    public function getRules(bool $required = true)
+    {
+        $dirty = $this->isDirty();
+
+        return [
+            'user.first_name' => ['string', 'min:2', 'max:255'],
+            'user.last_name' => ['string', 'min:2', 'max:255'],
+            'user.email' => [
+                Rule::requiredIf($required || $dirty), 'string', 'email', 'min:8', 'max:255',
+                $this->exists && $this->id ? Rule::unique('users', 'email')->ignore($this->id) : 'unique:users,email',
+            ],
+            'user.role' => [Rule::requiredIf($required || $dirty), 'int'],
+            'user.status' => [Rule::requiredIf($required || $dirty), 'int', Rule::in([Status::Active, Status::NotActive])],
+        ];
     }
 }
