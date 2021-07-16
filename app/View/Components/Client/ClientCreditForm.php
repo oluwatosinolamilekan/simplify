@@ -20,7 +20,7 @@ class ClientCreditForm extends Component
 
     public function render()
     {
-        return view('client.analysis-form');
+        return view('client.credit-form');
     }
 
     public function getRules()
