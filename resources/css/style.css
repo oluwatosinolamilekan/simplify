@@ -89,6 +89,14 @@ input[type=checkbox]:checked {
     font-weight: normal;
 }
 
+.table_label {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: #4A5568;
+    letter-spacing: normal;
+}
+
 /* CHECKBOX TOGGLE SWITCH */
 /* @apply rules for documentation, these do not work as inline style */
 .toggle-checkbox:checked {
