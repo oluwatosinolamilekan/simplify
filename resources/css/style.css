@@ -83,6 +83,14 @@ input[type=checkbox]:checked {
     font-weight: normal;
 }
 
+.table_label {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: #4A5568;
+    letter-spacing: normal;
+}
+
 @media only screen and (min-width: 1279px) {
     body.login {
         padding: 0 !important;
