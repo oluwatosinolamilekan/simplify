@@ -1,11 +1,11 @@
-<div x-data class="flex flex-col mr-2.5">
+<div x-data class="flex flex-col mr-2.5 ml-1 mb-3">
     <div class="flex">
         <x-select
             x-ref="select"
             name="{{ $name }}"
             wire:input="applyFilter('select', '{{ $index }}', $event.target.value)"
             x-on:input="$refs.select.value=''"
-            class="text-gray-500 h-8 mt-2.5"
+            class="text-gray-500 h-8 mt-2.5 pt-1 pb-1"
         >
             <option value="">Select..</option>
             @foreach($options as $value => $label)
@@ -22,13 +22,11 @@
         </x-select>
     </div>
 
-    <div class="flex flex-wrap max-w-48 space-x-1">
+    <div class="flex flex-wrap max-w-48">
         @foreach($this->activeSelectFilters[$index] ?? [] as $key => $value)
-        <button wire:click="removeFilter('select', '{{ $index }}', '{{ $key }}')" x-on:click="$refs.select.value=''"
-            class="m-1 pl-1 flex items-center uppercase tracking-wide bg-gray-300 text-white hover:bg-red-400 rounded-full focus:outline-none text-xs space-x-1">
-            <span>{{ $this->getDisplayValue($index, $value) }}</span>
-            <x-icons.x-circle />
-        </button>
+        <x-selected-filter-tag wire:click="removeFilter('select', '{{ $index }}', '{{ $key }}')" x-on:click="$refs.select.value=''">
+            <span class="pr-2">{{ $this->getDisplayValue($index, $value) }}</span>
+        </x-selected-filter-tag>
         @endforeach
     </div>
 </div>

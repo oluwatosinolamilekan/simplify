@@ -1,4 +1,4 @@
-<div class="data-table-container bg-white dark:bg-dark-2 p-8 mt-7">
+<div class="data-table-container bg-white dark:bg-dark-2 p-8 mt-0">
     @if($beforeTableSlot)
         <div class="mt-8">
             @include($beforeTableSlot)
@@ -16,9 +16,7 @@
 
                             <x-input wire:model.debounce.500ms="search" class="mt-auto py-2.5 px-9" placeholder="Search in {{ $this->searchableColumns()->map->label->join(', ') }}" />
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                                <button wire:click="$set('search', null)" class="text-gray-300 hover:text-red-600 focus:outline-none">
-                                    <x-icons.x-circle class="h-5 w-5 stroke-current" />
-                                </button>
+                                <x-clear-filter wire:click="$set('search', null)"/>
                             </div>
                         </div>
                     </div>
@@ -66,7 +64,7 @@
                                 @if($hideable === 'inline')
                                     @include('datatables::header-inline-hide', ['column' => $column, 'sort' => $sort])
                                 @elseif($column['type'] === 'checkbox')
-                                    <div class="relative table-cell h-12 w-48 overflow-hidden align-top px-6 py-3 border-b border-gray-300 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider flex items-center focus:outline-none">
+                                    <div class="relative table-cell h-12 w-12 overflow-hidden align-top px-6 py-3 border-b border-gray-300 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider flex items-center focus:outline-none">
                                         <div class="px-1 py-1 rounded @if(count($selected)) bg-orange-400 @else bg-gray-200 @endif text-gray-500 text-center">
                                             {{ count($selected) }}
                                         </div>
@@ -86,22 +84,21 @@
                                 @elseif($column['type'] === 'checkbox')
                                     <div class="table-cell w-32 overflow-hidden align-top px-6 py-3.5 border-b border-gray-300 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider flex h-full flex-col items-center space-y-2 focus:outline-none">
                                         {{--<div>SELECT ALL</div>--}}
-                                        <div>
-                                            <input type="checkbox" wire:click="toggleSelectAll" @if(count($selected) === $this->results->total()) checked @endif class="form-checkbox mt-1 h-4 w-4 text-blue-600 transition duration-150 ease-in-out" />
+                                        <div class="text-center">
+                                            <input type="checkbox" wire:click="toggleSelectAll" @if(count($selected) === $this->results->total()) checked @endif class="rounded shadow-sm focus:ring focus:ring-opacity-50 form-check-input border mr-2 focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" />
                                             {{--<x-checkbox wire:click="toggleSelectAll" @if(count($selected) === $this->results->total()) checked @endif/>--}}
                                         </div>
                                     </div>
                                 @elseif($column['type'] === 'actions')
                                     <div class="table-cell border-b border-gray-300 w-5 overflow-hidden align-top">
                                         @if ($this->getActiveFiltersProperty())
-                                            <x-secondary-button wire:click="clearAllFilters" class="mr-0 normal_letter_spacing inline-flex hover:text-red-400">
-                                                <span>Clear All</span>
-                                                <x-icons.x-circle class="ml-1" />
-                                            </x-secondary-button>
+                                            <x-light-anchor wire:click="clearAllFilters" class="mr-2.5 h-8 mt-2.5 pt-1.5">
+                                                <span class="nowrap">Clear All</span>
+                                            </x-light-anchor>
                                         @endif
                                     </div>
                                 @else
-                                    <div class="table-cell overflow-hidden align-top border-b border-gray-300">
+                                    <div class="table-cell table_cell_min_width overflow-hidden align-top border-b border-gray-300">
                                         @isset($column['filterable'])
                                             @if( is_iterable($column['filterable']) )
                                                 <div wire:key="{{ $index }}">
@@ -128,8 +125,12 @@
                                 @elseif($column['type'] === 'checkbox')
                                     @include('datatables::checkbox', ['value' => $result->checkbox_attribute])
                                 @else
-                                    <div class="min-w-min pl-0 pr-4 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900 table-cell border-b border-gray-300 @if($column['align'] === 'right') text-right @elseif($column['align'] === 'center') text-center @else text-left @endif">
-                                        {!! $result->{$column['name']} !!}
+                                    <div class="relative table_cell_value min-w-min pl-1 pr-4 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900 table-cell border-b border-gray-300 @if($column['align'] === 'right') text-right @elseif($column['align'] === 'center') text-center @else text-left @endif">
+                                        {{--@if($column['label'] === 'Status' && $result->{$column['name']} === 'Active' )--}}
+                                            {{--<span class="table_cell_status {{ strtolower($result->{$column['name']}) }}">{!! $result->{$column['name']} !!}</span>--}}
+                                        {{--@else--}}
+                                            {!! $result->{$column['name']} !!}
+                                        {{--@endif--}}
                                     </div>
                                 @endif
                             @endforeach
@@ -147,13 +148,13 @@
                         {{-- check if there is any data --}}
                         @if($this->results[1])
                             <div class="my-2 sm:my-0 flex items-center">
-                                <select name="perPage" class="mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5" wire:model="perPage">
+                                <x-select name="perPage" wire:model="perPage" class="h-8 pt-1 pb-1 pr-8">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
                                     <option value="99999999">All</option>
-                                </select>
+                                </x-select>
                             </div>
 
                             <div class="my-4 sm:my-0">
