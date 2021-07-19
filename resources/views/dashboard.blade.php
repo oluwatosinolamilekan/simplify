@@ -4,8 +4,8 @@
     </x-slot>
 
     <div class="mt-8">
-        <x-tabs active="Dashboard">
-            <x-tab name="Dashboard">
+        <x-tabs tabs='{"dashboard":"Dashboard", "account":"Account & Profile", "activities": "Activities", "tasks": "Tasks"}'>
+            <x-slot name="dashboard">
                 <div class="grid grid-cols-12 gap-6">
                     <!-- BEGIN: Top Categories -->
                     <div class="intro-y box col-span-12 lg:col-span-6">
@@ -123,9 +123,9 @@
                     </div>
                     <!-- END: Work In Progress -->
                 </div>
-            </x-tab>
+            </x-slot>
 
-            <x-tab name="Account & Profile">
+            <x-slot name="account">
                 <div class="grid grid-cols-12 gap-6">
                     <!-- BEGIN: Daily Sales -->
                     <div class="intro-y box col-span-12 lg:col-span-6">
@@ -221,9 +221,9 @@
                     </div>
                     <!-- END: Latest Tasks -->
                 </div>
-            </x-tab>
+            </x-slot>
 
-            <x-tab name="Activities">
+            <x-slot name="activities">
                 <div class="grid grid-cols-12 gap-6">
                     <!-- BEGIN: Work In Progress -->
                     <div class="intro-y box col-span-12 lg:col-span-6">
@@ -276,8 +276,8 @@
                     </div>
                     <!-- END: Work In Progress -->
                 </div>
-            </x-tab>
-            <x-tab name="Tasks">
+            </x-slot>
+            <x-slot name="tasks">
                 <div class="grid grid-cols-12 gap-6">
                     <!-- BEGIN: General Statistic -->
                     <div class="intro-y box col-span-12">
@@ -355,7 +355,7 @@
                     </div>
                     <!-- END: General Statistic -->
                 </div>
-            </x-tab>
+            </x-slot>
         </x-tabs>
     </div>
 
