@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="165" height="37" fill="none" viewBox="0 0 231.72 49.16" class="hidden xl:block">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="143" height="31" fill="none" viewBox="0 0 231.72 49.16" class="hidden xl:block">
     <defs>
         <style>.cls-1{fill:#fff;}.cls-2{fill:#51bfbc;}.cls-3{fill:url(#linear-gradient);}</style>
         <linearGradient id="linear-gradient" x1="28.07" y1="24.32" x2="88.64" y2="24.89" gradientUnits="userSpaceOnUse">

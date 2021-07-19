@@ -51,9 +51,9 @@
                                 <a class="p-4 cursor-pointer bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
                                     Cancel
                                 </a>
-                                <x-jet-button class="text-center xl:mr-3 align-top bg-theme-18 border-theme-18 focus:ring-theme-18" wire:loading.attr="disabled">
+                                <x-success-button wire:loading.attr="disabled">
                                     {{ __('Save') }}
-                                </x-jet-button>
+                                </x-success-button>
                             </div>
 
                         </form>
@@ -91,9 +91,9 @@
                                 <a class="p-4 cursor-pointer bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
                                     Cancel
                                 </a>
-                                <x-jet-button class="text-center xl:mr-3 align-top bg-theme-18 border-theme-18 focus:ring-theme-18" wire:loading.attr="disabled">
+                                <x-success-button wire:loading.attr="disabled">
                                     {{ __('Save') }}
-                                </x-jet-button>
+                                </x-success-button>
                             </div>
 
                         </form>

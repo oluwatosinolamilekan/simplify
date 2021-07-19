@@ -38,14 +38,14 @@
                     </span>
                 </div>
 
-                <x-jet-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent="$refs.photo.click()">
+                <x-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent="$refs.photo.click()">
                     {{ __('Select A New Photo') }}
-                </x-jet-secondary-button>
+                </x-secondary-button>
 
                 @if ($this->user->profile_photo_path)
-                    <x-jet-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
+                    <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
                         {{ __('Remove Photo') }}
-                    </x-jet-secondary-button>
+                    </x-secondary-button>
                 @endif
 
                 <x-jet-input-error for="photo" class="mt-2" />
@@ -54,22 +54,22 @@
 
         <!-- First Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="first_name" value="{{ __('First Name') }}"/>
-            <x-jet-input id="first_name" type="text" wire:model.defer="state.first_name" autocomplete="name"/>
+            <x-jet-label for="first_name" value="{{ __('First Name') }}" />
+            <x-input id="first_name" type="text" wire:model="state.first_name" autocomplete="name" />
             <x-jet-input-error for="first_name" class="mt-2" />
         </div>
 
         <!-- Last Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="last_name" value="{{ __('Last Name') }}" />
-            <x-jet-input id="last_name" type="text" wire:model.defer="state.last_name" autocomplete="name" />
+            <x-input id="last_name" type="text" wire:model="state.last_name" autocomplete="name" />
             <x-jet-input-error for="last_name" class="mt-2" />
         </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('Email') }}" />
-            <x-jet-input id="email" type="email" wire:model.defer="state.email" />
+            <x-input id="email" type="email" wire:model="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
         </div>
     </x-slot>
