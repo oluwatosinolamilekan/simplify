@@ -34,7 +34,7 @@ input[type=checkbox]:checked {
     border-color: #59BABE !important;
 }
 
-.side-nav.darkMode .main-logo {
+.dark .side-nav .main-logo {
     display: none;
 }
 
@@ -42,7 +42,7 @@ input[type=checkbox]:checked {
     display: none;
 }
 
-.side-nav.darkMode .main-logo-dark {
+.dark .side-nav .main-logo-dark {
     display: block;
 }
 
