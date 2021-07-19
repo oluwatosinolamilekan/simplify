@@ -28,7 +28,7 @@
                     <x-slot name="description">{{ __('Fill factor information.') }}</x-slot>
                 </x-jet-section-title>
 
-                @include('factor.relation-form', ['factor' => $factor])
+                @include('factor.relation.form', ['factor' => $factor])
             </div>
         </div>
 

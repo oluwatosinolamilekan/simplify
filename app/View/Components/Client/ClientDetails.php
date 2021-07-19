@@ -24,9 +24,9 @@ class ClientDetails extends CompanyComponent
     use ConfirmModelDelete;
 
     public Client $client;
-    public ClientAnalysis $clientAnalysis;
+    public ClientAnalysis $analysis;
     public ClientFundingInstructions $fundingInstructions;
-    public ClientCredit $clientCredit;
+    public ClientCredit $credit;
 
     public function mount($client_id)
     {
@@ -38,9 +38,9 @@ class ClientDetails extends CompanyComponent
 
         parent::mount($this->client->company_id);
 
-        $this->clientAnalysis = $this->client->analysis ?? new ClientAnalysis();
+        $this->analysis = $this->client->analysis ?? new ClientAnalysis();
         $this->fundingInstructions = $this->client->fundingInstructions ?? new ClientFundingInstructions();
-        $this->clientCredit = $this->client->clientCredit ?? new ClientCredit();
+        $this->credit = $this->client->credit ?? new ClientCredit();
     }
 
     public function render()
@@ -53,8 +53,8 @@ class ClientDetails extends CompanyComponent
         return ValidationRules::merge(
             parent::getRules(),
             ValidationRules::forModel('client', $this->client),
-            ValidationRules::forModel('clientAnalysis', $this->clientAnalysis, false),
-            ValidationRules::forModel('clientCredit', $this->clientCredit, false),
+            ValidationRules::forModel('clientAnalysis', $this->analysis, false),
+            ValidationRules::forModel('clientCredit', $this->credit, false),
             ValidationRules::forModel('fundingInstructions', $this->fundingInstructions, false),
         );
     }

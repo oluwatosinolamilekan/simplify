@@ -15,6 +15,7 @@ use App\Enums\ClientType;
 use App\Enums\Status;
 use App\Enums\StatusTypesList;
 use App\Models\Client;
+use App\View\Components\Common\Datatables\ActionsColumn;
 use App\View\Components\Common\Datatables\Datatable;
 use App\View\Components\Traits\ConfirmModelDelete;
 use Mediconesystems\LivewireDatatables\Column;
@@ -90,10 +91,10 @@ class ClientList extends Datatable
                 ->format('m/d/Y')
                 ->filterable(),
 
-            Column::callback(['id'], function ($id) {
+            ActionsColumn::actions(['id'], function ($id) {
                 return view(
                     'components.tables.table-actions',
-                    ['id' => $id, 'view' => 'clients.view', 'update' => 'clients.update', 'delete' => 'delete']
+                    ['id' => $id, 'view' => 'clients.view', 'update' => 'clients.update', 'delete' => 'delete', 'args' => ['client_id' => $id]]
                 );
             }),
         ];

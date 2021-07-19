@@ -21,15 +21,14 @@ use App\Models\User;
 use App\Models\UserCompanyAccess;
 use App\Support\Validation\ValidationRules;
 use App\View\Components\Component;
-use Illuminate\Database\Eloquent\Collection;
 
 class CompanyComponent extends Component
 {
     public Company $company;
     public Address $address;
     public ContactDetails $contact;
-    public Collection $bankInformation;
-    public CompanyIdentity $companyIdentity;
+    public BankInformation $bankInformation;
+    public CompanyIdentity $identity;
     public ?User $user;
     public ?UserCompanyAccess $userCompanyAccess;
 
@@ -42,12 +41,12 @@ class CompanyComponent extends Component
             'bankInformation',
         ])->findOrNew($company_id);
 
-        $this->companyIdentity = $this->company->identity ?? new CompanyIdentity();
+        $this->identity = $this->company->identity ?? new CompanyIdentity();
         $this->address = $this->company->address ?? new Address();
         $this->contact = $this->company->contactDetails ?? new ContactDetails();
         $this->bankInformation = $this->company->bankInformation ?? new BankInformation();
 
-        $this->user = new User(['role' => Role::CompanyUser]);
+        $this->user = new User();
         $this->userCompanyAccess = new UserCompanyAccess(['role' => Role::Administrator]);
     }
 
@@ -67,8 +66,8 @@ class CompanyComponent extends Component
 
     public function saveCompanyIdentity()
     {
-        if ($this->companyIdentity->isDirty()) {
-            $this->company->identity()->save($this->companyIdentity);
+        if ($this->identity->isDirty()) {
+            $this->company->identity()->save($this->identity);
         }
     }
 
@@ -103,13 +102,15 @@ class CompanyComponent extends Component
          */
 
         $userRules = $this->user->getRules(false);
-        $userRules['user.email'] = ['required', 'string', 'email', 'min:8', 'max:255'];
+        $userRules['email'] = ['required', 'string', 'email', 'min:8', 'max:255'];
 
-        return ValidationRules::merge(
+        $rules = ValidationRules::merge(
             ValidationRules::forModel('company', $this->company, true),
-            ValidationRules::forModel('companyIdentity', $this->companyIdentity, false),
+            ValidationRules::forModel('identity', $this->identity, false),
             ValidationRules::forModel('userCompanyAccess', $this->userCompanyAccess, false),
             ValidationRules::forProperty('user', $userRules)
         );
+
+        return $rules;
     }
 }

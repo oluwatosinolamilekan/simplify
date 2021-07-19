@@ -207,4 +207,13 @@ class User extends Authenticatable implements MustVerifyEmailContract
             'status' => [Rule::requiredIf($required || $dirty), 'int', Rule::in([Status::Active, Status::NotActive])],
         ];
     }
+
+    public function isDirty($attributes = [])
+    {
+        if (! $this->exists) {
+            return ! empty(array_filter($this->getDirty()));
+        }
+
+        return parent::isDirty($attributes);
+    }
 }

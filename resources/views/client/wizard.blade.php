@@ -38,7 +38,7 @@
                             <x-slot name="description">{{ __('Fill client information.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('client.relation-form', ['client' => $client])
+                        @include('client.relation.form', ['client' => $client])
                     </div>
                 </div>
 
@@ -53,7 +53,7 @@
                             <x-slot name="description">{{ __('Select factor.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('client.factor-form', ['client' => $client])
+                        @include('client.relation.factor-form', ['client' => $client])
                     </div>
                 </div>
 
@@ -68,7 +68,7 @@
                             <x-slot name="description">{{ __('Fill funding instructions.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('client.funding-instructions-form', ['fundingInstructions' => $fundingInstructions])
+                        @include('client.funding-instructions.form', ['fundingInstructions' => $fundingInstructions])
                     </div>
                 </div>
 
@@ -83,7 +83,7 @@
                             <x-slot name="description">{{ __('Fill credit details.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('client.credit-form', ['credit' => $clientCredit])
+                        @include('client.credit.form', ['credit' => $credit])
                     </div>
                 </div>
 
@@ -103,7 +103,7 @@
                             <x-slot name="description">{{ __('Company identity information.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('company.identity.form', ['companyIdentity' => $companyIdentity])
+                        @include('company.identity.form', ['identity' => $identity])
                     </div>
                 </div>
 
@@ -116,7 +116,7 @@
                             <x-slot name="description">{{ __('Client analysis information.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('client.analysis-form', ['clientAnalysis' => $clientAnalysis])
+                        @include('client.analysis.form', ['analysis' => $this->analysis])
                     </div>
                 </div>
 
@@ -173,7 +173,7 @@
                         </x-jet-section-title>
 
                         <div class="mt-5 md:mt-0 md:col-span-2" >
-                            @include('company.bank-information-list', ['bankInformation' => $bankInformation])
+                            @include('bank-information.form', ['bankInformation' => $bankInformation])
                         </div>
                     </div>
                 </div>

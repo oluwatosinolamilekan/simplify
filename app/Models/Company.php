@@ -90,7 +90,7 @@ class Company extends Model
 
     public function bankInformation()
     {
-        return $this->hasMany(BankInformation::class);
+        return $this->hasOne(BankInformation::class);
     }
 
     public function identity()

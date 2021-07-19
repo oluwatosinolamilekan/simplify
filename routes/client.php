@@ -9,14 +9,14 @@ declare(strict_types=1);
  * the LICENSE file that was distributed with this source code.
  */
 
+use App\View\Components\Client\ClientDetails;
 use App\View\Components\Client\ClientList;
 use App\View\Components\Client\ClientWizard;
-use App\View\Components\Factor\FactorDetails;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('clients')->name('clients.')->group(function () {
     Route::get('', ClientList::class)->name('list');
     Route::get('/create', ClientWizard::class)->name('create');
-    Route::get('{client_id}', FactorDetails::class)->name('view');
+    Route::get('{client_id}', ClientDetails::class)->name('view');
     Route::get('{client_id}/update', ClientWizard::class)->name('update');
 });

@@ -28,8 +28,8 @@ class ClientWizard extends CompanyComponent
     use WithNested;
 
     public Client $client;
-    public ClientAnalysis $clientAnalysis;
-    public ClientCredit $clientCredit;
+    public ClientAnalysis $analysis;
+    public ClientCredit $credit;
     public ClientFundingInstructions $fundingInstructions;
 
     public function mount($client_id = null)
@@ -42,9 +42,9 @@ class ClientWizard extends CompanyComponent
 
         parent::mount($this->client->company_id);
 
-        $this->clientAnalysis = $this->client->analysis ?? new ClientAnalysis();
+        $this->analysis = $this->client->analysis ?? new ClientAnalysis();
         $this->fundingInstructions = $this->client->fundingInstructions ?? new ClientFundingInstructions();
-        $this->clientCredit = $this->client->clientCredit ?? new ClientCredit();
+        $this->credit = $this->client->clientCredit ?? new ClientCredit();
     }
 
     public function saveClient()
@@ -66,9 +66,9 @@ class ClientWizard extends CompanyComponent
                 $this->fundingInstructions->save();
             }
 
-            if ($this->clientCredit->isDirty()) {
-                $this->clientCredit->client()->associate($this->client);
-                $this->clientCredit->save();
+            if ($this->credit->isDirty()) {
+                $this->credit->client()->associate($this->client);
+                $this->credit->save();
             }
 
             DB::commit();
@@ -108,8 +108,8 @@ class ClientWizard extends CompanyComponent
         return ValidationRules::merge(
             parent::getRules(),
             ValidationRules::forModel('client', $this->client),
-            ValidationRules::forModel('clientAnalysis', $this->clientAnalysis, false),
-            ValidationRules::forModel('clientCredit', $this->clientCredit, false),
+            ValidationRules::forModel('analysis', $this->analysis, false),
+            ValidationRules::forModel('credit', $this->credit, false),
             ValidationRules::forModel('fundingInstructions', $this->fundingInstructions, false),
         );
     }
