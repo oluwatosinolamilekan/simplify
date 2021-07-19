@@ -1,5 +1,5 @@
 <!-- BEGIN: Side Menu -->
-<nav class="side-nav" x-bind:class="{ 'darkMode': darkMode }">
+<nav class="side-nav">
     <a href="" class="intro-x flex items-center pl-5 pt-3 main-logo">
         <x-main-logo />
     </a>
