@@ -91,6 +91,37 @@ input[type=checkbox]:checked {
     letter-spacing: normal;
 }
 
+.table_cell_min_width {
+    min-width: 118px;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.table_cell_status.active {
+    position: relative;
+    color: #59BABE;
+    font-size: 13px;
+    padding-left: 12px;
+}
+
+.table_cell_status.active:before {
+    content: '\2022';
+    position: absolute;
+    color: #59BABE;
+    font-size: 20px;
+    left: 0;
+}
+
+.table_cell_value {
+    font-size: 13px;
+}
+
+.selected_filter_tag {
+    font-size: 11px;
+}
+
 @media only screen and (min-width: 1279px) {
     body.login {
         padding: 0 !important;
