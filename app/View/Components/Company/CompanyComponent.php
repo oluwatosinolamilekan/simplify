@@ -19,14 +19,16 @@ use App\Models\CompanyIdentity;
 use App\Models\ContactDetails;
 use App\Models\User;
 use App\Models\UserCompanyAccess;
+use App\Support\Validation\ValidationRules;
 use App\View\Components\Component;
+use Illuminate\Database\Eloquent\Collection;
 
 class CompanyComponent extends Component
 {
     public Company $company;
     public Address $address;
     public ContactDetails $contact;
-    public BankInformation $bankInformation;
+    public Collection $bankInformation;
     public CompanyIdentity $companyIdentity;
     public ?User $user;
     public ?UserCompanyAccess $userCompanyAccess;
@@ -103,14 +105,11 @@ class CompanyComponent extends Component
         $userRules = $this->user->getRules(false);
         $userRules['user.email'] = ['required', 'string', 'email', 'min:8', 'max:255'];
 
-        return array_merge(
-            $this->company->getRules(),
-            $this->bankInformation->getRules(false),
-            $this->address->getRules(false),
-            $this->contact->getRules(false),
-            $this->companyIdentity->getRules(false),
-            $this->userCompanyAccess->getRules(false),
-            $userRules
+        return ValidationRules::merge(
+            ValidationRules::forModel('company', $this->company, true),
+            ValidationRules::forModel('companyIdentity', $this->companyIdentity, false),
+            ValidationRules::forModel('userCompanyAccess', $this->userCompanyAccess, false),
+            ValidationRules::forProperty('user', $userRules)
         );
     }
 }

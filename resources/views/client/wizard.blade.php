@@ -3,28 +3,15 @@
 </x-slot>
 
 
-
-
 <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-
-    <div x-data="{ tab: window.location.hash ? window.location.hash : '#tab1' }" class="box">
-        <div class="nav nav-tabs flex-col sm:flex-row justify-center lg:justify-start border-b border-gray-200">
-
-            <a class="mt-5 px-4 pb-4" href="#" x-on:click.prevent="tab='#tab1'" :class="{ 'active': tab=='#tab1' }">General</a>
-
-            <a class="mt-5 px-4 pb-4" href="#" x-on:click.prevent="tab='#tab2'" :class="{ 'active': tab=='#tab2' }">Identity & Analysis</a>
-
-            <a class="mt-5 px-4 pb-4" href="#" x-on:click.prevent="tab='#tab3'" :class="{ 'active': tab=='#tab3' }">Address & Contact Details</a>
-
-            <a class="mt-5 px-4 pb-4" href="#" x-on:click.prevent="tab='#tab4'" :class="{ 'active': tab=='#tab4' }">Bank Information</a>
-
-            <a class="mt-5 px-4 pb-4" href="#" x-on:click.prevent="tab='#tab5'" :class="{ 'active': tab=='#tab5' }">Commissions & Fees</a>
-
-            <a class="mt-5 px-4 pb-4" href="#" x-on:click.prevent="tab='#tab6'" :class="{ 'active': tab=='#tab6' }">Users</a>
-
-        </div>
-
-        <div x-show="tab == '#tab1'" x-cloak class="mt-5 px-4 pb-4">
+    <x-tabs tabs='{
+        "general": "General",
+        "identity": "Identity & Analysis",
+        "address": "Address & Contact Details",
+        "bank": "Bank Information",
+        "users": "Users"
+    }'>
+        <x-slot name="general">
             <form wire:submit.prevent="saveClient">
 
                 <!-- Company Information -->
@@ -104,9 +91,8 @@
                 @include('components.forms.form-actions', ['delete' => $client->exists, 'disabled' => false])
 
             </form>
-        </div>
-
-        <div x-show="tab == '#tab2'" x-cloak class="mt-5 px-4 pb-4">
+        </x-slot>
+        <x-slot name="identity">
             <form wire:submit.prevent="saveIdentity">
                 <!-- Company Identity -->
                 <div class="mt-10 sm:mt-0">
@@ -138,9 +124,8 @@
                 @include('components.forms.form-actions', ['delete' => false, 'disabled' => !$client->exists])
 
             </form>
-        </div>
-
-        <div x-show="tab == '#tab3'" x-cloak class="mt-5 px-4 pb-4">
+        </x-slot>
+        <x-slot name="address">
             <form wire:submit.prevent="saveContact">
                 <!-- Address Information -->
                 <div class="mt-10 sm:mt-0">
@@ -175,9 +160,8 @@
                 <!-- Actions -->
                 @include('components.forms.form-actions', ['delete' => false, 'disabled' => !$client->exists])
             </form>
-        </div>
-
-        <div x-show="tab == '#tab4'" x-cloak class="mt-5 px-4 pb-4">
+        </x-slot>
+        <x-slot name="bank">
             <form wire:submit.prevent="saveBankInformation">
                 <!-- Bank Information -->
                 <div class="mt-10 sm:mt-0">
@@ -189,7 +173,7 @@
                         </x-jet-section-title>
 
                         <div class="mt-5 md:mt-0 md:col-span-2" >
-                            @include('bank-information.form', ['bankInformation' => $bankInformation])
+                            @include('company.bank-information-list', ['bankInformation' => $bankInformation])
                         </div>
                     </div>
                 </div>
@@ -197,9 +181,8 @@
                 <!-- Actions -->
                 @include('components.forms.form-actions', ['delete' => false, 'disabled' => !$client->exists])
             </form>
-        </div>
-
-        <div x-show="tab == '#tab5'" x-cloak class="mt-5 px-4 pb-4">
+        </x-slot>
+        <x-slot name="users">
             @if (!$client->exists)
                 <form wire:submit.prevent="saveUser">
                     <!-- Administrator Information -->
@@ -240,6 +223,6 @@
                     <livewire:company.user.company-users-list :company="$company"/>
                 </div>
             @endif
-        </div>
-    </div>
+        </x-slot>
+    </x-tabs>
 </div>

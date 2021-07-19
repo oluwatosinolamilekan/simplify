@@ -95,11 +95,11 @@ class BankInformation extends Model
         $dirty = $this->isDirty();
 
         return [
-            'bankInformation.bank_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
-            'bankInformation.account_holder_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
-            'bankInformation.account_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
-            'bankInformation.routing_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
-            'bankInformation.swift_code' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
+            'bank_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
+            'account_holder_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
+            'account_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
+            'routing_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
+            'swift_code' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
         ];
     }
 }

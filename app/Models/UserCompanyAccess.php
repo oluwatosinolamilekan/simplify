@@ -155,16 +155,16 @@ class UserCompanyAccess extends Model
         $dirty = $this->isDirty();
 
         return [
-            'userCompanyAccess.company_id' => ['int'],
-            'userCompanyAccess.first_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
-            'userCompanyAccess.last_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
-            'userCompanyAccess.middle_name' => ['string', 'min:2', 'max:255'],
-            'userCompanyAccess.role' => [Rule::requiredIf($required || $dirty), 'int'],
-            'userCompanyAccess.status' => [Rule::requiredIf($required || $dirty), 'int', Rule::in([Status::Active, Status::NotActive])],
-            'userCompanyAccess.emails' => ['array'],
-            'userCompanyAccess.emails.*' => ['string', 'email', 'min:8', 'max:255'],
-            'userCompanyAccess.phone_numbers' => ['array'],
-            'userCompanyAccess.phone_numbers.*' => ['string', 'phone_number:15'],
+            'company_id' => ['int'],
+            'first_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
+            'last_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
+            'middle_name' => ['string', 'min:2', 'max:255'],
+            'role' => [Rule::requiredIf($required || $dirty), 'int'],
+            'status' => [Rule::requiredIf($required || $dirty), 'int', Rule::in([Status::Active, Status::NotActive])],
+            'emails' => ['array'],
+            'emails.*' => ['string', 'email', 'min:8', 'max:255'],
+            'phone_numbers' => ['array'],
+            'phone_numbers.*' => ['string', 'phone_number:15'],
         ];
     }
 

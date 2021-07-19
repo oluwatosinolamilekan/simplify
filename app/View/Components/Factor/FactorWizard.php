@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\View\Components\Factor;
 
 use App\Models\Factor;
+use App\Support\Validation\ValidationRules;
 use App\View\Components\Company\CompanyComponent;
 use App\View\Components\Traits\ConfirmModelDelete;
 use DB;
@@ -78,9 +79,9 @@ class FactorWizard extends CompanyComponent
 
     public function getRules()
     {
-        return array_merge(
+        return ValidationRules::merge(
             parent::getRules(),
-            $this->factor->getRules(),
+            ValidationRules::forModel('factor', $this->factor)
         );
     }
 

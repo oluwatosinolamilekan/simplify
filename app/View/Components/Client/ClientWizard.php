@@ -15,6 +15,7 @@ use App\Models\Client;
 use App\Models\ClientAnalysis;
 use App\Models\ClientCredit;
 use App\Models\ClientFundingInstructions;
+use App\Support\Validation\ValidationRules;
 use App\View\Components\Company\CompanyComponent;
 use App\View\Components\Traits\ConfirmModelDelete;
 use App\View\Components\Traits\WithNested;
@@ -36,6 +37,7 @@ class ClientWizard extends CompanyComponent
         $this->client = Client::with([
             'analysis',
             'credit',
+            'fundingInstructions',
         ])->findOrNew($client_id);
 
         parent::mount($this->client->company_id);
@@ -103,12 +105,12 @@ class ClientWizard extends CompanyComponent
 
     public function getRules()
     {
-        return array_merge(
+        return ValidationRules::merge(
             parent::getRules(),
-            $this->client->getRules(),
-            $this->clientAnalysis->getRules(false),
-            $this->clientCredit->getRules(false),
-            $this->fundingInstructions->getRules(false),
+            ValidationRules::forModel('client', $this->client),
+            ValidationRules::forModel('clientAnalysis', $this->clientAnalysis, false),
+            ValidationRules::forModel('clientCredit', $this->clientCredit, false),
+            ValidationRules::forModel('fundingInstructions', $this->fundingInstructions, false),
         );
     }
 }

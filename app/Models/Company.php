@@ -34,7 +34,7 @@ use Illuminate\Validation\Rule;
  * @property Address    $address
  * @property User[]     $users
  * @property ContactDetails  $contactDetails
- * @property BankInformation $bankInformation
+ * @property BankInformation[] $bankInformation
  * @property CompanyIdentity $identity
  * @method static Company           active()
  * @method static Builder|Company   createdBy($userId)
@@ -90,7 +90,7 @@ class Company extends Model
 
     public function bankInformation()
     {
-        return $this->hasOne(BankInformation::class);
+        return $this->hasMany(BankInformation::class);
     }
 
     public function identity()
@@ -113,8 +113,8 @@ class Company extends Model
     public function getRules(bool $required = true)
     {
         return [
-            'company.name' => ['required', 'string', 'min:2', 'max:255'],
-            'company.domain' => ['required', 'string', 'min:2', 'max:125',
+            'name' => ['required', 'string', 'min:2', 'max:255'],
+            'domain' => ['required', 'string', 'min:2', 'max:125',
                 $this->exists ? Rule::unique('companies', 'domain')->ignore($this->id) : 'unique:companies,domain',
             ],
         ];

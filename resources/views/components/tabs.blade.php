@@ -1,46 +1,43 @@
-@props(['active'])
+<div class="w-full">
+    @if($count > 0)
+        <div x-data="manageTabs('{{ json_encode($tabshow) }}')" x-init="init()" x-cloak class="box">
+            <div class="nav nav-tabs flex-col sm:flex-row justify-center lg:justify-start border-b border-gray-200">
+                @foreach ($tabs as $id => $title )
+                    <a @click="selectTab('{{ $id }}')" class="mt-5 px-4 pb-4 " :class="(tabs['{{ $id }}'] == true) ? ' active ' : '' ">
+                        {{ $title }}
+                    </a>
+                @endforeach
+            </div>
+            <div class="mt-5 px-4 pb-4">
+                @foreach ($tabs as $id => $tab)
+                    <div x-show.transition.in.duration.300ms.opacity.50="tabs.{{ $id }}" class="">
+                        {{ ${$id} ?? '' }}
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
 
-<div x-data="{
-        activeTab: '{{ $active }}',
-        tabs: [],
-        tabHeadings: [],
-        toggleTabs() {
-            this.tabs.forEach(
-                tab => tab.__x.$data.showIfActive(this.activeTab)
-            );
-        }
-     }"
-     x-init="() => {
-        tabs = [...$refs.tabs.children];
-        tabHeadings = tabs.map((tab, index) => {
-            tab.__x.$data.id = (index + 1);
-            return tab.__x.$data.name;
-        });
-        toggleTabs();
-     }"
-     class="box"
->
-    <div class="nav nav-tabs flex-col sm:flex-row justify-center lg:justify-start border-b border-gray-200"
-         role="tablist"
-    >
-        <template x-for="(tab, index) in tabHeadings"
-                  :key="index"
-        >
-            <a
-               x-text="tab"
-               href="javascript:;"
-               @click="activeTab = tab; toggleTabs();"
-               class="py-4 px-6"
-               :class="tab === activeTab ? 'active' : ''"
-               :id="`tab-${index + 1}`"
-               role="tab"
-               :aria-selected="(tab === activeTab).toString()"
-               :aria-controls="`tab-panel-${index + 1}`"
-            >Dashboard</a>
-        </template>
-    </div>
-
-    <div x-ref="tabs">
-        {{ $slot }}
-    </div>
 </div>
+<script>
+    var manageTabs = (tabsfromphp) => {
+        return {
+            tabs: tabsfromphp,
+            tabshow: [],
+            init: function() {
+                this.tabs = JSON.parse(this.tabs);
+                var t = new URLSearchParams(window.location.search);
+                t.has("tab") && this.selectTab(t.get("tab"))
+            },
+            selectTab: function(t) {
+                var e = this;
+                Object.keys(this.tabs).forEach((function(n) {
+                    e.tabs[n] = t == n
+                })),
+                window.history.pushState("", "", "?tab=" + t)
+            }
+        }
+
+    }
+
+</script>

@@ -11,10 +11,7 @@ declare(strict_types=1);
 
 namespace App\View\Components\Factor;
 
-use App\Models\Address;
-use App\Models\BankInformation;
 use App\Models\Company;
-use App\Models\ContactDetails;
 use App\Models\Factor;
 use App\View\Components\Company\CompanyComponent;
 use App\View\Components\Traits\ConfirmModelDelete;
@@ -25,9 +22,6 @@ class FactorDetails extends CompanyComponent
 
     public Factor $factor;
     public Company $company;
-    public Address $address;
-    public ContactDetails $contact;
-    public BankInformation $bankInformation;
 
     public function mount($factor_id)
     {

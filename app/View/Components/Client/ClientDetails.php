@@ -13,7 +13,9 @@ namespace App\View\Components\Client;
 
 use App\Models\Client;
 use App\Models\ClientAnalysis;
+use App\Models\ClientCredit;
 use App\Models\ClientFundingInstructions;
+use App\Support\Validation\ValidationRules;
 use App\View\Components\Company\CompanyComponent;
 use App\View\Components\Traits\ConfirmModelDelete;
 
@@ -24,15 +26,21 @@ class ClientDetails extends CompanyComponent
     public Client $client;
     public ClientAnalysis $clientAnalysis;
     public ClientFundingInstructions $fundingInstructions;
+    public ClientCredit $clientCredit;
 
     public function mount($client_id)
     {
-        $this->client = Client::with(['analysis', 'fundingInstructions'])->findOrNew($client_id);
+        $this->client = Client::with([
+            'analysis',
+            'credit',
+            'fundingInstructions',
+        ])->findOrFail($client_id);
 
         parent::mount($this->client->company_id);
 
         $this->clientAnalysis = $this->client->analysis ?? new ClientAnalysis();
         $this->fundingInstructions = $this->client->fundingInstructions ?? new ClientFundingInstructions();
+        $this->clientCredit = $this->client->clientCredit ?? new ClientCredit();
     }
 
     public function render()
@@ -42,10 +50,12 @@ class ClientDetails extends CompanyComponent
 
     public function getRules()
     {
-        return array_merge(
+        return ValidationRules::merge(
             parent::getRules(),
-            $this->clientAnalysis->getRules(false),
-            $this->fundingInstructions->getRules(false)
+            ValidationRules::forModel('client', $this->client),
+            ValidationRules::forModel('clientAnalysis', $this->clientAnalysis, false),
+            ValidationRules::forModel('clientCredit', $this->clientCredit, false),
+            ValidationRules::forModel('fundingInstructions', $this->fundingInstructions, false),
         );
     }
 }

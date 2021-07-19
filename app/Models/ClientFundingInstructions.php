@@ -115,22 +115,22 @@ class ClientFundingInstructions extends Model
         $dirty = $this && $this->isDirty();
 
         return [
-            'fundingInstructions.generate_invoice' => [Rule::requiredIf($required || $dirty), 'boolean'],
-            'fundingInstructions.send_invoice' => [Rule::requiredIf($required || $dirty), 'boolean'],
-            'fundingInstructions.efs_available' => [Rule::requiredIf($required || $dirty), 'boolean'],
-            'fundingInstructions.fuel_advance_fee' => [Rule::requiredIf($required || $dirty), 'numeric'],
-            'fundingInstructions.fuel_advance_max_rate' => ['numeric', 'min:0', 'max:100'],
-            'fundingInstructions.max_invoice_amount' => [Rule::requiredIf($required || $dirty), 'numeric', 'min:0', 'max:10000'],
-            'fundingInstructions.allow_fundings' => [Rule::requiredIf($required || $dirty), 'boolean'],
-            'fundingInstructions.allow_reserve_releases' => [Rule::requiredIf($required || $dirty), 'boolean'],
-            'fundingInstructions.funding_limit' => [Rule::requiredIf($required || $dirty), 'numeric', 'min:0', 'max:10000'],
-            'fundingInstructions.funding_notes' => ['array'],
-            'fundingInstructions.funding_notes.*' => ['string', 'min:2', 'max:255'],
-            'fundingInstructions.outsource_collections' => [Rule::requiredIf($required || $dirty), 'boolean'],
-            'fundingInstructions.send_email_remittances' => [Rule::requiredIf($required || $dirty), 'boolean'],
-            'fundingInstructions.schedule_submission_email' => ['string', 'email', 'min:2', 'max:255'],
-            'fundingInstructions.warning_notes' => ['array'],
-            'fundingInstructions.warning_notes.*' => ['string', 'min:2', 'max:255'],
+            'generate_invoice' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'send_invoice' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'efs_available' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'fuel_advance_fee' => [Rule::requiredIf($required || $dirty), 'numeric'],
+            'fuel_advance_max_rate' => ['numeric', 'min:0', 'max:100'],
+            'max_invoice_amount' => [Rule::requiredIf($required || $dirty), 'numeric', 'min:0', 'max:10000'],
+            'allow_fundings' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'allow_reserve_releases' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'funding_limit' => [Rule::requiredIf($required || $dirty), 'numeric', 'min:0', 'max:10000'],
+            'funding_notes' => ['array'],
+            'funding_notes.*' => ['string', 'min:2', 'max:255'],
+            'outsource_collections' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'send_email_remittances' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'schedule_submission_email' => ['string', 'email', 'min:2', 'max:255'],
+            'warning_notes' => ['array'],
+            'warning_notes.*' => ['string', 'min:2', 'max:255'],
         ];
     }
 }

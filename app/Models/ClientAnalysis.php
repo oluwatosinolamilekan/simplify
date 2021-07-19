@@ -96,10 +96,10 @@ class ClientAnalysis extends Model
         $dirty = $this->isDirty();
 
         return [
-            'clientAnalysis.industry' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
-            'clientAnalysis.region' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
-            'clientAnalysis.loan_grade' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
-            'clientAnalysis.business_type' => [Rule::requiredIf($required || $dirty), 'required', 'int', Rule::in(BusinessType::getValues())],
+            'industry' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
+            'region' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
+            'loan_grade' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
+            'business_type' => [Rule::requiredIf($required || $dirty), 'required', 'int', Rule::in(BusinessType::getValues())],
         ];
     }
 }

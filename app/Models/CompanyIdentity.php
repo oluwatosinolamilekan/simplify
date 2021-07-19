@@ -83,16 +83,16 @@ class CompanyIdentity extends Model
         $dirty = $this->isDirty();
 
         return [
-            'companyIdentity.company_code' => [
+            'company_code' => [
                 'string', 'min:2', 'max:255',
                 $this->exists && $this->id ? Rule::unique('company_identities', 'company_code')->ignore($this->id) : 'unique:company_identities,company_code',
             ],
-            'companyIdentity.alternate_name' => ['string', 'min:2', 'max:255'],
-            'companyIdentity.mc_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
-            'companyIdentity.dot_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
-            'companyIdentity.fed_tax_id' => ['string', 'min:2', 'max:125'],
-            'companyIdentity.duns_id' => ['string', 'min:2', 'max:125'],
-            'companyIdentity.edi_id' => ['string', 'min:2', 'max:125'],
+            'alternate_name' => ['string', 'min:2', 'max:255'],
+            'mc_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
+            'dot_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
+            'fed_tax_id' => ['string', 'min:2', 'max:125'],
+            'duns_id' => ['string', 'min:2', 'max:125'],
+            'edi_id' => ['string', 'min:2', 'max:125'],
         ];
     }
 }
