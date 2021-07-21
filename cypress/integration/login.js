@@ -9,18 +9,13 @@ it('Logs in users', () => {
         cy.get('input[name="email"]').clear();
         cy.get('input[name="password"]').clear();
         cy.get('button[type="submit"]').click();
-        cy.get('input:invalid').should('have.length', 2)
-        cy.get('input[name="email"]').then(($input) => {
-            expect($input[0].validationMessage).to.eq('Please fill out this field.')
-        })
+        cy.validationError(2,'input[name="email"]', 'Please fill out this field.');
         cy.location('pathname').should('eq','/login');
 
         cy.get('input[name="email"]').type(correctEmail);
+        cy.get('input[name="password"]').clear();
         cy.get('button[type="submit"]').click();
-        cy.get('input:invalid').should('have.length', 1)
-        cy.get('input[name="password"]').then(($input) => {
-            expect($input[0].validationMessage).to.eq('Please fill out this field.')
-        })
+        cy.validationError(1,'input[name="password"]', 'Please fill out this field.');
         cy.location('pathname').should('eq','/login');
         cy.get('input[name="email"]').clear();
 
