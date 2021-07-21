@@ -80,17 +80,15 @@ class CompanyIdentity extends Model
 
     public function getRules(bool $required = false)
     {
-        $dirty = $this->isDirty();
-
         return [
             'company_id' => ['required', 'int', 'exists:companies,id'],
             'company_code' => [
                 'string', 'min:2', 'max:255',
-                $this->exists && $this->id ? Rule::unique('company_identities', 'company_code')->ignore($this->id) : 'unique:company_identities,company_code',
+                Rule::unique('company_identities', 'company_code')->ignore($this->id),
             ],
             'alternate_name' => ['string', 'min:2', 'max:255'],
-            'mc_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
-            'dot_number' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
+            'mc_number' => [Rule::requiredIf($required), 'string', 'min:2', 'max:125'],
+            'dot_number' => [Rule::requiredIf($required), 'string', 'min:2', 'max:125'],
             'fed_tax_id' => ['string', 'min:2', 'max:125'],
             'duns_id' => ['string', 'min:2', 'max:125'],
             'edi_id' => ['string', 'min:2', 'max:125'],

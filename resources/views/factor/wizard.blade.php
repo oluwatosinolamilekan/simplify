@@ -55,7 +55,7 @@
                 </div>
 
                     <!-- Actions -->
-                @include('components.forms.form-actions', ['delete' => $factor->exists, 'disabled' => false])
+                @include('components.forms.form-actions', ['delete' => $factor->exists])
             </form>
         </x-slot>
 
@@ -71,7 +71,7 @@
                         </x-jet-section-title>
 
                         <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <livewire:address.address-form :address="$address" :partial="false"/>
+                            <livewire:address.address-form :address="$address" :partial="false" :nested="true"/>
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                         </x-jet-section-title>
 
                         <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <livewire:contact.contact-form :contact="$contact" :partial="false"/>
+                            <livewire:contact.contact-form :contact="$contact" :partial="false" :nested="true"/>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                         </x-jet-section-title>
 
                         <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false"/>
+                            <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false" :nested="true"/>
                         </div>
                     </div>
                 </div>

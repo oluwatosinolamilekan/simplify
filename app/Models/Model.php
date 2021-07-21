@@ -16,6 +16,7 @@ use App\Models\Traits\HasMeta;
 use App\Models\Traits\UsesTimestampScopes;
 use BenSampo\Enum\Traits\CastsEnums;
 use Closure;
+use Exception;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -154,6 +155,11 @@ abstract class Model extends EloquentModel
         return parent::isDirty($attributes);
     }
 
+    public function ignoreDirty($attributes)
+    {
+        $this->syncOriginalAttribute($attributes);
+    }
+
     /**
      * @param Builder $query
      * @return Builder
@@ -176,10 +182,14 @@ abstract class Model extends EloquentModel
         return [];
     }
 
-    public function getRelatedInstanceOrNew(string $relation)
+    public function getRelatedInstanceOrNew(string $relation, bool $reload = false)
     {
         if (! $this->hasRelation($relation)) {
-            throw new \Exception("Unknown relation {$relation} for model of class {$this}");
+            throw new Exception("Unknown relation {$relation} for model of class {$this}");
+        }
+
+        if ($reload) {
+            $this->load($relation);
         }
 
         if ($this->relationLoaded($relation) && $this->{$relation}) {

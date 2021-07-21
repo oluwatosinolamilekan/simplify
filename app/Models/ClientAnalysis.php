@@ -93,14 +93,12 @@ class ClientAnalysis extends Model
 
     public function getRules(bool $required = true)
     {
-        $dirty = $this->isDirty();
-
         return [
             'client_id' => ['required', 'int', 'exists:clients,id'],
-            'industry' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
-            'region' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
-            'loan_grade' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
-            'business_type' => [Rule::requiredIf($required || $dirty), 'required', 'int', Rule::in(BusinessType::getValues())],
+            'industry' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'region' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'loan_grade' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'business_type' => [Rule::requiredIf($required), 'required', 'int', Rule::in(BusinessType::getValues())],
         ];
     }
 }

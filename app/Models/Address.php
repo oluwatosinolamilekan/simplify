@@ -94,17 +94,15 @@ class Address extends Model
 
     public function getRules(bool $required = true)
     {
-        $dirty = $this->isDirty();
-
         return [
             'company_id' => ['required', 'int', 'exists:companies,id'],
-            'street' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
-            'city' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
-            'state' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
-            'country' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
-            'zip_code' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:125'],
-            'mail_code' => [Rule::requiredIf($required || $dirty), 'min:2', 'max:125'],
-            'timezone' => [Rule::requiredIf($required || $dirty), 'min:2', 'max:125'],
+            'street' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'city' => [Rule::requiredIf($required), 'string', 'min:2', 'max:125'],
+            'state' => [Rule::requiredIf($required), 'string', 'min:2', 'max:125'],
+            'country' => [Rule::requiredIf($required), 'string', 'min:2', 'max:125'],
+            'zip_code' => [Rule::requiredIf($required), 'string', 'min:2', 'max:125'],
+            'mail_code' => [Rule::requiredIf($required), 'min:2', 'max:125'],
+            'timezone' => [Rule::requiredIf($required), 'min:2', 'max:125'],
         ];
     }
 }

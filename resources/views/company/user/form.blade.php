@@ -1,12 +1,13 @@
-@extends('layouts.form', ['partial' => $partial, 'section' => 'companyUser'])
-@section('companyUser')
+@extends('layouts.form', ['partial' => $partial, 'section' => 'companyUserForm', 'titleSection' => 'companyUserFormTitle', 'nested' => $nested])
 
-    @if(!$nested)
-        <x-jet-section-title>
-            <x-slot name="title">{{ __('User Profile Information') }}</x-slot>
-            <x-slot name="description">{{ __('Fill account\'s profile information.')}}</x-slot>
-        </x-jet-section-title>
-    @endif
+@section('companyUserFormTitle')
+    <x-jet-section-title>
+        <x-slot name="title">{{ __('User Profile Information') }}</x-slot>
+        <x-slot name="description">{{ __('Fill account\'s profile information.')}}</x-slot>
+    </x-jet-section-title>
+@endsection
+
+@section('companyUserForm')
 
     <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
         <div class="grid grid-cols-6 gap-6">

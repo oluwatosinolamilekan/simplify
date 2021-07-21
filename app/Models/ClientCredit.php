@@ -119,22 +119,20 @@ class ClientCredit extends Model
 
     public function getRules(bool $required = true)
     {
-        $dirty = $this && $this->isDirty();
-
         return [
-            'client_id' => [Rule::requiredIf($required || $dirty), 'int', 'exists:clients,id'],
-            'approved' => [Rule::requiredIf($required || $dirty), 'boolean'],
-            'credit_rating' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
-            'credit_limit' => [Rule::requiredIf($required || $dirty), 'numeric'],
-            'debtor_limit' => [Rule::requiredIf($required || $dirty), 'numeric'],
-            'debtor_concentration' => [Rule::requiredIf($required || $dirty), 'numeric'],
-            'standard_terms' => [Rule::requiredIf($required || $dirty), 'numeric'],
-            'ineligible_days' => [Rule::requiredIf($required || $dirty), 'numeric'],
-            'report_charge' => [Rule::requiredIf($required || $dirty), 'boolean'],
-            'report_charge_amount' => [Rule::requiredIf($required || $dirty), 'numeric', 'min:0', 'max:10000'],
-            'ucc_date' => [Rule::requiredIf($required || $dirty), 'date'],
-            'ucc_date_2' => [Rule::requiredIf($required || $dirty), 'date'],
-            'ucc_expiring_date' => [Rule::requiredIf($required || $dirty), 'date'],
+            'client_id' => [Rule::requiredIf($required), 'int', 'exists:clients,id'],
+            'approved' => [Rule::requiredIf($required), 'boolean'],
+            'credit_rating' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'credit_limit' => [Rule::requiredIf($required), 'numeric'],
+            'debtor_limit' => [Rule::requiredIf($required), 'numeric'],
+            'debtor_concentration' => [Rule::requiredIf($required), 'numeric'],
+            'standard_terms' => [Rule::requiredIf($required), 'numeric'],
+            'ineligible_days' => [Rule::requiredIf($required), 'numeric'],
+            'report_charge' => [Rule::requiredIf($required), 'boolean'],
+            'report_charge_amount' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:10000'],
+            'ucc_date' => [Rule::requiredIf($required), 'date'],
+            'ucc_date_2' => [Rule::requiredIf($required), 'date'],
+            'ucc_expiring_date' => [Rule::requiredIf($required), 'date'],
         ];
     }
 }

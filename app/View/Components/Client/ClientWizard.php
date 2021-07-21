@@ -96,8 +96,8 @@ class ClientWizard extends CompanyComponent
         parent::initRelated();
 
         $this->analysis = $this->client->getRelatedInstanceOrNew('analysis');
-        $this->credit = $this->client->getRelatedInstanceOrNew('credit');
-        $this->fundingInstructions = $this->client->getRelatedInstanceOrNew('fundingInstructions');
+        $this->credit = $this->client->getRelatedInstanceOrNew('credit', true);
+        $this->fundingInstructions = $this->client->getRelatedInstanceOrNew('fundingInstructions', true);
     }
 
     /**
@@ -113,11 +113,15 @@ class ClientWizard extends CompanyComponent
      */
     public function getRules()
     {
+        /** Ignore client_id change as client_id is set by default */
+        $this->fundingInstructions->ignoreDirty(['client_id']);
+        $this->credit->ignoreDirty(['client_id']);
+
         return ValidationRules::merge(
             ValidationRules::forModel('company', $this->company),
             ValidationRules::forModel('client', $this->client),
-            ValidationRules::forModel('credit', $this->credit, false),
-            ValidationRules::forModel('fundingInstructions', $this->fundingInstructions, false)
+            ValidationRules::forModel('credit', $this->credit, $this->credit->isDirty()),
+            ValidationRules::forModel('fundingInstructions', $this->fundingInstructions, $this->fundingInstructions->isDirty())
         );
     }
 }

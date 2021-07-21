@@ -96,15 +96,13 @@ class ContactDetails extends Model
 
     public function getRules(bool $required = true)
     {
-        $dirty = $this->isDirty();
-
         return [
             'company_id' => ['required', 'int', 'exists:companies,id'],
-            'emails' => [Rule::requiredIf($required || $dirty), 'array'],
+            'emails' => [Rule::requiredIf($required), 'array'],
             'emails.*' => ['string', 'email', 'min:8', 'max:255'],
-            'phone_numbers' => [Rule::requiredIf($required || $dirty), 'array'],
+            'phone_numbers' => [Rule::requiredIf($required), 'array'],
             'phone_numbers.*' => ['string', 'phone_number:15'],
-            'notes' => [Rule::requiredIf($required || $dirty), 'array'],
+            'notes' => [Rule::requiredIf($required), 'array'],
             'notes.*' => ['string', 'min:2', 'max:125'],
         ];
     }

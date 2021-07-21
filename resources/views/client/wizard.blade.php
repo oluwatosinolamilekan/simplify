@@ -68,7 +68,7 @@
                             <x-slot name="description">{{ __('Fill funding instructions.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('client.funding-instructions.form', ['fundingInstructions' => $fundingInstructions, 'partial' => true])
+                        @include('client.funding-instructions.form', ['fundingInstructions' => $fundingInstructions, 'partial' => true, 'nested' => true])
                     </div>
                 </div>
 
@@ -83,12 +83,12 @@
                             <x-slot name="description">{{ __('Fill credit details.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('client.credit.form', ['credit' => $credit, 'partial' => true])
+                        @include('client.credit.form', ['credit' => $credit, 'partial' => true, 'nested' => true])
                     </div>
                 </div>
 
                 <!-- Actions -->
-                @include('components.forms.form-actions', ['delete' => $client->exists, 'disabled' => false])
+                @include('components.forms.form-actions', ['delete' => $client->exists])
 
             </form>
         </x-slot>
@@ -104,7 +104,7 @@
                         </x-jet-section-title>
 
                         <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <livewire:company.company-identity-form :identity="$identity" :partial="false"/>
+                            <livewire:company.company-identity-form :identity="$identity" :partial="false" :nested="true"/>
                         </div>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                         </x-jet-section-title>
 
                         <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <livewire:client.client-analysis-form :analysis="$analysis" :partial="false"/>
+                            <livewire:client.client-analysis-form :analysis="$analysis" :partial="false" :nested="true"/>
                         </div>
                     </div>
                 </div>
@@ -137,7 +137,7 @@
                         </x-jet-section-title>
 
                         <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <livewire:address.address-form :address="$address" :partial="false"/>
+                            <livewire:address.address-form :address="$address" :partial="false" :nested="true"/>
                         </div>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                         </x-jet-section-title>
 
                         <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <livewire:contact.contact-form :contact="$contact" :partial="false"/>
+                            <livewire:contact.contact-form :contact="$contact" :partial="false" :nested="true"/>
                         </div>
                     </div>
                 </div>
@@ -173,7 +173,7 @@
                         </x-jet-section-title>
 
                         <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false"/>
+                            <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false" :nested="true"/>
                         </div>
                     </div>
                 </div>
@@ -195,11 +195,15 @@
                                 <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
                                 <x-success-anchor wire:loading.attr="disabled"> + Add </x-success-anchor>
                             </div>
+
                             <livewire:company.user.company-user-form :company="$company" :partial="false" :nested="true"/>
                         </div>
                     </div>
                 </div>
-                <livewire:company.user.company-users-list :company="$company"/>
+                <div>
+                    <livewire:company.user.company-users-list :company="$company"/>
+                </div>
+
             @endif
         </x-slot>
     </x-tabs>
