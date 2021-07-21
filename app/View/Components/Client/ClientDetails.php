@@ -31,16 +31,13 @@ class ClientDetails extends CompanyComponent
     public function mount($client_id)
     {
         $this->client = Client::with([
+            'company',
             'analysis',
             'credit',
             'fundingInstructions',
         ])->findOrFail($client_id);
 
-        parent::mount($this->client->company_id);
-
-        $this->analysis = $this->client->analysis ?? new ClientAnalysis();
-        $this->fundingInstructions = $this->client->fundingInstructions ?? new ClientFundingInstructions();
-        $this->credit = $this->client->credit ?? new ClientCredit();
+        parent::mount($this->client->getRelatedInstanceOrNew('company'));
     }
 
     public function render()
@@ -48,14 +45,23 @@ class ClientDetails extends CompanyComponent
         return view('client.details');
     }
 
+    public function initRelated()
+    {
+        parent::initRelated();
+
+        $this->analysis = $this->client->getRelatedInstanceOrNew('analysis');
+        $this->credit = $this->client->getRelatedInstanceOrNew('credit');
+        $this->fundingInstructions = $this->client->getRelatedInstanceOrNew('fundingInstructions');
+    }
+
     public function getRules()
     {
         return ValidationRules::merge(
             parent::getRules(),
             ValidationRules::forModel('client', $this->client),
-            ValidationRules::forModel('clientAnalysis', $this->analysis, false),
-            ValidationRules::forModel('clientCredit', $this->credit, false),
+            ValidationRules::forModel('credit', $this->credit, false),
             ValidationRules::forModel('fundingInstructions', $this->fundingInstructions, false),
+            ValidationRules::forModel('analysis', $this->analysis, false),
         );
     }
 }

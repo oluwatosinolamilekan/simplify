@@ -122,6 +122,7 @@ class ClientCredit extends Model
         $dirty = $this && $this->isDirty();
 
         return [
+            'client_id' => [Rule::requiredIf($required || $dirty), 'int', 'exists:clients,id'],
             'approved' => [Rule::requiredIf($required || $dirty), 'boolean'],
             'credit_rating' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
             'credit_limit' => [Rule::requiredIf($required || $dirty), 'numeric'],

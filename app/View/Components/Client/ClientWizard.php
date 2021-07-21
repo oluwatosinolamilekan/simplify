@@ -17,37 +17,43 @@ use App\Models\ClientCredit;
 use App\Models\ClientFundingInstructions;
 use App\Support\Validation\ValidationRules;
 use App\View\Components\Company\CompanyComponent;
-use App\View\Components\Traits\ConfirmModelDelete;
-use App\View\Components\Traits\WithNested;
 use DB;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Throwable;
 
+/**
+ * Class ClientWizard.
+ */
 class ClientWizard extends CompanyComponent
 {
-    use ConfirmModelDelete;
-    use WithNested;
-
     public Client $client;
     public ClientAnalysis $analysis;
     public ClientCredit $credit;
     public ClientFundingInstructions $fundingInstructions;
 
+    /**
+     * @param  $client_id
+     * @throws Exception
+     */
     public function mount($client_id = null)
     {
         $this->client = Client::with([
+            'company',
             'analysis',
             'credit',
             'fundingInstructions',
         ])->findOrNew($client_id);
 
-        parent::mount($this->client->company_id);
-
-        $this->analysis = $this->client->analysis ?? new ClientAnalysis();
-        $this->fundingInstructions = $this->client->fundingInstructions ?? new ClientFundingInstructions();
-        $this->credit = $this->client->clientCredit ?? new ClientCredit();
+        parent::mount($this->client->getRelatedInstanceOrNew('company'));
     }
 
-    public function saveClient()
+    /**
+     * @throws Exception
+     */
+    public function save()
     {
         $this->validate();
 
@@ -78,39 +84,40 @@ class ClientWizard extends CompanyComponent
             DB::rollBack();
             $this->exceptionAlert($exception);
         }
+
+        $this->initRelated();
     }
 
-    public function saveContact()
+    /**
+     * @throws Exception
+     */
+    public function initRelated()
     {
-        $this->validate();
-        try {
-            DB::beginTransaction();
+        parent::initRelated();
 
-            $this->saveContactDetails();
-            $this->saveBankInformation();
-
-            DB::commit();
-
-            $this->successAlert();
-        } catch (Throwable $exception) {
-            DB::rollBack();
-            $this->exceptionAlert($exception);
-        }
+        $this->analysis = $this->client->getRelatedInstanceOrNew('analysis');
+        $this->credit = $this->client->getRelatedInstanceOrNew('credit');
+        $this->fundingInstructions = $this->client->getRelatedInstanceOrNew('fundingInstructions');
     }
 
+    /**
+     * @return Application|Factory|View
+     */
     public function render()
     {
         return view('client.wizard');
     }
 
+    /**
+     * @return array
+     */
     public function getRules()
     {
         return ValidationRules::merge(
-            parent::getRules(),
+            ValidationRules::forModel('company', $this->company),
             ValidationRules::forModel('client', $this->client),
-            ValidationRules::forModel('analysis', $this->analysis, false),
             ValidationRules::forModel('credit', $this->credit, false),
-            ValidationRules::forModel('fundingInstructions', $this->fundingInstructions, false),
+            ValidationRules::forModel('fundingInstructions', $this->fundingInstructions, false)
         );
     }
 }

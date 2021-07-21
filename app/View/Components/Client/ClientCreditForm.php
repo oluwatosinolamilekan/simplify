@@ -12,19 +12,19 @@ declare(strict_types=1);
 namespace App\View\Components\Client;
 
 use App\Models\ClientCredit;
-use Livewire\Component;
+use App\View\Components\ModelForm;
 
-class ClientCreditForm extends Component
+class ClientCreditForm extends ModelForm
 {
-    public ClientCredit $clientCredit;
+    public ClientCredit $credit;
+
+    public function getProperty()
+    {
+        return 'credit';
+    }
 
     public function render()
     {
-        return view('client.credit-form');
-    }
-
-    public function getRules()
-    {
-        return $this->clientCredit->getRules();
+        return view('client.credit.form');
     }
 }

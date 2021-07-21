@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\Role;
+use App\Enums\RoleTypesList;
 use App\Enums\Status;
 use Awobaz\Compoships\Compoships;
 use Carbon\Carbon;
@@ -155,11 +156,18 @@ class UserCompanyAccess extends Model
         $dirty = $this->isDirty();
 
         return [
-            'company_id' => ['int'],
+            'user_id' => [
+                'int', Rule::requiredIf($this->exists),
+                Rule::unique('user_company_access', 'user_id')->where(fn ($query) => $query->where('company_id', $this->company_id))->ignore($this->id),
+            ],
+            'company_id' => [
+                'int',  Rule::requiredIf($this->exists),
+                Rule::unique('user_company_access', 'company_id')->where(fn ($query) => $query->where('user_id', $this->company_id))->ignore($this->id),
+            ],
             'first_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
             'last_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
             'middle_name' => ['string', 'min:2', 'max:255'],
-            'role' => [Rule::requiredIf($required || $dirty), 'int'],
+            'role' => [Rule::requiredIf($required || $dirty), 'int', Rule::in(RoleTypesList::Company)],
             'status' => [Rule::requiredIf($required || $dirty), 'int', Rule::in([Status::Active, Status::NotActive])],
             'emails' => ['array'],
             'emails.*' => ['string', 'email', 'min:8', 'max:255'],

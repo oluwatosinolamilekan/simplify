@@ -96,6 +96,7 @@ class ClientAnalysis extends Model
         $dirty = $this->isDirty();
 
         return [
+            'client_id' => ['required', 'int', 'exists:clients,id'],
             'industry' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
             'region' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
             'loan_grade' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],

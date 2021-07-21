@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace App\View\Components\Traits;
 
-use App\View\Components\Common\Datatable;
+use App\View\Components\Common\Datatables\Datatable;
 use Throwable;
 use URL;
 
@@ -30,7 +30,7 @@ trait ConfirmModelDelete
     public function mountConfirmModelDelete()
     {
         $this->previous = URL::previous();
-        $this->listeners = array_merge($this->listeners, ['deleteConfirmed', 'deleteCancelled']);
+        $this->listeners = array_merge($this->listeners, ['deleteConfirmed' => 'deleteConfirmed', 'deleteCancelled' => 'deleteCancelled']);
     }
 
     /**

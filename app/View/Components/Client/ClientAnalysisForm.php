@@ -11,22 +11,20 @@ declare(strict_types=1);
 
 namespace App\View\Components\Client;
 
-use App\Enums\BusinessType;
 use App\Models\ClientAnalysis;
-use Illuminate\Validation\Rule;
-use Livewire\Component;
+use App\View\Components\ModelForm;
 
-class ClientAnalysisForm extends Component
+class ClientAnalysisForm extends ModelForm
 {
-    public ClientAnalysis $clientAnalysis;
+    public ClientAnalysis $analysis;
+
+    public function getProperty()
+    {
+        return 'analysis';
+    }
 
     public function render()
     {
-        return view('client.analysis-form');
-    }
-
-    public function getRules()
-    {
-        return $this->clientAnalysis->getRules();
+        return view('client.analysis.form');
     }
 }

@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace App\View\Components\Factor;
 
-use App\Models\Company;
 use App\Models\Factor;
 use App\View\Components\Company\CompanyComponent;
 use App\View\Components\Traits\ConfirmModelDelete;
@@ -21,13 +20,12 @@ class FactorDetails extends CompanyComponent
     use ConfirmModelDelete;
 
     public Factor $factor;
-    public Company $company;
 
     public function mount($factor_id)
     {
-        $this->factor = Factor::with(['subscriptionPlan'])->findOrFail($factor_id);
+        $this->factor = Factor::with(['company', 'subscriptionPlan'])->findOrFail($factor_id);
 
-        parent::mount($this->factor->company_id);
+        parent::mount($this->factor->company);
     }
 
     public function render()

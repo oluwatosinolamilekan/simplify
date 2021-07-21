@@ -20,15 +20,6 @@ return [
       0 => 'BenSampo\\Enum\\EnumServiceProvider',
     ],
   ],
-  'devaweb/bladetailui' => [
-    'providers' => [
-      0 => 'Devaweb\\BladeTailUI\\BladeTailUIServiceProvider',
-    ],
-    'aliases' => [
-    ],
-    'dont-discover' => [
-    ],
-  ],
   'facade/ignition' => [
     'providers' => [
       0 => 'Facade\\Ignition\\IgnitionServiceProvider',

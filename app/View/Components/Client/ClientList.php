@@ -103,7 +103,7 @@ class ClientList extends Datatable
     public function confirmItemDeletion($id)
     {
         $this->client = Client::findOrFail($id);
-        $this->confirmDelete();
+        $this->confirmDeletion();
     }
 
     public function getDeleteModel()

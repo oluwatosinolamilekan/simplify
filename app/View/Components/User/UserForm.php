@@ -14,13 +14,11 @@ namespace App\View\Components\User;
 use App\Enums\Role;
 use App\Enums\Status;
 use App\Models\User;
-use App\View\Components\Component;
-use App\View\Components\Traits\ConfirmModelDelete;
+use App\Support\Validation\ValidationRules;
+use Livewire\Component;
 
 class UserForm extends Component
 {
-    use ConfirmModelDelete;
-
     public User $user;
 
     public function mount($user_id = null)
@@ -49,7 +47,7 @@ class UserForm extends Component
 
     public function getRules()
     {
-        return $this->user->getRules();
+        return ValidationRules::forModel('user', $this->user)->getRules();
     }
 
     public function getDeleteModel()

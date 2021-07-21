@@ -83,7 +83,6 @@ class ClientFundingInstructions extends Model
      */
     protected $casts = [
         'warning_notes' => 'array',
-        'funding_notes' => 'array',
     ];
 
     /**
@@ -96,10 +95,9 @@ class ClientFundingInstructions extends Model
         'fuel_advance_fee' => 0,
         'fuel_advance_max_rate' => 0,
         'allow_fundings' => true,
-        'allow_reserve_releases' => true,
+        'allow_reserve_release' => true,
         'send_email_remittances' => true,
         'warning_notes' => '[]',
-        'funding_notes' => '[]',
     ];
 
     /**
@@ -115,6 +113,7 @@ class ClientFundingInstructions extends Model
         $dirty = $this && $this->isDirty();
 
         return [
+            'client_id' => [Rule::requiredIf($required || $dirty), 'int', 'exists:clients,id'],
             'generate_invoice' => [Rule::requiredIf($required || $dirty), 'boolean'],
             'send_invoice' => [Rule::requiredIf($required || $dirty), 'boolean'],
             'efs_available' => [Rule::requiredIf($required || $dirty), 'boolean'],
@@ -122,13 +121,11 @@ class ClientFundingInstructions extends Model
             'fuel_advance_max_rate' => ['numeric', 'min:0', 'max:100'],
             'max_invoice_amount' => [Rule::requiredIf($required || $dirty), 'numeric', 'min:0', 'max:10000'],
             'allow_fundings' => [Rule::requiredIf($required || $dirty), 'boolean'],
-            'allow_reserve_releases' => [Rule::requiredIf($required || $dirty), 'boolean'],
+            'allow_reserve_release' => [Rule::requiredIf($required || $dirty), 'boolean'],
             'funding_limit' => [Rule::requiredIf($required || $dirty), 'numeric', 'min:0', 'max:10000'],
-            'funding_notes' => ['array'],
-            'funding_notes.*' => ['string', 'min:2', 'max:255'],
             'outsource_collections' => [Rule::requiredIf($required || $dirty), 'boolean'],
             'send_email_remittances' => [Rule::requiredIf($required || $dirty), 'boolean'],
-            'schedule_submission_email' => ['string', 'email', 'min:2', 'max:255'],
+            'schedule_submission_email' => [Rule::requiredIf($required || $dirty), 'string', 'email', 'min:2', 'max:255'],
             'warning_notes' => ['array'],
             'warning_notes.*' => ['string', 'min:2', 'max:255'],
         ];

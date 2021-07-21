@@ -12,19 +12,19 @@ declare(strict_types=1);
 namespace App\View\Components\Company;
 
 use App\Models\CompanyIdentity;
-use Livewire\Component;
+use App\View\Components\ModelForm;
 
-class CompanyIdentityForm extends Component
+class CompanyIdentityForm extends ModelForm
 {
-    public CompanyIdentity $companyIdentity;
+    public CompanyIdentity $identity;
+
+    public function getProperty()
+    {
+        return 'identity';
+    }
 
     public function render()
     {
         return view('company.identity.form');
-    }
-
-    public function getRules()
-    {
-        return $this->companyIdentity->getRules();
     }
 }

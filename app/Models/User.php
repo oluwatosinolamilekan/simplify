@@ -201,7 +201,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
             'last_name' => ['string', 'min:2', 'max:255'],
             'email' => [
                 Rule::requiredIf($required || $dirty), 'string', 'email', 'min:8', 'max:255',
-                $this->exists && $this->id ? Rule::unique('users', 'email')->ignore($this->id) : 'unique:users,email',
+                Rule::unique('users', 'email')->ignore($this->id),
             ],
             'role' => [Rule::requiredIf($required || $dirty), 'int'],
             'status' => [Rule::requiredIf($required || $dirty), 'int', Rule::in([Status::Active, Status::NotActive])],

@@ -12,13 +12,10 @@ declare(strict_types=1);
 namespace App\View\Components\Client;
 
 use App\Models\ClientFundingInstructions;
-use App\View\Components\Traits\WithParent;
-use Livewire\Component;
+use App\View\Components\ModelForm;
 
-class ClientFundingInstructionsForm extends Component
+class ClientFundingInstructionsForm extends ModelForm
 {
-    use WithParent;
-
     public ClientFundingInstructions $fundingInstructions;
 
     public ?string $warningNote = null;
@@ -31,16 +28,11 @@ class ClientFundingInstructionsForm extends Component
 
     public function render()
     {
-        return view('client.funding-instructions-form');
+        return view('client.funding-instructions.form');
     }
 
-    public function addNote()
+    public function getProperty()
     {
-        \Log::debug('CLICK');
-    }
-
-    public function rules()
-    {
-        return $this->fundingInstructions->getRules();
+        return 'fundingInstructions';
     }
 }

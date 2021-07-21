@@ -1,4 +1,5 @@
-
+@extends('layouts.form', ['partial' => $partial, 'section' => 'fundingInstructions'])
+@section('fundingInstructions')
 <div class="mt-5 md:mt-0 md:col-span-2">
     <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
         <div class="grid grid-cols-6 gap-6">
@@ -54,8 +55,8 @@
 
             <!-- Allow Reserve Releases -->
             <div class="col-span-3 sm:col-span-3">
-                <x-jet-label for="allow_reserve_releases" value="{{ __('Allow Reserve Releases') }}"/>
-                <x-forms.toggle-input id="allow_reserve_releases" wire:model="fundingInstructions.allow_reserve_releases"/>
+                <x-jet-label for="allow_reserve_releases" value="{{ __('Allow Reserve Release') }}"/>
+                <x-forms.toggle-input id="allow_reserve_releases" wire:model="fundingInstructions.allow_reserve_release"/>
                 <x-jet-input-error for="fundingInstructions.allow_reserve_releases" class="mt-3" />
             </div>
 
@@ -71,6 +72,13 @@
                 <x-jet-label for="send_email_remittances" value="{{ __('Send Email Remittances') }}"/>
                 <x-forms.toggle-input id="send_email_remittances" wire:model="fundingInstructions.send_email_remittances"/>
                 <x-jet-input-error for="fundingInstructions.send_email_remittances" class="mt-3" />
+            </div>
+
+            <!-- Outsource collections -->
+            <div class="col-span-3 sm:col-span-3">
+                <x-jet-label for="outsource_collections" value="{{ __('Outsource Collections') }}"/>
+                <x-forms.toggle-input id="outsource_collections" wire:model="fundingInstructions.outsource_collections"/>
+                <x-jet-input-error for="fundingInstructions.outsource_collections" class="mt-3" />
             </div>
 
             <!-- Schedule Submission Email -->
@@ -108,3 +116,4 @@
         </div>
     </div>
 </div>
+@endsection

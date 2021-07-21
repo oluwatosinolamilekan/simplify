@@ -11,10 +11,13 @@ declare(strict_types=1);
 
 namespace App\View\Components;
 
+use App\View\Components\Traits\ConfirmModelDelete;
 use Livewire\Component as BaseComponent;
 
 class Component extends BaseComponent
 {
+    use ConfirmModelDelete;
+
     /* Realtime validation */
 
     public function updated($property)

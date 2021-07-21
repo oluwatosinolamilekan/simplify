@@ -99,12 +99,13 @@ class ContactDetails extends Model
         $dirty = $this->isDirty();
 
         return [
-            'contact.emails' => [Rule::requiredIf($required || $dirty), 'array'],
-            'contact.emails.*' => ['string', 'email', 'min:8', 'max:255'],
-            'contact.phone_numbers' => [Rule::requiredIf($required || $dirty), 'array'],
-            'contact.phone_numbers.*' => ['string', 'phone_number:15'],
-            'contact.notes' => [Rule::requiredIf($required || $dirty), 'array'],
-            'contact.notes.*' => ['string', 'min:2', 'max:125'],
+            'company_id' => ['required', 'int', 'exists:companies,id'],
+            'emails' => [Rule::requiredIf($required || $dirty), 'array'],
+            'emails.*' => ['string', 'email', 'min:8', 'max:255'],
+            'phone_numbers' => [Rule::requiredIf($required || $dirty), 'array'],
+            'phone_numbers.*' => ['string', 'phone_number:15'],
+            'notes' => [Rule::requiredIf($required || $dirty), 'array'],
+            'notes.*' => ['string', 'min:2', 'max:125'],
         ];
     }
 }

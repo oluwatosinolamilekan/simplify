@@ -27,7 +27,7 @@
             <div class="col-span-3 sm:col-span-3">
                 <x-jet-label for="max_invoice_amount" value="{{ __('Max Invoice Amount') }}" />
                 <span class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                    {{ $client->max_invoice_amount }}
+                    {{ $fundingInstructions->max_invoice_amount }}
                 </span>
             </div>
 
@@ -45,7 +45,7 @@
             <div class="col-span-3 sm:col-span-3">
                 <x-jet-label for="fuel_advance_fee" value="{{ __('Fuel Advance Fee') }}"/>
                 <span class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                    {{ $client->fuel_advance_fee }}
+                    {{ $fundingInstructions->fuel_advance_fee }}
                 </span>
             </div>
 
@@ -53,7 +53,7 @@
             <div class="col-span-3 sm:col-span-3">
                 <x-jet-label for="fuel_advance_max_rate" value="{{ __('Fuel Advance Max Rate') }}" />
                 <span class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                    {{ $client->fuel_advance_max_rate }}
+                    {{ $fundingInstructions->fuel_advance_max_rate }}
                 </span>
             </div>
 
@@ -81,7 +81,7 @@
             <div class="col-span-3 sm:col-span-3">
                 <x-jet-label for="funding_limit" value="{{ __('Funding Limit') }}" />
                 <span class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                    {{ $client->funding_limit }}
+                    {{ $fundingInstructions->funding_limit }}
                 </span>
             </div>
 
@@ -99,7 +99,7 @@
             <div class="col-span-6 sm:col-span-6">
                 <x-jet-label for="schedule_submission_email" value="{{ __('Schedule Submission Email') }}" />
                 <span class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                    {{ $client->schedule_submission_email }}
+                    {{ $fundingInstructions->schedule_submission_email }}
                 </span>
             </div>
 

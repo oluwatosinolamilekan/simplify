@@ -21,9 +21,16 @@ use App\Models\User;
 use App\Models\UserCompanyAccess;
 use App\Support\Validation\ValidationRules;
 use App\View\Components\Component;
+use App\View\Components\Traits\WithNested;
+use Exception;
 
+/**
+ * Class CompanyComponent.
+ */
 class CompanyComponent extends Component
 {
+    use WithNested;
+
     public Company $company;
     public Address $address;
     public ContactDetails $contact;
@@ -32,67 +39,47 @@ class CompanyComponent extends Component
     public ?User $user;
     public ?UserCompanyAccess $userCompanyAccess;
 
-    public function mount($company_id)
+    /**
+     * @param Company $company
+     * @throws Exception
+     */
+    public function mount(Company $company)
     {
-        $this->company = Company::with([
-            'identity',
-            'address',
-            'contactDetails',
-            'bankInformation',
-        ])->findOrNew($company_id);
+        $this->company = $company;
+        $this->company->load(['identity', 'address', 'contactDetails', 'bankInformation']);
 
-        $this->identity = $this->company->identity ?? new CompanyIdentity();
-        $this->address = $this->company->address ?? new Address();
-        $this->contact = $this->company->contactDetails ?? new ContactDetails();
-        $this->bankInformation = $this->company->bankInformation ?? new BankInformation();
+        $this->initRelated();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function initRelated()
+    {
+        $this->identity = $this->company->getRelatedInstanceOrNew('identity');
+        $this->address = $this->company->getRelatedInstanceOrNew('address');
+        $this->contact = $this->company->getRelatedInstanceOrNew('contactDetails');
+        $this->bankInformation = $this->company->getRelatedInstanceOrNew('bankInformation');
 
         $this->user = new User();
         $this->userCompanyAccess = new UserCompanyAccess(['role' => Role::Administrator]);
     }
 
-    public function saveAddressInformation()
+    /**
+     * Saved hook for userCompanyAccess model
+     * Refreshes users list and user and userCompanyAccess models.
+     */
+    public function savedUserCompanyAccess()
     {
-        if ($this->address->isDirty()) {
-            $this->company->address()->save($this->address);
-        }
+        $this->emit('refreshLivewireDatatable');
+
+        $this->user = new User();
+        $this->userCompanyAccess = new UserCompanyAccess(['role' => Role::Administrator]);
     }
 
-    public function saveBankInformation()
-    {
-        if ($this->bankInformation->isDirty()) {
-            $this->company->bankInformation()->save($this->bankInformation);
-        }
-    }
-
-    public function saveCompanyIdentity()
-    {
-        if ($this->identity->isDirty()) {
-            $this->company->identity()->save($this->identity);
-        }
-    }
-
-    public function saveContactDetails()
-    {
-        if ($this->contact->isDirty()) {
-            $this->company->contactDetails()->save($this->contact);
-        }
-    }
-
-    public function saveUser()
-    {
-        /* If user is fresh new record ("create" scenario) - try to find user with given email first */
-        if (! $this->user->exists) {
-            $this->user = User::firstOrNew(['email' => $this->user->email], ['role' => Role::CompanyUser]);
-        }
-
-        $this->user->save();
-
-        $this->userCompanyAccess->user()->associate($this->user);
-        $this->userCompanyAccess->company()->associate($this->company);
-
-        $this->userCompanyAccess->save();
-    }
-
+    /**
+     * @return array
+     */
     public function getRules()
     {
         /*
@@ -104,13 +91,14 @@ class CompanyComponent extends Component
         $userRules = $this->user->getRules(false);
         $userRules['email'] = ['required', 'string', 'email', 'min:8', 'max:255'];
 
-        $rules = ValidationRules::merge(
+        return ValidationRules::merge(
             ValidationRules::forModel('company', $this->company, true),
             ValidationRules::forModel('identity', $this->identity, false),
             ValidationRules::forModel('userCompanyAccess', $this->userCompanyAccess, false),
+            ValidationRules::forModel('bankInformation', $this->bankInformation, false),
+            ValidationRules::forModel('address', $this->address, false),
+            ValidationRules::forModel('contact', $this->contact, false),
             ValidationRules::forProperty('user', $userRules)
         );
-
-        return $rules;
     }
 }

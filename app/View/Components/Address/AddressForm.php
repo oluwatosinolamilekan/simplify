@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace App\View\Components\Address;
 
 use App\Models\Address;
-use Livewire\Component;
+use App\View\Components\ModelForm;
 
-class AddressForm extends Component
+class AddressForm extends ModelForm
 {
     public Address $address;
 
@@ -23,8 +23,8 @@ class AddressForm extends Component
         return view('address.form');
     }
 
-    public function getRules()
+    public function getProperty()
     {
-        return $this->address->getRules();
+        return 'address';
     }
 }

@@ -1,7 +1,13 @@
-[x-cloak=""] { display: none; }
+[x-cloak] { display: none; }
 
 html:not(.dark) {
     background-color: white !important;
+}
+
+a[disabled], a.disabled, a:disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    color: gray;
 }
 
 .login .guest-layout-intro-title {

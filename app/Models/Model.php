@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -146,7 +148,7 @@ abstract class Model extends EloquentModel
     public function isDirty($attributes = [])
     {
         if (! $this->exists) {
-            return ! empty(array_filter($this->getDirty()));
+            return ! empty(array_filter($this->getDirty(), fn ($item) => $item !== null));
         }
 
         return parent::isDirty($attributes);
@@ -172,5 +174,31 @@ abstract class Model extends EloquentModel
     public function getRules(bool $required = true)
     {
         return [];
+    }
+
+    public function getRelatedInstanceOrNew(string $relation)
+    {
+        if (! $this->hasRelation($relation)) {
+            throw new \Exception("Unknown relation {$relation} for model of class {$this}");
+        }
+
+        if ($this->relationLoaded($relation) && $this->{$relation}) {
+            return $this->{$relation};
+        }
+
+        /** @var Relation $relation */
+        $relation = $this->$relation();
+
+        if ($relation instanceof BelongsTo) {
+            $instance = $relation->newModelInstance();
+        }
+
+        if ($relation instanceof HasOne) {
+            $instance = $relation->newRelatedInstanceFor($this);
+        }
+
+        $instance->syncOriginal(); // prevent making model state dirty by setting foreign key
+
+        return $instance;
     }
 }

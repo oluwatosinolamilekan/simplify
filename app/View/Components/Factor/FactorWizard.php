@@ -14,23 +14,34 @@ namespace App\View\Components\Factor;
 use App\Models\Factor;
 use App\Support\Validation\ValidationRules;
 use App\View\Components\Company\CompanyComponent;
-use App\View\Components\Traits\ConfirmModelDelete;
 use DB;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Throwable;
 
+/**
+ * Class FactorWizard.
+ */
 class FactorWizard extends CompanyComponent
 {
-    use ConfirmModelDelete;
-
     public Factor $factor;
 
+    /**
+     * @param  $factor_id
+     * @throws Exception
+     */
     public function mount($factor_id = null)
     {
-        $this->factor = Factor::with(['subscriptionPlan'])->findOrNew($factor_id);
+        $this->factor = Factor::with(['company', 'subscriptionPlan'])->findOrNew($factor_id);
 
-        parent::mount($this->factor->company_id);
+        parent::mount($this->factor->getRelatedInstanceOrNew('company'));
     }
 
+    /**
+     * @throws Exception
+     */
     public function save()
     {
         $this->validate();
@@ -42,51 +53,36 @@ class FactorWizard extends CompanyComponent
 
             $this->company->save();
 
-            if ($this->contact->isDirty()) {
-                $this->saveContactDetails();
-            }
-
-            if ($this->address->isDirty()) {
-                $this->saveAddressInformation();
-            }
-
-            if ($this->bankInformation->isDirty()) {
-                $this->saveBankInformation();
-            }
-
-            if (! $this->factor->exists) {
-                $this->saveUser();
-            }
-
             $this->factor->company()->associate($this->company);
             $this->factor->save();
 
             DB::commit();
 
             $this->successAlert();
-
-            $this->redirect(route('factors.view', ['factor_id' => $this->factor->id]));
         } catch (Throwable $exception) {
             DB::rollBack();
             $this->exceptionAlert($exception);
         }
+
+        $this->initRelated();
     }
 
+    /**
+     * @return Application|Factory|View
+     */
     public function render()
     {
         return view('factor.wizard');
     }
 
+    /**
+     * @return array
+     */
     public function getRules()
     {
         return ValidationRules::merge(
-            parent::getRules(),
+            ValidationRules::forModel('company', $this->company),
             ValidationRules::forModel('factor', $this->factor)
         );
-    }
-
-    public function getModel()
-    {
-        return $this->factor ?? null;
     }
 }

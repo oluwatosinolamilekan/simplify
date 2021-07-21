@@ -232,8 +232,11 @@ class Client extends Model
     public function getRules(bool $required = true)
     {
         return [
-            'name' => ['string', 'min:2', 'max:255'],
-            'ref_code' => [Rule::requiredIf($required), 'string', 'min:2', 'max:125'],
+            'name' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'ref_code' => [
+                Rule::requiredIf($required), 'string', 'min:2', 'max:125',
+                Rule::unique('clients', 'ref_code')->ignore($this->id),
+            ],
             'office' => ['string', 'min:2', 'max:255'],
             'status' => [Rule::requiredIf($required), 'int', Rule::in(StatusTypesList::Client)],
             'type' => [Rule::requiredIf($required), 'int', Rule::in(ClientType::getValues())],

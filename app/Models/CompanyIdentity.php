@@ -83,6 +83,7 @@ class CompanyIdentity extends Model
         $dirty = $this->isDirty();
 
         return [
+            'company_id' => ['required', 'int', 'exists:companies,id'],
             'company_code' => [
                 'string', 'min:2', 'max:255',
                 $this->exists && $this->id ? Rule::unique('company_identities', 'company_code')->ignore($this->id) : 'unique:company_identities,company_code',

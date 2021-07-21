@@ -46,26 +46,10 @@
                         <div class="mt-5 md:mt-0 md:col-span-2" >
                             <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
                                 <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <a class="p-4 cursor-pointer bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                    + Add
-                                </a>
+                                <x-success-anchor> + Add </x-success-anchor>
                             </div>
 
-                            <form wire:submit.prevent="saveFundingInstructions">
-
-                                @include('client.funding-instructions.form', ['fundingInstructions' => $fundingInstructions])
-
-                                <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                    <!-- TODO @Sofia: Clicking this button should collapse the form above -->
-                                    <a class="p-4 cursor-pointer bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                        Cancel
-                                    </a>
-                                    <x-success-button wire:loading.attr="disabled">
-                                        {{ __('Save') }}
-                                    </x-success-button>
-                                </div>
-
-                            </form>
+                            <livewire:client.client-funding-instructions-form :fundingInstructions="$fundingInstructions" :partial="false"/>
                         </div>
                     @endif
                 </div>
@@ -78,7 +62,7 @@
                 <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
 
                     <x-jet-section-title>
-                        <x-slot name="title">{{ __('Client Credit') }}</x-slot>
+                        <x-slot name="title">{{ __('Client Credit') }} </x-slot>
                         <x-slot name="description">{{ __('Client Credit Information.') }}</x-slot>
                     </x-jet-section-title>
 
@@ -88,26 +72,10 @@
                         <div class="mt-5 md:mt-0 md:col-span-2" >
                             <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
                                 <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <a class="p-4 cursor-pointer bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                    + Add
-                                </a>
+                                <x-success-anchor> + Add </x-success-anchor>
                             </div>
 
-                            <form wire:submit.prevent="saveCredit">
-
-                                @include('client.credit.form', ['credit' => $credit])
-
-                                <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                    <!-- TODO @Sofia: Clicking this button should collapse the form above -->
-                                    <a class="p-4 cursor-pointer bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                        Cancel
-                                    </a>
-                                    <x-success-button wire:loading.attr="disabled">
-                                        {{ __('Save') }}
-                                    </x-success-button>
-                                </div>
-
-                            </form>
+                            <livewire:client.client-credit-form :credit="$credit" :partial="false"/>
                         </div>
                     @endif
                 </div>
@@ -136,21 +104,7 @@
                                 </a>
                             </div>
 
-                            <form wire:submit.prevent="saveIdentity">
-
-                                @include('client.identity.form', ['identity' => $identity])
-
-                                <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                    <!-- TODO @Sofia: Clicking this button should collapse the form above -->
-                                    <a class="p-4 cursor-pointer bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                        Cancel
-                                    </a>
-                                    <x-success-button wire:loading.attr="disabled">
-                                        {{ __('Save') }}
-                                    </x-success-button>
-                                </div>
-
-                            </form>
+                            <livewire:company.company-identity-form :identity="$identity" :partial="false"/>
                         </div>
                     @endif
 
@@ -176,22 +130,7 @@
                                     + Add
                                 </a>
                             </div>
-
-                            <form wire:submit.prevent="saveAnalysis">
-
-                                @include('client.analysis.form', ['analysis' => $analysis])
-
-                                <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                    <!-- TODO @Sofia: Clicking this button should collapse the form above -->
-                                    <a class="p-4 cursor-pointer bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                        Cancel
-                                    </a>
-                                    <x-success-button wire:loading.attr="disabled">
-                                        {{ __('Save') }}
-                                    </x-success-button>
-                                </div>
-
-                            </form>
+                            <livewire:client.client-analysis-form :analysis="$analysis" :partial="false"/>
                         </div>
                     @endif
                 </div>
@@ -209,31 +148,15 @@
                     </x-jet-section-title>
 
                     @if ($address->exists)
-                        @include('address.details', ['address' => $client->company->address])
+                        @include('address.details', ['address' => $address])
                     @else
                         <div class="mt-5 md:mt-0 md:col-span-2" >
                             <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
                                 <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <a class="p-4 cursor-pointer bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                    + Add
-                                </a>
+                                <x-success-anchor> + Add </x-success-anchor>
                             </div>
 
-                            <form wire:submit.prevent="saveAddressInformation">
-
-                                @include('address.form', ['address' => $address])
-
-                                <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                    <!-- TODO @Sofia: Clicking this button should collapse the form above -->
-                                    <a class="p-4 cursor-pointer bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                        Cancel
-                                    </a>
-                                    <x-success-button wire:loading.attr="disabled">
-                                        {{ __('Save') }}
-                                    </x-success-button>
-                                </div>
-
-                            </form>
+                            <livewire:address.address-form :address="$address" :partial="false"/>
                         </div>
                     @endif
                 </div>
@@ -254,26 +177,10 @@
                         <div class="mt-5 md:mt-0 md:col-span-2" >
                             <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
                                 <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <a class="p-4 cursor-pointer bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                    + Add
-                                </a>
+                                <x-success-anchor> + Add </x-success-anchor>
                             </div>
 
-                            <form wire:submit.prevent="saveContactDetails">
-
-                                @include('contact.form', ['contact' => $contact])
-
-                                <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                    <!-- TODO @Sofia: Clicking this button should collapse the form above -->
-                                    <a class="p-4 cursor-pointer bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                        Cancel
-                                    </a>
-                                    <x-jet-button class="text-center xl:mr-3 align-top bg-theme-18 border-theme-18 focus:ring-theme-18" wire:loading.attr="disabled">
-                                        {{ __('Save') }}
-                                    </x-jet-button>
-                                </div>
-
-                            </form>
+                            <livewire:contact.contact-form :contact="$contact" :partial="false"/>
                         </div>
                     @endif
                 </div>
@@ -297,25 +204,9 @@
                         <div class="mt-5 md:mt-0 md:col-span-2" >
                             <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
                                 <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <a class="p-4 cursor-pointer bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                    + Add
-                                </a>
+                                <x-success-anchor> + Add </x-success-anchor>
                             </div>
-                            <form wire:submit.prevent="saveBankInformation">
-
-                                @include('bank-information.form', ['bankInformation' => $bankInformation])
-
-                                <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                    <!-- TODO @Sofia: Clicking this button should collapse the form above -->
-                                    <a class="p-4 cursor-pointer bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                        Cancel
-                                    </a>
-                                    <x-success-button wire:loading.attr="disabled">
-                                        {{ __('Save') }}
-                                    </x-success-button>
-                                </div>
-
-                            </form>
+                            <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false"/>
                         </div>
                     @endif
                 </div>
@@ -336,13 +227,13 @@
     <!-- Actions -->
     <div class="flex items-center justify-end px-4 py-3 text-right sm:px-6">
 
-        <a href="{{route('clients.update', $this->client->id)}}" class="bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition">
+        <x-success-anchor href="{{route('clients.update', $this->client->id)}}">
             {{ __('Update') }}
-        </a>
+        </x-success-anchor>
 
-        <x-jet-danger-button wire:click="confirmDeletion" class="bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" wire:loading.attr="disabled">
+        <x-danger-button wire:click="confirmDeletion" wire:loading.attr="disabled">
             {{ __('Delete') }}
-        </x-jet-danger-button>
+        </x-danger-button>
     </div>
 
 </div>

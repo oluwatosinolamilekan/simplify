@@ -1,40 +1,29 @@
+@extends('layouts.form', ['partial' => $partial, 'section' => 'companyUser'])
+@section('companyUser')
 
-<x-slot name="header">
-    {{ __('User Details') }}
-</x-slot>
-<x-jet-form-section submit="save" class="mt-6">
-    <x-slot name="title">
-        @if($userCompanyAccess->exists) {{__('Update')}} @else {{ __('Create') }} @endif {{ __(' User Account') }}
-    </x-slot>
+    @if(!$nested)
+        <x-jet-section-title>
+            <x-slot name="title">{{ __('User Profile Information') }}</x-slot>
+            <x-slot name="description">{{ __('Fill account\'s profile information.')}}</x-slot>
+        </x-jet-section-title>
+    @endif
 
-    <x-slot name="description">
-        {{ __('Fill account\'s profile information and email address.') }}
-    </x-slot>
+    <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
+        <div class="grid grid-cols-6 gap-6">
+            @include('company.user.partials.user-form', ['user' => $user, 'editable' => !$userCompanyAccess->exists])
+        </div>
 
-    <x-slot name="form">
-        @include('company.user.partials.user-form', ['user' => $user])
+        <div class="col-span-6 sm:col-span-6">
+            <x-jet-input-error for="userCompanyAccess.user_id" class="mt-3" />
+            <x-jet-input-error for="userCompanyAccess.company_id" class="mt-3" />
+        </div>
 
-        <div class="border-t border-gray-200 col-span-6 sm:col-span-6 "></div>
+        <x-jet-section-border />
 
-        @include('company.user.partials.company-access-form', ['userCompanyAccess' => $userCompanyAccess])
-    </x-slot>
+        <div class="grid grid-cols-6 gap-6">
+            @include('company.user.partials.company-access-form', ['userCompanyAccess' => $userCompanyAccess])
+        </div>
 
-    <!-- Actions -->
-    <x-slot name="actions">
+    </div>
 
-        <x-jet-action-message class="mr-3" on="saved">
-            {{ __('Saved.') }}
-        </x-jet-action-message>
-
-        <x-success-button wire:loading.attr="disabled">
-            {{ __('Save') }}
-        </x-success-button>
-
-        @if($user->exists)
-            <x-jet-danger-button wire:click="confirmDeletion" class="text-center xl:mr-3 align-top border-theme-18 focus:ring-theme-18" wire:loading.attr="disabled">
-                {{ __('Delete') }}
-            </x-jet-danger-button>
-        @endif
-    </x-slot>
-</x-jet-form-section>
-
+@endsection

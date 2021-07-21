@@ -182,12 +182,12 @@ class Factor extends Model
     public function getRules(bool $required = true)
     {
         return [
-            'factor.ref_code' => [
+            'ref_code' => [
                 Rule::requiredIf($required), 'string', 'min:2', 'max:125',
                 $this->exists && $this->id ? Rule::unique('factors', 'ref_code')->ignore($this->id) : 'unique:factors,ref_code',
             ],
-            'factor.status' => [Rule::requiredIf($required), 'int', Rule::in(StatusTypesList::Factor)],
-            'factor.subscription_plan_id' => [Rule::requiredIf($required), 'exists:subscription_plans,id'],
+            'status' => [Rule::requiredIf($required), 'int', Rule::in(StatusTypesList::Factor)],
+            'subscription_plan_id' => [Rule::requiredIf($required), 'exists:subscription_plans,id'],
         ];
     }
 }

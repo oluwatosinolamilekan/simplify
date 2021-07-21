@@ -23,9 +23,9 @@
     <!-- Role -->
     <div class="col-span-6 sm:col-span-3">
         <x-jet-label for="role" value="{{ __('Role') }}" />
-        <select id="role" wire:model="userCompanyAccess.role" @if (count($roles) == 1) disabled @endif class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-            @foreach($roles as $role)
-            <option value="{{$role}}" @if ($userCompanyAccess && $userCompanyAccess->role && $userCompanyAccess->role->is($role)) selected @endif>
+        <select id="role" wire:model="userCompanyAccess.role" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+            @foreach(\App\Enums\RoleTypesList::Company as $role)
+            <option value="{{$role}}" @if ($userCompanyAccess->role && $userCompanyAccess->role->is($role)) selected @endif>
                 {{\App\Enums\Role::fromValue($role)->description}}
             </option>
             @endforeach
@@ -48,14 +48,14 @@
     </div>
 
     <!-- Emails -->
-    <div class="col-span-6 sm:col-span-4">
+    <div class="col-span-6 sm:col-span-3">
         <x-jet-label for="user-access-emails" value="{{ __('Additional Emails') }}" />
         <x-jet-input id="user-access-emails" type="text" class="mt-1 block w-full" wire:model="userCompanyAccess.emails" />
         <x-jet-input-error for="userCompanyAccess.emails" class="mt-3" />
     </div>
 
     <!-- Phone Numbers -->
-    <div class="col-span-6 sm:col-span-4">
+    <div class="col-span-6 sm:col-span-3">
         <x-jet-label for="user-access-phone_numbers" value="{{ __('Phone Numbers') }}" />
         <x-jet-input id="user-access-phone_numbers" type="text" class="mt-1 block w-full" wire:model="userCompanyAccess.phone_numbers"/>
         <x-jet-input-error for="userCompanyAccess.phone_numbers" class="mt-3" />
