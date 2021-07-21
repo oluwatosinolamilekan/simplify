@@ -14,6 +14,15 @@ Cypress.Commands.add('userLogout' , (user) => {
     cy.get('a[id="dropdown_logout"]').click();
 })
 
+//When input is invalid validation message shows up
+//cy.validationError(1,'#input','Please fill out input field');
+Cypress.Commands.add('validationError',(num, selector,label) => {
+    cy.get('input:invalid').should('have.length', num)
+    cy.get(selector).then(($input) => {
+        expect($input[0].validationMessage).to.eq(label)
+    })
+})
+
 //Empty Mailtrap inbox
 //cy.cleanInbox();
 Cypress.Commands.add('cleanInbox', ()=> {
