@@ -55,21 +55,21 @@
         <!-- First Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="first_name" value="{{ __('First Name') }}" />
-            <x-input id="first_name" type="text" wire:model.defer="state.first_name" autocomplete="name" />
+            <x-input id="first_name" type="text" wire:model="state.first_name" autocomplete="name" />
             <x-jet-input-error for="first_name" class="mt-2" />
         </div>
 
         <!-- Last Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="last_name" value="{{ __('Last Name') }}" />
-            <x-input id="last_name" type="text" wire:model.defer="state.last_name" autocomplete="name" />
+            <x-input id="last_name" type="text" wire:model="state.last_name" autocomplete="name" />
             <x-jet-input-error for="last_name" class="mt-2" />
         </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('Email') }}" />
-            <x-input id="email" type="email" wire:model.defer="state.email" />
+            <x-input id="email" type="email" wire:model="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
         </div>
     </x-slot>

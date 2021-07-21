@@ -11,13 +11,13 @@ declare(strict_types=1);
 
 namespace App\View\Components\Traits;
 
-use App\View\Components\Common\Datatable;
+use App\View\Components\Common\Datatables\Datatable;
 use Throwable;
 use URL;
 
 trait ConfirmModelDelete
 {
-    use ExceptionAlerts;
+    use WithAlerts;
 
     /* Previous URL for redirection after delete  */
     public $previous = null;
@@ -30,6 +30,7 @@ trait ConfirmModelDelete
     public function mountConfirmModelDelete()
     {
         $this->previous = URL::previous();
+        $this->listeners = array_merge($this->listeners, ['deleteConfirmed' => 'deleteConfirmed', 'deleteCancelled' => 'deleteCancelled']);
     }
 
     /**
@@ -53,11 +54,6 @@ trait ConfirmModelDelete
         ]);
 
         $this->resetErrorBag();
-    }
-
-    public function getListeners()
-    {
-        return array_merge($this->listeners, ['deleteConfirmed', 'deleteCancelled']);
     }
 
     public function deleteConfirmed()

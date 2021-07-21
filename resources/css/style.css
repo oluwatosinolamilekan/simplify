@@ -1,7 +1,13 @@
-[x-cloak=""] { display: none; }
+[x-cloak] { display: none; }
 
 html:not(.dark) {
     background-color: white !important;
+}
+
+a[disabled], a.disabled, a:disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    color: gray;
 }
 
 .login .guest-layout-intro-title {
@@ -82,6 +88,51 @@ input[type=checkbox]:checked {
     font-size: 16px;
     font-weight: normal;
 }
+
+/* CHECKBOX TOGGLE SWITCH */
+/* @apply rules for documentation, these do not work as inline style */
+.toggle-checkbox:checked {
+    @apply: right-0 border-green-400;
+    right: 0;
+}
+.toggle-checkbox:checked + .toggle-box {
+    @apply: bg-green-400;
+}
+
+.input-symbol-currency, .input-symbol-rate {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.input-symbol-currency input, .input-symbol-rate input {
+    padding-right: 25px;
+    width: 100%;
+}
+
+.input-symbol-currency:after, .input-symbol-rate:after {
+    position: absolute;
+    transform: translateY(-50%);
+    margin: auto;
+    right: 10px;
+    top: 55%;
+}
+
+.input-symbol-currency:after {
+    content: "$";
+}
+
+.input-symbol-rate:after {
+    content: "%";
+}
+
+select.form-control
+{
+    -webkit-appearance: auto !important;
+    -moz-appearance: auto !important;
+     appearance: auto !important;
+}
+
 
 @media only screen and (min-width: 1279px) {
     body.login {

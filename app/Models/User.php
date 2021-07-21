@@ -28,6 +28,7 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
 /**
@@ -189,5 +190,30 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function getPreferencesAttribute()
     {
         return $this->meta['preferences'] ?? [];
+    }
+
+    public function getRules(bool $required = true)
+    {
+        $dirty = $this->isDirty();
+
+        return [
+            'first_name' => ['string', 'min:2', 'max:255'],
+            'last_name' => ['string', 'min:2', 'max:255'],
+            'email' => [
+                Rule::requiredIf($required || $dirty), 'string', 'email', 'min:8', 'max:255',
+                Rule::unique('users', 'email')->ignore($this->id),
+            ],
+            'role' => [Rule::requiredIf($required || $dirty), 'int'],
+            'status' => [Rule::requiredIf($required || $dirty), 'int', Rule::in([Status::Active, Status::NotActive])],
+        ];
+    }
+
+    public function isDirty($attributes = [])
+    {
+        if (! $this->exists) {
+            return ! empty(array_filter($this->getDirty()));
+        }
+
+        return parent::isDirty($attributes);
     }
 }

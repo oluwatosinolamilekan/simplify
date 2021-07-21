@@ -12,10 +12,12 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\Status;
+use App\Enums\StatusTypesList;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\Factor.
@@ -175,5 +177,17 @@ class Factor extends Model
     public function vendors()
     {
         return $this->hasMany(Vendor::class);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'ref_code' => [
+                Rule::requiredIf($required), 'string', 'min:2', 'max:125',
+                $this->exists && $this->id ? Rule::unique('factors', 'ref_code')->ignore($this->id) : 'unique:factors,ref_code',
+            ],
+            'status' => [Rule::requiredIf($required), 'int', Rule::in(StatusTypesList::Factor)],
+            'subscription_plan_id' => [Rule::requiredIf($required), 'exists:subscription_plans,id'],
+        ];
     }
 }

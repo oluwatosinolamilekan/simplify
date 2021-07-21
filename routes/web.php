@@ -27,6 +27,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     require base_path('routes/dashboard.php');
     require base_path('routes/user.php');
     require base_path('routes/factor.php');
+    require base_path('routes/client.php');
     require base_path('routes/company.php');
 });
 

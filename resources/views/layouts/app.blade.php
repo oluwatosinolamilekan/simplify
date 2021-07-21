@@ -19,7 +19,7 @@
     <!-- Scripts -->
     <script src="{{ asset('mix/js/app.js') }}" defer></script>
 </head>
-<body class="{{$attributes['bodyClass'] ?? ''}} {{1 ? '' : 'bg-white'}}">
+<body class="{{$attributes['bodyClass'] ?? ''}}">
     <x-mobile-menu/>
     <div class="flex">
         <x-sidebar/>
@@ -38,8 +38,8 @@
 
     @livewireScripts
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10" />
-    ...
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10" ></script>
+
     <x-livewire-alert::scripts />
 </body>
 </html>

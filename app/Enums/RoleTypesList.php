@@ -22,5 +22,6 @@ class RoleTypesList
         Role::AccountExecutive,
         Role::SalesRepresentative,
         Role::FactorBroker,
+        Role::Employee,
     ];
 }

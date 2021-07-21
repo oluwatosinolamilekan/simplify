@@ -2,136 +2,132 @@
     {{ __('Factor Wizard') }}
 </x-slot>
 <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+    <x-tabs tabs='{
+        "general": "General",
+        "address": "Address & Contact Details",
+        "bank": "Bank Information",
+        "users": "Users"
+    }'>
+        <x-slot name="general">
+            <!-- Company Information -->
+            <div class="mt-10 sm:mt-0">
+                <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
+                    @include('company.details', ['company' => $company])
 
-        <!-- Company Information -->
-        <div class="mt-10 sm:mt-0">
-            <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-                @include('company.details', ['company' => $company, 'title' => __('Company Information'), 'description' => __('Company Basic Information.')])
-
+                </div>
             </div>
-        </div>
 
-        <x-jet-section-border />
+            <x-jet-section-border />
 
-        <!-- Factor Information -->
-        <div class="mt-10 sm:mt-0">
-            <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-                @include('factor.relation-details', ['company' => $company, 'title' => __('Factor Information'), 'description' => __('Factor Basic Information.')])
+            <!-- Factor Information -->
+            <div class="mt-10 sm:mt-0">
+                <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
+                    @include('factor.relation.details', ['company' => $company])
+                </div>
             </div>
-        </div>
 
-        <x-jet-section-border />
+            <x-jet-section-border />
+        </x-slot>
 
-        <!-- Bank Information -->
-        <div class="mt-10 sm:mt-0">
+        <x-slot name="address">
 
-            <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
+            <div class="mt-10 sm:mt-0">
+                <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
 
-                <x-jet-section-title>
-                    <x-slot name="title">{{ __('Bank Information') }}</x-slot>
-                    <x-slot name="description">{{ __('Bank account information.') }}</x-slot>
-                </x-jet-section-title>
+                    <x-jet-section-title>
+                        <x-slot name="title">{{ __('Address Information') }}</x-slot>
+                        <x-slot name="description">{{ __('Company address information.') }}</x-slot>
+                    </x-jet-section-title>
 
-                @if ($bankInformation->exists)
-                    @include('bank-information.details', ['bankInformation' => $bankInformation])
-                @else
-                    <div class="mt-5 md:mt-0 md:col-span-2" >
-                        <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                            <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                            <a class="p-4 cursor-pointer bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                + Add
-                            </a>
-                        </div>
-                        <form wire:submit.prevent="saveBankInformation">
-
-                            @include('bank-information.form', ['bankInformation' => $bankInformation])
-
+                    @if ($address->exists)
+                        @include('address.details', ['address' => $address])
+                    @else
+                        <div class="mt-5 md:mt-0 md:col-span-2" >
                             <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse the form above -->
-                                <a class="p-4 cursor-pointer bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                    Cancel
-                                </a>
-                                <x-success-button wire:loading.attr="disabled">
-                                    {{ __('Save') }}
-                                </x-success-button>
+                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
+                                <x-success-anchor> + Add </x-success-anchor>
                             </div>
 
-                        </form>
-                    </div>
-                @endif
-            </div>
-        </div>
-
-        <!-- Address Information -->
-        <div class="mt-10 sm:mt-0">
-            <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-
-                <x-jet-section-title>
-                    <x-slot name="title">{{ __('Address Information') }}</x-slot>
-                    <x-slot name="description">{{ __('Company address information.') }}</x-slot>
-                </x-jet-section-title>
-
-            @if ($address->exists)
-                    @include('address.details', ['address' => $factor->company->address])
-                @else
-                    <div class="mt-5 md:mt-0 md:col-span-2" >
-                        <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                            <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                            <a class="p-4 cursor-pointer bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                + Add
-                            </a>
+                            <livewire:address.address-form :address="$address" :partial="false"/>
                         </div>
+                    @endif
+                </div>
+            </div>
 
-                        <form wire:submit.prevent="saveAddressInformation">
+            <!-- Contact Details -->
+            <div class="mt-10 sm:mt-0">
+                <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
 
-                            @include('address.form', ['address' => $address])
+                    <x-jet-section-title>
+                        <x-slot name="title">{{ __('Contact Details') }}</x-slot>
+                        <x-slot name="description">{{ __('Company contact details.') }}</x-slot>
+                    </x-jet-section-title>
 
+                    @if ($contact->exists)
+                        @include('contact.details', ['contact' => $client->company->contact])
+                    @else
+                        <div class="mt-5 md:mt-0 md:col-span-2" >
                             <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse the form above -->
-                                <a class="p-4 cursor-pointer bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                    Cancel
-                                </a>
-                                <x-success-button wire:loading.attr="disabled">
-                                    {{ __('Save') }}
-                                </x-success-button>
+                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
+                                <x-success-anchor> + Add </x-success-anchor>
                             </div>
 
-                        </form>
-                    </div>
-                @endif
+                            <livewire:contact.contact-form :contact="$contact" :partial="false"/>
+                        </div>
+                    @endif
+                </div>
             </div>
-        </div>
+        </x-slot>
+        <x-slot name="bank">
 
-        <x-jet-section-border />
+            <!-- Bank Information -->
 
-        <!-- Contact Information -->
-        <div class="mt-10 sm:mt-0">
-            <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-                @if ($factor->company->contact)
-                    @include('contact.details', ['contact' => $factor->company->contact, 'title' => __('Contact Details'), 'description' => __('Basic Contact Details.')])
-                @endif
+            <div class="mt-10 sm:mt-0">
+                <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
+
+                    <x-jet-section-title>
+                        <x-slot name="title">{{ __('Bank Information') }}</x-slot>
+                        <x-slot name="description">{{ __('Bank account information.') }}</x-slot>
+                    </x-jet-section-title>
+
+                    @if ($bankInformation->exists)
+                        @include('bank-information.details', ['bankInformation' => $bankInformation])
+                    @else
+                        <div class="mt-5 md:mt-0 md:col-span-2" >
+                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
+                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
+                                <x-success-anchor wire:loading.attr="disabled">
+                                    + Add
+                                </x-success-anchor>
+                            </div>
+                            <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false"/>
+                        </div>
+                    @endif
+                </div>
             </div>
-        </div>
+        </x-slot>
+        <x-slot name="users">
+            <!-- Users -->
+            <div>
+                <x-jet-nav-link href="{{route('companies.users.create', ['company_id' => $company->id])}}" :active="true">+ Add new user</x-jet-nav-link>
 
-        <x-jet-section-border />
+                <livewire:company.user.company-users-list :company="$company"/>
+            </div>
+        </x-slot>
 
-        <!-- Actions -->
-        <div class="flex items-center justify-end px-4 py-3 text-right sm:px-6">
+    </x-tabs>
 
-            <a href="{{route('factors.update', $this->factor->id)}}" class="bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition">
-                {{ __('Update') }}
-            </a>
+    <x-jet-section-border />
 
-            <x-jet-danger-button wire:click="confirmDeletion" class="bg-red-600 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" wire:loading.attr="disabled">
-                {{ __('Delete') }}
-            </x-jet-danger-button>
-        </div>
+    <!-- Actions -->
+    <div class="flex items-center justify-end px-4 py-3 text-right sm:px-6" x-cloak>
 
-        <!-- Users -->
-        <div>
-            <x-jet-nav-link href="{{route('companies.users.create', ['company_id' => $company->id])}}" :active="true">+ Add new user</x-jet-nav-link>
+        <x-success-anchor href="{{route('factors.update', $this->factor->id)}}">
+            {{ __('Update') }}
+        </x-success-anchor>
 
-            <livewire:company.user.company-users-list :company="$company"/>
-        </div>
-
+        <x-danger-button wire:click="confirmDeletion" wire:loading.attr="disabled">
+            {{ __('Delete') }}
+        </x-danger-button>
+    </div>
 </div>

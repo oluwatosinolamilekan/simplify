@@ -11,51 +11,37 @@ declare(strict_types=1);
 
 namespace App\View\Components\Factor;
 
-use App\Enums\Role;
-use App\Models\Address;
-use App\Models\BankInformation;
-use App\Models\Company;
-use App\Models\ContactDetails;
 use App\Models\Factor;
-use App\Models\User;
-use App\Models\UserCompanyAccess;
-use App\View\Components\Address\AddressForm;
-use App\View\Components\BankInformation\BankInformationForm;
-use App\View\Components\Company\CompanyForm;
-use App\View\Components\Company\User\CompanyUserForm;
-use App\View\Components\Contact\ContactForm;
-use App\View\Components\Traits\ConfirmModelDelete;
+use App\Support\Validation\ValidationRules;
+use App\View\Components\Company\CompanyComponent;
 use DB;
-use Livewire\Component;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Throwable;
 
-class FactorWizard extends Component
+/**
+ * Class FactorWizard.
+ */
+class FactorWizard extends CompanyComponent
 {
-    use ConfirmModelDelete;
-
     public Factor $factor;
-    public Company $company;
-    public Address $address;
-    public ContactDetails $contact;
-    public BankInformation $bankInformation;
-    public ?User $user;
-    public ?UserCompanyAccess $userCompanyAccess;
 
+    /**
+     * @param  $factor_id
+     * @throws Exception
+     */
     public function mount($factor_id = null)
     {
-        $this->factor = Factor::with(['company', 'company.address', 'company.contactDetails', 'company.bankInformation', 'subscriptionPlan'])->findOrNew($factor_id);
+        $this->factor = Factor::with(['company', 'subscriptionPlan'])->findOrNew($factor_id);
 
-        $this->company = $this->factor->company ?? new Company();
-        $this->address = $this->company->address ?? new Address();
-        $this->contact = $this->company->contactDetails ?? new ContactDetails();
-        $this->bankInformation = $this->company->bankInformation ?? new BankInformation();
-
-        if (! $this->factor->exists) {
-            $this->user = new User(['role' => Role::CompanyUser]);
-            $this->userCompanyAccess = new UserCompanyAccess(['role' => Role::Administrator]);
-        }
+        parent::mount($this->factor->getRelatedInstanceOrNew('company'));
     }
 
+    /**
+     * @throws Exception
+     */
     public function save()
     {
         $this->validate();
@@ -70,65 +56,33 @@ class FactorWizard extends Component
             $this->factor->company()->associate($this->company);
             $this->factor->save();
 
-            if ($this->contact->isDirty()) {
-                $this->contact->company()->associate($this->company);
-                $this->contact->save();
-            }
-
-            if ($this->address->isDirty()) {
-                $this->address->company()->associate($this->company);
-                $this->address->save();
-            }
-
-            if ($this->bankInformation->isDirty()) {
-                $this->bankInformation->company()->associate($this->company);
-                $this->bankInformation->save();
-            }
-
-            if (isset($this->user) && isset($this->userCompanyAccess)) {
-                $this->user->save();
-
-                $this->userCompanyAccess->user()->associate($this->user);
-                $this->userCompanyAccess->company()->associate($this->company);
-
-                $this->userCompanyAccess->save();
-            }
-
             DB::commit();
 
-            $this->emit('saved');
+            $this->successAlert();
         } catch (Throwable $exception) {
+            DB::rollBack();
             $this->exceptionAlert($exception);
         }
+
+        $this->initRelated();
     }
 
+    /**
+     * @return Application|Factory|View
+     */
     public function render()
     {
         return view('factor.wizard');
     }
 
-    /* Realtime validation */
-
-    public function updated($property)
-    {
-        $this->validateOnly($property);
-    }
-
+    /**
+     * @return array
+     */
     public function getRules()
     {
-        return array_merge(
-            FactorForm::getValidationRules(),
-            SubscriptionPlanForm::getValidationRules(),
-            CompanyForm::getValidationRules($this->company),
-            BankInformationForm::getValidationRules($this->bankInformation),
-            AddressForm::getValidationRules($this->address),
-            ContactForm::getValidationRules(),
-            ! $this->factor->exists ? CompanyUserForm::getValidationRules($this->user) : [],
+        return ValidationRules::merge(
+            ValidationRules::forModel('company', $this->company),
+            ValidationRules::forModel('factor', $this->factor)
         );
-    }
-
-    public function getModel()
-    {
-        return $this->factor ?? null;
     }
 }

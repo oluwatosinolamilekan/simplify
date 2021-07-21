@@ -49,4 +49,9 @@ class StatusTypesList
         Status::Deleted,
         Status::Refunded,
     ];
+
+    public const Client = [
+        Status::Active,
+        Status::NotActive,
+    ];
 }

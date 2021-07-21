@@ -16,6 +16,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\Address.
@@ -89,5 +90,19 @@ class Address extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class, 'company_id');
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'company_id' => ['required', 'int', 'exists:companies,id'],
+            'street' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'city' => [Rule::requiredIf($required), 'string', 'min:2', 'max:125'],
+            'state' => [Rule::requiredIf($required), 'string', 'min:2', 'max:125'],
+            'country' => [Rule::requiredIf($required), 'string', 'min:2', 'max:125'],
+            'zip_code' => [Rule::requiredIf($required), 'string', 'min:2', 'max:125'],
+            'mail_code' => [Rule::requiredIf($required), 'min:2', 'max:125'],
+            'timezone' => [Rule::requiredIf($required), 'min:2', 'max:125'],
+        ];
     }
 }

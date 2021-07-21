@@ -22,7 +22,8 @@
         "mediconesystems/livewire-datatables": "dev-master",
         "protoqol/prequel": "^1.22",
         "richan-fongdasen/eloquent-blameable": "^1.7",
-        "techtailor/rpg": "^1.0"
+        "techtailor/rpg": "^1.0",
+      "ext-json": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",

@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Enums\CommissionType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\ClientCredit.
@@ -94,21 +94,19 @@ class ClientCredit extends Model
      * @var array
      */
     protected $dates = [
-        'ucc_date',
-        'ucc_date_2',
-        'ucc_expiring_date',
-        'expiry_date',
+        'ucc_date:Y-m-d',
+        'ucc_date_2:Y-m-d',
+        'ucc_expiring_date:Y-m-d',
         'created_at',
         'updated_at',
     ];
 
     /**
-     * The attributes that should be cast to enum types.
-     *
-     * @var array
+     * @var  array Default values for attributes
      */
-    protected $enumCasts = [
-        'type' => CommissionType::class,
+    protected $attributes = [
+        'standard_terms' => 30,
+        'ineligible_days' => 0,
     ];
 
     /**
@@ -117,5 +115,24 @@ class ClientCredit extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'client_id' => [Rule::requiredIf($required), 'int', 'exists:clients,id'],
+            'approved' => [Rule::requiredIf($required), 'boolean'],
+            'credit_rating' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'credit_limit' => [Rule::requiredIf($required), 'numeric'],
+            'debtor_limit' => [Rule::requiredIf($required), 'numeric'],
+            'debtor_concentration' => [Rule::requiredIf($required), 'numeric'],
+            'standard_terms' => [Rule::requiredIf($required), 'numeric'],
+            'ineligible_days' => [Rule::requiredIf($required), 'numeric'],
+            'report_charge' => [Rule::requiredIf($required), 'boolean'],
+            'report_charge_amount' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:10000'],
+            'ucc_date' => [Rule::requiredIf($required), 'date'],
+            'ucc_date_2' => [Rule::requiredIf($required), 'date'],
+            'ucc_expiring_date' => [Rule::requiredIf($required), 'date'],
+        ];
     }
 }

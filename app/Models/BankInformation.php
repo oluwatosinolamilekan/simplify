@@ -88,4 +88,16 @@ class BankInformation extends Model
     {
         return $this->belongsTo(Company::class, 'company_id');
     }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'company_id' => ['required', 'int'],
+            'bank_name' => ['required', 'string', 'min:2', 'max:255'],
+            'account_holder_name' => ['required', 'string', 'min:2', 'max:125'],
+            'account_number' => ['required', 'string', 'min:2', 'max:125'],
+            'routing_number' => ['required', 'string', 'min:2', 'max:125'],
+            'swift_code' => ['required', 'string', 'min:2', 'max:125'],
+        ];
+    }
 }

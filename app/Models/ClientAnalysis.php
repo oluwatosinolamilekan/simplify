@@ -15,6 +15,7 @@ use App\Enums\BusinessType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\ClientAnalysis.
@@ -57,6 +58,13 @@ class ClientAnalysis extends Model
     ];
 
     /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'business_type' => BusinessType::Other,
+    ];
+
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -81,5 +89,16 @@ class ClientAnalysis extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'client_id' => ['required', 'int', 'exists:clients,id'],
+            'industry' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'region' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'loan_grade' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'business_type' => [Rule::requiredIf($required), 'required', 'int', Rule::in(BusinessType::getValues())],
+        ];
     }
 }

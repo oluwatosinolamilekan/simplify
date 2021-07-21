@@ -13,12 +13,14 @@ namespace App\Models;
 
 use App\Enums\ClientType;
 use App\Enums\Status;
+use App\Enums\StatusTypesList;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\Client.
@@ -28,6 +30,7 @@ use Illuminate\Support\Carbon;
  * @property int $factor_id
  * @property string $ref_code
  * @property string $name
+ * @property string $office
  * @property ClientType $type
  * @property Status $status
  * @property array|null $meta
@@ -41,8 +44,8 @@ use Illuminate\Support\Carbon;
  * @property ClientAnalysis[] $analysis
  * @property ClientCommission[] $commissions
  * @property ClientContractDocument[] $contractDocuments
- * @property ClientContract[] $ccontracts
- * @property ClientCredit[] $credits
+ * @property ClientContract[] $contracts
+ * @property ClientCredit $credit
  * @property ClientFundingInstructions[] $fundingInstructions
  * @property ClientIntegrations[] $integrations
  * @property ClientTransactionFee[] $transactionFees
@@ -69,6 +72,7 @@ class Client extends Model
         'factor_id',
         'ref_code',
         'name',
+        'office',
         'type',
         'status',
         'meta',
@@ -85,6 +89,14 @@ class Client extends Model
         'type' => 'int',
         'status' => 'int',
         'meta' => 'array',
+    ];
+
+    /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'status' => Status::Active,
+        'type' => ClientType::Other,
     ];
 
     /**
@@ -154,19 +166,19 @@ class Client extends Model
     }
 
     /**
-     * @return HasMany
+     * @return HasOne
      */
-    public function credits()
+    public function credit()
     {
-        return $this->hasMany(ClientCredit::class);
+        return $this->hasOne(ClientCredit::class);
     }
 
     /**
-     * @return HasMany
+     * @return HasOne
      */
     public function fundingInstructions()
     {
-        return $this->hasMany(ClientFundingInstructions::class);
+        return $this->hasOne(ClientFundingInstructions::class);
     }
 
     /**
@@ -215,5 +227,20 @@ class Client extends Model
     public function teams()
     {
         return $this->hasManyThrough(Team::class, TeamClient::class);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'name' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'ref_code' => [
+                Rule::requiredIf($required), 'string', 'min:2', 'max:125',
+                Rule::unique('clients', 'ref_code')->ignore($this->id),
+            ],
+            'office' => ['string', 'min:2', 'max:255'],
+            'status' => [Rule::requiredIf($required), 'int', Rule::in(StatusTypesList::Client)],
+            'type' => [Rule::requiredIf($required), 'int', Rule::in(ClientType::getValues())],
+            'factor_id' => [Rule::requiredIf($required), 'int', 'exists:factors,id'],
+        ];
     }
 }

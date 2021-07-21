@@ -6,14 +6,14 @@
             <!-- Ref Code -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="ref_code" value="{{ __('Ref Code') }}" />
-                <x-jet-input id="ref_code" type="text" class="mt-1 block w-full" wire:model.defer="factor.ref_code" />
-                <x-jet-input-error for="factor.ref_code" class="mt-2" />
+                <x-jet-input id="ref_code" type="text" class="mt-1 block w-full" wire:model="factor.ref_code" />
+                <x-jet-input-error for="factor.ref_code" class="mt-3" />
             </div>
 
             <!-- Status -->
             <div class="col-span-6 sm:col-span-3">
-                <x-jet-label for="status" value="{{ __('Status') }}" />
-                <select id="status" wire:model.defer="factor.status" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                <x-jet-label for="factor-status" value="{{ __('Status') }}" />
+                <select id="factor-status" wire:model="factor.status" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                     <option value="{{\App\Enums\Status::Active}}" @if($factor->status->is(\App\Enums\Status::Active)) selected @endif>
                         {{ \App\Enums\Status::Active()->description }}
                     </option>
@@ -21,7 +21,7 @@
                         {{ \App\Enums\Status::NotActive()->description }}
                     </option>
                 </select>
-                <x-jet-input-error for="factor.status" class="mt-2" />
+                <x-jet-input-error for="factor.status" class="mt-3" />
             </div>
 
         </div>

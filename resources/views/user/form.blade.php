@@ -1,5 +1,5 @@
 <x-slot name="header">
-    {{ __('Update User Details') }}
+    {{ __('User Details') }}
 </x-slot>
 <x-jet-form-section submit="save" class="mt-6">
     <x-slot name="title">
@@ -14,28 +14,28 @@
         <!-- First Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="first_name" value="{{ __('First Name') }}" />
-            <x-input id="first_name" type="text" wire:model.defer="user.first_name" autocomplete="name" />
+            <x-input id="first_name" type="text" wire:model="user.first_name" autocomplete="name" />
             <x-jet-input-error for="user.first_name" class="mt-2" />
         </div>
 
         <!-- Last Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="last_name" value="{{ __('Last Name') }}" />
-            <x-input id="last_name" type="text" wire:model.defer="user.last_name" autocomplete="name" />
+            <x-input id="last_name" type="text" wire:model="user.last_name" autocomplete="name" />
             <x-jet-input-error for="user.last_name" class="mt-2" />
         </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('Email') }}" />
-            <x-input id="email" type="email" wire:model.defer="user.email"/>
+            <x-input id="email" type="email" wire:model="user.email"/>
             <x-jet-input-error for="user.email" class="mt-2" />
         </div>
 
         <!-- Role -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="role" value="{{ __('Role') }}" />
-            <x-select id="role" wire:model.defer="user.role" disabled>
+            <x-select id="role" wire:model="user.role" disabled>
                 <option value="{{\App\Enums\Role::SuperAdministrator}}">{{\App\Enums\Role::SuperAdministrator()->description}}</option>
             </x-select>
             <x-jet-input-error for="user.role" class="mt-2" />
@@ -44,7 +44,7 @@
         <!-- Status -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="status" value="{{ __('Status') }}" />
-            <x-select id="status" wire:model.defer="user.status">
+            <x-select id="status" wire:model="user.status">
                 <option value={{\App\Enums\Status::Active}} selected>
                     {{ \App\Enums\Status::Active()->description }}
                 </option>

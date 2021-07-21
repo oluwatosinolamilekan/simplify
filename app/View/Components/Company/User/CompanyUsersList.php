@@ -16,16 +16,21 @@ use App\Enums\RoleTypesList;
 use App\Enums\Status;
 use App\Enums\StatusTypesList;
 use App\Models\Company;
+use App\View\Components\Common\Datatables\Datatable;
 use App\View\Components\Traits\ConfirmModelDelete;
-use App\View\Components\User\UsersList;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
 
-class CompanyUsersList extends UsersList
+class CompanyUsersList extends Datatable
 {
     use ConfirmModelDelete;
 
     public Company $company;
+
+    public function render()
+    {
+        return view('datatables::datatable');
+    }
 
     public function builder()
     {

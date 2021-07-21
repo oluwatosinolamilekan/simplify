@@ -32,4 +32,5 @@ final class Role extends Enum
     const AccountExecutive = 4;
     const SalesRepresentative = 5;
     const FactorBroker = 6;
+    const Employee = 7;
 }

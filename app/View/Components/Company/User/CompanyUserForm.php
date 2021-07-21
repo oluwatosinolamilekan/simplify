@@ -12,38 +12,77 @@ declare(strict_types=1);
 namespace App\View\Components\Company\User;
 
 use App\Enums\Role;
-use App\Enums\RoleTypesList;
-use App\Enums\Status;
+use App\Models\Company;
 use App\Models\User;
 use App\Models\UserCompanyAccess;
+use App\Support\Validation\ValidationRules;
+use App\View\Components\ModelForm;
 use App\View\Components\Traits\ConfirmModelDelete;
 use DB;
-use Illuminate\Validation\Rule;
-use Livewire\Component;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
-class CompanyUserForm extends Component
+class CompanyUserForm extends ModelForm
 {
     use ConfirmModelDelete;
 
     public UserCompanyAccess $userCompanyAccess;
     public User $user;
 
-    public $roles = RoleTypesList::Company; // allowed roles
+    /** @var string[] Custom validation messages */
+    protected array $messages = [
+        'userCompanyAccess.user_id.unique' => 'User with given email is already registered for this company.',
+        'userCompanyAccess.company_id.unique' => 'User with given email is already registered for this company.',
+    ];
 
-    public function mount($company_id, $user_id = null)
+    /** Mount with variadic arguments to support mounting with both ids and models.
+     * @param array $params
+     * @throws Exception
+     */
+    public function mount(...$params)
     {
-        $attributes = ['company_id' => $company_id];
+        [$company, $user] = $params;
 
-        if ($user_id) {
-            $attributes['user_id'] = $user_id;
+        $attributes = ['company_id' => $company, 'user_id' => $user];
+
+        if ($company instanceof Company) {
+            $attributes['company_id'] = $company->id;
         }
 
-        $this->userCompanyAccess = UserCompanyAccess::firstOrNew($attributes);
+        if ($user instanceof User) {
+            $attributes['user_id'] = $user->id;
+        }
 
-        $this->user = $this->userCompanyAccess->user ?? new User(['role' => Role::CompanyUser]);
+        $this->userCompanyAccess = UserCompanyAccess::with('user')->firstOrNew($attributes);
+
+        $this->userCompanyAccess->syncOriginal();
+
+        $this->user = $this->userCompanyAccess->getRelatedInstanceOrNew('user');
     }
 
+    /**
+     * On user email update, check if user with given email already exists and link it with company
+     * Email update is allowed only in "create" scenario.
+     * @throws ValidationException
+     */
+    public function updatedUserEmail()
+    {
+        /* If user is fresh new record ("create" scenario) - try to find user with given email first */
+        if (! $this->userCompanyAccess->exists) {
+            $this->user = User::firstOrNew(['email' => $this->user->email], ['role' => Role::CompanyUser]);
+            $this->userCompanyAccess->user()->associate($this->user); // for validation purposes
+
+            $this->validateOnly('userCompanyAccess.user_id');
+        }
+    }
+
+    /**
+     * Save action.
+     */
     public function save()
     {
         $this->validate();
@@ -52,55 +91,61 @@ class CompanyUserForm extends Component
         try {
             DB::beginTransaction();
 
-            /* If user is fresh new record ("create" scenario) - try to find user with given email first */
-            if (! $this->user->exists) {
-                $this->user = User::firstOrNew(['email' => $this->user->email], ['role' => Role::CompanyUser]);
-                $this->user->save();
-                $this->userCompanyAccess->user()->associate($this->user);
-            }
+            $this->user->save();
 
+            $this->userCompanyAccess->user()->associate($this->user);
             $this->userCompanyAccess->save();
 
             DB::commit();
 
-            $this->emit('saved');
+            $this->successAlert();
+
+            if (! $this->nested) {
+                $this->redirect(route('companies.users.view', [
+                    'company_id' => $this->userCompanyAccess->company_id,
+                    'user_id' => $this->user->id,
+                ]));
+            } else {
+                $this->emitUp('saved', $this->getProperty());
+            }
         } catch (Throwable $exception) {
             $this->exceptionAlert($exception);
         }
     }
 
+    /**
+     * @return Application|Factory|View|mixed
+     */
     public function render()
     {
         return view('company.user.form');
     }
 
+    /**
+     * @return array
+     */
     public function getRules()
     {
-        return self::getValidationRules($this->user);
+        /*
+         * Email uniqueness should not be validated
+         * If user with given email address exists - company access is granted for that user
+         * Email address update is not allowed
+         */
+
+        $userRules = $this->user->getRules();
+        $userRules['email'] = ['required', 'string', 'email', 'min:8', 'max:255'];
+
+        return ValidationRules::merge(
+            ValidationRules::forModel('userCompanyAccess', $this->userCompanyAccess),
+            ValidationRules::forProperty('user', $userRules)
+        );
     }
 
-    public static function getValidationRules($user = null)
+    /**
+     * @return mixed|string
+     */
+    public function getProperty()
     {
-        // TODO @Jovana: try move all validation rules to models
-        return [
-            'userCompanyAccess.company_id' => ['required', 'int'],
-            'userCompanyAccess.first_name' => ['required', 'string', 'min:2', 'max:255'],
-            'userCompanyAccess.last_name' => ['required', 'string', 'min:2', 'max:255'],
-            'userCompanyAccess.middle_name' => ['string', 'min:2', 'max:255'],
-            'userCompanyAccess.role' => ['required', 'int'],
-            'userCompanyAccess.status' => ['required', 'int', Rule::in([Status::Active, Status::NotActive])],
-            'userCompanyAccess.emails' => ['array'],
-            'userCompanyAccess.emails.*' => ['string', 'email', 'min:8', 'max:255'],
-            'userCompanyAccess.phone_numbers' => ['array'],
-            'userCompanyAccess.phone_numbers.*' => ['string', 'phone_number:15'],
-            /*
-             * Email uniqueness should not be validated
-             * If user with given email address exists - company access is granted for that user
-             * Email address update is not allowed
-             */
-
-            'user.email' => ['required', 'string', 'email', 'min:8', 'max:255'],
-            'user.role' => [Rule::requiredIf(! isset($user) || ! $user->exists), 'int'],
-        ];
+        return 'userCompanyAccess';
     }
 }

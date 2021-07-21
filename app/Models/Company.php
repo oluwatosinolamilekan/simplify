@@ -15,6 +15,7 @@ use App\Enums\Status;
 use Carbon\Carbon;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\Company.
@@ -33,7 +34,8 @@ use Illuminate\Database\Eloquent\Builder;
  * @property Address    $address
  * @property User[]     $users
  * @property ContactDetails  $contactDetails
- * @property BankInformation $bankInformation
+ * @property BankInformation[] $bankInformation
+ * @property CompanyIdentity $identity
  * @method static Company           active()
  * @method static Builder|Company   createdBy($userId)
  * @method static Builder|Company   updatedBy($userId)
@@ -91,6 +93,11 @@ class Company extends Model
         return $this->hasOne(BankInformation::class);
     }
 
+    public function identity()
+    {
+        return $this->hasOne(CompanyIdentity::class);
+    }
+
     public function users()
     {
         return $this->hasManyThrough(
@@ -101,5 +108,15 @@ class Company extends Model
             'id',
             'user_id'
         );
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'name' => ['required', 'string', 'min:2', 'max:255'],
+            'domain' => ['required', 'string', 'min:2', 'max:125',
+                $this->exists ? Rule::unique('companies', 'domain')->ignore($this->id) : 'unique:companies,domain',
+            ],
+        ];
     }
 }

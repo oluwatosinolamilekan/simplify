@@ -12,10 +12,9 @@ declare(strict_types=1);
 namespace App\View\Components\Address;
 
 use App\Models\Address;
-use Illuminate\Validation\Rule;
-use Livewire\Component;
+use App\View\Components\ModelForm;
 
-class AddressForm extends Component
+class AddressForm extends ModelForm
 {
     public Address $address;
 
@@ -24,23 +23,8 @@ class AddressForm extends Component
         return view('address.form');
     }
 
-    public static function getValidationRules(?Address $model = null)
+    public function getProperty()
     {
-        $dirty = $model && $model->isDirty();
-
-        return [
-            'address.street' => [Rule::requiredIf($dirty), 'string', 'min:2', 'max:255'],
-            'address.city' => [Rule::requiredIf($dirty), 'string', 'min:2', 'max:125'],
-            'address.state' => [Rule::requiredIf($dirty), 'string', 'min:2', 'max:125'],
-            'address.country' => [Rule::requiredIf($dirty), 'string', 'min:2', 'max:125'],
-            'address.zip_code' => [Rule::requiredIf($dirty), 'string', 'min:2', 'max:125'],
-            'address.mail_code' => [Rule::requiredIf($dirty), 'min:2', 'max:125'],
-            'address.timezone' => [Rule::requiredIf($dirty), 'min:2', 'max:125'],
-        ];
-    }
-
-    public function getRules()
-    {
-        return self::getValidationRules($this->address);
+        return 'address';
     }
 }
