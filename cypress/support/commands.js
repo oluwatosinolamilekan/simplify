@@ -2,7 +2,7 @@
 //cy.userLogin({email: 'testuser@domain.com' , password: 'testpassword'})
 Cypress.Commands.add('userLogin' , (user) => {
     cy.get('input[name="email"]').type(user.email);
-    cy.get('input[name="password"]').type(user.password); // see user factory for details - password is always set to 'password'
+    cy.get('input[name="password"]').type(user.password);
     cy.get('button[type="submit"]').click();
 })
 
