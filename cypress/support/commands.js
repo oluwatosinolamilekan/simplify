@@ -2,7 +2,7 @@
 //cy.userLogin({email: 'testuser@domain.com' , password: 'testpassword'})
 Cypress.Commands.add('userLogin' , (user) => {
     cy.get('input[name="email"]').type(user.email);
-    cy.get('input[name="password"]').type('password'); // see user factory for details - password is always set to 'password'
+    cy.get('input[name="password"]').type(user.password);
     cy.get('button[type="submit"]').click();
 })
 
@@ -12,6 +12,15 @@ Cypress.Commands.add('userLogout' , (user) => {
     cy.get('div[id="manage_profile_icon"]').click();
     cy.contains(user.first_name);
     cy.get('a[id="dropdown_logout"]').click();
+})
+
+//When input is invalid validation message shows up
+//cy.validationError(1,'#input','Please fill out input field');
+Cypress.Commands.add('validationError',(num, selector,label) => {
+    cy.get('input:invalid').should('have.length', num)
+    cy.get(selector).then(($input) => {
+        expect($input[0].validationMessage).to.eq(label)
+    })
 })
 
 //Empty Mailtrap inbox
