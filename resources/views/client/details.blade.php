@@ -49,7 +49,7 @@
                                 <x-success-anchor> + Add </x-success-anchor>
                             </div>
 
-                            <livewire:client.client-funding-instructions-form :fundingInstructions="$fundingInstructions" :partial="false"/>
+                            <livewire:client.client-funding-instructions-form :fundingInstructions="$fundingInstructions" :partial="false" :nested="true"/>
                         </div>
                     @endif
                 </div>
@@ -75,7 +75,7 @@
                                 <x-success-anchor> + Add </x-success-anchor>
                             </div>
 
-                            <livewire:client.client-credit-form :credit="$credit" :partial="false"/>
+                            <livewire:client.client-credit-form :credit="$credit" :partial="false" :nested="true"/>
                         </div>
                     @endif
                 </div>
@@ -104,7 +104,7 @@
                                 </a>
                             </div>
 
-                            <livewire:company.company-identity-form :identity="$identity" :partial="false"/>
+                            <livewire:company.company-identity-form :identity="$identity" :partial="false" :nested="true"/>
                         </div>
                     @endif
 
@@ -130,7 +130,7 @@
                                     + Add
                                 </a>
                             </div>
-                            <livewire:client.client-analysis-form :analysis="$analysis" :partial="false"/>
+                            <livewire:client.client-analysis-form :analysis="$analysis" :partial="false" :nested="true"/>
                         </div>
                     @endif
                 </div>
@@ -156,7 +156,7 @@
                                 <x-success-anchor> + Add </x-success-anchor>
                             </div>
 
-                            <livewire:address.address-form :address="$address" :partial="false"/>
+                            <livewire:address.address-form :address="$address" :partial="false" :nested="true"/>
                         </div>
                     @endif
                 </div>
@@ -180,7 +180,7 @@
                                 <x-success-anchor> + Add </x-success-anchor>
                             </div>
 
-                            <livewire:contact.contact-form :contact="$contact" :partial="false"/>
+                            <livewire:contact.contact-form :contact="$contact" :partial="false" :nested="true"/>
                         </div>
                     @endif
                 </div>
@@ -206,7 +206,7 @@
                                 <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
                                 <x-success-anchor> + Add </x-success-anchor>
                             </div>
-                            <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false"/>
+                            <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false" :nested="true"/>
                         </div>
                     @endif
                 </div>
