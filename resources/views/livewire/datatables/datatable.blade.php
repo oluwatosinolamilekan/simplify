@@ -136,7 +136,7 @@
             @if(empty($this->results[0]))
                 <div class="text-center">
                     <p class="p-3 text-lg text-teal-600">
-                        There's Nothing to show at the moment
+                        There's nothing to show at the moment
                     </p>
                 </div>
             @endif
