@@ -125,21 +125,11 @@
                                     @include('datatables::checkbox', ['value' => $result->checkbox_attribute])
                                 @else
                                     <div class="relative table_cell_value min-w-min pl-1 pr-4 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900 table-cell border-b border-gray-300 @if($column['align'] === 'right') text-right @elseif($column['align'] === 'center') text-center @else text-left @endif">
-                                        {{--@if($column['label'] === 'Status' && $result->{$column['name']} === 'Active' )--}}
-                                        {{--<span class="table_cell_status {{ strtolower($result->{$column['name']}) }}">{!! $result->{$column['name']} !!}</span>--}}
-                                        {{--@else--}}
                                         {!! $result->{$column['name']} !!}
-                                        {{--@endif--}}
                                     </div>
                                 @endif
                             @endforeach
                         </div>
-                    {{--@empty--}}
-                        {{--<div class="table-row p-1">--}}
-                            {{--<p class="p-3 text-lg text-teal-600">--}}
-                                {{--There's Nothing to show at the moment--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
                     @endforeach
                 </div>
             </div>
