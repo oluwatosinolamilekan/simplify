@@ -4,7 +4,7 @@
         name="{{ $name }}"
         wire:input="applyFilter('boolean', '{{ $index }}', $event.target.value)"
         x-on:input="$refs.select.value=''"
-        class="text-gray-500 h-8 mt-2.5 pt-1 pb-1"
+        class="text-gray-500 h-8 mt-2.5 pt-1 pb-1 text-sm-13"
     >
         <option value="">Select..</option>
         <option value="0" class="text-gray-800">No</option>

@@ -5,7 +5,7 @@
             name="{{ $name }}"
             wire:input="applyFilter('select', '{{ $index }}', $event.target.value)"
             x-on:input="$refs.select.value=''"
-            class="text-gray-500 h-8 mt-2.5 pt-1 pb-1"
+            class="text-gray-500 h-8 mt-2.5 pt-1 pb-1 text-sm-13"
         >
             <option value="">Select..</option>
             @foreach($options as $value => $label)

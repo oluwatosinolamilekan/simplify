@@ -129,7 +129,7 @@ input[type=checkbox]:checked {
 }
 
 .date_input_min_with {
-    min-width: 200px;
+    min-width: 185px;
 }
 
 /* CHECKBOX TOGGLE SWITCH */
@@ -186,7 +186,7 @@ select.form-control
 }
 
 .table_cell_min_width {
-    min-width: 118px;
+    min-width: 115px;
 }
 
 .nowrap {
@@ -214,6 +214,18 @@ select.form-control
 
 .selected_filter_tag {
     font-size: 11px;
+}
+
+.data-table-container .table-cell:first-child > button {
+    padding-left: 24px;
+}
+
+.data-table-container .filter_cell:first-child {
+    padding-left: 20px;
+}
+
+.text-sm-13 {
+    font-size: 13px;
 }
 
 @media only screen and (min-width: 1279px) {

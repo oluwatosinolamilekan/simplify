@@ -86,7 +86,6 @@
                                         {{--<div>SELECT ALL</div>--}}
                                         <div class="text-center">
                                             <input type="checkbox" wire:click="toggleSelectAll" @if(count($selected) === $this->results->total()) checked @endif class="rounded shadow-sm focus:ring focus:ring-opacity-50 form-check-input border mr-2 focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" />
-                                            {{--<x-checkbox wire:click="toggleSelectAll" @if(count($selected) === $this->results->total()) checked @endif/>--}}
                                         </div>
                                     </div>
                                 @elseif($column['type'] === 'actions')
@@ -98,7 +97,7 @@
                                         @endif
                                     </div>
                                 @else
-                                    <div class="table-cell table_cell_min_width overflow-hidden align-top border-b border-gray-300">
+                                    <div class="filter_cell table-cell table_cell_min_width overflow-hidden align-top border-b border-gray-300">
                                         @isset($column['filterable'])
                                             @if( is_iterable($column['filterable']) )
                                                 <div wire:key="{{ $index }}">
@@ -115,7 +114,7 @@
                             @endforeach
                         </div>
                     @endif
-                    @forelse($this->results as $result)
+                    @foreach($this->results as $result)
                         <div class="table-row p-1 {{ isset($result->checkbox_attribute) && in_array($result->checkbox_attribute, $selected) ? 'bg-orange-100' : ($loop->even ? 'bg-white' : 'bg-white') }}">
                             @foreach($this->columns as $column)
                                 @if($column['hidden'])
@@ -127,21 +126,31 @@
                                 @else
                                     <div class="relative table_cell_value min-w-min pl-1 pr-4 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900 table-cell border-b border-gray-300 @if($column['align'] === 'right') text-right @elseif($column['align'] === 'center') text-center @else text-left @endif">
                                         {{--@if($column['label'] === 'Status' && $result->{$column['name']} === 'Active' )--}}
-                                            {{--<span class="table_cell_status {{ strtolower($result->{$column['name']}) }}">{!! $result->{$column['name']} !!}</span>--}}
+                                        {{--<span class="table_cell_status {{ strtolower($result->{$column['name']}) }}">{!! $result->{$column['name']} !!}</span>--}}
                                         {{--@else--}}
-                                            {!! $result->{$column['name']} !!}
+                                        {!! $result->{$column['name']} !!}
                                         {{--@endif--}}
                                     </div>
                                 @endif
                             @endforeach
                         </div>
-                    @empty
-                        <p class="p-3 text-lg text-teal-600">
-                            There's Nothing to show at the moment
-                        </p>
-                    @endforelse
+                    {{--@empty--}}
+                        {{--<div class="table-row p-1">--}}
+                            {{--<p class="p-3 text-lg text-teal-600">--}}
+                                {{--There's Nothing to show at the moment--}}
+                            {{--</p>--}}
+                        {{--</div>--}}
+                    @endforeach
                 </div>
             </div>
+            @if(empty($this->results[0]))
+                <div class="text-center">
+                    <p class="p-3 text-lg text-teal-600">
+                        There's Nothing to show at the moment
+                    </p>
+                </div>
+            @endif
+
             @unless($this->hidePagination)
                 <div class="rounded-lg rounded-t-none max-w-screen rounded-lg border-b border-gray-200 bg-white">
                     <div class="p-2 sm:flex items-center justify-between">
