@@ -359,21 +359,4 @@
         </x-tabs>
     </div>
 
-    <?php
-    $values = [
-        ['id' => '1', 'name' => 'mek', 'selected' => 'selected'],
-        ['id' => '2', 'name' => 'erku', 'selected' => ''],
-        ['id' => '3', 'name' => 'ereq', 'selected' => 'selected'],
-        ['id' => '4', 'name' => 'chors', 'selected' => ''],
-    ];
-    ?>
-
-    <div class="intro-y box mt-5">
-        <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
-            <h2 class="font-medium text-base mr-auto">
-                Searchable Select
-            </h2>
-        </div>
-        <x-searchable-select :values="$values" class="p-5"/>
-    </div>
 </x-app-layout>
