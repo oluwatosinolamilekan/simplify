@@ -10,8 +10,7 @@ new Litepicker({
     singleMode: false,
     setup: (picker) => {
         picker.on('selected', (date1, date2) => {
-            console.log(date1.dateInstance);
-            console.log(date2.dateInstance);
+            picker.options.element.dispatchEvent(new Event('selected'));
         });
     },
 })
