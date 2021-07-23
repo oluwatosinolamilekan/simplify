@@ -42,7 +42,7 @@ class ClientDetails extends CompanyComponent
 
     public function render()
     {
-        return view('client.details');
+        return view('clients.details');
     }
 
     public function initRelated()
@@ -56,6 +56,10 @@ class ClientDetails extends CompanyComponent
 
     public function getRules()
     {
+        /** Ignore client_id change as client_id is set by default */
+        $this->fundingInstructions->isDirty('client_id') && $this->fundingInstructions->ignoreDirty('client_id');
+        $this->credit->isDirty('client_id') && $this->credit->ignoreDirty('client_id');
+
         return ValidationRules::merge(
             parent::getRules(),
             ValidationRules::forModel('client', $this->client),

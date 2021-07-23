@@ -25,6 +25,6 @@ class ClientCreditForm extends ModelForm
 
     public function render()
     {
-        return view('client.credit.form');
+        return view('clients.credit.form');
     }
 }

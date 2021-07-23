@@ -30,5 +30,17 @@
                 <div class="menu__title"> {{ __('Clients') }} </div>
             </a>
         </li>
+        <li>
+            <a href="{{ route('vendors.list') }}" class="menu text-gray-600">
+                <div class="menu__icon"> <i data-feather="users"></i> </div>
+                <div class="menu__title"> {{ __('Vendors') }} </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('debtors.list') }}" class="menu text-gray-600">
+                <div class="menu__icon"> <i data-feather="users"></i> </div>
+                <div class="menu__title"> {{ __('Debtors') }} </div>
+            </a>
+        </li>
     </ul>
 </div>

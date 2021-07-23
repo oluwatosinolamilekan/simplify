@@ -20,7 +20,7 @@
                             <x-slot name="description">{{ __('Fill company information.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('company.form', ['company' => $company])
+                        @include('companies.form', ['company' => $company])
                     </div>
                 </div>
 
@@ -35,7 +35,7 @@
                             <x-slot name="description">{{ __('Fill factor information.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('factor.relation.form', ['factor' => $factor])
+                        @include('factors.relation.form', ['factor' => $factor])
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@
                             <x-slot name="description">{{ __('Select subscription plan.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('factor.subscription-plan-form', ['factor' => $factor])
+                        @include('factors.subscription-plan-form', ['factor' => $factor])
                     </div>
                 </div>
 

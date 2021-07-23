@@ -72,7 +72,7 @@ class FactorWizard extends CompanyComponent
      */
     public function render()
     {
-        return view('factor.wizard');
+        return view('factors.wizard');
     }
 
     /**

@@ -99,8 +99,6 @@
                     <x-jet-input-error for="warningNote" class="mt-3" />
                 </div>
 
-
-
                 <div class="col-span-6 sm:col-span-4 offset-2">
                 @foreach($fundingInstructions->warning_notes as $i => $note)
                     <div>

@@ -14,6 +14,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\DebtorCreditLimits.
@@ -36,7 +37,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Model  createdBetween(string $from, string $to)
  * @method static Builder|Model  updatedBetween(string $from, string $to)
  */
-class DebtorCreditLimits extends Model
+class DebtorCreditLimit extends Model
 {
     /**
      * @var array
@@ -71,10 +72,17 @@ class DebtorCreditLimits extends Model
      * @var array
      */
     protected $dates = [
-        'credit_date',
-        'credit_expiry_date',
+        'credit_date:Y-m-d',
+        'credit_expiry_date:Y-m-d',
         'created_at',
         'updated_at',
+    ];
+
+    /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'notes' => '[]',
     ];
 
     /**
@@ -83,5 +91,18 @@ class DebtorCreditLimits extends Model
     public function debtor()
     {
         return $this->belongsTo(Debtor::class);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'debtor_id' => ['int', 'exists:debtors,id'],
+            'all_customer_limit' => [Rule::requiredIf($required), 'numeric'],
+            'months_good_for' => [Rule::requiredIf($required), 'int', 'min:0', 'max:360'],
+            'credit_date' => [Rule::requiredIf($required), 'date'],
+            'credit_expiry_date' => [Rule::requiredIf($required), 'date'],
+            'notes' => ['array'],
+            'notes.*' => ['string', 'min:2', 'max:255'],
+        ];
     }
 }

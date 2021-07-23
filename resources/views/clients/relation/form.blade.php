@@ -17,7 +17,7 @@
                 <x-jet-input-error for="client.name" class="mt-3" />
             </div>
 
-            <!-- Client Name -->
+            <!-- Office -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="office" value="{{ __('Office') }}" />
                 <x-jet-input id="office" type="text" class="w-1/2 float-right" wire:model="client.office" />

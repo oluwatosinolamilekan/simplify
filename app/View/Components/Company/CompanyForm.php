@@ -20,7 +20,7 @@ class CompanyForm extends Component
 
     public function render()
     {
-        return view('company.form');
+        return view('companies.form');
     }
 
     public function getRules()

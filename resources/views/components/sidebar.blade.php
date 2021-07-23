@@ -40,6 +40,22 @@
                 </div>
             </a>
         </li>
+        <li>
+            <a href="{{ route('vendors.list') }}" class="side-menu {{request()->routeIs('vendors.list') ? 'side-menu--active' : ''}}">
+                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                <div class="side-menu__title">
+                    {{ __('Vendors') }}
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('debtors.list') }}" class="side-menu {{request()->routeIs('debtors.list') ? 'side-menu--active' : ''}}">
+                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                <div class="side-menu__title">
+                    {{ __('Debtors') }}
+                </div>
+            </a>
+        </li>
     </ul>
 </nav>
 <!-- END: Side Menu -->

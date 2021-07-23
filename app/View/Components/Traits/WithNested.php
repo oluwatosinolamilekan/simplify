@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace App\View\Components\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use Livewire\Exceptions\PublicPropertyNotFoundException;
 use Livewire\HydrationMiddleware\HashDataPropertiesForDirtyDetection;
 use Throwable;
 
@@ -43,6 +42,10 @@ trait WithNested
      */
     public function saved(string $property)
     {
+        if (! $this->propertyIsPublicAndNotDefinedOnBaseClass($property)) {
+            return;
+        }
+
         if ($this->{$property} instanceof Model) {
             $this->{$property}->exists = true;
         }
@@ -68,10 +71,9 @@ trait WithNested
         // Get model attribute to be filled.
         $model = $this->beforeFirstDot($name);
 
-        throw_unless(
-            $this->propertyIsPublicAndNotDefinedOnBaseClass($model),
-            new PublicPropertyNotFoundException($model, $this::getName())
-        );
+        if (! $this->propertyIsPublicAndNotDefinedOnBaseClass($model)) {
+            return;
+        }
 
         if ($this->containsDots($name)) {
             // Strip away model name.

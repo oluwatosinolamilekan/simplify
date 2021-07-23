@@ -25,6 +25,6 @@ class CompanyIdentityForm extends ModelForm
 
     public function render()
     {
-        return view('company.identity.form');
+        return view('companies.identity.form');
     }
 }

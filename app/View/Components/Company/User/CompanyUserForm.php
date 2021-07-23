@@ -118,7 +118,7 @@ class CompanyUserForm extends ModelForm
      */
     public function render()
     {
-        return view('company.user.form');
+        return view('companies.user.form');
     }
 
     /**

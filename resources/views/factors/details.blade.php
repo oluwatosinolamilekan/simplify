@@ -12,7 +12,7 @@
             <!-- Company Information -->
             <div class="mt-10 sm:mt-0">
                 <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-                    @include('company.details', ['company' => $company])
+                    @include('companies.details', ['company' => $company])
 
                 </div>
             </div>
@@ -22,7 +22,7 @@
             <!-- Factor Information -->
             <div class="mt-10 sm:mt-0">
                 <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-                    @include('factor.relation.details', ['company' => $company])
+                    @include('factors.relation.details', ['company' => $company])
                 </div>
             </div>
 

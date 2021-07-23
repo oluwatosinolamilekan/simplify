@@ -28,7 +28,7 @@ class UserDetails extends Component
 
     public function render()
     {
-        return view('user.details');
+        return view('users.details');
     }
 
     public function getDeleteModel()

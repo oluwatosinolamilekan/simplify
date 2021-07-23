@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
@@ -148,7 +149,7 @@ abstract class Model extends EloquentModel
 
     public function isDirty($attributes = [])
     {
-        if (! $this->exists) {
+        if (! $this->exists && empty($attributes)) {
             return ! empty(array_filter($this->getDirty(), fn ($item) => $item !== null));
         }
 
@@ -157,7 +158,7 @@ abstract class Model extends EloquentModel
 
     public function ignoreDirty($attributes)
     {
-        $this->syncOriginalAttribute($attributes);
+        $this->syncOriginalAttributes(Arr::wrap($attributes));
     }
 
     /**

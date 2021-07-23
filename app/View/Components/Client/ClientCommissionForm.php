@@ -22,7 +22,7 @@ class ClientCommissionForm extends Component
 
     public function render()
     {
-        return view('client.analysis-form');
+        return view('clients.analysis-form');
     }
 
     public static function getValidationRules(?ClientAnalysis $model = null)

@@ -19,11 +19,6 @@ class StatusTypesList
         Status::Deleted,
     ];
 
-    public const Factor = [
-        Status::Active,
-        Status::NotActive,
-    ];
-
     public const User = [
         Status::Active,
         Status::NotActive,
@@ -50,7 +45,22 @@ class StatusTypesList
         Status::Refunded,
     ];
 
+    public const Factor = [
+        Status::Active,
+        Status::NotActive,
+    ];
+
     public const Client = [
+        Status::Active,
+        Status::NotActive,
+    ];
+
+    public const Vendor = [
+        Status::Active,
+        Status::NotActive,
+    ];
+
+    public const Debtor = [
         Status::Active,
         Status::NotActive,
     ];

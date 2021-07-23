@@ -25,6 +25,6 @@ class ClientAnalysisForm extends ModelForm
 
     public function render()
     {
-        return view('client.analysis.form');
+        return view('clients.analysis.form');
     }
 }

@@ -30,6 +30,6 @@ class FactorDetails extends CompanyComponent
 
     public function render()
     {
-        return view('factor.details');
+        return view('factors.details');
     }
 }

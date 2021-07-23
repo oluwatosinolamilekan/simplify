@@ -1,15 +1,16 @@
 <x-slot name="header">
-    {{ __('Client Wizard') }}
+    {{ __('Debtor Wizard') }}
 </x-slot>
 
 
 <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
     <x-tabs tabs='{
         "general": "General",
-        "identity": {"title": "Identity & Analysis", "enabled": "{{$client->exists}}"},
-        "address": {"title": "Address & Contact Details", "enabled": "{{$client->exists}}"},
-        "bank": {"title": "Bank Information", "enabled": "{{$client->exists}}"},
-        "users": {"title": "Users", "enabled": "{{$client->exists}}"}
+        "credit": {"title": "Credit", "enabled": "{{$debtor->exists}}"},
+        "identity": {"title": "Identity", "enabled": "{{$debtor->exists}}"},
+        "address": {"title": "Address & Contact Details", "enabled": "{{$debtor->exists}}"},
+        "bank": {"title": "Bank Information", "enabled": "{{$debtor->exists}}"},
+        "users": {"title": "Users", "enabled": "{{$debtor->exists}}"}
     }'>
         <x-slot name="general">
             <form wire:submit.prevent="save">
@@ -23,22 +24,22 @@
                             <x-slot name="description">{{ __('Fill company information.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('company.form', ['company' => $company])
+                        @include('companies.form', ['company' => $company])
                     </div>
                 </div>
 
                 <x-jet-section-border />
 
-                <!-- Client Information -->
+                <!-- Debtor Information -->
                 <div class="mt-10 sm:mt-0">
                     <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
 
                         <x-jet-section-title>
-                            <x-slot name="title">{{ __('Client Information') }}</x-slot>
-                            <x-slot name="description">{{ __('Fill client information.') }}</x-slot>
+                            <x-slot name="title">{{ __('Debtor Information') }}</x-slot>
+                            <x-slot name="description">{{ __('Fill debtor information.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('client.relation.form', ['client' => $client])
+                        @include('debtors.relation.form', ['debtor' => $debtor])
                     </div>
                 </div>
 
@@ -49,52 +50,44 @@
                     <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
 
                         <x-jet-section-title>
-                            <x-slot name="title">{{ __('Factor Information') }}</x-slot>
-                            <x-slot name="description">{{ __('Select factor.') }}</x-slot>
+                            <x-slot name="title">{{ __('Client Information') }}</x-slot>
+                            <x-slot name="description">{{ __('Select client.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('client.relation.factor-form', ['client' => $client])
+                        @include('debtors.relation.client-form', ['debtor' => $debtor])
                     </div>
                 </div>
 
                 <x-jet-section-border />
 
-                <!-- Funding Instructions -->
+                <!-- Settings -->
                 <div class="mt-10 sm:mt-0">
                     <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
 
                         <x-jet-section-title>
-                            <x-slot name="title">{{ __('Funding Instructions') }}</x-slot>
-                            <x-slot name="description">{{ __('Fill funding instructions.') }}</x-slot>
+                            <x-slot name="title">{{ __('Debtor Settings') }}</x-slot>
+                            <x-slot name="description">{{ __('Fill debtor settings.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('client.funding-instructions.form', ['fundingInstructions' => $fundingInstructions, 'partial' => true, 'nested' => true])
+                        @include('debtors.settings.form', ['settings' => $settings, 'partial' => true, 'nested' => true])
                     </div>
                 </div>
 
                 <x-jet-section-border />
-
-                <!-- Credit -->
-                <div class="mt-10 sm:mt-0">
-                    <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-
-                        <x-jet-section-title>
-                            <x-slot name="title">{{ __('Credit') }}</x-slot>
-                            <x-slot name="description">{{ __('Fill credit details.') }}</x-slot>
-                        </x-jet-section-title>
-
-                        @include('client.credit.form', ['credit' => $credit, 'partial' => true, 'nested' => true])
-                    </div>
-                </div>
 
                 <!-- Actions -->
-                @include('components.forms.form-actions', ['delete' => $client->exists])
+                @include('components.forms.form-actions', ['delete' => $debtor->exists])
 
             </form>
         </x-slot>
+        <x-slot name="credit">
+            @if($debtor->exists)
+                <livewire:debtor.debtor-credit-main-form :debtor="$debtor" :partial="false" :nested="true"/>
+            @endif
+        </x-slot>
         <x-slot name="identity">
-            @if($client->exists)
-                <!-- Company Identity -->
+        @if($debtor->exists)
+            <!-- Company Identity -->
                 <div class="mt-10 sm:mt-0">
                     <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
 
@@ -108,26 +101,11 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Client Analysis -->
-                <div class="mt-10 sm:mt-0">
-                    <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-
-                        <x-jet-section-title>
-                            <x-slot name="title">{{ __('Client Analysis') }}</x-slot>
-                            <x-slot name="description">{{ __('Client analysis information.') }}</x-slot>
-                        </x-jet-section-title>
-
-                        <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <livewire:client.client-analysis-form :analysis="$analysis" :partial="false" :nested="true"/>
-                        </div>
-                    </div>
-                </div>
             @endif
         </x-slot>
         <x-slot name="address">
-            @if($client->exists)
-                <!-- Address Information -->
+        @if($debtor->exists)
+            <!-- Address Information -->
                 <div class="mt-10 sm:mt-0">
                     <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
 
@@ -162,8 +140,8 @@
 
         </x-slot>
         <x-slot name="bank">
-            @if($client->exists)
-                <!-- Bank Information -->
+        @if($debtor->exists)
+            <!-- Bank Information -->
                 <div class="mt-10 sm:mt-0">
                     <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
 
@@ -180,7 +158,7 @@
             @endif
         </x-slot>
         <x-slot name="users">
-        @if ($client->exists)
+        @if ($debtor->exists)
             <!-- Administrator Information -->
                 <div class="mt-10 sm:mt-0">
                     <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">

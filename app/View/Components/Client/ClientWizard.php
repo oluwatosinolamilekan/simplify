@@ -105,7 +105,7 @@ class ClientWizard extends CompanyComponent
      */
     public function render()
     {
-        return view('client.wizard');
+        return view('clients.wizard');
     }
 
     /**
@@ -114,8 +114,8 @@ class ClientWizard extends CompanyComponent
     public function getRules()
     {
         /** Ignore client_id change as client_id is set by default */
-        $this->fundingInstructions->ignoreDirty(['client_id']);
-        $this->credit->ignoreDirty(['client_id']);
+        $this->fundingInstructions->isDirty('client_id') && $this->fundingInstructions->ignoreDirty('client_id');
+        $this->credit->isDirty('client_id') && $this->credit->ignoreDirty('client_id');
 
         return ValidationRules::merge(
             ValidationRules::forModel('company', $this->company),
