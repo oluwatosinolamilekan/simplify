@@ -1,3 +1,8 @@
+<div class="inline-block w-full my-4">
+    <span class="text-xl font-medium mt-auto mb-auto">{{ $table_title }}</span>
+    <x-success-anchor href="{{ $button_route }}" id="{{ $button_id }}" class="mr-0 normal_letter_spacing float-right">{{ $button_text }}</x-success-anchor>
+</div>
+
 <div class="data-table-container bg-white dark:bg-dark-2 p-8 mt-0">
     @if($beforeTableSlot)
         <div class="mt-8">

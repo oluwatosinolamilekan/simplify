@@ -2,7 +2,5 @@
     {{ __('Factors List') }}
 </x-slot>
 <div>
-    <x-jet-nav-link href="{{route('factors.create')}}" id="add_new_factor">+ Add new factor</x-jet-nav-link>
-
-    @include('datatables::datatable')
+    @include('datatables::datatable', ['table_title' => "Factors List", 'button_route' => route('factors.create'), 'button_id' => "add_new_factor", 'button_text' => "Add New Factor"])
 </div>
