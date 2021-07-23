@@ -10,7 +10,7 @@
                 <x-jet-input-error for="debtor.ref_code" class="mt-3" />
             </div>
 
-            <!-- Client Name -->
+            <!-- Debtor Name -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="name" value="{{ __('Debtor Name') }}" />
                 <x-jet-input id="name" type="text" class="w-1/2 float-right" wire:model="debtor.name" />
