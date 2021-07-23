@@ -45,7 +45,7 @@ class CompanyUserForm extends ModelForm
      */
     public function mount(...$params)
     {
-        [$company, $user] = $params;
+        [$company, $user] = [$params[0], $params[1] ?? null];
 
         $attributes = ['company_id' => $company, 'user_id' => $user];
 
