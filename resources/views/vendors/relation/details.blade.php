@@ -39,7 +39,7 @@
 
             <!-- Factor -->
             <div class="col-span-6 sm:col-span-3">
-                <x-jet-label for="factor" value="{{ __('Client') }}" />
+                <x-jet-label for="client" value="{{ __('Client') }}" />
                 <span class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                     {{ $vendor->client->ref_code }} {{ $vendor->client->company->name }}
                 </span>
