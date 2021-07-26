@@ -4,14 +4,14 @@
                                                   toggle() { this.open = ! this.open },
                                                 }">
     <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-        <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-{{--        <x-success-anchor @click="toggle()"> + Add </x-success-anchor>--}}
-        <x-add-form>
-            <x-slot name="buttonName">
-               <span  x-text="!open ? 'Add Funding' : 'Cancel Funding' ">
-               </span>
-            </x-slot>
-        </x-add-form>
+        <x-success-anchor @click="toggle()">
+            <x-add-form>
+                <x-slot name="buttonName">
+                   <span  x-text="!open ? '+ Add' : '- Cancel' ">
+                   </span>
+                </x-slot>
+            </x-add-form>
+        </x-success-anchor>
     </div>
     <div x-show="isOpen">
         {{$form}}
