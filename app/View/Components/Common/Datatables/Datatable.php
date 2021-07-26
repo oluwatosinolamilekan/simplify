@@ -52,6 +52,15 @@ class Datatable extends LivewireDatatable
         }
     }
 
+    public function doDateFilterRange($index, $range)
+    {
+        [$start, $end] = empty($range) ? [null, null] : explode(' - ', $range);
+
+        parent::doDateFilterStart($index, $start);
+        parent::doDateFilterEnd($index, $end);
+        $this->clearEmptyDateFilter($index);
+    }
+
     public function doDateFilterStart($index, $start)
     {
         parent::doDateFilterStart($index, $start);

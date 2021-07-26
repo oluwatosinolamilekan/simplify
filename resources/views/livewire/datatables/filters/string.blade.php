@@ -1,17 +1,17 @@
-<div x-data class="flex flex-col">
-    <input
+<div x-data class="flex flex-col mr-2.5 ml-1 mb-3">
+    <x-input
         x-ref="input"
         type="text"
-        class="m-1 text-sm leading-4 flex-grow form-input "
         wire:change="applyFilter('text', '{{ $index }}', $event.target.value)"
         x-on:change="$refs.input.value = ''"
+        placeholder="{{ $name }}"
+        class="h-8 mt-2.5 text-sm-13 dark:bg-dark-2"
     />
-    <div class="flex flex-wrap max-w-48 space-x-1">
+    <div class="flex flex-wrap max-w-48">
         @foreach($this->activeTextFilters[$index] ?? [] as $key => $value)
-        <button wire:click="removeFilter('text', '{{ $index }}', '{{ $key }}')" class="m-1 pl-1 flex items-center uppercase tracking-wide bg-gray-300 text-white hover:bg-red-600 rounded-full focus:outline-none text-xs space-x-1">
-            <span>{{ $this->getDisplayValue($index, $value) }}</span>
-            <x-icons.x-circle />
-        </button>
+        <x-selected-filter-tag wire:click="removeFilter('text', '{{ $index }}', '{{ $key }}')">
+            <span class="pr-2">{{ $this->getDisplayValue($index, $value) }}</span>
+        </x-selected-filter-tag>
         @endforeach
     </div>
 </div>
