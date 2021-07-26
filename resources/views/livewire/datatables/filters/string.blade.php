@@ -5,7 +5,7 @@
         wire:change="applyFilter('text', '{{ $index }}', $event.target.value)"
         x-on:change="$refs.input.value = ''"
         placeholder="{{ $name }}"
-        class="h-8 mt-2.5 text-sm-13"
+        class="h-8 mt-2.5 text-sm-13 dark:bg-dark-2"
     />
     <div class="flex flex-wrap max-w-48">
         @foreach($this->activeTextFilters[$index] ?? [] as $key => $value)

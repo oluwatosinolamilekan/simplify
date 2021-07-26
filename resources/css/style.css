@@ -176,7 +176,6 @@ select.form-control
      appearance: auto !important;
 }
 
-
 .table_label {
     font-size: 13px;
     font-weight: 500;
@@ -226,6 +225,10 @@ select.form-control
 
 .text-sm-13 {
     font-size: 13px;
+}
+
+.column_item:last-child > div {
+    border: none !important;
 }
 
 @media only screen and (min-width: 1279px) {

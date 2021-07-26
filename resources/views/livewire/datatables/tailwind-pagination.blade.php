@@ -1,12 +1,12 @@
 <div class="pagination flex rounded overflow-hidden">
     <!-- Previous Page Link -->
     @if ($paginator->onFirstPage())
-    <x-pagination-button disabled>
+    <x-pagination-button disabled class="dark:text-gray-700">
         <span><x-icons.chevronleft/></span>
     </x-pagination-button>
     @else
     <x-pagination-button wire:click="previousPage"
-        class="text-gray-700 hover:text-gray-400 focus:outline-none focus:z-10 active:text-theme-18">
+        class="text-gray-700 hover:text-gray-400 focus:outline-none focus:z-10 active:text-theme-18 dark:text-gray-500 dark:hover:text-white">
         <span><x-icons.chevronleft/></span>
     </x-pagination-button>
     @endif
@@ -24,7 +24,7 @@
         @if (is_array($element))
         @foreach ($element as $page => $url)
         <x-pagination-button wire:click="gotoPage({{ $page }})"
-                class="-mx-1 px-5 text-gray-700 hover:text-gray-500 focus:outline-none focus:z-10 active:text-theme-18 {{ $page === $paginator->currentPage() ? 'text-theme-18' : 'bg-white' }}">
+                class="-mx-1 px-5 hover:text-gray-500 focus:outline-none focus:z-10 active:text-theme-18 dark:hover:text-white {{ $page === $paginator->currentPage() ? 'text-theme-18 dark:text-theme-18' : 'dark:text-gray-400 text-gray-700' }}">
             {{ $page }}
             </x-pagination-button>
         @endforeach
@@ -35,11 +35,11 @@
     <!-- Next Page Link -->
     @if ($paginator->hasMorePages())
     <x-pagination-button wire:click="nextPage"
-        class="-ml-px text-gray-700 hover:text-gray-400 focus:outline-none focus:z-10 active:text-theme-18">
+        class="-ml-px text-gray-700 hover:text-gray-400 focus:outline-none focus:z-10 active:text-theme-18 dark:text-gray-500 dark:hover:text-white">
         <span><x-icons.chevronright/></span>
     </x-pagination-button>
     @else
-    <x-pagination-button disabled>
+    <x-pagination-button disabled class="dark:text-gray-700">
         <span><x-icons.chevronright/></span>
     </x-pagination-button>
     @endif

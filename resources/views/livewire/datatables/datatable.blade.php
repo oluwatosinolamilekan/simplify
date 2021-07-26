@@ -60,17 +60,17 @@
             </div>
         @endif
 
-        <div class="rounded-lg shadow-lg bg-white max-w-screen overflow-x-scroll">
+        <div class="rounded-lg shadow-lg bg-white dark:bg-dark-1 max-w-screen overflow-x-scroll">
             <div class="rounded-lg @unless($this->hidePagination) rounded-b-none @endif">
                 <div class="table align-middle min-w-full">
                     @unless($this->hideHeader)
-                        <div class="table-row">
+                        <div class="table-row dark:bg-dark-1">
                             @foreach($this->columns as $index => $column)
                                 @if($hideable === 'inline')
                                     @include('datatables::header-inline-hide', ['column' => $column, 'sort' => $sort])
                                 @elseif($column['type'] === 'checkbox')
-                                    <div class="relative table-cell h-12 w-12 overflow-hidden align-top px-6 py-3 border-b border-gray-300 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider flex items-center focus:outline-none">
-                                        <div class="px-1 py-1 rounded @if(count($selected)) bg-orange-400 @else bg-gray-200 @endif text-gray-500 text-center">
+                                    <div class="relative table-cell h-12 w-12 overflow-hidden align-top px-6 py-3 border-b border-gray-300 bg-gray-50 dark:bg-dark-1 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider flex items-center focus:outline-none">
+                                        <div class="px-1 py-1 rounded @if(count($selected)) bg-orange-400 @else bg-gray-200 @endif text-gray-500 text-center dark:bg-dark-2">
                                             {{ count($selected) }}
                                         </div>
                                     </div>
@@ -80,7 +80,7 @@
                             @endforeach
                         </div>
 
-                        <div class="table-row bg-white">
+                        <div class="table-row bg-white dark:bg-dark-1">
                             @foreach($this->columns as $index => $column)
                                 @if($column['hidden'])
                                     @if($hideable === 'inline')
@@ -96,7 +96,7 @@
                                 @elseif($column['type'] === 'actions')
                                     <div class="table-cell border-b border-gray-300 w-5 overflow-hidden align-top">
                                         @if ($this->getActiveFiltersProperty())
-                                            <x-light-anchor wire:click="clearAllFilters" class="mr-2.5 h-8 mt-2.5 pt-1.5">
+                                            <x-light-anchor wire:click="clearAllFilters" class="mr-2.5 h-8 mt-2.5 pt-1.5 dark:bg-dark-2">
                                                 <span class="nowrap">Clear All</span>
                                             </x-light-anchor>
                                         @endif
@@ -120,7 +120,7 @@
                         </div>
                     @endif
                     @foreach($this->results as $result)
-                        <div class="table-row p-1 {{ isset($result->checkbox_attribute) && in_array($result->checkbox_attribute, $selected) ? 'bg-orange-100' : ($loop->even ? 'bg-white' : 'bg-white') }}">
+                        <div class="table-row p-1 dark:bg-dark-1 {{ isset($result->checkbox_attribute) && in_array($result->checkbox_attribute, $selected) ? 'bg-orange-100' : ($loop->even ? 'bg-white' : 'bg-white') }}">
                             @foreach($this->columns as $column)
                                 @if($column['hidden'])
                                     @if($hideable === 'inline')
@@ -129,7 +129,7 @@
                                 @elseif($column['type'] === 'checkbox')
                                     @include('datatables::checkbox', ['value' => $result->checkbox_attribute])
                                 @else
-                                    <div class="relative table_cell_value min-w-min pl-1 pr-4 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900 table-cell border-b border-gray-300 @if($column['align'] === 'right') text-right @elseif($column['align'] === 'center') text-center @else text-left @endif">
+                                    <div class="relative table_cell_value min-w-min pl-1 pr-4 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900 dark:text-white table-cell border-b border-gray-300 @if($column['align'] === 'right') text-right @elseif($column['align'] === 'center') text-center @else text-left @endif">
                                         {!! $result->{$column['name']} !!}
                                     </div>
                                 @endif
@@ -147,12 +147,12 @@
             @endif
 
             @unless($this->hidePagination)
-                <div class="rounded-lg rounded-t-none max-w-screen rounded-lg border-b border-gray-200 bg-white">
+                <div class="rounded-lg rounded-t-none max-w-screen rounded-lg border-b border-gray-200 bg-white dark:bg-dark-1">
                     <div class="p-2 sm:flex items-center justify-between">
                         {{-- check if there is any data --}}
                         @if($this->results[1])
                             <div class="my-2 sm:my-0 flex items-center">
-                                <x-select name="perPage" wire:model="perPage" class="h-8 pt-1 pb-1 pr-8">
+                                <x-select name="perPage" wire:model="perPage" class="h-8 pt-1 pb-1 pr-8 dark:bg-dark-2">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
