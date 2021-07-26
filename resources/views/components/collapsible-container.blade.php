@@ -5,7 +5,12 @@
                                                 }">
     <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
         <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-        <x-success-anchor @click="toggle()"> + Add </x-success-anchor>
+{{--        <x-success-anchor @click="toggle()"> + Add </x-success-anchor>--}}
+        <x-add-form>
+            <x-slot  name="buttonName">
+                Add Funding
+            </x-slot>
+        </x-add-form>
     </div>
     <div x-show="isOpen">
         {{$form}}
