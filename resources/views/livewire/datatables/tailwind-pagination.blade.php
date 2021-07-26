@@ -1,33 +1,32 @@
-<div class="pagination flex rounded border border-gray-300 overflow-hidden divide-x divide-gray-300">
+<div class="pagination flex rounded overflow-hidden">
     <!-- Previous Page Link -->
     @if ($paginator->onFirstPage())
-    <button class="relative inline-flex items-center px-2 py-2 bg-white text-sm leading-5 font-medium text-gray-500"
-        disabled>
-        <span>&laquo;</span>
-    </button>
+    <x-pagination-button disabled class="dark:text-gray-700">
+        <span><x-icons.chevronleft/></span>
+    </x-pagination-button>
     @else
-    <button wire:click="previousPage"
-        class="relative inline-flex items-center px-2 py-2 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150">
-        <span>&laquo;</span>
-    </button>
+    <x-pagination-button wire:click="previousPage"
+        class="text-gray-700 hover:text-gray-400 focus:outline-none focus:z-10 active:text-theme-18 dark:text-gray-500 dark:hover:text-white">
+        <span><x-icons.chevronleft/></span>
+    </x-pagination-button>
     @endif
 
-    <div class="divide-x divide-gray-300">
+    <div class="">
         @foreach ($elements as $element)
         @if (is_string($element))
-        <button class="-ml-px relative inline-flex items-center px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700" disabled>
+        <x-pagination-button class="px-5 text-gray-700" disabled>
             <span>{{ $element }}</span>
-        </button>
+        </x-pagination-button>
         @endif
 
         <!-- Array Of Links -->
 
         @if (is_array($element))
         @foreach ($element as $page => $url)
-        <button wire:click="gotoPage({{ $page }})"
-                class="-mx-1 relative inline-flex items-center px-4 py-2 text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 {{ $page === $paginator->currentPage() ? 'bg-gray-200' : 'bg-white' }}">
+        <x-pagination-button wire:click="gotoPage({{ $page }})"
+                class="-mx-1 px-5 hover:text-gray-500 focus:outline-none focus:z-10 active:text-theme-18 dark:hover:text-white {{ $page === $paginator->currentPage() ? 'text-theme-18 dark:text-theme-18' : 'dark:text-gray-400 text-gray-700' }}">
             {{ $page }}
-            </button>
+            </x-pagination-button>
         @endforeach
         @endif
         @endforeach
@@ -35,13 +34,13 @@
 
     <!-- Next Page Link -->
     @if ($paginator->hasMorePages())
-    <button wire:click="nextPage"
-        class="-ml-px relative inline-flex items-center px-2 py-2 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150">
-        <span>&raquo;</span>
-    </button>
+    <x-pagination-button wire:click="nextPage"
+        class="-ml-px text-gray-700 hover:text-gray-400 focus:outline-none focus:z-10 active:text-theme-18 dark:text-gray-500 dark:hover:text-white">
+        <span><x-icons.chevronright/></span>
+    </x-pagination-button>
     @else
-    <button
-        class="-ml-px relative inline-flex items-center px-2 py-2 bg-white text-sm leading-5 font-medium text-gray-500 "
-        disabled><span>&raquo;</span></button>
+    <x-pagination-button disabled class="dark:text-gray-700">
+        <span><x-icons.chevronright/></span>
+    </x-pagination-button>
     @endif
 </div>

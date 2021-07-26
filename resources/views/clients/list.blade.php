@@ -2,7 +2,5 @@
     {{ __('Clients List') }}
 </x-slot>
 <div>
-    <x-jet-nav-link href="{{route('clients.create')}}">+ Add new client</x-jet-nav-link>
-
-    @include('datatables::datatable')
+    @include('datatables::datatable', ['table_title' => "Clients List", 'button_route' => route('clients.create'), 'button_id' => "add_new_client", 'button_text' => "Add New Client"])
 </div>
