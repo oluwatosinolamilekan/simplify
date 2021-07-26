@@ -99,8 +99,12 @@ class DebtorCreditMainForm extends ModelForm
         try {
             DB::beginTransaction();
 
-            $this->credit->save();
-            $this->creditLimit->save();
+            if ($this->credit->isDirty()) {
+                $this->credit->save();
+            }
+            if ($this->creditLimit->isDirty()) {
+                $this->creditLimit->save();
+            }
 
             DB::commit();
 
