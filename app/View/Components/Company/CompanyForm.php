@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace App\View\Components\Company;
 
 use App\Models\Company;
-use App\View\Components\Component;
+use App\View\Components\ModelForm;
 
-class CompanyForm extends Component
+class CompanyForm extends ModelForm
 {
     public Company $company;
 
@@ -23,8 +23,8 @@ class CompanyForm extends Component
         return view('companies.form');
     }
 
-    public function getRules()
+    public function getProperty()
     {
-        return $this->company->getRules(true);
+        return 'company';
     }
 }

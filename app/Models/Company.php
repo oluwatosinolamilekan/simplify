@@ -114,8 +114,9 @@ class Company extends Model
     {
         return [
             'name' => ['required', 'string', 'min:2', 'max:255'],
-            'domain' => ['required', 'string', 'min:2', 'max:125',
-                $this->exists ? Rule::unique('companies', 'domain')->ignore($this->id) : 'unique:companies,domain',
+            'domain' => [
+                'required', 'string', 'min:2', 'max:125',
+                Rule::unique('companies', 'domain')->ignore($this->id),
             ],
         ];
     }
