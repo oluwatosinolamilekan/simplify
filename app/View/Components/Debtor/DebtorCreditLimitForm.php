@@ -25,16 +25,12 @@ class DebtorCreditLimitForm extends ModelForm
 
     public function updatedCreditLimitCreditDate()
     {
-        if ($this->creditLimit->credit_expiry_date) {
-            $this->creditLimit->months_good_for = $this->creditLimit->credit_expiry_date->diffInMonths($this->creditLimit->credit_date);
-        }
+        $this->creditLimit->calcMonthsGoodFor();
     }
 
     public function updatedCreditLimitCreditExpiryDate()
     {
-        if ($this->creditLimit->credit_date) {
-            $this->creditLimit->months_good_for = $this->creditLimit->credit_expiry_date->diffInMonths($this->creditLimit->credit_date);
-        }
+        $this->creditLimit->calcMonthsGoodFor();
     }
 
     public function render()

@@ -99,10 +99,19 @@ class DebtorCreditLimit extends Model
             'debtor_id' => ['int', 'exists:debtors,id'],
             'all_customer_limit' => [Rule::requiredIf($required), 'numeric'],
             'months_good_for' => [Rule::requiredIf($required), 'int', 'min:0', 'max:360'],
-            'credit_date' => [Rule::requiredIf($required), 'date'],
-            'credit_expiry_date' => [Rule::requiredIf($required), 'date'],
+            'credit_date' => [Rule::requiredIf($required), 'date', 'date_format:Y-m-d', 'before:credit_expiry_date'],
+            'credit_expiry_date' => [Rule::requiredIf($required), 'date', 'date_format:Y-m-d', 'after:credit_date'],
             'notes' => ['array'],
             'notes.*' => ['string', 'min:2', 'max:255'],
         ];
+    }
+
+    public function calcMonthsGoodFor()
+    {
+        if (! $this->credit_date || ! $this->credit_expiry_date) {
+            return;
+        }
+
+        $this->months_good_for = (new Carbon($this->credit_expiry_date))->diffInMonths(new Carbon($this->credit_date));
     }
 }

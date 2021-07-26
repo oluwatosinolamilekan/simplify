@@ -17,6 +17,7 @@ use App\Models\DebtorCreditLimit;
 use App\Support\Validation\ValidationRules;
 use App\View\Components\ModelForm;
 use App\View\Components\Traits\WithNested;
+use DB;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -79,6 +80,30 @@ class DebtorCreditMainForm extends ModelForm
     }
 
     /**
+     * Save action for component model.
+     */
+    public function save()
+    {
+        $this->validate();
+
+        try {
+            DB::beginTransaction();
+
+            $this->credit->save();
+            $this->creditLimit->save();
+
+            DB::commit();
+
+            $this->successAlert();
+
+            $this->emitUp('saved', $this->getProperty());
+        } catch (Exception $exception) {
+            DB::rollBack();
+            $this->exceptionAlert($exception);
+        }
+    }
+
+    /**
      * @return mixed|string
      */
     public function getProperty()
@@ -92,5 +117,15 @@ class DebtorCreditMainForm extends ModelForm
     public function render()
     {
         return view('debtors.credit.form');
+    }
+
+    public function updatedCreditLimitCreditDate()
+    {
+        $this->creditLimit->calcMonthsGoodFor();
+    }
+
+    public function updatedCreditLimitCreditExpiryDate()
+    {
+        $this->creditLimit->calcMonthsGoodFor();
     }
 }
