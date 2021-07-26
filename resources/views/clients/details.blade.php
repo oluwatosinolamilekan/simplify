@@ -68,10 +68,9 @@
                     @else
                         <x-collapsible-container>
                             <x-slot name="form">
-                                <livewire:client.client-credit-form :credit="$credit" :partial="false" :nested="true"/>
+                                <livewire:client.client-funding-instructions-form :fundingInstructions="$fundingInstructions" :partial="false" :nested="true" />
                             </x-slot>
                         </x-collapsible-container>
-
                     @endif
                 </div>
             </div>
@@ -118,7 +117,6 @@
                                 <livewire:client.client-analysis-form :analysis="$analysis" :partial="false" :nested="true"/>
                             </x-slot>
                         </x-collapsible-container>
-
                     @endif
                 </div>
             </div>
@@ -142,6 +140,7 @@
                                 <livewire:address.address-form :address="$address" :partial="false" :nested="true"/>
                             </x-slot>
                         </x-collapsible-container>
+
                     @endif
                 </div>
             </div>
@@ -187,6 +186,7 @@
                                 <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false" :nested="true"/>
                             </x-slot>
                         </x-collapsible-container>
+
                     @endif
                 </div>
             </div>
