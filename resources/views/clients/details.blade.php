@@ -43,14 +43,11 @@
                     @if ($fundingInstructions->exists)
                         @include('clients.funding-instructions.details', ['fundingInstructions' => $fundingInstructions])
                     @else
-                        <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <x-success-anchor> + Add </x-success-anchor>
-                            </div>
-
-                            <livewire:client.client-funding-instructions-form :fundingInstructions="$fundingInstructions" :partial="false" :nested="true"/>
-                        </div>
+                       <x-collapsible-container>
+                           <x-slot name="form">
+                               <livewire:client.client-funding-instructions-form :fundingInstructions="$fundingInstructions" :partial="false" :nested="true" />
+                           </x-slot>
+                       </x-collapsible-container>
                     @endif
                 </div>
             </div>
