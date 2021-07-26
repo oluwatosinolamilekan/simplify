@@ -12,10 +12,12 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\Status;
+use App\Enums\StatusTypesList;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\Debtor.
@@ -82,6 +84,13 @@ class Debtor extends Model
     ];
 
     /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'status' => Status::Active,
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function client()
@@ -106,10 +115,40 @@ class Debtor extends Model
     }
 
     /**
-     * @return HasMany
+     * @return HasOne
      */
-    public function invoices()
+    public function settings()
     {
-        return $this->hasMany(Invoice::class);
+        return $this->hasOne(DebtorSettings::class);
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function credit()
+    {
+        return $this->hasOne(DebtorCredit::class);
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function creditLimit()
+    {
+        return $this->hasOne(DebtorCreditLimit::class);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'name' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'ref_code' => [
+                Rule::requiredIf($required), 'string', 'min:2', 'max:125',
+                Rule::unique('debtors', 'ref_code')->ignore($this->id),
+            ],
+            'status' => [Rule::requiredIf($required), 'int', Rule::in(StatusTypesList::Debtor)],
+            'factor_id' => [Rule::requiredIf($required), 'int', 'exists:factors,id'],
+            'client_id' => [Rule::requiredIf($required), 'int', 'exists:clients,id'],
+        ];
     }
 }

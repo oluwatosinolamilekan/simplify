@@ -29,7 +29,7 @@ class FactorsList extends Datatable
 
     public function render()
     {
-        return view('factor.list');
+        return view('factors.list');
     }
 
     public function builder()

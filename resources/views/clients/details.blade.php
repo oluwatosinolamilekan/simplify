@@ -15,7 +15,7 @@
             <!-- Company Information -->
             <div class="mt-10 sm:mt-0">
                 <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-                    @include('company.details', ['company' => $company])
+                    @include('companies.details', ['company' => $company])
 
                 </div>
             </div>
@@ -25,7 +25,7 @@
             <!-- Client Information -->
             <div class="mt-10 sm:mt-0">
                 <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-                    @include('client.relation.details', ['company' => $company])
+                    @include('clients.relation.details', ['company' => $company])
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
                     </x-jet-section-title>
 
                 @if ($fundingInstructions->exists)
-                        @include('client.funding-instructions.details', ['fundingInstructions' => $fundingInstructions])
+                        @include('clients.funding-instructions.details', ['fundingInstructions' => $fundingInstructions])
                     @else
                         <div class="mt-5 md:mt-0 md:col-span-2" >
                             <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
@@ -67,7 +67,7 @@
                     </x-jet-section-title>
 
                     @if ($credit->exists)
-                        @include('client.credit.details', ['credit' => $credit])
+                        @include('clients.credit.details', ['credit' => $credit])
                     @else
                         <div class="mt-5 md:mt-0 md:col-span-2" >
                             <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
@@ -94,14 +94,12 @@
                     </x-jet-section-title>
 
                     @if ($identity->exists)
-                        @include('company.identity.details', ['identity' => $identity])
+                        @include('companies.identity.details', ['identity' => $identity])
                     @else
                         <div class="mt-5 md:mt-0 md:col-span-2" >
                             <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
                                 <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <a class="p-4 cursor-pointer bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                    + Add
-                                </a>
+                                <x-success-anchor> + Add </x-success-anchor>
                             </div>
 
                             <livewire:company.company-identity-form :identity="$identity" :partial="false" :nested="true"/>
@@ -121,14 +119,12 @@
                     </x-jet-section-title>
 
                 @if ($analysis->exists)
-                        @include('client.analysis.details', ['analysis' => $analysis])
+                        @include('clients.analysis.details', ['analysis' => $analysis])
                     @else
                         <div class="mt-5 md:mt-0 md:col-span-2" >
                             <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
                                 <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <a class="p-4 cursor-pointer bg-theme-18 text-center mx-2 px-4 py-4 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                                    + Add
-                                </a>
+                                <x-success-anchor> + Add </x-success-anchor>
                             </div>
                             <livewire:client.client-analysis-form :analysis="$analysis" :partial="false" :nested="true"/>
                         </div>

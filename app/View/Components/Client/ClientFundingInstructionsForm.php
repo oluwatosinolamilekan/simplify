@@ -19,7 +19,6 @@ class ClientFundingInstructionsForm extends ModelForm
     public ClientFundingInstructions $fundingInstructions;
 
     public ?string $warningNote = null;
-    public ?string $fundingNote = null;
 
     public function mount(ClientFundingInstructions $fundingInstructions)
     {
@@ -28,7 +27,7 @@ class ClientFundingInstructionsForm extends ModelForm
 
     public function render()
     {
-        return view('client.funding-instructions.form');
+        return view('clients.funding-instructions.form');
     }
 
     public function getProperty()

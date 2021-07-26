@@ -23,7 +23,7 @@ class SubscriptionPlanForm extends Component
 
     public function render()
     {
-        return view('factor.subscription-plan-form');
+        return view('factors.subscription-plan-form');
     }
 
     public function getRules()

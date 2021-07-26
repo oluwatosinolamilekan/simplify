@@ -11,7 +11,7 @@
 
     <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
         <div class="grid grid-cols-6 gap-6">
-            @include('company.user.partials.user-form', ['user' => $user, 'editable' => !$userCompanyAccess->exists])
+            @include('companies.user.partials.user-form', ['user' => $user, 'editable' => !$userCompanyAccess->exists])
         </div>
 
         <div class="col-span-6 sm:col-span-6">
@@ -22,7 +22,7 @@
         <x-jet-section-border />
 
         <div class="grid grid-cols-6 gap-6">
-            @include('company.user.partials.company-access-form', ['userCompanyAccess' => $userCompanyAccess])
+            @include('companies.user.partials.company-access-form', ['userCompanyAccess' => $userCompanyAccess])
         </div>
 
     </div>

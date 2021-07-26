@@ -31,7 +31,7 @@ class ClientForm extends Component
 
     public function render()
     {
-        return view('client.relation-form');
+        return view('clients.relation-form');
     }
 
     public function getRules()

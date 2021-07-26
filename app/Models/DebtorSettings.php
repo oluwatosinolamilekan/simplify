@@ -14,6 +14,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\DebtorSettings.
@@ -68,10 +69,33 @@ class DebtorSettings extends Model
     ];
 
     /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'buy_status' => true,
+        'do_not_contact' => true,
+        'require_original_invoices' => false,
+        'warning_notes' => '[]',
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function debtor()
     {
         return $this->belongsTo(Debtor::class);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'debtor_id' => ['int', 'exists:debtors,id'],
+            'buy_status' => [Rule::requiredIf($required), 'boolean'],
+            'do_not_contact' => [Rule::requiredIf($required), 'boolean'],
+            'require_original_invoices' => [Rule::requiredIf($required), 'boolean'],
+            'noa_email' => [Rule::requiredIf($required), 'string', 'email', 'min:2', 'max:255'],
+            'warning_notes' => ['array'],
+            'warning_notes.*' => ['string', 'min:2', 'max:255'],
+        ];
     }
 }

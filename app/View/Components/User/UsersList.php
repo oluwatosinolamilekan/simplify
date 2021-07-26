@@ -31,7 +31,7 @@ class UsersList extends Datatable
 
     public function render()
     {
-        return view('user.list');
+        return view('users.list');
     }
 
     public function builder()

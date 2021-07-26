@@ -29,7 +29,7 @@ class ClientList extends Datatable
 
     public function render()
     {
-        return view('client.list');
+        return view('clients.list');
     }
 
     public function builder()

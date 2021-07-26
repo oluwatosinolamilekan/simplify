@@ -13,6 +13,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Validation\Rule;
 
 /**
  * App/Models/VendorSettings.
@@ -60,10 +61,27 @@ class VendorSettings extends Model
     ];
 
     /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'buy_status' => true,
+        'send_email_remittances' => true,
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function vendor()
     {
         return $this->belongsTo(Vendor::class);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'vendor_id' => ['int', 'exists:vendors,id'],
+            'buy_status' => [Rule::requiredIf($required), 'boolean'],
+            'send_email_remittances' => [Rule::requiredIf($required), 'boolean'],
+        ];
     }
 }

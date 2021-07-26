@@ -14,6 +14,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\DebtorCredit.
@@ -54,6 +55,13 @@ class DebtorCredit extends Model
     ];
 
     /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'notes' => '[]',
+    ];
+
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -69,5 +77,16 @@ class DebtorCredit extends Model
     public function debtor()
     {
         return $this->belongsTo(Debtor::class);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'debtor_id' => ['int', 'exists:debtors,id'],
+            'annual_sales' => [Rule::requiredIf($required), 'numeric'],
+            'net_worth' => [Rule::requiredIf($required), 'numeric'],
+            'notes' => ['array'],
+            'notes.*' => ['string', 'min:2', 'max:255'],
+        ];
     }
 }

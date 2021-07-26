@@ -11,9 +11,7 @@ declare(strict_types=1);
 
 namespace App\View\Components\Factor;
 
-use App\Enums\Status;
 use App\Models\Factor;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class FactorForm extends Component
@@ -22,7 +20,7 @@ class FactorForm extends Component
 
     public function render()
     {
-        return view('factor.relation-form');
+        return view('factors.relation-form');
     }
 
     public function getRules()

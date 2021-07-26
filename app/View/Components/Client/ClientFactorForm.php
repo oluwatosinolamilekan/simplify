@@ -20,7 +20,7 @@ class ClientFactorForm extends Component
 
     public function render()
     {
-        return view('client.factor-form');
+        return view('clients.factor-form');
     }
 
     public function getRules()

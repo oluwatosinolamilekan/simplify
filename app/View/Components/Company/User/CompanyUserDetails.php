@@ -28,7 +28,7 @@ class CompanyUserDetails extends Component
 
     public function render()
     {
-        return view('company.user.details');
+        return view('companies.user.details');
     }
 
     public function getDeleteModel()
