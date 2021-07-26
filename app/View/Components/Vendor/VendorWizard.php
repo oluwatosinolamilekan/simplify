@@ -54,7 +54,7 @@ class VendorWizard extends CompanyComponent
     public function save()
     {
         $this->vendor->getRelatedInstanceOrNew('client', true);
-        $this->vendor->factor_id = $this->vendor->client->factor_id;
+        $this->vendor->factor_id = $this->vendor->client->factor_id ?? null;
 
         $this->validate();
 

@@ -58,7 +58,7 @@ class DebtorWizard extends CompanyComponent
     public function save()
     {
         $this->debtor->getRelatedInstanceOrNew('client', true);
-        $this->debtor->factor_id = $this->debtor->client->factor_id;
+        $this->debtor->factor_id = $this->debtor->client->factor_id ?? null;
 
         $this->validate();
 

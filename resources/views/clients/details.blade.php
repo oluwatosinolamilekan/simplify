@@ -40,7 +40,7 @@
                         <x-slot name="description">{{ __('Funding Instructions Information.') }}</x-slot>
                     </x-jet-section-title>
 
-                @if ($fundingInstructions->exists)
+                    @if ($fundingInstructions->exists)
                         @include('clients.funding-instructions.details', ['fundingInstructions' => $fundingInstructions])
                     @else
                         <div class="mt-5 md:mt-0 md:col-span-2" >
