@@ -2,7 +2,7 @@
     <div class="w-full relative flex">
         <div class="relative">
 
-            <x-input x-ref="range" id="datepicker" wire:selected="doDateFilterRange('{{ $index }}', $event.target.value)" class="h-8 mt-auto pr-7 mt-2.5 text-sm-13 dark:bg-dark-2" placeholder="Select Date.." />
+            <x-input x-ref="range" id="datepicker" autocomplete="off" wire:selected="doDateFilterRange('{{ $index }}', $event.target.value)" class="h-8 mt-auto pr-7 mt-2.5 text-sm-13 dark:bg-dark-2" placeholder="Select.." />
 
             <div class="absolute inset-y-0 right-0 pr-2 flex items-center mt-2.5">
                 <x-icons.calendar />

@@ -10,6 +10,43 @@ a[disabled], a.disabled, a:disabled {
     color: gray;
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #edf2f7;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #dcdcdc;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #c7c7c7;
+}
+
+/* Track */
+.dark ::-webkit-scrollbar-track {
+    background: #262d40;
+}
+
+/* Handle */
+.dark ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #1d2331;
+}
+
+/* Handle on hover */
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #171c27;
+}
+
 .login .guest-layout-intro-title {
     font-size: 39px;
     color: #59BABE;
@@ -229,6 +266,17 @@ select.form-control
 
 .column_item:last-child > div {
     border: none !important;
+}
+
+.dark .view_icon path,
+.dark .view_icon rect,
+.dark .edit_icon path,
+.dark .edit_icon rect {
+    stroke: #a0aec0 !important;
+}
+
+.dark .litepicker {
+    box-shadow: 0px 0px 5px 0px #232a3b;
 }
 
 @media only screen and (min-width: 1279px) {

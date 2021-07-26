@@ -19,7 +19,7 @@
                                 <x-icons.search class="mr-2 text-gray-400"/>
                             </div>
 
-                            <x-input wire:model.debounce.500ms="search" class="mt-auto py-2.5 px-9" placeholder="Search in {{ $this->searchableColumns()->map->label->join(', ') }}" />
+                            <x-input wire:model.debounce.500ms="search" class="mt-auto py-2.5 px-9" placeholder="Search..." />
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                                 <x-clear-filter wire:click="$set('search', null)"/>
                             </div>
@@ -60,7 +60,7 @@
             </div>
         @endif
 
-        <div class="rounded-lg shadow-lg bg-white dark:bg-dark-1 max-w-screen overflow-x-scroll">
+        <div class="rounded-lg shadow-lg bg-white dark:bg-dark-1 max-w-screen overflow-x-auto">
             <div class="rounded-lg @unless($this->hidePagination) rounded-b-none @endif">
                 <div class="table align-middle min-w-full">
                     @unless($this->hideHeader)
