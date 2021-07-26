@@ -36,8 +36,8 @@
                 <div class="col-span-6 sm:col-span-6">
                     <x-jet-label for="warning_note" value="{{ __('Notes') }}"/>
                     <div class="sm:inline-block w-1/2 float-right">
-                        <x-jet-input id="credit_limit_note" type="text" wire:model="creditLimitNote" class="w-3/4"/>
-                        <x-success-anchor wire:click="addCreditLimitNote"> + Add </x-success-anchor>
+                        <x-jet-input id="credit_limit_note" type="text" wire:model.defer="creditLimit.notes.{{count($creditLimit->notes ?? [])}}" class="w-3/4"/>
+                        <x-success-anchor wire:click="addNote"> + Add </x-success-anchor>
                         <x-jet-input-error for="credit_limit_note" class="mt-3" />
                     </div>
 

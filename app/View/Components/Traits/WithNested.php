@@ -86,8 +86,18 @@ trait WithNested
             // Merge in new data.
             data_set($results, $attribute, $value);
 
-            // Re-assign data to model.
-            data_set($this->{$model}, $attribute, $results[$attribute]);
+            // TODO @Jovana: Handle this in a model method instead of here
+            $property = $this->beforeFirstDot($attribute);
+            if (is_array($this->{$model}->{$property})) {
+                $index = $this->afterFirstDot($attribute);
+
+                $data = $this->{$model}->{$property};
+                data_set($data, $index, data_get($results, $attribute));
+                $this->{$model}->{$property} = $data;
+            } else {
+                // Re-assign data to model.
+                data_set($this->{$model}, $attribute, data_get($results, $attribute));
+            }
         } else {
             $this->{$name} = $value;
         }
