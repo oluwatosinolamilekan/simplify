@@ -79,6 +79,16 @@ class DebtorCreditMainForm extends ModelForm
         );
     }
 
+    public function addNote()
+    {
+        // TODO @Jovana: validate only notes
+    }
+
+    public function deleteNote()
+    {
+        // TODO @Jovana: implement
+    }
+
     /**
      * Save action for component model.
      */
