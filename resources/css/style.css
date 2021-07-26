@@ -260,6 +260,10 @@ select.form-control
     padding-left: 20px;
 }
 
+.data-table-container .table_cell_value:first-child {
+    padding-left: 20px;
+}
+
 .text-sm-13 {
     font-size: 13px;
 }

@@ -2,7 +2,5 @@
     {{ __('Vendors List') }}
 </x-slot>
 <div>
-    <x-jet-nav-link href="{{route('vendors.create')}}">+ Add new vendor</x-jet-nav-link>
-
-    @include('datatables::datatable')
+    @include('datatables::datatable', ['button_route' => route('vendors.create'), 'button_id' => "add_new_vendor", 'button_text' => "Add New Vendor"])
 </div>
