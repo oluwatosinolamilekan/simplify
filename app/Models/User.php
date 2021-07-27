@@ -13,8 +13,8 @@ namespace App\Models;
 
 use App\Enums\Role;
 use App\Enums\Status;
-use App\Models\Traits\HasMeta;
 use App\Models\Traits\MustConfigurePassword;
+use App\Models\Traits\UsesJsonAttributes;
 use App\Models\Traits\UsesTimestampScopes;
 use BenSampo\Enum\Traits\CastsEnums;
 use Eloquent;
@@ -68,7 +68,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
     use TwoFactorAuthenticatable;
     use CastsEnums;
     use UsesTimestampScopes;
-    use HasMeta;
+    use UsesJsonAttributes;
 
     /**
      * @var bool do not allow timestamps management. They are already being done by database.

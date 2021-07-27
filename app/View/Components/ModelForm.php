@@ -77,7 +77,7 @@ abstract class ModelForm extends Component
 
             $this->successAlert();
 
-            $this->emitUp('saved', $this->getProperty());
+            $this->emitUp('saved', $this->getProperty(), $this->getModel()->id);
         } catch (Exception $exception) {
             $this->exceptionAlert($exception);
         }
