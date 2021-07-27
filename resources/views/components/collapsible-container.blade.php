@@ -5,12 +5,8 @@
                                                 }">
     <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
         <x-success-anchor @click="toggle()">
-            <x-add-form>
-                <x-slot name="buttonName">
-                   <span  x-text="!open ? '+ Add' : '- Cancel' ">
-                   </span>
-                </x-slot>
-            </x-add-form>
+            <span  x-text="!open ? '+ Add' : '- Cancel' ">
+            </span>
         </x-success-anchor>
     </div>
     <div x-show="isOpen">
