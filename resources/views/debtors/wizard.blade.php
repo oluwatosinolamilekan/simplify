@@ -69,7 +69,7 @@
                             <x-slot name="description">{{ __('Fill debtor settings.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('debtors.settings.form', ['settings' => $settings, 'partial' => true, 'nested' => true])
+                        <livewire:debtor.debtor-settings-form :settings="$settings" :partial="true" :nested="true"/>
                     </div>
                 </div>
 
