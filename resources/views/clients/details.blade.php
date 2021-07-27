@@ -68,7 +68,7 @@
                     @else
                         <x-collapsible-container>
                             <x-slot name="form">
-                                <livewire:client.client-funding-instructions-form :fundingInstructions="$fundingInstructions" :partial="false" :nested="true" />
+                                <livewire:client.client-credit-form :credit="$credit" :partial="false" :nested="true"/>
                             </x-slot>
                         </x-collapsible-container>
                     @endif
