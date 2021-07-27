@@ -89,7 +89,7 @@ input[type=checkbox]:checked {
     display: block;
 }
 
-#add_new_user {
+.add_new_button {
     font-size: 15px;
     font-weight: 500;
     font-family: 'Roboto';
@@ -101,7 +101,7 @@ input[type=checkbox]:checked {
     border: none;
 }
 
-#add_new_user:hover {
+.add_new_button:hover {
     border: none !important;
     text-decoration: none !important;
     background: rgb(89 186 190 / 75%);

@@ -68,7 +68,7 @@
                             <x-slot name="description">{{ __('Fill funding instructions.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('clients.funding-instructions.form', ['fundingInstructions' => $fundingInstructions, 'partial' => true, 'nested' => true])
+                        <livewire:client.client-funding-instructions-form :fundingInstructions="$fundingInstructions" :partial="true" :nested="true"/>
                     </div>
                 </div>
 
@@ -191,12 +191,11 @@
                         </x-jet-section-title>
 
                         <div class="mt-5 md:mt-0 md:col-span-2">
-                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <x-success-anchor wire:loading.attr="disabled"> + Add </x-success-anchor>
-                            </div>
-
-                            <livewire:company.user.company-user-form :company="$company" :partial="false" :nested="true"/>
+                            <x-collapsible-container>
+                                <x-slot name="form">
+                                    <livewire:company.user.company-user-form :company="$company" :partial="false" :nested="true"/>
+                                </x-slot>
+                            </x-collapsible-container>
                         </div>
                     </div>
                 </div>
