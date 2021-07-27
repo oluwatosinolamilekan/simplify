@@ -10,12 +10,12 @@ declare(strict_types=1);
  */
 
 use App\View\Components\Vendor\VendorDetails;
-use App\View\Components\Vendor\VendorList;
+use App\View\Components\Vendor\VendorsList;
 use App\View\Components\Vendor\VendorWizard;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('vendors')->name('vendors.')->group(function () {
-    Route::get('', VendorList::class)->name('list');
+    Route::get('', VendorsList::class)->name('list');
     Route::get('/create', VendorWizard::class)->name('create');
     Route::get('{vendor_id}', VendorDetails::class)->name('view');
     Route::get('{vendor_id}/update', VendorWizard::class)->name('update');

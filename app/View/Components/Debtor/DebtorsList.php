@@ -16,11 +16,12 @@ use App\Enums\StatusTypesList;
 use App\Models\Debtor;
 use App\View\Components\Common\Datatables\ActionsColumn;
 use App\View\Components\Common\Datatables\Datatable;
+use App\View\Components\Common\Datatables\RelationColumn;
 use App\View\Components\Traits\ConfirmModelDelete;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
 
-class DebtorList extends Datatable
+class DebtorsList extends Datatable
 {
     use ConfirmModelDelete;
 
@@ -33,7 +34,14 @@ class DebtorList extends Datatable
 
     public function builder()
     {
-        return Debtor::with(['factor', 'factor.company', 'client', 'client.company', 'company', 'company.identity']);
+        return Debtor::with([
+            'factor',
+            'factor.company',
+            'client',
+            'client.company',
+            'company',
+            'company.identity',
+        ]);
     }
 
     public function columns()
@@ -49,20 +57,23 @@ class DebtorList extends Datatable
                 ->label('Name')
                 ->filterable()
                 ->searchable(),
-            Column::name('factor.company.name')
+
+            RelationColumn::name('factor.company.name')
+                ->alias('factor_company')
                 ->label('Factor')
                 ->filterable()
                 ->searchable(),
-            Column::name('client.company.name')
+            RelationColumn::name('client.company.name')
+                ->alias('client_company')
                 ->label('Client')
                 ->filterable()
                 ->searchable(),
 
-            Column::name('company.identity.mc_number')
+            RelationColumn::name('company.identity.mc_number')
                 ->label('MC Number')
                 ->filterable(),
 
-            Column::name('company.identity.dot_number')
+            RelationColumn::name('company.identity.dot_number')
                 ->label('DOT Number')
                 ->filterable(),
 

@@ -17,11 +17,12 @@ use App\Enums\StatusTypesList;
 use App\Models\Client;
 use App\View\Components\Common\Datatables\ActionsColumn;
 use App\View\Components\Common\Datatables\Datatable;
+use App\View\Components\Common\Datatables\RelationColumn;
 use App\View\Components\Traits\ConfirmModelDelete;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
 
-class ClientList extends Datatable
+class ClientsList extends Datatable
 {
     use ConfirmModelDelete;
 
@@ -50,8 +51,10 @@ class ClientList extends Datatable
                 ->label('Name')
                 ->filterable()
                 ->searchable(),
-            Column::name('factor.company.name')
+
+            RelationColumn::name('factor.company.name')
                 ->label('Factor')
+                ->alias('factor_company')
                 ->filterable()
                 ->searchable(),
 
