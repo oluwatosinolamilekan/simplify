@@ -68,7 +68,7 @@
                             <x-slot name="description">{{ __('Fill funding instructions.') }}</x-slot>
                         </x-jet-section-title>
 
-                        @include('clients.funding-instructions.form', ['fundingInstructions' => $fundingInstructions, 'partial' => true, 'nested' => true])
+                        <livewire:client.client-funding-instructions-form :fundingInstructions="$fundingInstructions" :partial="true" :nested="true"/>
                     </div>
                 </div>
 
