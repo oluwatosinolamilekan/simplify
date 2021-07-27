@@ -13,6 +13,7 @@ namespace App\View\Components\Factor;
 
 use App\Models\Factor;
 use App\View\Components\Client\ClientsList;
+use Illuminate\Support\Arr;
 
 class FactorClientsList extends ClientsList
 {
@@ -21,5 +22,10 @@ class FactorClientsList extends ClientsList
     public function builder()
     {
         return parent::builder()->where('factor_id', $this->factor->id);
+    }
+
+    public function columns()
+    {
+        return Arr::where(parent::columns(), fn ($column) => $column->name != 'factor.company.name');
     }
 }

@@ -53,6 +53,11 @@ class DebtorsList extends Datatable
                 ->truncate(15)
                 ->view('components.tables.email-row'),
 
+            Column::name('company.name')
+                ->label('Name')
+                ->filterable()
+                ->searchable(),
+
             RelationColumn::name('factor.company.name')
                 ->alias('factor_company')
                 ->label('Factor')

@@ -9,23 +9,23 @@ declare(strict_types=1);
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace App\View\Components\Factor;
+namespace App\View\Components\Client;
 
-use App\Models\Factor;
+use App\Models\Client;
 use App\View\Components\Vendor\VendorsList;
 use Arr;
 
-class FactorVendorsList extends VendorsList
+class ClientVendorsList extends VendorsList
 {
-    public Factor $factor;
+    public Client $client;
 
     public function builder()
     {
-        return parent::builder()->where('vendors.factor_id', $this->factor->id);
+        return parent::builder()->where('client_id', $this->client->id);
     }
 
     public function columns()
     {
-        return Arr::where(parent::columns(), fn ($column) => $column->name != 'factor.company.name');
+        return Arr::where(parent::columns(), fn ($column) => ! in_array($column->name, ['client.company.name', 'factor.company.name']));
     }
 }

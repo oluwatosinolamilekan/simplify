@@ -51,6 +51,7 @@ class ClientsList extends Datatable
                 ->label('Name')
                 ->filterable()
                 ->searchable(),
+
             RelationColumn::name('factor.company.name')
                 ->label('Factor')
                 ->alias('factor_company')

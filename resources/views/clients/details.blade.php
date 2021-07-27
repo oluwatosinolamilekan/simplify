@@ -8,6 +8,8 @@
         "identity": "Identity & Analysis",
         "address": "Address & Contact Details",
         "bank": "Bank Information",
+        "vendors": "Vendors",
+        "debtors": "Debtors",
         "users": "Users"
     }'>
         <x-slot name="general">
@@ -206,6 +208,18 @@
                         </div>
                     @endif
                 </div>
+            </div>
+        </x-slot>
+        <x-slot name="vendors">
+            <!-- Vendors -->
+            <div>
+                <livewire:client.client-vendors-list :client="$client"/>
+            </div>
+        </x-slot>
+        <x-slot name="debtors">
+            <!-- Debtors -->
+            <div>
+                <livewire:client.client-debtors-list :client="$client"/>
             </div>
         </x-slot>
         <x-slot name="users">
