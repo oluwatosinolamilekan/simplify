@@ -6,7 +6,6 @@
 
             <div class="absolute inset-y-0 right-0 pr-2 flex items-center mt-2.5">
                 <x-icons.calendar />
-                {{--<x-clear-filter wire:click="removeFilter('date', '{{ $index }}')" x-on:click="$refs.range.value=''" tabindex="-1"/>--}}
             </div>
         </div>
     </div>
