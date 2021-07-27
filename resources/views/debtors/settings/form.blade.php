@@ -36,7 +36,7 @@
                 <div class="col-span-6 sm:col-span-6">
                     <x-jet-label for="warning_note" value="{{ __('Warning Notes') }}"/>
                     <div class="sm:inline-block w-1/2 float-right">
-                        <x-jet-input id="note" type="text" wire:model.defer="settings.warning_notes.{{count($settings->warning_notes ?? [])}}" class="w-3/4"/>
+                        <x-jet-input id="note" type="text" wire:model.defer="note" class="w-3/4"/>
                         <x-success-anchor wire:click="addNote"> + Add </x-success-anchor>
                         <x-jet-input-error for="note" class="mt-3" />
                     </div>
@@ -47,7 +47,7 @@
                         @foreach($settings->warning_notes ?? [] as $i => $note)
                             <div>
                                 <span class="text-wrap mx-2 py-3 sm:inline-block w-5/6">{{$note}}</span>
-                                <x-danger-anchor wire:click="deleteNote"> x </x-danger-anchor>
+                                <x-danger-anchor wire:click="deleteNote({{$i}})"> x </x-danger-anchor>
                             </div>
 
                         @endforeach

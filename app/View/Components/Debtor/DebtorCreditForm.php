@@ -18,6 +18,8 @@ class DebtorCreditForm extends ModelForm
 {
     public DebtorCredit $credit;
 
+    public ?string $note = null;
+
     public function getProperty()
     {
         return 'credit';
@@ -26,5 +28,23 @@ class DebtorCreditForm extends ModelForm
     public function render()
     {
         return view('debtors.credit.partials.credit-form');
+    }
+
+    public function addNote()
+    {
+        $this->validateOnly('note', ['note' => $this->getRules()['credit.notes.*']]);
+
+        $this->credit->appendToJson('notes', $this->note);
+
+        $this->updatedWithParent('credit.notes', $this->credit->notes); // inform parent about update
+
+        $this->note = '';
+    }
+
+    public function deleteNote($index)
+    {
+        $this->credit->removeJsonField('notes', $index, true);
+
+        $this->updatedWithParent('credit.notes', $this->credit->notes); // inform parent about update
     }
 }

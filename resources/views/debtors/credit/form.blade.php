@@ -10,7 +10,7 @@
                 <x-slot name="description">{{ __('Fill debtor credit information.') }}</x-slot>
             </x-jet-section-title>
 
-            @include('debtors.credit.partials.credit-form', ['credit' => $credit, 'partial' => true, 'nested' => true])
+            <livewire:debtor.debtor-credit-form :credit="$credit" :partial="true" :nested="true"/>
         </div>
     </div>
 
@@ -25,7 +25,7 @@
                 <x-slot name="description">{{ __('Fill debtor credit limit information.') }}</x-slot>
             </x-jet-section-title>
 
-            @include('debtors.credit.partials.credit-limit-form', ['creditLimit' => $creditLimit, 'partial' => true, 'nested' => true])
+            <livewire:debtor.debtor-credit-limit-form :creditLimit="$creditLimit" :partial="true" :nested="true"/>
         </div>
     </div>
 

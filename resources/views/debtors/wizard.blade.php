@@ -86,8 +86,8 @@
             @endif
         </x-slot>
         <x-slot name="identity">
-        @if($debtor->exists)
-            <!-- Company Identity -->
+            @if($debtor->exists)
+                <!-- Company Identity -->
                 <div class="mt-10 sm:mt-0">
                     <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
 

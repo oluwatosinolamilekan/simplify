@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\Status;
-use App\Models\Traits\HasMeta;
+use App\Models\Traits\UsesJsonAttributes;
 use App\Models\Traits\UsesTimestampScopes;
 use BenSampo\Enum\Traits\CastsEnums;
 use Closure;
@@ -104,7 +104,7 @@ abstract class Model extends EloquentModel
     use UsesTimestampScopes;
     use HasFactory;
     use BlameableTrait;
-    use HasMeta;
+    use UsesJsonAttributes;
 
     /**
      * @var bool do not allow timestamps management. They are already being done by database.
@@ -147,13 +147,13 @@ abstract class Model extends EloquentModel
         return false;
     }
 
-    public function isDirty($attributes = [])
+    public function getDirty()
     {
-        if (! $this->exists && empty($attributes)) {
-            return ! empty(array_filter($this->getDirty(), fn ($item) => $item !== null));
+        if (! $this->exists) {
+            return array_filter(parent::getDirty(), fn ($item) => $item !== null);
         }
 
-        return parent::isDirty($attributes);
+        return parent::getDirty();
     }
 
     public function ignoreDirty($attributes)

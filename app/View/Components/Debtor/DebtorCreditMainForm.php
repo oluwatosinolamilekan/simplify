@@ -15,7 +15,7 @@ use App\Models\Debtor;
 use App\Models\DebtorCredit;
 use App\Models\DebtorCreditLimit;
 use App\Support\Validation\ValidationRules;
-use App\View\Components\ModelForm;
+use App\View\Components\Component;
 use App\View\Components\Traits\WithNested;
 use DB;
 use Exception;
@@ -26,13 +26,16 @@ use Illuminate\Contracts\View\View;
 /**
  * Class DebtorCreditForm.
  */
-class DebtorCreditMainForm extends ModelForm
+class DebtorCreditMainForm extends Component
 {
     use WithNested;
 
     public Debtor $debtor;
     public DebtorCredit $credit;
     public DebtorCreditLimit $creditLimit;
+
+    public bool $partial = false;
+    public bool $nested = false;
 
     /** Mount with variadic arguments to support mounting with both ids and models.
      * @param array $params
@@ -79,16 +82,6 @@ class DebtorCreditMainForm extends ModelForm
         );
     }
 
-    public function addNote()
-    {
-        // TODO @Jovana: validate only notes
-    }
-
-    public function deleteNote()
-    {
-        // TODO @Jovana: implement
-    }
-
     /**
      * Save action for component model.
      */
@@ -109,20 +102,10 @@ class DebtorCreditMainForm extends ModelForm
             DB::commit();
 
             $this->successAlert();
-
-            $this->emitUp('saved', $this->getProperty());
         } catch (Exception $exception) {
             DB::rollBack();
             $this->exceptionAlert($exception);
         }
-    }
-
-    /**
-     * @return mixed|string
-     */
-    public function getProperty()
-    {
-        return 'credit';
     }
 
     /**
@@ -131,15 +114,5 @@ class DebtorCreditMainForm extends ModelForm
     public function render()
     {
         return view('debtors.credit.form');
-    }
-
-    public function updatedCreditLimitCreditDate()
-    {
-        $this->creditLimit->calcMonthsGoodFor();
-    }
-
-    public function updatedCreditLimitCreditExpiryDate()
-    {
-        $this->creditLimit->calcMonthsGoodFor();
     }
 }
