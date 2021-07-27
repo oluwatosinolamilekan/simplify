@@ -10,12 +10,12 @@ declare(strict_types=1);
  */
 
 use App\View\Components\Debtor\DebtorDetails;
-use App\View\Components\Debtor\DebtorList;
+use App\View\Components\Debtor\DebtorsList;
 use App\View\Components\Debtor\DebtorWizard;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('debtors')->name('debtors.')->group(function () {
-    Route::get('', DebtorList::class)->name('list');
+    Route::get('', DebtorsList::class)->name('list');
     Route::get('/create', DebtorWizard::class)->name('create');
     Route::get('{debtor_id}', DebtorDetails::class)->name('view');
     Route::get('{debtor_id}/update', DebtorWizard::class)->name('update');

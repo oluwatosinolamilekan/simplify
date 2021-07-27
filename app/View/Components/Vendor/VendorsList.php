@@ -9,31 +9,32 @@ declare(strict_types=1);
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace App\View\Components\Debtor;
+namespace App\View\Components\Vendor;
 
 use App\Enums\Status;
 use App\Enums\StatusTypesList;
-use App\Models\Debtor;
+use App\Models\Vendor;
 use App\View\Components\Common\Datatables\ActionsColumn;
 use App\View\Components\Common\Datatables\Datatable;
+use App\View\Components\Common\Datatables\RelationColumn;
 use App\View\Components\Traits\ConfirmModelDelete;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
 
-class DebtorList extends Datatable
+class VendorsList extends Datatable
 {
     use ConfirmModelDelete;
 
-    public ?Debtor $debtor = null;
+    public ?Vendor $vendor = null;
 
     public function render()
     {
-        return view('debtors.list');
+        return view('vendors.list');
     }
 
     public function builder()
     {
-        return Debtor::with(['factor', 'factor.company', 'client', 'client.company', 'company', 'company.identity']);
+        return Vendor::with(['factor', 'factor.company', 'client', 'client.company', 'company', 'company.identity']);
     }
 
     public function columns()
@@ -49,20 +50,22 @@ class DebtorList extends Datatable
                 ->label('Name')
                 ->filterable()
                 ->searchable(),
-            Column::name('factor.company.name')
+            RelationColumn::name('factor.company.name')
                 ->label('Factor')
+                ->alias('factor_company')
                 ->filterable()
                 ->searchable(),
-            Column::name('client.company.name')
+            RelationColumn::name('client.company.name')
                 ->label('Client')
+                ->alias('client_company')
                 ->filterable()
                 ->searchable(),
 
-            Column::name('company.identity.mc_number')
+            RelationColumn::name('company.identity.mc_number')
                 ->label('MC Number')
                 ->filterable(),
 
-            Column::name('company.identity.dot_number')
+            RelationColumn::name('company.identity.dot_number')
                 ->label('DOT Number')
                 ->filterable(),
 
@@ -83,7 +86,7 @@ class DebtorList extends Datatable
             ActionsColumn::actions(['id'], function ($id) {
                 return view(
                     'components.tables.table-actions',
-                    ['id' => $id, 'view' => 'debtors.view', 'update' => 'debtors.update', 'delete' => 'delete', 'args' => ['debtor_id' => $id]]
+                    ['id' => $id, 'view' => 'vendors.view', 'update' => 'vendors.update', 'delete' => 'delete', 'args' => ['vendor_id' => $id]]
                 );
             }),
         ];
@@ -91,17 +94,17 @@ class DebtorList extends Datatable
 
     public function confirmItemDeletion($id)
     {
-        $this->debtor = Debtor::findOrFail($id);
+        $this->vendor = Vendor::findOrFail($id);
         $this->confirmDeletion();
     }
 
     public function getDeleteModel()
     {
-        return $this->debtor;
+        return $this->vendor;
     }
 
     public function resetDeleteModel()
     {
-        $this->debtor = null;
+        $this->vendor = null;
     }
 }
