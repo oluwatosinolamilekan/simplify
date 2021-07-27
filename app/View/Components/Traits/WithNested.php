@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\View\Components\Traits;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\ValidationException;
 use Livewire\HydrationMiddleware\HashDataPropertiesForDirtyDetection;
 use Throwable;
 
@@ -36,11 +37,12 @@ trait WithNested
      * Likewise Livewire's "updated" hook, it mimics "saved" hook that:
      * - Informs parent component about shared models being saved
      * - Is triggered when nested component save action is called
-     * - Marks parent's component property with name $property as existing
+     * - Marks parent's component property with name $property as existing and sets record id
      * - If property "foo" is saved and parent component implements savedFoo hook then savedFoo is called for parent component.
      * @param string $property
+     * @param mixed $id
      */
-    public function saved(string $property)
+    public function saved(string $property, $id)
     {
         if (! $this->propertyIsPublicAndNotDefinedOnBaseClass($property)) {
             return;
@@ -48,6 +50,7 @@ trait WithNested
 
         if ($this->{$property} instanceof Model) {
             $this->{$property}->exists = true;
+            $this->{$property}->id = $id;
         }
 
         $method = 'saved'.ucfirst($property);
@@ -79,29 +82,51 @@ trait WithNested
             // Strip away model name.
             $attribute = $this->afterFirstDot($name);
 
+            $modelInstance = $this->{$model};
+
             // Get existing data from model property.
             $results = [];
-            $results[$model] = data_get($this->{$model}, $attribute, []);
+            $results[$model] = data_get($modelInstance, $attribute, []);
 
             // Merge in new data.
             data_set($results, $attribute, $value);
 
-            // TODO @Jovana: Handle this in a model method instead of here
+            // Strip away all inner properties
             $property = $this->beforeFirstDot($attribute);
-            if (is_array($this->{$model}->{$property})) {
-                $index = $this->afterFirstDot($attribute);
 
-                $data = $this->{$model}->{$property};
-                data_set($data, $index, data_get($results, $attribute));
-                $this->{$model}->{$property} = $data;
+            // If property is of type json - no direct modification of json fields is allowed, use methods defined in UsesJsonAttributes trait
+            if ($modelInstance->hasJsonAttribute($property) && $this->containsDots($attribute)) {
+                $modelInstance->updateJsonField($property, $this->afterFirstDot($attribute), data_get($results, $attribute));
             } else {
                 // Re-assign data to model.
-                data_set($this->{$model}, $attribute, data_get($results, $attribute));
+                data_set($modelInstance, $attribute, data_get($results, $attribute));
             }
         } else {
             $this->{$name} = $value;
         }
 
         HashDataPropertiesForDirtyDetection::rehashProperty($name, $value, $this);
+    }
+
+    /**
+     * Livewire nested components are not reactive as the parent one
+     * Therefore, in order to display error bags validation errors need to be propagated to nested components.
+     * @param null $rules
+     * @param array $messages
+     * @param array $attributes
+     * @throws ValidationException
+     */
+    public function validate($rules = null, $messages = [], $attributes = [])
+    {
+        try {
+            parent::validate($rules, $messages, $attributes);
+        } catch (\Illuminate\Validation\ValidationException $exception) {
+
+            // inform nested components about validation errors
+            $this->emit('validationFail', $exception->validator->getMessageBag());
+
+            // throw ValidationException to prevent further actions
+            throw $exception;
+        }
     }
 }

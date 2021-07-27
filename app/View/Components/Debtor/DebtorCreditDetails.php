@@ -14,12 +14,13 @@ namespace App\View\Components\Debtor;
 use App\Models\Debtor;
 use App\Models\DebtorCredit;
 use App\Models\DebtorCreditLimit;
-use App\View\Components\ModelForm;
+use App\Support\Validation\ValidationRules;
+use App\View\Components\Component;
 use App\View\Components\Traits\ConfirmModelDelete;
 use App\View\Components\Traits\WithNested;
 use Exception;
 
-class DebtorCreditDetails extends ModelForm
+class DebtorCreditDetails extends Component
 {
     use ConfirmModelDelete;
     use WithNested;
@@ -53,8 +54,11 @@ class DebtorCreditDetails extends ModelForm
         $this->creditLimit = $this->debtor->getRelatedInstanceOrNew('creditLimit');
     }
 
-    public function getProperty()
+    public function getRules()
     {
-        return 'credit';
+        return ValidationRules::merge(
+            ValidationRules::forModel('credit', $this->credit, $this->credit->isDirty()),
+            ValidationRules::forModel('creditLimit', $this->creditLimit, $this->creditLimit->isDirty())
+        );
     }
 }

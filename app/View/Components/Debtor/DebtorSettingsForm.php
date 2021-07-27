@@ -18,7 +18,7 @@ class DebtorSettingsForm extends ModelForm
 {
     public DebtorSettings $settings;
 
-    public ?string $warningNote = null;
+    public ?string $note = null;
 
     public function mount(DebtorSettings $settings)
     {
@@ -33,5 +33,23 @@ class DebtorSettingsForm extends ModelForm
     public function getProperty()
     {
         return 'settings';
+    }
+
+    public function addNote()
+    {
+        $this->validateOnly('note', ['note' => $this->getRules()['settings.warning_notes.*']]);
+
+        $this->settings->appendToJson('warning_notes', $this->note);
+
+        $this->updatedWithParent('settings.warning_notes', $this->settings->warning_notes); // inform parent about update
+
+        $this->note = '';
+    }
+
+    public function deleteNote($index)
+    {
+        $this->settings->removeJsonField('warning_notes', $index, true);
+
+        $this->updatedWithParent('settings.warning_notes', $this->settings->warning_notes); // inform parent about update
     }
 }

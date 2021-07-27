@@ -96,11 +96,12 @@ class DebtorCreditLimit extends Model
     public function getRules(bool $required = true)
     {
         return [
+            'id' => ['int'],
             'debtor_id' => ['int', 'exists:debtors,id'],
             'all_customer_limit' => [Rule::requiredIf($required), 'numeric'],
-            'months_good_for' => [Rule::requiredIf($required), 'int', 'min:0', 'max:360'],
-            'credit_date' => [Rule::requiredIf($required), 'date', 'date_format:Y-m-d', 'before:credit_expiry_date'],
-            'credit_expiry_date' => [Rule::requiredIf($required), 'date', 'date_format:Y-m-d', 'after:credit_date'],
+            'months_good_for' => ['int', 'min:0', 'max:360'],
+            'credit_date' => [Rule::requiredIf($required), 'date', 'date_format:Y-m-d', 'before:creditLimit.credit_expiry_date'],
+            'credit_expiry_date' => [Rule::requiredIf($required), 'date', 'date_format:Y-m-d', 'after:creditLimit.credit_date'],
             'notes' => ['array'],
             'notes.*' => ['string', 'min:2', 'max:255'],
         ];

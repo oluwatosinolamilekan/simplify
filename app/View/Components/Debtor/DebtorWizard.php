@@ -53,7 +53,7 @@ class DebtorWizard extends CompanyComponent
     }
 
     /**
-     * @throws Exception
+     * @throws Exception|Throwable
      */
     public function save()
     {

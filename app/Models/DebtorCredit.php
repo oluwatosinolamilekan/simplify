@@ -82,6 +82,7 @@ class DebtorCredit extends Model
     public function getRules(bool $required = true)
     {
         return [
+            'id' => ['int'],
             'debtor_id' => ['int', 'exists:debtors,id'],
             'annual_sales' => [Rule::requiredIf($required), 'numeric'],
             'net_worth' => [Rule::requiredIf($required), 'numeric'],
