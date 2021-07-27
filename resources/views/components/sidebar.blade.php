@@ -18,7 +18,7 @@
         </li>
         <li>
             <a href="{{ route('users.list') }}" id="sidebar_users_list" class="side-menu {{request()->routeIs('users.list') ? 'side-menu--active' : ''}}">
-                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                <div class="side-menu__icon">  <x-icons.user></x-icons.user>  </div>
                 <div class="side-menu__title">
                     {{ __('Users') }}
                 </div>
@@ -34,7 +34,7 @@
         </li>
         <li>
             <a href="{{ route('clients.list') }}" class="side-menu {{request()->routeIs('clients.list') ? 'side-menu--active' : ''}}">
-                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                <div class="side-menu__icon"> <x-icons.client></x-icons.client> </div>
                 <div class="side-menu__title">
                     {{ __('Clients') }}
                 </div>
@@ -42,7 +42,7 @@
         </li>
         <li>
             <a href="{{ route('vendors.list') }}" class="side-menu {{request()->routeIs('vendors.list') ? 'side-menu--active' : ''}}">
-                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                <div class="side-menu__icon"> <x-icons.vendor></x-icons.vendor> </div>
                 <div class="side-menu__title">
                     {{ __('Vendors') }}
                 </div>
@@ -50,7 +50,7 @@
         </li>
         <li>
             <a href="{{ route('debtors.list') }}" class="side-menu {{request()->routeIs('debtors.list') ? 'side-menu--active' : ''}}">
-                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                <div class="side-menu__icon"> <x-icons.debtor></x-icons.debtor> </div>
                 <div class="side-menu__title">
                     {{ __('Debtors') }}
                 </div>
