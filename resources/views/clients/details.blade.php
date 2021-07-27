@@ -43,14 +43,11 @@
                     @if ($fundingInstructions->exists)
                         @include('clients.funding-instructions.details', ['fundingInstructions' => $fundingInstructions])
                     @else
-                        <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <x-success-anchor> + Add </x-success-anchor>
-                            </div>
-
-                            <livewire:client.client-funding-instructions-form :fundingInstructions="$fundingInstructions" :partial="false" :nested="true"/>
-                        </div>
+                       <x-collapsible-container>
+                           <x-slot name="form">
+                               <livewire:client.client-funding-instructions-form :fundingInstructions="$fundingInstructions" :partial="false" :nested="true" />
+                           </x-slot>
+                       </x-collapsible-container>
                     @endif
                 </div>
             </div>
@@ -69,14 +66,11 @@
                     @if ($credit->exists)
                         @include('clients.credit.details', ['credit' => $credit])
                     @else
-                        <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <x-success-anchor> + Add </x-success-anchor>
-                            </div>
-
-                            <livewire:client.client-credit-form :credit="$credit" :partial="false" :nested="true"/>
-                        </div>
+                        <x-collapsible-container>
+                            <x-slot name="form">
+                                <livewire:client.client-credit-form :credit="$credit" :partial="false" :nested="true"/>
+                            </x-slot>
+                        </x-collapsible-container>
                     @endif
                 </div>
             </div>
@@ -96,14 +90,11 @@
                     @if ($identity->exists)
                         @include('companies.identity.details', ['identity' => $identity])
                     @else
-                        <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <x-success-anchor> + Add </x-success-anchor>
-                            </div>
-
-                            <livewire:company.company-identity-form :identity="$identity" :partial="false" :nested="true"/>
-                        </div>
+                        <x-collapsible-container>
+                            <x-slot name="form">
+                                <livewire:company.company-identity-form :identity="$identity" :partial="false" :nested="true"/>
+                            </x-slot>
+                        </x-collapsible-container>
                     @endif
 
                 </div>
@@ -121,13 +112,11 @@
                 @if ($analysis->exists)
                         @include('clients.analysis.details', ['analysis' => $analysis])
                     @else
-                        <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <x-success-anchor> + Add </x-success-anchor>
-                            </div>
-                            <livewire:client.client-analysis-form :analysis="$analysis" :partial="false" :nested="true"/>
-                        </div>
+                        <x-collapsible-container>
+                            <x-slot name="form">
+                                <livewire:client.client-analysis-form :analysis="$analysis" :partial="false" :nested="true"/>
+                            </x-slot>
+                        </x-collapsible-container>
                     @endif
                 </div>
             </div>
@@ -146,14 +135,12 @@
                     @if ($address->exists)
                         @include('address.details', ['address' => $address])
                     @else
-                        <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <x-success-anchor> + Add </x-success-anchor>
-                            </div>
+                        <x-collapsible-container>
+                            <x-slot name="form">
+                                <livewire:address.address-form :address="$address" :partial="false" :nested="true"/>
+                            </x-slot>
+                        </x-collapsible-container>
 
-                            <livewire:address.address-form :address="$address" :partial="false" :nested="true"/>
-                        </div>
                     @endif
                 </div>
             </div>
@@ -170,14 +157,11 @@
                     @if ($contact->exists)
                         @include('contact.details', ['contact' => $client->company->contact])
                     @else
-                        <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <x-success-anchor> + Add </x-success-anchor>
-                            </div>
-
-                            <livewire:contact.contact-form :contact="$contact" :partial="false" :nested="true"/>
-                        </div>
+                        <x-collapsible-container>
+                            <x-slot name="form">
+                                <livewire:contact.contact-form :contact="$contact" :partial="false" :nested="true"/>
+                            </x-slot>
+                        </x-collapsible-container>
                     @endif
                 </div>
             </div>
@@ -197,13 +181,12 @@
                     @if ($bankInformation->exists)
                         @include('bank-information.details', ['bankInformation' => $bankInformation])
                     @else
-                        <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <x-success-anchor> + Add </x-success-anchor>
-                            </div>
-                            <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false" :nested="true"/>
-                        </div>
+                        <x-collapsible-container>
+                            <x-slot name="form">
+                                <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false" :nested="true"/>
+                            </x-slot>
+                        </x-collapsible-container>
+
                     @endif
                 </div>
             </div>
@@ -212,7 +195,6 @@
             <!-- Users -->
             <div>
                 <x-jet-nav-link href="{{route('companies.users.create', ['company_id' => $company->id])}}" :active="true">+ Add new user</x-jet-nav-link>
-
                 <livewire:company.user.company-users-list :company="$company"/>
             </div>
         </x-slot>
