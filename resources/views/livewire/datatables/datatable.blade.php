@@ -1,6 +1,6 @@
 <div class="inline-block w-full my-4">
     <span class="text-xl font-medium mt-auto mb-auto">{{ isset($table_title) ? $table_title : '' }}</span>
-    @if(isset($button_text))<x-success-anchor href="{{ isset($button_route) ? $button_route : '' }}" id="{{ isset($button_id) ? $button_id : '' }}" class="mr-0 normal_letter_spacing float-right">{{ isset($button_text) ? $button_text  : '' }}</x-success-anchor>@endif
+    @if(isset($button_text))<x-success-anchor href="{{ isset($button_route) ? $button_route : '' }}" id="{{ isset($button_id) ? $button_id : '' }}" class="add_new_button mr-0 normal_letter_spacing float-right">{{ isset($button_text) ? $button_text  : '' }}</x-success-anchor>@endif
 </div>
 
 <div class="data-table-container bg-white dark:bg-dark-2 p-8 mt-0">
