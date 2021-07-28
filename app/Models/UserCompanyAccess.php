@@ -162,7 +162,7 @@ class UserCompanyAccess extends Model
             ],
             'company_id' => [
                 'int',  Rule::requiredIf($this->exists),
-                Rule::unique('user_company_access', 'company_id')->where(fn ($query) => $query->where('user_id', $this->company_id))->ignore($this->id),
+                Rule::unique('user_company_access', 'company_id')->where(fn ($query) => $query->where('user_id', $this->user_id))->ignore($this->id),
             ],
             'first_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],
             'last_name' => [Rule::requiredIf($required || $dirty), 'string', 'min:2', 'max:255'],

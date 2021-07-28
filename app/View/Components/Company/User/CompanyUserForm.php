@@ -30,6 +30,8 @@ class CompanyUserForm extends ModelForm
 {
     use ConfirmModelDelete;
 
+    public Company $company;
+
     public UserCompanyAccess $userCompanyAccess;
     public User $user;
 
