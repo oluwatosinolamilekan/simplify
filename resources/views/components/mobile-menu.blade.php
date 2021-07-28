@@ -42,5 +42,11 @@
                 <div class="menu__title"> {{ __('Debtors') }} </div>
             </a>
         </li>
+        <li>
+            <a href="{{ route('terms.list') }}" class="menu text-gray-600">
+                <div class="menu__icon"> <i data-feather="users"></i> </div>
+                <div class="menu__title"> {{ __('Terms') }} </div>
+            </a>
+        </li>
     </ul>
 </div>
