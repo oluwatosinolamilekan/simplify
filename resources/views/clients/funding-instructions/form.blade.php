@@ -93,20 +93,16 @@
             <div class="col-span-6 sm:col-span-6">
                 <x-jet-label for="warning_note" value="{{ __('Warning Notes') }}"/>
                 <div class="sm:inline-block w-1/2 float-right">
-                    <x-jet-input id="warning_note" type="text" wire:model="warningNote" class="w-3/4"/>
-                    <a wire:click="click" class="w-1/4 p-4 cursor-pointer bg-theme-18 text-center px-3 py-3 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                        + Add
-                    </a>
-                    <x-jet-input-error for="warningNote" class="mt-3" />
+                    <x-jet-input id="note" type="text" wire:model="note" class="w-3/4"/>
+                    <x-success-anchor wire:click="addNote"> + Add </x-success-anchor>
+                    <x-jet-input-error for="note" class="mt-3" />
                 </div>
 
                 <div class="col-span-6 sm:col-span-4 offset-2">
                 @foreach($fundingInstructions->warning_notes as $i => $note)
                     <div>
                         <span class="text-wrap mx-2 py-3 sm:inline-block w-5/6">{{$note}}</span>
-                        <a wire:click="deleteNote" class="sm:inline-block w-1/6 cursor-pointer text-center mx-2 py-3 rounded-md font-semibold text-xs text-white tracking-widest focus:outline-none focus:ring disabled:opacity-25 hover:opacity-75 transition" href="javascript:;">
-                            x
-                        </a>
+                        <x-danger-anchor wire:click="deleteNote({{$i}})"> x </x-danger-anchor>
                     </div>
 
                 @endforeach

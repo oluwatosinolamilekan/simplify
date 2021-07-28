@@ -16,11 +16,12 @@ use App\Enums\StatusTypesList;
 use App\Models\Vendor;
 use App\View\Components\Common\Datatables\ActionsColumn;
 use App\View\Components\Common\Datatables\Datatable;
+use App\View\Components\Common\Datatables\RelationColumn;
 use App\View\Components\Traits\ConfirmModelDelete;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
 
-class VendorList extends Datatable
+class VendorsList extends Datatable
 {
     use ConfirmModelDelete;
 
@@ -49,20 +50,24 @@ class VendorList extends Datatable
                 ->label('Name')
                 ->filterable()
                 ->searchable(),
-            Column::name('factor.company.name')
+
+            RelationColumn::name('factor.company.name')
                 ->label('Factor')
-                ->filterable()
-                ->searchable(),
-            Column::name('client.company.name')
-                ->label('Client')
+                ->alias('factor_company')
                 ->filterable()
                 ->searchable(),
 
-            Column::name('company.identity.mc_number')
+            RelationColumn::name('client.company.name')
+                ->label('Client')
+                ->alias('client_company')
+                ->filterable()
+                ->searchable(),
+
+            RelationColumn::name('company.identity.mc_number')
                 ->label('MC Number')
                 ->filterable(),
 
-            Column::name('company.identity.dot_number')
+            RelationColumn::name('company.identity.dot_number')
                 ->label('DOT Number')
                 ->filterable(),
 

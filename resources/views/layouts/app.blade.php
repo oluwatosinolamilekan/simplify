@@ -41,5 +41,16 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10" ></script>
 
     <x-livewire-alert::scripts />
+
+    {{--Usersnap integration--}}
+    <script>
+        window.onUsersnapCXLoad = function(api) {
+            api.init();
+        }
+        var script = document.createElement('script');
+        script.defer = 1;
+        script.src = 'https://widget.usersnap.com/global/load/36b42ad3-6732-4cc9-a329-05e1b43e4a47?onload=onUsersnapCXLoad';
+        document.getElementsByTagName('head')[0].appendChild(script);
+    </script>
 </body>
 </html>

@@ -111,7 +111,7 @@ class ClientFundingInstructions extends Model
     public function getRules(bool $required = true)
     {
         return [
-            'client_id' => [Rule::requiredIf($required), 'int', 'exists:clients,id'],
+            'client_id' => ['int', 'exists:clients,id'],
             'generate_invoice' => [Rule::requiredIf($required), 'boolean'],
             'send_invoice' => [Rule::requiredIf($required), 'boolean'],
             'efs_available' => [Rule::requiredIf($required), 'boolean'],

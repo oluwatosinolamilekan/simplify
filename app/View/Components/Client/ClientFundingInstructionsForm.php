@@ -18,7 +18,7 @@ class ClientFundingInstructionsForm extends ModelForm
 {
     public ClientFundingInstructions $fundingInstructions;
 
-    public ?string $warningNote = null;
+    public ?string $note = null;
 
     public function mount(ClientFundingInstructions $fundingInstructions)
     {
@@ -33,5 +33,23 @@ class ClientFundingInstructionsForm extends ModelForm
     public function getProperty()
     {
         return 'fundingInstructions';
+    }
+
+    public function addNote()
+    {
+        $this->validateOnly('note', ['note' => $this->getRules()['fundingInstructions.warning_notes.*']]);
+
+        $this->fundingInstructions->appendToJson('warning_notes', $this->note);
+
+        $this->updatedWithParent('fundingInstructions.warning_notes', $this->fundingInstructions->warning_notes); // inform parent about update
+
+        $this->note = '';
+    }
+
+    public function deleteNote($index)
+    {
+        $this->fundingInstructions->removeJsonField('warning_notes', $index, true);
+
+        $this->updatedWithParent('fundingInstructions.warning_notes', $this->fundingInstructions->warning_notes); // inform parent about update
     }
 }

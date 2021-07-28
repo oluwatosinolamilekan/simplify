@@ -6,6 +6,9 @@
         "general": "General",
         "address": "Address & Contact Details",
         "bank": "Bank Information",
+        "clients": "Clients",
+        "vendors": "Vendors",
+        "debtors": "Debtors",
         "users": "Users"
     }'>
         <x-slot name="general">
@@ -104,6 +107,24 @@
                         </div>
                     @endif
                 </div>
+            </div>
+        </x-slot>
+        <x-slot name="clients">
+            <!-- Clients -->
+            <div>
+                <livewire:factor.factor-clients-list :factor="$factor"/>
+            </div>
+        </x-slot>
+        <x-slot name="vendors">
+            <!-- Vendors -->
+            <div>
+                <livewire:factor.factor-vendors-list :factor="$factor"/>
+            </div>
+        </x-slot>
+        <x-slot name="debtors">
+            <!-- Debtors -->
+            <div>
+                <livewire:factor.factor-debtors-list :factor="$factor"/>
             </div>
         </x-slot>
         <x-slot name="users">
