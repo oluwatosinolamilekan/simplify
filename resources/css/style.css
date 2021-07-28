@@ -287,6 +287,15 @@ select.form-control
     stroke: #59BABE !important;
 }
 
+.side-menu-white-icons.active path,
+.side-menu-white-icons.active rect {
+    stroke: white !important;
+}
+.dark .side-menu-custom-icons.active path,
+.dark .side-menu-custom-icons.active rect {
+    stroke: #FFFFFF !important;
+}
+
 @media only screen and (min-width: 1279px) {
     body.login {
         padding: 0 !important;
