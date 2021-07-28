@@ -168,14 +168,13 @@
                             <x-slot name="description">{{ 'Fill administrator account information.'}}</x-slot>
                         </x-jet-section-title>
 
-                        <div class="mt-5 md:mt-0 md:col-span-2">
-                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <x-success-anchor wire:loading.attr="disabled"> + Add </x-success-anchor>
-                            </div>
+                        <x-collapsible-container>
+                            <x-slot name="form">
+                                <livewire:company.user.company-user-form :company="$company" :partial="false" :nested="true"/>
+                            </x-slot>
+                        </x-collapsible-container>
 
-                            <livewire:company.user.company-user-form :company="$company" :partial="false" :nested="true"/>
-                        </div>
+
                     </div>
                 </div>
                 <div>
