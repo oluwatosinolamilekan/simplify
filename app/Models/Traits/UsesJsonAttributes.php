@@ -34,10 +34,10 @@ trait UsesJsonAttributes
         // so check column type from schema would give wrong result
         // it's enough to check whether attribute is array for this purpose
         if (! $schema->hasColumn($this->getTable(), $attribute) || ! is_array($this->{$attribute})) {
-            \Log::debug('META column type: '.$schema->getColumnType($this->getTable(), $attribute));
-
             return false;
         }
+
+        \Log::debug('META column type: '.$schema->getColumnType($this->getTable(), $attribute));
 
         return true;
     }
