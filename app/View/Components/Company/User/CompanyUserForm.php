@@ -106,7 +106,7 @@ class CompanyUserForm extends ModelForm
                     'user_id' => $this->user->id,
                 ]));
             } else {
-                $this->emitUp('saved', $this->getProperty());
+                $this->emitUp('saved', $this->getProperty(), $this->userCompanyAccess->id);
             }
         } catch (Throwable $exception) {
             $this->exceptionAlert($exception);
