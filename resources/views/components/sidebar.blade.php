@@ -6,6 +6,7 @@
     <a href="" class="intro-x flex items-center pl-5 pt-3 main-logo-dark">
         <x-jet-authentication-card-logo />
     </a>
+
     <div class="side-nav__devider my-6 bg-gray-500"></div>
     <ul>
         <li>
@@ -33,7 +34,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('clients.list') }}" id="sidebar_clients_list" class="side-menu {{request()->routeIs('clients.list') ? 'side-menu--active' : ''}}">
+            <a href="{{ route('clients.list') }}" class="side-menu {{request()->routeIs('clients.list') ? 'side-menu--active' : ''}}">
                 <div class="side-menu__icon"> <x-icons.client class="side-menu-custom-icons {{request()->routeIs('clients.list') ? 'active' : ''}}"></x-icons.client> </div>
                 <div class="side-menu__title">
                     {{ __('Clients') }}
@@ -41,7 +42,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('vendors.list') }}" id="sidebar_vendors_list" class="side-menu {{request()->routeIs('vendors.list') ? 'side-menu--active' : ''}}">
+            <a href="{{ route('vendors.list') }}" class="side-menu {{request()->routeIs('vendors.list') ? 'side-menu--active' : ''}}">
                 <div class="side-menu__icon"> <x-icons.vendor class="side-menu-custom-icons {{request()->routeIs('vendors.list') ? 'active' : ''}}"></x-icons.vendor> </div>
                 <div class="side-menu__title">
                     {{ __('Vendors') }}
@@ -49,7 +50,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('debtors.list') }}" id="sidebar_debtors_list" class="side-menu {{request()->routeIs('debtors.list') ? 'side-menu--active' : ''}}">
+            <a href="{{ route('debtors.list') }}" class="side-menu {{request()->routeIs('debtors.list') ? 'side-menu--active' : ''}}">
                 <div class="side-menu__icon"><x-icons.debtor class="side-menu-custom-icons {{request()->routeIs('debtors.list') ? 'active' : ''}}"></x-icons.debtor> </div>
                 <div class="side-menu__title">
                     {{ __('Debtors') }}
