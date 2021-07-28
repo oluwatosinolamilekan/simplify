@@ -6,6 +6,7 @@
     <a href="" class="intro-x flex items-center pl-5 pt-3 main-logo-dark">
         <x-jet-authentication-card-logo />
     </a>
+
     <div class="side-nav__devider my-6 bg-gray-500"></div>
     <ul>
         <li>
