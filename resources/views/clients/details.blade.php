@@ -207,9 +207,18 @@
         </x-slot>
         <x-slot name="users">
             <!-- Users -->
+            <div class="mt-10 sm:mt-0">
+                <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
+                    <x-collapsible-container>
+                        <x-slot name="form">
+                            <livewire:company.user.company-user-form :company="$company" :partial="false" :nested="true"/>
+                        </x-slot>
+                    </x-collapsible-container>
+
+                </div>
+            </div>
             <div>
-                <x-jet-nav-link href="{{route('companies.users.create', ['company_id' => $company->id])}}" :active="true">+ Add new user</x-jet-nav-link>
-                <livewire:company.user.company-users-list :company="$company"/>
+                <livewire:company.user.company-users-list :company="$company" :user="$user"/>
             </div>
         </x-slot>
     </x-tabs>

@@ -29,7 +29,7 @@ class CompanyUsersList extends Datatable
 
     public function render()
     {
-        return view('datatables::datatable');
+        return view('companies.user.list');
     }
 
     public function builder()
@@ -56,7 +56,7 @@ class CompanyUsersList extends Datatable
                 ->view('components.tables.email-row'),
 
             Column::callback('user_company_access.role', fn (int $status) => Role::fromValue($status)->description)
-                ->label('Status')
+                ->label('Role')
                 ->filterable(
                     collect(RoleTypesList::Company)->map(fn ($value) => [
                         'id' => $value,
