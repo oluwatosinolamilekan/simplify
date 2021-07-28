@@ -6,6 +6,9 @@
         "general": "General",
         "address": "Address & Contact Details",
         "bank": "Bank Information",
+        "clients": "Clients",
+        "vendors": "Vendors",
+        "debtors": "Debtors",
         "users": "Users"
     }'>
         <x-slot name="general">
@@ -42,14 +45,11 @@
                     @if ($address->exists)
                         @include('address.details', ['address' => $address])
                     @else
-                        <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <x-success-anchor> + Add </x-success-anchor>
-                            </div>
-
-                            <livewire:address.address-form :address="$address" :partial="false"/>
-                        </div>
+                        <x-collapsible-container>
+                            <x-slot name="form">
+                                <livewire:address.address-form :address="$address" :partial="false"/>
+                            </x-slot>
+                        </x-collapsible-container>
                     @endif
                 </div>
             </div>
@@ -66,14 +66,11 @@
                     @if ($contact->exists)
                         @include('contact.details', ['contact' => $client->company->contact])
                     @else
-                        <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <x-success-anchor> + Add </x-success-anchor>
-                            </div>
-
-                            <livewire:contact.contact-form :contact="$contact" :partial="false"/>
-                        </div>
+                        <x-collapsible-container>
+                            <x-slot name="form">
+                                <livewire:contact.contact-form :contact="$contact" :partial="false"/>
+                            </x-slot>
+                        </x-collapsible-container>
                     @endif
                 </div>
             </div>
@@ -93,17 +90,32 @@
                     @if ($bankInformation->exists)
                         @include('bank-information.details', ['bankInformation' => $bankInformation])
                     @else
-                        <div class="mt-5 md:mt-0 md:col-span-2" >
-                            <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                                <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                                <x-success-anchor wire:loading.attr="disabled">
-                                    + Add
-                                </x-success-anchor>
-                            </div>
-                            <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false"/>
-                        </div>
+                        <x-collapsible-container>
+                            <x-slot name="form">
+                                <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false"/>
+                            </x-slot>
+                        </x-collapsible-container>
+
                     @endif
                 </div>
+            </div>
+        </x-slot>
+        <x-slot name="clients">
+            <!-- Clients -->
+            <div>
+                <livewire:factor.factor-clients-list :factor="$factor"/>
+            </div>
+        </x-slot>
+        <x-slot name="vendors">
+            <!-- Vendors -->
+            <div>
+                <livewire:factor.factor-vendors-list :factor="$factor"/>
+            </div>
+        </x-slot>
+        <x-slot name="debtors">
+            <!-- Debtors -->
+            <div>
+                <livewire:factor.factor-debtors-list :factor="$factor"/>
             </div>
         </x-slot>
         <x-slot name="users">
