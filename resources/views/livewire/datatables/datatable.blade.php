@@ -19,7 +19,7 @@
                                 <x-icons.search class="mr-2 text-gray-400"/>
                             </div>
 
-                            <x-input wire:model.debounce.500ms="search" class="mt-auto py-2.5 px-9" placeholder="Search..." />
+                            <x-input wire:model.debounce.500ms="search" id="datatable_global_search" class="mt-auto py-2.5 px-9" placeholder="Search..." />
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                                 <x-clear-filter wire:click="$set('search', null)"/>
                             </div>
@@ -70,7 +70,7 @@
                                     @include('datatables::header-inline-hide', ['column' => $column, 'sort' => $sort])
                                 @elseif($column['type'] === 'checkbox')
                                     <div class="relative table-cell h-12 w-12 overflow-hidden align-top px-6 py-3 border-b border-gray-300 bg-gray-50 dark:bg-dark-1 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider flex items-center focus:outline-none">
-                                        <div class="px-1 py-1 rounded @if(count($selected)) bg-orange-400 @else bg-gray-200 @endif text-gray-500 text-center dark:bg-dark-2">
+                                        <div id="datatable_selected_rows_number" class="px-1 py-1 rounded @if(count($selected)) bg-orange-400 @else bg-gray-200 @endif text-gray-500 text-center dark:bg-dark-2">
                                             {{ count($selected) }}
                                         </div>
                                     </div>
@@ -90,13 +90,13 @@
                                     <div class="table-cell w-32 overflow-hidden align-top px-6 py-3.5 border-b border-gray-300 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider flex h-full flex-col items-center space-y-2 focus:outline-none">
                                         {{--<div>SELECT ALL</div>--}}
                                         <div class="text-center">
-                                            <input type="checkbox" wire:click="toggleSelectAll" @if(count($selected) === $this->results->total()) checked @endif class="rounded shadow-sm focus:ring focus:ring-opacity-50 form-check-input border mr-2 focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" />
+                                            <input type="checkbox" id="datatable_toggle_select_all_rows" wire:click="toggleSelectAll" @if(count($selected) === $this->results->total()) checked @endif class="rounded shadow-sm focus:ring focus:ring-opacity-50 form-check-input border mr-2 focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18" />
                                         </div>
                                     </div>
                                 @elseif($column['type'] === 'actions')
                                     <div class="table-cell border-b border-gray-300 w-5 overflow-hidden align-top">
                                         @if ($this->getActiveFiltersProperty())
-                                            <x-light-anchor wire:click="clearAllFilters" class="mr-2.5 h-8 mt-2.5 pt-1.5 dark:bg-dark-2">
+                                            <x-light-anchor wire:click="clearAllFilters" id="datatable_clear_all_filters" class="mr-2.5 h-8 mt-2.5 pt-1.5 dark:bg-dark-2">
                                                 <span class="nowrap">Clear All</span>
                                             </x-light-anchor>
                                         @endif
