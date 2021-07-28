@@ -8,7 +8,7 @@ require('./theme');
 let datepicker = document.getElementById('datepicker');
 if(datepicker) {
     new Litepicker({
-        element: document.getElementById('datepicker'),
+        element: datepicker,
         singleMode: false,
         setup: (picker) => {
             picker.on('selected', (date1, date2) => {
