@@ -12,12 +12,11 @@
                 @include('debtors.credit.partials.credit-details', ['credit' => $credit])
             @else
                 <div class="mt-5 md:mt-0 md:col-span-2" >
-                    <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                        <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                        <x-success-anchor> + Add </x-success-anchor>
-                    </div>
-
-                    <livewire:debtor.debtor-credit-form :credit="$credit" :partial="false" :nested="true"/>
+                    <x-collapsible-container>
+                        <x-slot name="form">
+                            <livewire:debtor.debtor-credit-form :credit="$credit" :partial="false" :nested="true"/>
+                        </x-slot>
+                    </x-collapsible-container>
                 </div>
             @endif
 
@@ -36,14 +35,12 @@
             @if ($creditLimit->exists)
                 @include('debtors.credit.partials.credit-limit-details', ['creditLimit' => $creditLimit])
             @else
-                <div class="mt-5 md:mt-0 md:col-span-2" >
-                    <div class="px-4 py-5 text-right sm:p-6 shadow sm:rounded-md">
-                        <!-- TODO @Sofia: Clicking this button should collapse / expand the form below; Initially it should be hidden -->
-                        <x-success-anchor> + Add </x-success-anchor>
-                    </div>
+                <x-collapsible-container>
+                    <x-slot name="form">
+                        <livewire:debtor.debtor-credit-limit-form :creditLimit="$creditLimit" :partial="false" :nested="true"/>
+                    </x-slot>
+                </x-collapsible-container>
 
-                    <livewire:debtor.debtor-credit-limit-form :creditLimit="$creditLimit" :partial="false" :nested="true"/>
-                </div>
             @endif
 
         </div>
