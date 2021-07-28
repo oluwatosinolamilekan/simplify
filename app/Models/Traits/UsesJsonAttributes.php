@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Models\Traits;
 
 use ArrayAccess;
+use Doctrine\DBAL\Types\Type;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Arr;
 use RuntimeException;
@@ -33,11 +34,9 @@ trait UsesJsonAttributes
         // MySQL converts json type into longtext  (https://github.com/phpmyadmin/phpmyadmin/issues/16221)
         // so check column type from schema would give wrong result
         // it's enough to check whether attribute is array for this purpose
-        if (! $schema->hasColumn($this->getTable(), $attribute) || ! is_array($this->{$attribute})) {
+        if (! $schema->hasColumn($this->getTable(), $attribute) || ! $schema->getColumnType($this->getTable(), $attribute) == 'json') {
             return false;
         }
-
-        \Log::debug('META column type: '.$schema->getColumnType($this->getTable(), $attribute));
 
         return true;
     }
