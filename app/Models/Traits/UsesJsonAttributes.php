@@ -34,7 +34,7 @@ trait UsesJsonAttributes
         // MySQL converts json type into longtext  (https://github.com/phpmyadmin/phpmyadmin/issues/16221)
         // so check column type from schema would give wrong result
         // it's enough to check whether attribute is array for this purpose
-        if (! $schema->hasColumn($this->getTable(), $attribute) || ! $schema->getColumnType($this->getTable(), $attribute) == 'json') {
+        if (! $schema->hasColumn($this->getTable(), $attribute) || $schema->getColumnType($this->getTable(), $attribute) != 'json') {
             return false;
         }
 
