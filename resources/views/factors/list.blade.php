@@ -2,5 +2,5 @@
     {{ __('Factors List') }}
 </x-slot>
 <div>
-    @include('datatables::datatable', ['table_title' => "Factors List", 'button_route' => route('factors.create'), 'button_id' => "add_new_factor", 'button_text' => "Add New Factor"])
+    @include('datatables::datatable', ['table_id' => 'factors', 'table_title' => "Factors List", 'button_route' => route('factors.create'), 'button_id' => "add_new_factor", 'button_text' => "Add New Factor"])
 </div>

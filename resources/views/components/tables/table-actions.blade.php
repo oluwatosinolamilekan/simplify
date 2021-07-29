@@ -6,7 +6,7 @@
     @endif
 
     @if ($update)
-    <a href="{{ route($update['route'] ?? $update, $args ?? [$id]) }}" id="datatable_edir_icon_{{$id}}" class="p-1 hover:bg-gray-300 dark:hover:bg-dark-2 rounded transition">
+    <a href="{{ route($update['route'] ?? $update, $args ?? [$id]) }}" id="datatable_edit_icon_{{$id}}" class="p-1 hover:bg-gray-300 dark:hover:bg-dark-2 rounded transition">
         <x-icons.edit class="edit_icon"/>
     </a>
     @endif
