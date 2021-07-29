@@ -105,6 +105,9 @@ class ClientCredit extends Model
      * @var  array Default values for attributes
      */
     protected $attributes = [
+        'approved' => 0,
+        'report_charge' => 0,
+        'report_charge_amount' => 0,
         'standard_terms' => 30,
         'ineligible_days' => 0,
     ];

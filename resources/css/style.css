@@ -282,6 +282,19 @@ select.form-control
 .dark .litepicker {
     box-shadow: 0px 0px 5px 0px #232a3b;
 }
+.side-menu-custom-icons.active path,
+.side-menu-custom-icons.active rect {
+    stroke: #59BABE !important;
+}
+
+.side-menu-white-icons.active path,
+.side-menu-white-icons.active rect {
+    stroke: white !important;
+}
+.dark .side-menu-custom-icons.active path,
+.dark .side-menu-custom-icons.active rect {
+    stroke: #FFFFFF !important;
+}
 
 @media only screen and (min-width: 1279px) {
     body.login {
