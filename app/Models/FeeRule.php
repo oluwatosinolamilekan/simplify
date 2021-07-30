@@ -11,26 +11,31 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\BaseDateType;
 use App\Enums\FeeRuleType;
+use App\Enums\RateType;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\FeeRule.
  *
  * @property int $id
- * @property int $term_fee_rules_id
+ * @property int $term_id
  * @property string $label
  * @property FeeRuleType $type
  * @property float $rate
  * @property array|null $configuration
+ * @property Model $config
  * @property array|null $meta
  * @property int $created_by
  * @property int $updated_by
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @property TermFeeRules $termFeeRule
+ * @property Term $term
  * @property User $creator
  * @property User $updater
  * @method static Builder|User   createdBy($userId)
@@ -40,11 +45,12 @@ use Illuminate\Support\Carbon;
  */
 class FeeRule extends Model
 {
+    protected $table = 'fee_rules';
     /**
      * @var array
      */
     protected $fillable = [
-        'term_fee_rules_id',
+        'term_id',
         'label',
         'type',
         'rate',
@@ -76,11 +82,40 @@ class FeeRule extends Model
         'type' => FeeRuleType::class,
     ];
 
+    protected $attributes = [
+        'configuration' => '[]',
+    ];
+
     /**
      * @return BelongsTo
      */
-    public function termFeeRule()
+    public function term()
     {
-        return $this->belongsTo(TermFeeRules::class, 'term_fee_rules_id');
+        return $this->belongsTo(Term::class, 'term_id');
+    }
+
+    public static function fromType(int $type, array $attributes = [])
+    {
+        if (! FeeRuleType::hasValue($type)) {
+            throw new Exception("Invalid fee rule type {$type}");
+        }
+
+        return new self($attributes + ['type' => $type, 'configuration' => []]);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'label' => ['string', 'min:2', 'max:255'],
+            'type' => ['required', 'int', Rule::in(FeeRuleType::getValues())],
+            'rate' => ['required', 'numeric', 'gt:0'],
+            'configuration' => ['array'],
+            'configuration.rate_type' => ['required_if:type,3,4', 'int', Rule::in(RateType::getValues())],
+            'configuration.start_day' => ['required_if:type,1,2', 'int'],
+            'configuration.thru_day' => ['required_if:type,1', 'int'],
+            'configuration.calculate_age_based_on' => ['required_if:type,2', 'int', Rule::in(BaseDateType::getValues())],
+            'configuration.interval' => ['required_if:type,2', 'int'],
+            'configuration.max_rate' => ['required_if:type,2', 'numeric', 'min:0', 'max:100'],
+        ];
     }
 }

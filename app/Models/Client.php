@@ -54,6 +54,7 @@ use Illuminate\Validation\Rule;
  * @property Payment[] $payments
  * @property Schedule[] $schedules
  * @property Team[] $teams
+ * @property Term[] $terms
  * @property Vendor[] $vendors
  * @property User $creator
  * @property User $updater
@@ -227,6 +228,14 @@ class Client extends Model
     public function teams()
     {
         return $this->hasManyThrough(Team::class, TeamClient::class);
+    }
+
+    /**
+     * @return HasManyThrough
+     */
+    public function terms()
+    {
+        return $this->hasManyThrough(Term::class, ClientTerm::class);
     }
 
     public function getRules(bool $required = true)

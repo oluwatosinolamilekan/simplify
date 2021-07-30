@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 
@@ -37,7 +38,8 @@ use Illuminate\Validation\Rule;
  * @property Carbon $updated_at
  * @property Factor $factor
  * @property Client[] $clients
- * @property TermFeeRules[] $termFeeRules
+ * @property TermSettings[] $settings
+ * @property FeeRule[] $feeRules
  * @property User $creator
  * @property User $updater
  * @method static Builder|User   createdBy($userId)
@@ -105,15 +107,23 @@ class Term extends Model
      */
     public function clients()
     {
-        return $this->belongsToMany(Client::class);
+        return $this->belongsToMany(Client::class, ClientTerm::class);
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function settings()
+    {
+        return $this->hasOne(TermSettings::class);
     }
 
     /**
      * @return HasMany
      */
-    public function termFeeRules()
+    public function feeRules()
     {
-        return $this->hasMany(TermFeeRules::class);
+        return $this->hasMany(FeeRule::class, 'term_id');
     }
 
     public function getRules(bool $required = true)

@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Scope;
@@ -206,6 +207,10 @@ abstract class Model extends EloquentModel
 
         if ($relation instanceof HasOne) {
             $instance = $relation->newRelatedInstanceFor($this);
+        }
+
+        if ($relation instanceof HasMany) {
+            $instance = $relation->make();
         }
 
         $instance->syncOriginal(); // prevent making model state dirty by setting foreign key
