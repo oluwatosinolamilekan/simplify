@@ -16,7 +16,7 @@ import tail from "tail.select";
         }
 
         if (cash(this).data("search")) {
-            options.search = true;
+            options.search = false;
         }
 
         if (cash(this).attr("multiple") !== undefined) {
