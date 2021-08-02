@@ -14,7 +14,7 @@
         </li>
         <li>
             <a href="{{ route('users.list') }}" class="menu text-gray-600">
-                <div class="menu__icon"> <i data-feather="users"></i> </div>
+                <div class="menu__icon">  <x-icons.user class="side-menu-custom-icons {{request()->routeIs('users.list') ? 'active' : ''}}"></x-icons.user>  </div>
                 <div class="menu__title"> {{ __('Users') }} </div>
             </a>
         </li>
@@ -26,19 +26,19 @@
         </li>
         <li>
             <a href="{{ route('clients.list') }}" class="menu text-gray-600">
-                <div class="menu__icon"> <i data-feather="users"></i> </div>
+                <div class="menu__icon"> <x-icons.client class="side-menu-custom-icons {{request()->routeIs('clients.list') ? 'active' : ''}}"></x-icons.client> </div>
                 <div class="menu__title"> {{ __('Clients') }} </div>
             </a>
         </li>
         <li>
             <a href="{{ route('vendors.list') }}" class="menu text-gray-600">
-                <div class="menu__icon"> <i data-feather="users"></i> </div>
+                <div class="menu__icon"> <x-icons.vendor class="side-menu-custom-icons {{request()->routeIs('vendors.list') ? 'active' : ''}}"></x-icons.vendor> </div>
                 <div class="menu__title"> {{ __('Vendors') }} </div>
             </a>
         </li>
         <li>
             <a href="{{ route('debtors.list') }}" class="menu text-gray-600">
-                <div class="menu__icon"> <i data-feather="users"></i> </div>
+                <div class="menu__icon"><x-icons.debtor class="side-menu-custom-icons {{request()->routeIs('debtors.list') ? 'active' : ''}}"></x-icons.debtor> </div>
                 <div class="menu__title"> {{ __('Debtors') }} </div>
             </a>
         </li>

@@ -61,4 +61,4 @@ return [
   'vendor.vendor-settings-form' => 'App\\View\\Components\\Vendor\\VendorSettingsForm',
   'vendor.vendor-wizard' => 'App\\View\\Components\\Vendor\\VendorWizard',
   'vendor.vendors-list' => 'App\\View\\Components\\Vendor\\VendorsList',
-];
+);
