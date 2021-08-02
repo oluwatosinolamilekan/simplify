@@ -11,6 +11,12 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
+    {{--    add jquery cdn--}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.slim.js"
+        integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY="
+        crossorigin="anonymous"></script>
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('mix/css/app.css') }}">
 
@@ -42,6 +48,7 @@
 
     <x-livewire-alert::scripts />
 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     {{--Usersnap integration--}}
     <script>
         window.onUsersnapCXLoad = function(api) {

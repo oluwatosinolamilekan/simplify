@@ -17,7 +17,6 @@
   'company.company-component' => 'App\\View\\Components\\Company\\CompanyComponent',
   'company.company-form' => 'App\\View\\Components\\Company\\CompanyForm',
   'company.company-identity-form' => 'App\\View\\Components\\Company\\CompanyIdentityForm',
-  'company.company-users-list' => 'App\\View\\Components\\Company\\CompanyUsersList',
   'company.user.company-user-details' => 'App\\View\\Components\\Company\\User\\CompanyUserDetails',
   'company.user.company-user-form' => 'App\\View\\Components\\Company\\User\\CompanyUserForm',
   'company.user.company-users-list' => 'App\\View\\Components\\Company\\User\\CompanyUsersList',
