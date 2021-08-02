@@ -295,18 +295,7 @@ select.form-control
 .dark .side-menu-custom-icons.active rect {
     stroke: #FFFFFF !important;
 }
-/*searchable component*/
-/*.select2-dropdown {*/
-/*    background-color: white;*/
-/*    border: 1px solid #aaa;*/
-/*    border-radius: 4px;*/
-/*    box-sizing: border-box;*/
-/*    display: block;*/
-/*    position: absolute;*/
-/*    left: -100000px;*/
-/*    width: 100%;*/
-/*    z-index: 1051; }*/
-/*end searchable component*/
+
 @media only screen and (min-width: 1279px) {
     body.login {
         padding: 0 !important;
