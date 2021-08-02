@@ -1,5 +1,6 @@
 <div x-data class="flex flex-col mr-2.5 ml-1 mb-3">
     <x-input
+        id="datatable_field_filter_{{str_replace(' ', '_', strtolower($name))}}"
         x-ref="input"
         type="text"
         wire:change="applyFilter('text', '{{ $index }}', $event.target.value)"
