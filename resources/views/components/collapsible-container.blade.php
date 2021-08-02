@@ -1,6 +1,6 @@
 <div class="mt-5 md:mt-0 md:col-span-2"
      x-data="{
-          open: {{ ($collapsed ?? true) ? 0 : 1 }},
+          open: {{ !isset($collapsed) || $collapsed ? 'false' : 'true' }},
           get isOpen() { return this.open },
           toggle() { this.open = ! this.open },
         }">
