@@ -8,7 +8,6 @@
         "php": ">=7.4",
         "ext-json": "*",
         "ext-pdo": "*",
-        "asantibanez/livewire-select": "^2.0",
         "awobaz/compoships": "^2.1",
         "bensampo/laravel-enum": "^3.3",
         "fideloper/proxy": "^4.4",
