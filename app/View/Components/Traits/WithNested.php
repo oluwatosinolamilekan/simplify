@@ -78,32 +78,7 @@ trait WithNested
             return;
         }
 
-        if ($this->containsDots($name)) {
-            // Strip away model name.
-            $attribute = $this->afterFirstDot($name);
-
-            $modelInstance = $this->{$model};
-
-            // Get existing data from model property.
-            $results = [];
-            $results[$model] = data_get($modelInstance, $attribute, []);
-
-            // Merge in new data.
-            data_set($results, $attribute, $value);
-
-            // Strip away all inner properties
-            $property = $this->beforeFirstDot($attribute);
-
-            // If property is of type json - no direct modification of json fields is allowed, use methods defined in UsesJsonAttributes trait
-            if ($modelInstance->hasJsonAttribute($property) && $this->containsDots($attribute)) {
-                $modelInstance->updateJsonField($property, $this->afterFirstDot($attribute), data_get($results, $attribute));
-            } else {
-                // Re-assign data to model.
-                data_set($modelInstance, $attribute, data_get($results, $attribute));
-            }
-        } else {
-            $this->{$name} = $value;
-        }
+        $this->syncInputProperty($model, $name, $value);
 
         HashDataPropertiesForDirtyDetection::rehashProperty($name, $value, $this);
     }
