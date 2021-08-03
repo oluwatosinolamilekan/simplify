@@ -50,15 +50,8 @@
                                     'selected' => $client->status === $status
                                 ])
                 @endphp
-                <livewire:select-searchable
-{{--                    name="car_model_id"--}}
-                    :values="$statuses"
-                    wire:model="client.status"
-                    placeholder="Choose an Option"
-                    :searchable="true"
-                    class="w-1/2 float-right
-                />
-{{--                <x-searchable-select :values="$statuses" wire:model="client.status"  class="w-1/2 float-right"/>--}}
+
+                <x-searchable-select :values="$statuses" wire:model="client.status"  class="w-1/2 float-right"/>
                 <x-jet-input-error for="client.status" class="mt-3" />
             </div>
 
