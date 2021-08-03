@@ -20,7 +20,7 @@
             </div>
 
             <!-- Max Invoice Amount -->
-            <div class="col-span-3 sm:col-span-3">
+            <div class="col-span-3 md:col-span-6 lg:col-span-3">
                 <x-jet-label for="max_invoice_amount" value="{{ __('Max Invoice Amount') }}" />
                 <x-forms.currency-input wire:model="fundingInstructions.max_invoice_amount" />
                 <x-jet-input-error for="fundingInstructions.max_invoice_amount" class="mt-3" />
@@ -34,14 +34,14 @@
             </div>
 
             <!-- Fuel Advance Fee -->
-            <div class="col-span-3 sm:col-span-3">
+            <div class="col-span-3 md:col-span-6 lg:col-span-3">
                 <x-jet-label for="fuel_advance_fee" value="{{ __('Fuel Advance Fee') }}"/>
                 <x-forms.currency-input wire:model="fundingInstructions.fuel_advance_fee"/>
                 <x-jet-input-error for="fundingInstructions.fuel_advance_fee" class="mt-3" />
             </div>
 
             <!-- Fuel Advance Max Rate -->
-            <div class="col-span-3 sm:col-span-3">
+            <div class="col-span-3 md:col-span-6 lg:col-span-3">
                 <x-jet-label for="fuel_advance_max_rate" value="{{ __('Fuel Advance Max Rate') }}" />
                 <x-forms.rate-input wire:model="fundingInstructions.fuel_advance_max_rate" />
                 <x-jet-input-error for="fundingInstructions.fuel_advance_max_rate" class="mt-3" />
@@ -62,7 +62,7 @@
             </div>
 
             <!-- Funding Limit -->
-            <div class="col-span-3 sm:col-span-3">
+            <div class="col-span-3 md:col-span-6 lg:col-span-3">
                 <x-jet-label for="funding_limit" value="{{ __('Funding Limit') }}" />
                 <x-forms.currency-input wire:model="fundingInstructions.funding_limit" />
                 <x-jet-input-error for="fundingInstructions.funding_limit" class="mt-3" />
@@ -92,7 +92,7 @@
             <!-- Warning Notes -->
             <div class="col-span-6 sm:col-span-6">
                 <x-jet-label for="warning_note" value="{{ __('Warning Notes') }}"/>
-                <div class="sm:inline-block w-1/2 float-right">
+                <div class="flex w-1/2 float-right">
                     <x-jet-input id="note" type="text" wire:model="note" class="w-3/4"/>
                     <x-success-anchor wire:click="addNote"> + Add </x-success-anchor>
                     <x-jet-input-error for="note" class="mt-3" />
