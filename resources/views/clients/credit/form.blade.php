@@ -22,21 +22,21 @@
                 </div>
 
                 <!-- Credit Limit -->
-                <div class="col-span-3 sm:col-span-3">
+                <div class="col-span-3 md:col-span-6 lg:col-span-3">
                     <x-jet-label for="credit_limit" value="{{ __('Credit Limit') }}" class="sm:inline-block"/>
                     <x-forms.currency-input id="credit_limit" wire:model="credit.credit_limit"/>
                     <x-jet-input-error for="credit.credit_limit" class="mt-3" />
                 </div>
 
                 <!-- Debtor Limit -->
-                <div class="col-span-3 sm:col-span-3">
+                <div class="col-span-3 md:col-span-6 lg:col-span-3">
                     <x-jet-label for="debtor_limit" value="{{ __('Debtor Limit') }}" class="sm:inline-block"/>
                     <x-forms.currency-input id="debtor_limit" wire:model="credit.debtor_limit"/>
                     <x-jet-input-error for="credit.debtor_limit" class="mt-3" />
                 </div>
 
                 <!-- Debtor Concentration -->
-                <div class="col-span-3 sm:col-span-3">
+                <div class="col-span-3 md:col-span-6 lg:col-span-3">
                     <x-jet-label for="debtor_concentration" value="{{ __('Debtor Concentration') }}" class="sm:inline-block"/>
                     <x-forms.rate-input id="debtor_concentration" wire:model="credit.debtor_concentration"/>
                     <x-jet-input-error for="credit.debtor_concentration" class="mt-3" />
@@ -68,7 +68,7 @@
                 </div>
 
                 <!-- Report Charge Amount -->
-                <div class="col-span-3 sm:col-span-3">
+                <div class="col-span-3 md:col-span-6 lg:col-span-3">
                     <x-jet-label for="report_charge_amount" value="{{ __('Report Charge Amount') }}" class="sm:inline-block"/>
                     <x-forms.currency-input id="report_charge_amount" wire:model="credit.report_charge_amount"/>
                     <x-jet-input-error for="credit.report_charge_amount" class="mt-3" />
