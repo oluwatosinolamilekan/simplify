@@ -1,4 +1,3 @@
-
 require('./bootstrap');
 
 require('cash-dom');
@@ -18,6 +17,3 @@ if(datepicker) {
         },
     });
 }
-$(document).ready(function() {
-    $('.js-example-basic-single').select2();
-});

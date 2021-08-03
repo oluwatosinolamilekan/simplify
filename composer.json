@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": ">=7.4",
-        "ext-json": "*",
         "ext-pdo": "*",
         "awobaz/compoships": "^2.1",
         "bensampo/laravel-enum": "^3.3",
@@ -23,7 +22,8 @@
         "mediconesystems/livewire-datatables": "dev-master",
         "protoqol/prequel": "^1.22",
         "richan-fongdasen/eloquent-blameable": "^1.7",
-        "techtailor/rpg": "^1.0"
+        "techtailor/rpg": "^1.0",
+      "ext-json": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
