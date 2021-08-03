@@ -1,202 +1,149 @@
-<?php return array (
-  'asantibanez/livewire-select' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Asantibanez\\LivewireSelect\\LivewireSelectServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'LivewireSelect' => 'Asantibanez\\LivewireSelect\\LivewireSelectFacade',
-    ),
-  ),
-  'barryvdh/laravel-ide-helper' => 
-  array (
-    'providers' => 
-    array (
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the 2amigos/addio
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+return [
+  'barryvdh/laravel-ide-helper' => [
+    'providers' => [
       0 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
-    ),
-  ),
-  'bensampo/laravel-enum' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'bensampo/laravel-enum' => [
+    'providers' => [
       0 => 'BenSampo\\Enum\\EnumServiceProvider',
-    ),
-  ),
-  'facade/ignition' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'facade/ignition' => [
+    'providers' => [
       0 => 'Facade\\Ignition\\IgnitionServiceProvider',
-    ),
-    'aliases' => 
-    array (
+    ],
+    'aliases' => [
       'Flare' => 'Facade\\Ignition\\Facades\\Flare',
-    ),
-  ),
-  'fideloper/proxy' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'fideloper/proxy' => [
+    'providers' => [
       0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-    ),
-  ),
-  'fruitcake/laravel-cors' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'fruitcake/laravel-cors' => [
+    'providers' => [
       0 => 'Fruitcake\\Cors\\CorsServiceProvider',
-    ),
-  ),
-  'jantinnerezo/livewire-alert' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'jantinnerezo/livewire-alert' => [
+    'providers' => [
       0 => 'Jantinnerezo\\LivewireAlert\\LivewireAlertServiceProvider',
-    ),
-    'aliases' => 
-    array (
+    ],
+    'aliases' => [
       'LivewireAlert' => 'Jantinnerezo\\LivewireAlert\\LivewireAlertFacade',
-    ),
-  ),
-  'jenssegers/agent' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'jenssegers/agent' => [
+    'providers' => [
       0 => 'Jenssegers\\Agent\\AgentServiceProvider',
-    ),
-    'aliases' => 
-    array (
+    ],
+    'aliases' => [
       'Agent' => 'Jenssegers\\Agent\\Facades\\Agent',
-    ),
-  ),
-  'krlove/eloquent-model-generator' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'krlove/eloquent-model-generator' => [
+    'providers' => [
       0 => 'Krlove\\EloquentModelGenerator\\Provider\\GeneratorServiceProvider',
-    ),
-  ),
-  'laracasts/cypress' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'laracasts/cypress' => [
+    'providers' => [
       0 => 'Laracasts\\Cypress\\CypressServiceProvider',
-    ),
-  ),
-  'laravel/fortify' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'laravel/fortify' => [
+    'providers' => [
       0 => 'Laravel\\Fortify\\FortifyServiceProvider',
-    ),
-  ),
-  'laravel/jetstream' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'laravel/jetstream' => [
+    'providers' => [
       0 => 'Laravel\\Jetstream\\JetstreamServiceProvider',
-    ),
-  ),
-  'laravel/sail' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'laravel/sail' => [
+    'providers' => [
       0 => 'Laravel\\Sail\\SailServiceProvider',
-    ),
-  ),
-  'laravel/sanctum' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'laravel/sanctum' => [
+    'providers' => [
       0 => 'Laravel\\Sanctum\\SanctumServiceProvider',
-    ),
-  ),
-  'laravel/telescope' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'laravel/telescope' => [
+    'providers' => [
       0 => 'Laravel\\Telescope\\TelescopeServiceProvider',
-    ),
-  ),
-  'laravel/tinker' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'laravel/tinker' => [
+    'providers' => [
       0 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    ),
-  ),
-  'livewire/livewire' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'livewire/livewire' => [
+    'providers' => [
       0 => 'Livewire\\LivewireServiceProvider',
-    ),
-    'aliases' => 
-    array (
+    ],
+    'aliases' => [
       'Livewire' => 'Livewire\\Livewire',
-    ),
-  ),
-  'maatwebsite/excel' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'maatwebsite/excel' => [
+    'providers' => [
       0 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
-    ),
-    'aliases' => 
-    array (
+    ],
+    'aliases' => [
       'Excel' => 'Maatwebsite\\Excel\\Facades\\Excel',
-    ),
-  ),
-  'mediconesystems/livewire-datatables' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'mediconesystems/livewire-datatables' => [
+    'providers' => [
       0 => 'Mediconesystems\\LivewireDatatables\\LivewireDatatablesServiceProvider',
-    ),
-    'aliases' => 
-    array (
+    ],
+    'aliases' => [
       'LivewireDatatables' => 'Mediconesystems\\LivewireDatatables\\LivewireDatatablesFacade',
-    ),
-  ),
-  'nesbot/carbon' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'nesbot/carbon' => [
+    'providers' => [
       0 => 'Carbon\\Laravel\\ServiceProvider',
-    ),
-  ),
-  'nunomaduro/collision' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'nunomaduro/collision' => [
+    'providers' => [
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    ),
-  ),
-  'protoqol/prequel' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'protoqol/prequel' => [
+    'providers' => [
       0 => 'Protoqol\\Prequel\\PrequelServiceProvider',
-    ),
-  ),
-  'richan-fongdasen/eloquent-blameable' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'richan-fongdasen/eloquent-blameable' => [
+    'providers' => [
       0 => 'RichanFongdasen\\EloquentBlameable\\ServiceProvider',
-    ),
-  ),
-  'techtailor/rpg' => 
-  array (
-    'providers' => 
-    array (
+    ],
+  ],
+  'techtailor/rpg' => [
+    'providers' => [
       0 => 'TechTailor\\RPG\\RPGServiceProvider',
-    ),
-    'aliases' => 
-    array (
+    ],
+    'aliases' => [
       'RPG' => 'TechTailor\\RPG\\Facade',
-    ),
-  ),
-);
+    ],
+  ],
+];
