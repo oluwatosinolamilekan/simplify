@@ -128,9 +128,9 @@ class TermSettings extends Model
     public function getRules(bool $required = true)
     {
         return [
-            'advance_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100'],
-            'purchase_fee_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100'],
-            'escrow_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100'],
+            'advance_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100', Rule::in([100 - $this->purchase_fee_rate - $this->escrow_rate])],
+            'purchase_fee_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100', Rule::in([100 - $this->advance_rate - $this->escrow_rate])],
+            'escrow_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100', Rule::in([100 - $this->advance_rate - $this->purchase_fee_rate])],
             'minimum_fee_per_invoice' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:10000'],
             'minimum_fee_applied_to_non_advanced_loads' => [Rule::requiredIf($required), 'boolean'],
             'collection_fee_rule' => [Rule::requiredIf($required), 'int', Rule::in(CollectionFeeRule::getValues())],
@@ -139,6 +139,15 @@ class TermSettings extends Model
             'rate_base_type' => [Rule::requiredIf($required), 'int', Rule::in(RateBaseType::getValues())],
             'float_days_type' => [Rule::requiredIf($required), 'int', Rule::in(FloatDaysType::getValues())],
             'term_id' => ['int', 'exists:terms,id'],
+        ];
+    }
+
+    public function getMessages()
+    {
+        return [
+            'settings.advance_rate.in' => 'Sum of all rates must be 100.',
+            'settings.purchase_fee_rate.in' => 'Sum of all rates must be 100.',
+            'settings.escrow_rate.in' => 'Sum of all rates must be 100.',
         ];
     }
 }

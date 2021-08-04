@@ -132,7 +132,7 @@ class FeeRule extends Model
         return [
             'label' => ['string', 'min:2', 'max:255'],
             'type' => ['required', 'int', Rule::in(FeeRuleType::getValues())],
-            'rate' => ['required', 'numeric', 'gt:0'],
+            'rate' => ['required', 'numeric', 'min:0'],
             'configuration' => ['array'],
         ];
     }
@@ -144,8 +144,21 @@ class FeeRule extends Model
             'start_day' => ['required_if:type,1,2', 'int', 'min:1', 'max:90'],
             'thru_day' => ['required_if:type,1', 'int', 'min:1', 'max:90'],
             'calculate_age_based_on' => ['required_if:type,2', 'int', Rule::in(BaseDateType::getValues())],
-            'interval' => ['required_if:type,2', 'int', 'min:1'],
+            'interval' => ['required_if:type,2', 'int', 'min:1', 'max:90'],
             'max_rate' => ['required_if:type,2', 'numeric', 'min:0', 'max:100'],
+        ];
+    }
+
+    public function getValidationAttributes(string $property = '')
+    {
+        return [
+            "{$property}.rate" => 'rate',
+            "{$property}.configuration.start_day" => 'start day',
+            "{$property}.configuration.thru_day" => 'thru day',
+            "{$property}.configuration.interval" => 'interval',
+            "{$property}.configuration.calculate_age_based_on" => 'calculate age based on',
+            "{$property}.configuration.rate_type" => 'rate type',
+            "{$property}.configuration.max_rate" => 'max rate',
         ];
     }
 }

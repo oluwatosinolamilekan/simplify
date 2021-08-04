@@ -32,4 +32,23 @@ class TermSettingsForm extends ModelForm
     {
         return 'settings';
     }
+
+    /* Realtime validation */
+
+    public function updated($property)
+    {
+        // if any rate has been changed - validate all rates to check sum against 100
+        if (in_array($property, ['settings.advance_rate', 'settings.purchase_fee_rate', 'settings.escrow_rate'])) {
+            $this->validateOnly('settings.escrow_rate');
+            $this->validateOnly('settings.advance_rate');
+            $this->validateOnly('settings.purchase_fee_rate');
+        } else {
+            $this->validateOnly($property);
+        }
+    }
+
+    public function messages()
+    {
+        return $this->settings->getMessages();
+    }
 }

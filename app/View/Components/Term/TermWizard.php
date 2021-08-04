@@ -167,4 +167,16 @@ class TermWizard extends Component
     {
         return ValidationRules::forProperty('feeRules.*.configuration', (new FeeRule())->getConfigurationRules())->getRules();
     }
+
+    // Custom validation messages and attribute names
+
+    public function getMessages()
+    {
+        return $this->settings->getMessages();
+    }
+
+    public function getValidationAttributes()
+    {
+        return (new FeeRule())->getValidationAttributes('feeRules.*');
+    }
 }
