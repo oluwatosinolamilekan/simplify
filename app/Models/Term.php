@@ -12,11 +12,16 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\Status;
+use App\Enums\StatusTypesList;
 use App\Enums\TermType;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\Term.
@@ -33,7 +38,9 @@ use Illuminate\Support\Carbon;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Factor $factor
- * @property TermFeeRules[] $termFeeRules
+ * @property Client[] $clients
+ * @property TermSettings[] $settings
+ * @property FeeRule[] $feeRules
  * @property User $creator
  * @property User $updater
  * @method static Builder|User   createdBy($userId)
@@ -81,6 +88,14 @@ class Term extends Model
     ];
 
     /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'status' => Status::Active,
+        'type' => TermType::Other,
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function factor()
@@ -89,10 +104,46 @@ class Term extends Model
     }
 
     /**
+     * @return BelongsToMany
+     */
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class, ClientTerm::class);
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function settings()
+    {
+        return $this->hasOne(TermSettings::class);
+    }
+
+    /**
      * @return HasMany
      */
-    public function termFeeRules()
+    public function feeRules()
     {
-        return $this->hasMany(TermFeeRules::class);
+        return $this->hasMany(FeeRule::class, 'term_id');
+    }
+
+    public function syncFeeRules(Collection $rules)
+    {
+        $this->feeRules()->saveMany($rules);
+        $this->feeRules()->whereNotIn('id', $rules->pluck('id'))->delete();
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'name' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'code' => [
+                Rule::requiredIf($required), 'string', 'min:2', 'max:125',
+                Rule::unique('terms', 'code')->ignore($this->id),
+            ],
+            'status' => [Rule::requiredIf($required), 'int', Rule::in(StatusTypesList::Term)],
+            'type' => [Rule::requiredIf($required), 'int', Rule::in(TermType::getValues())],
+            'factor_id' => [Rule::requiredIf($required), 'int', 'exists:factors,id'],
+        ];
     }
 }

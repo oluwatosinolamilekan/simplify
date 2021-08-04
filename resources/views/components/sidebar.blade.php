@@ -57,6 +57,14 @@
                 </div>
             </a>
         </li>
+        <li>
+            <a href="{{ route('terms.list') }}" class="side-menu {{request()->routeIs('terms.list') ? 'side-menu--active' : ''}}">
+                <div class="side-menu__icon"><x-icons.debtor class="side-menu-custom-icons {{request()->routeIs('terms.list') ? 'active' : ''}}"></x-icons.debtor> </div>
+                <div class="side-menu__title">
+                    {{ __('Terms') }}
+                </div>
+            </a>
+        </li>
     </ul>
 </nav>
 <!-- END: Side Menu -->

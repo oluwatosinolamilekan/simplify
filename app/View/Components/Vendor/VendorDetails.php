@@ -62,7 +62,6 @@ class VendorDetails extends CompanyComponent
 
         return ValidationRules::merge(
             parent::getRules(),
-            ValidationRules::forModel('vendor', $this->vendor),
             ValidationRules::forModel('settings', $this->settings, $this->settings->isDirty())
         );
     }

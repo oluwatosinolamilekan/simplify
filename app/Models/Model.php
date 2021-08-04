@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Scope;
@@ -208,8 +209,19 @@ abstract class Model extends EloquentModel
             $instance = $relation->newRelatedInstanceFor($this);
         }
 
-        $instance->syncOriginal(); // prevent making model state dirty by setting foreign key
+        if ($relation instanceof HasMany) {
+            $instance = $relation->make();
+        }
+
+        // prevent making model state dirty by setting foreign key
+        $instance->syncOriginal();
 
         return $instance;
+    }
+
+    // important due to fact that connection name is not set for new records
+    public function getConnectionName()
+    {
+        return env('DB_CONNECTION');
     }
 }

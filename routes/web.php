@@ -31,6 +31,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     require base_path('routes/client.php');
     require base_path('routes/vendor.php');
     require base_path('routes/debtor.php');
+    require base_path('routes/terms.php');
 });
 
 /** Public routes */

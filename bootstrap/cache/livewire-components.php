@@ -1,4 +1,15 @@
-<?php return array (
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the 2amigos/addio
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+return [
   'address.address-form' => 'App\\View\\Components\\Address\\AddressForm',
   'bank-information.bank-information-form' => 'App\\View\\Components\\BankInformation\\BankInformationForm',
   'client.client-analysis-form' => 'App\\View\\Components\\Client\\ClientAnalysisForm',
@@ -17,7 +28,6 @@
   'company.company-component' => 'App\\View\\Components\\Company\\CompanyComponent',
   'company.company-form' => 'App\\View\\Components\\Company\\CompanyForm',
   'company.company-identity-form' => 'App\\View\\Components\\Company\\CompanyIdentityForm',
-  'company.company-users-list' => 'App\\View\\Components\\Company\\CompanyUsersList',
   'company.user.company-user-details' => 'App\\View\\Components\\Company\\User\\CompanyUserDetails',
   'company.user.company-user-form' => 'App\\View\\Components\\Company\\User\\CompanyUserForm',
   'company.user.company-users-list' => 'App\\View\\Components\\Company\\User\\CompanyUsersList',
@@ -40,6 +50,10 @@
   'factor.factor-wizard' => 'App\\View\\Components\\Factor\\FactorWizard',
   'factor.factors-list' => 'App\\View\\Components\\Factor\\FactorsList',
   'factor.subscription-plan-form' => 'App\\View\\Components\\Factor\\SubscriptionPlanForm',
+  'term.term-details' => 'App\\View\\Components\\Term\\TermDetails',
+  'term.term-settings-form' => 'App\\View\\Components\\Term\\TermSettingsForm',
+  'term.term-wizard' => 'App\\View\\Components\\Term\\TermWizard',
+  'term.terms-list' => 'App\\View\\Components\\Term\\TermsList',
   'user.user-details' => 'App\\View\\Components\\User\\UserDetails',
   'user.user-form' => 'App\\View\\Components\\User\\UserForm',
   'user.users-list' => 'App\\View\\Components\\User\\UsersList',
@@ -47,4 +61,4 @@
   'vendor.vendor-settings-form' => 'App\\View\\Components\\Vendor\\VendorSettingsForm',
   'vendor.vendor-wizard' => 'App\\View\\Components\\Vendor\\VendorWizard',
   'vendor.vendors-list' => 'App\\View\\Components\\Vendor\\VendorsList',
-);
+];
