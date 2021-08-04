@@ -33,7 +33,7 @@ class ClientWizard extends CompanyComponent
     public ClientAnalysis $analysis;
     public ClientCredit $credit;
     public ClientFundingInstructions $fundingInstructions;
-
+    public $selected;
     /**
      * @param  $client_id
      * @throws Exception
@@ -50,6 +50,16 @@ class ClientWizard extends CompanyComponent
         parent::mount($this->client->getRelatedInstanceOrNew('company'));
     }
 
+    protected $listeners = [
+        'selected' => 'valueSelectedUpdated',
+
+    ];
+
+    public function valueSelectedUpdated($object)
+    {
+        $this->selected= $object;
+    }
+
     /**
      * @throws Exception
      */
@@ -63,10 +73,9 @@ class ClientWizard extends CompanyComponent
             DB::beginTransaction();
 
             $this->company->save();
-
             $this->client->company()->associate($this->company);
+            $this->client->status = $this->selected;
             $this->client->save();
-
             if ($this->fundingInstructions->isDirty()) {
                 $this->fundingInstructions->client()->associate($this->client);
                 $this->fundingInstructions->save();

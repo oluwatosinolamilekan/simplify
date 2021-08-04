@@ -16,10 +16,29 @@ class SelectSearchable extends LivewireSelect
                                 ));
     }
 
+
+
     public function selectedOption($value)
     {
 //        $this->emitUp('updated', 'client.status', $value);
         return $this->selectOptions->where('value', $value)->first();
+
+    }
+
+    public function selectValue($value)
+    {
+        $this->value = $value;
+
+        if ($this->searchable && $this->value == null) {
+            $this->emit('livewire-select-focus-search', ['name' => $this->name]);
+        }
+
+        if ($this->searchable && $this->value != null) {
+            $this->emit('livewire-select-focus-selected', ['name' => $this->name]);
+            $this->emit('selected', $value);
+        }
+
+        $this->notifyValueChanged();
     }
 
 
@@ -32,12 +51,12 @@ class SelectSearchable extends LivewireSelect
         if ($this->value != null) {
             $selectedOption = $this->selectedOption($this->value);
         }
-
         $shouldShow = $this->waitForDependenciesToShow
             ? $this->allDependenciesMet()
             : true;
 
         $styles = $this->styles();
+
 
         return view($this->selectView)
             ->with([
