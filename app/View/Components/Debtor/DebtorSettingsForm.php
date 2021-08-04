@@ -56,11 +56,4 @@ class DebtorSettingsForm extends ModelForm
 
         $this->updatedWithParent('settings.warning_notes', $this->settings->warning_notes); // inform parent about update
     }
-
-    public function getMessages()
-    {
-        return [
-            'warning_notes.*.required' => 'Empty notes are not allowed.',
-        ];
-    }
 }
