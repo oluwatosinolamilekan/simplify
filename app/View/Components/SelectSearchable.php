@@ -20,7 +20,6 @@ class SelectSearchable extends LivewireSelect
 
     public function selectedOption($value)
     {
-//        $this->emitUp('updated', 'client.status', $value);
         return $this->selectOptions->where('value', $value)->first();
 
     }
