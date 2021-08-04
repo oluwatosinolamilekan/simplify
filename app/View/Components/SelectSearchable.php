@@ -78,4 +78,30 @@ class SelectSearchable extends LivewireSelect
 
         return $this->selectOptions->where('value', $value)->first();
     }
+
+    public function render()
+    {
+
+        $options = $this->options($this->searchTerm);
+
+        $this->optionsValues = $options->pluck('value')->toArray();
+
+        if ($this->value != null) {
+            $selectedOption = $this->selectedOption($this->value);
+        }
+
+        $shouldShow = $this->waitForDependenciesToShow
+            ? $this->allDependenciesMet()
+            : true;
+
+        $styles = $this->styles();
+
+        return view($this->selectView)
+            ->with([
+                'options' => $options,
+                'selectedOption' => $selectedOption ?? null,
+                'shouldShow' => $shouldShow,
+                'styles' => $styles,
+            ]);
+    }
 }
