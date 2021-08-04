@@ -13,9 +13,7 @@ namespace App\View\Components;
 
 use App\View\Components\Traits\ConfirmModelDelete;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
-use Illuminate\Database\Eloquent\Model;
 use Livewire\Component as BaseComponent;
-use Livewire\Exceptions\CannotBindToModelDataWithoutValidationRuleException;
 use Livewire\Exceptions\PublicPropertyNotFoundException;
 use Livewire\HydrationMiddleware\HashDataPropertiesForDirtyDetection;
 
@@ -33,11 +31,6 @@ class Component extends BaseComponent
     public function syncInput($name, $value, $rehash = true)
     {
         $propertyName = $this->beforeFirstDot($name);
-
-        throw_if(
-            ($this->{$propertyName} instanceof Model || $this->{$propertyName} instanceof EloquentCollection) && $this->missingRuleFor($name),
-            new CannotBindToModelDataWithoutValidationRuleException($name, $this::getName())
-        );
 
         $this->callBeforeAndAfterSyncHooks($name, $value, function ($name, $value) use ($propertyName, $rehash) {
             throw_unless(

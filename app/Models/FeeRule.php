@@ -45,7 +45,6 @@ use Illuminate\Validation\Rule;
  */
 class FeeRule extends Model
 {
-    protected $table = 'fee_rules';
     /**
      * @var array
      */
@@ -71,6 +70,25 @@ class FeeRule extends Model
         'type' => 'int',
         'configuration' => 'array',
         'meta' => 'array',
+    ];
+
+    protected static $ruleConfig = [
+        FeeRuleType::CollectionFee => [
+            'start_day' => 1,
+            'thru_day' => 30,
+        ],
+        FeeRuleType::IntervalFee => [
+            'start_day' => 1,
+            'interval' => 7,
+            'max_rate' => 100,
+            'calculate_age_based_on' => BaseDateType::InvoiceDate,
+        ],
+        FeeRuleType::FlatFee => [
+            'rate_type' => RateType::Percent,
+        ],
+        FeeRuleType::NegativeReserveFee => [
+            'rate_type' => RateType::Percent,
+        ],
     ];
 
     /**
@@ -100,7 +118,13 @@ class FeeRule extends Model
             throw new Exception("Invalid fee rule type {$type}");
         }
 
-        return new self($attributes + ['type' => $type, 'configuration' => []]);
+        $attributes = array_merge([
+            'type' => $type,
+            'label' => FeeRuleType::fromValue($type)->description,
+            'configuration' => self::$ruleConfig[$type] ?? [],
+        ], $attributes);
+
+        return new self($attributes);
     }
 
     public function getRules(bool $required = true)
@@ -110,12 +134,18 @@ class FeeRule extends Model
             'type' => ['required', 'int', Rule::in(FeeRuleType::getValues())],
             'rate' => ['required', 'numeric', 'gt:0'],
             'configuration' => ['array'],
-            'configuration.rate_type' => ['required_if:type,3,4', 'int', Rule::in(RateType::getValues())],
-            'configuration.start_day' => ['required_if:type,1,2', 'int'],
-            'configuration.thru_day' => ['required_if:type,1', 'int'],
-            'configuration.calculate_age_based_on' => ['required_if:type,2', 'int', Rule::in(BaseDateType::getValues())],
-            'configuration.interval' => ['required_if:type,2', 'int'],
-            'configuration.max_rate' => ['required_if:type,2', 'numeric', 'min:0', 'max:100'],
+        ];
+    }
+
+    public function getConfigurationRules()
+    {
+        return [
+            'rate_type' => ['required_if:type,3,4', 'int', Rule::in(RateType::getValues())],
+            'start_day' => ['required_if:type,1,2', 'int', 'min:1', 'max:90'],
+            'thru_day' => ['required_if:type,1', 'int', 'min:1', 'max:90'],
+            'calculate_age_based_on' => ['required_if:type,2', 'int', Rule::in(BaseDateType::getValues())],
+            'interval' => ['required_if:type,2', 'int', 'min:1'],
+            'max_rate' => ['required_if:type,2', 'numeric', 'min:0', 'max:100'],
         ];
     }
 }

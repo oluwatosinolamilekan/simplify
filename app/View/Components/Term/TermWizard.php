@@ -38,7 +38,7 @@ class TermWizard extends Component
     public Factor $factor;
     public TermSettings $settings;
     public Collection $clients;
-    public \Illuminate\Support\Collection $feeRules;
+    public Collection $feeRules;
 
     /**
      * @param  $term_id
@@ -58,12 +58,19 @@ class TermWizard extends Component
         $this->initRelated();
     }
 
+    /* Realtime validation */
+
+    public function updated($property)
+    {
+        $this->validateOnly($property, $this->getRules() + $this->getConfigurationRules());
+    }
+
     /**
      * @throws Exception|Throwable
      */
     public function save()
     {
-        $this->validate();
+        $this->validate($this->getRules() + $this->getConfigurationRules());
 
         // TODO @Jovana: should be separate service + reusable middlewares
 
@@ -78,6 +85,8 @@ class TermWizard extends Component
             $attributes = ['factor_id' => $this->term->factor_id, 'created_by' => Auth::user()->id];
 
             $this->term->clients()->syncWithPivotValues($this->clients, $attributes);
+
+            $this->term->syncFeeRules($this->feeRules);
 
             DB::commit();
 
@@ -124,7 +133,12 @@ class TermWizard extends Component
 
     public function selectFeeRuleType(int $type)
     {
-        $this->feeRules->add(FeeRule::fromType($type, ['label' => 'test', 'configuration' => ['start_day' => 1, 'rate_type' => 1]]));
+        $this->feeRules->add(FeeRule::fromType($type));
+    }
+
+    public function deleteRule(int $index)
+    {
+        $this->feeRules->forget($index);
     }
 
     /**
@@ -142,7 +156,14 @@ class TermWizard extends Component
     {
         return ValidationRules::merge(
             ValidationRules::forModel('term', $this->term),
-            ValidationRules::forCollection('feeRules', new FeeRule()),
+            ValidationRules::forCollection('feeRules', new FeeRule())
         );
+    }
+
+    // Keep validation rules for configuration array separately and use it only for validation purposes
+    // as hydrate fails for json fields
+    public function getConfigurationRules()
+    {
+        return ValidationRules::forProperty('feeRules.*.configuration', (new FeeRule())->getConfigurationRules())->getRules();
     }
 }

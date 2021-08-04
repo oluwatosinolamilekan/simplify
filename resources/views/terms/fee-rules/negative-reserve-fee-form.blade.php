@@ -1,8 +1,23 @@
-<?php declare(strict_types=1);
 
-/*
- * This file is part of the 2amigos/addio
- *
- * For the full copyright and license information, please view
- * the LICENSE file that was distributed with this source code.
- */
+<div class="col-span-6 sm:col-span-3">
+    <x-jet-label value="{{ __('Type') }}" />
+    @php
+        $types = collect(\App\Enums\RateType::getInstances())
+                    ->map(fn ($type) => [
+                        'id' => $type->value,
+                        'name' => $type->description
+                    ])
+    @endphp
+
+    <x-searchable-select :values="$types" wire:model="feeRules.{{$index}}.configuration.rate_type" class="w-1/2 float-right"/>
+</div>
+
+<div class="col-span-6 sm:col-span-3">
+    <x-jet-label for="feeRules.{{$index}}.rate" value="{{ __('Amount') }}" />
+    @if(isset($feeRules[$index]->configuration['rate_type']) && $feeRules[$index]->configuration['rate_type'] == \App\Enums\RateType::Amount)
+        <x-forms.currency-input wire:model="feeRules.{{$index}}.rate" />
+    @else
+        <x-forms.rate-input wire:model="feeRules.{{$index}}.rate" />
+    @endif
+    <x-jet-input-error for="feeRules.{{$index}}.rate" class="mt-3" />
+</div>

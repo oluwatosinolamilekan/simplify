@@ -106,7 +106,6 @@
 
                             <div class="col-span-6 sm:col-span-6">
 
-
                             @foreach($this->feeRules as $i => $feeRule)
                                 @include('terms.fee-rules.form', ['feeRule' => $feeRule, 'index' => $i])
                             @endforeach

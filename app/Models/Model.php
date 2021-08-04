@@ -217,4 +217,10 @@ abstract class Model extends EloquentModel
 
         return $instance;
     }
+
+    // important due to fact that connection name is not set for new records
+    public function getConnectionName()
+    {
+        return env('DB_CONNECTION');
+    }
 }

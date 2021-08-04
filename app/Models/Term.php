@@ -15,6 +15,7 @@ use App\Enums\Status;
 use App\Enums\StatusTypesList;
 use App\Enums\TermType;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -124,6 +125,12 @@ class Term extends Model
     public function feeRules()
     {
         return $this->hasMany(FeeRule::class, 'term_id');
+    }
+
+    public function syncFeeRules(Collection $rules)
+    {
+        $this->feeRules()->saveMany($rules);
+        $this->feeRules()->whereNotIn('id', $rules->pluck('id'))->delete();
     }
 
     public function getRules(bool $required = true)
