@@ -50,7 +50,7 @@
                                 ])
                 @endphp
 {{--                <livewire:select-searchable :value="$statuses" :name="'js'" >--}}
-                <livewire:select-searchable :searchable="true" :selectOptions="$statuses" :value="$client->status->value" wire:model="client.status" class="w-1/2 float-right" :name="'client.status'"/>
+                <livewire:select-searchable :searchable="true" :selectOptions="$statuses" :value="$client->status->value" wire:model="client.status" class="w-1/2 float-right" :name="'client.status'" />
                 <x-jet-input-error for="client.status" class="mt-3" />
             </div>
 

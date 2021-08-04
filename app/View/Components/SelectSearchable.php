@@ -11,7 +11,9 @@ class SelectSearchable extends LivewireSelect
 
     public function options($searchTerm = null) : Collection
     {
-        return $this->selectOptions->filter(fn ($item) => empty($searchTerm) || str_contains($item['description'], $searchTerm));
+        return $this->selectOptions->filter(fn ($item) => empty($searchTerm)
+                                    || str_contains(strtolower($item['description']), strtolower($searchTerm)
+                                ));
     }
 
     public function selectedOption($value)
@@ -19,6 +21,7 @@ class SelectSearchable extends LivewireSelect
 //        $this->emitUp('updated', 'client.status', $value);
         return $this->selectOptions->where('value', $value)->first();
     }
+
 
     public function render()
     {
