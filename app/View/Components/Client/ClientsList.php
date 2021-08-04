@@ -35,7 +35,7 @@ class ClientsList extends Datatable
 
     public function builder()
     {
-        return Client::with(['factor', 'factor.company', 'company', 'company.identity']);
+        return Client::with(['factor', 'factor.company', 'company', 'identity']);
     }
 
     public function columns()
@@ -58,10 +58,10 @@ class ClientsList extends Datatable
                 ->filterable()
                 ->searchable(),
 
-            Column::name('company.identity.mc_number')
+            Column::name('identity.mc_number')
                 ->label('MC Number')
                 ->filterable(),
-            Column::name('company.identity.dot_number')
+            Column::name('identity.dot_number')
                 ->label('DOT Number')
                 ->filterable(),
 

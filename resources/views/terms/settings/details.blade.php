@@ -26,7 +26,9 @@
                 </span>
             </div>
 
-            <x-jet-section-border />
+            <div class="col-span-6 sm:col-span-6">
+                <x-jet-section-border />
+            </div>
 
             <!-- Minimum Fee Per Invoice -->
             <div class="col-span-3 sm:col-span-4">
@@ -37,7 +39,7 @@
             </div>
 
             <!-- Minimum Fee Applied To Non Advanced Loads -->
-            <div class="col-span-3 sm:col-span-3">
+            <div class="col-span-3 sm:col-span-4">
                 <x-jet-label for="minimum_fee_applied_to_non_advanced_loads" value="{{ __('Applied To Non Advanced Loads') }}" class="sm:inline-block"/>
                 @if($settings->minimum_fee_applied_to_non_advanced_loads)
                     <x-icons.check-circle class="text-green-600 mx-0 inline" />
@@ -47,7 +49,7 @@
             </div>
 
             <!-- Prioritize Minimum Fee -->
-            <div class="col-span-3 sm:col-span-2">
+            <div class="col-span-3 sm:col-span-4">
                 <x-jet-label for="prioritize_minimum_fee" value="{{ __('Minimum Fee Calculated Before Extra Fees') }}" class="sm:inline-block"/>
                 @if($settings->prioritize_minimum_fee)
                     <x-icons.check-circle class="text-green-600 mx-0 inline" />
@@ -56,7 +58,9 @@
                 @endif
             </div>
 
-            <x-jet-section-border />
+            <div class="col-span-6 sm:col-span-6">
+                <x-jet-section-border />
+            </div>
 
             <!-- Collection Fee Rule -->
             <div class="col-span-6 sm:col-span-3">

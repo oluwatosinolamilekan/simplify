@@ -76,7 +76,7 @@
                 <x-slot name="title">{{ __('Term Settings') }}</x-slot>
                 <x-slot name="description">{{ __('Term configuration')}}</x-slot>
             </x-jet-section-title>
-            @include('terms.settings.details', ['settings' => $settings])
+            @include('terms.settings.details', ['settings' => $term->settings])
         </div>
     </div>
 
@@ -87,10 +87,43 @@
                 <x-slot name="title">{{ __('Assigned Clients') }}</x-slot>
                 <x-slot name="description">{{ __('Clients assigned to this term')}}</x-slot>
             </x-jet-section-title>
-            @foreach($term->clients as $client)
-                <span class="text-wrap mx-2 py-3 sm:inline-block w-5/6">{{$client->ref_code}} {{$client->company->name}}</span>
-            @endforeach
+            <div class="mt-5 md:mt-0 md:col-span-2">
+                <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
+                    @foreach($term->clients as $client)
+                        <span class="text-wrap mx-2 py-3 sm:inline-block w-5/6">{{$client->ref_code}} {{$client->company->name}}</span>
+                    @endforeach
+                </div>
+            </div>
         </div>
+    </div>
+
+    <!-- Fee Rules Information -->
+    <div class="mt-10 sm:mt-0">
+        <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
+            <x-jet-section-title>
+                <x-slot name="title">{{ __('Fee Rules') }}</x-slot>
+                <x-slot name="description">{{ __('Fee rules and configurations')}}</x-slot>
+            </x-jet-section-title>
+            <div class="mt-5 md:mt-0 md:col-span-2">
+                <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
+                    @foreach($term->feeRules as $feeRule)
+                        @include('terms.fee-rules.details', ['feeRule' => $feeRule])
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center justify-end px-4 py-3 text-right sm:px-6">
+
+        <x-success-anchor href="{{route('terms.update', $this->term->id)}}">
+            {{ __('Update') }}
+        </x-success-anchor>
+
+        <x-danger-button wire:click="confirmDeletion" wire:loading.attr="disabled">
+            {{ __('Delete') }}
+        </x-danger-button>
     </div>
 </div>
 

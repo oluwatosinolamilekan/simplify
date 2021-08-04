@@ -9,7 +9,7 @@
         FeeRuleType::NFEFee => 'terms.fee-rules.nfe-fee-form',
     ];
 @endphp
-<x-collapsible-container :header="$feeRule->type->description">
+<x-collapsible-container :header="$feeRule->type->description" :collapsed="false">
     <x-slot name="form">
         <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
             <div class="grid grid-cols-6 gap-6">

@@ -121,6 +121,14 @@ class Client extends Model
     /**
      * @return BelongsTo
      */
+    public function identity()
+    {
+        return $this->belongsTo(CompanyIdentity::class, 'company_id', 'company_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
     public function factor()
     {
         return $this->belongsTo(Factor::class);
