@@ -213,7 +213,8 @@ abstract class Model extends EloquentModel
             $instance = $relation->make();
         }
 
-        $instance->syncOriginal(); // prevent making model state dirty by setting foreign key
+        // prevent making model state dirty by setting foreign key
+        $instance->syncOriginal();
 
         return $instance;
     }
