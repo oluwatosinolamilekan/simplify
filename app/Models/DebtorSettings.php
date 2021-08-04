@@ -95,7 +95,7 @@ class DebtorSettings extends Model
             'require_original_invoices' => [Rule::requiredIf($required), 'boolean'],
             'noa_email' => [Rule::requiredIf($required), 'string', 'email', 'min:2', 'max:255'],
             'warning_notes' => ['array'],
-            'warning_notes.*' => ['string', 'min:2', 'max:255'],
+            'warning_notes.*' => ['required', 'string', 'min:2', 'max:255'],
         ];
     }
 }
