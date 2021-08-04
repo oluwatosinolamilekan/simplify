@@ -156,6 +156,7 @@ class TermWizard extends Component
     {
         return ValidationRules::merge(
             ValidationRules::forModel('term', $this->term),
+            ValidationRules::forModel('settings', $this->settings),
             ValidationRules::forCollection('feeRules', new FeeRule())
         );
     }
