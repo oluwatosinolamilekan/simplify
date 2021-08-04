@@ -37,7 +37,11 @@ class DebtorSettingsForm extends ModelForm
 
     public function addNote()
     {
-        $this->validateOnly('note', ['note' => $this->getRules()['settings.warning_notes.*']]);
+        $this->validateOnly(
+            'note',
+            ['note' => $this->getRules()['settings.warning_notes.*']],
+            ['note.required' => 'Empty notes are not allowed.']
+        );
 
         $this->settings->appendToJson('warning_notes', $this->note);
 
@@ -51,5 +55,12 @@ class DebtorSettingsForm extends ModelForm
         $this->settings->removeJsonField('warning_notes', $index, true);
 
         $this->updatedWithParent('settings.warning_notes', $this->settings->warning_notes); // inform parent about update
+    }
+
+    public function getMessages()
+    {
+        return [
+            'warning_notes.*.required' => 'Empty notes are not allowed.',
+        ];
     }
 }
