@@ -92,8 +92,8 @@
             <!-- Warning Notes -->
             <div class="col-span-6 sm:col-span-6">
                 <x-jet-label for="warning_note" value="{{ __('Warning Notes') }}"/>
-                <div class="flex w-1/2 float-right">
-                    <x-jet-input id="note" type="text" wire:model="note" class="w-3/4"/>
+                <div class="sm:inline-block w-1/2 float-right">
+                    <x-jet-input id="note" type="text" wire:model.defer="note" class="w-3/4"/>
                     <x-success-anchor wire:click="addNote"> + Add </x-success-anchor>
                     <x-jet-input-error for="note" class="mt-3" />
                 </div>

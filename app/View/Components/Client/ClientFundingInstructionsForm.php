@@ -37,7 +37,11 @@ class ClientFundingInstructionsForm extends ModelForm
 
     public function addNote()
     {
-        $this->validateOnly('note', ['note' => $this->getRules()['fundingInstructions.warning_notes.*']]);
+        $this->validateOnly(
+            'note',
+            ['note' => $this->getRules()['fundingInstructions.warning_notes.*']],
+            ['note.required' => 'Empty notes are not allowed.']
+        );
 
         $this->fundingInstructions->appendToJson('warning_notes', $this->note);
 
