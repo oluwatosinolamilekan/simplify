@@ -153,7 +153,7 @@ $datatable_id = isset($table_id) ? $table_id : '';
                 <div class="rounded-lg rounded-t-none max-w-screen rounded-lg border-b border-gray-200 bg-white dark:bg-dark-1">
                     <div class="p-2 sm:flex items-center justify-between">
                         {{-- check if there is any data --}}
-                        @if($this->results[1])
+                        @if($this->results[0])
                             <div class="my-2 sm:my-0 flex items-center">
                                 <x-select name="perPage" wire:model="perPage" class="h-8 pt-1 pb-1 pr-8 dark:bg-dark-2">
                                     <option value="10">10</option>
