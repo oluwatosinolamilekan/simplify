@@ -107,6 +107,9 @@ class CompanyUserForm extends ModelForm
                 ]));
             } else {
                 $this->emitUp('saved', $this->getProperty(), $this->userCompanyAccess->id);
+                if ($this->nested) {
+                    $this->mount($this->userCompanyAccess->company_id);
+                }
             }
         } catch (Throwable $exception) {
             $this->exceptionAlert($exception);

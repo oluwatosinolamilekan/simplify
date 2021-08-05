@@ -64,4 +64,9 @@ class StatusTypesList
         Status::Active,
         Status::NotActive,
     ];
+
+    public const Term = [
+        Status::Active,
+        Status::NotActive,
+    ];
 }

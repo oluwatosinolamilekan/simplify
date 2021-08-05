@@ -37,7 +37,11 @@ class DebtorSettingsForm extends ModelForm
 
     public function addNote()
     {
-        $this->validateOnly('note', ['note' => $this->getRules()['settings.warning_notes.*']]);
+        $this->validateOnly(
+            'note',
+            ['note' => $this->getRules()['settings.warning_notes.*']],
+            ['note.required' => 'Empty notes are not allowed.']
+        );
 
         $this->settings->appendToJson('warning_notes', $this->note);
 

@@ -9,12 +9,12 @@ declare(strict_types=1);
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace App\View\Components\Client;
+namespace App\View\Components\Term;
 
-use App\Enums\ClientType;
 use App\Enums\Status;
 use App\Enums\StatusTypesList;
-use App\Models\Client;
+use App\Enums\TermType;
+use App\Models\Term;
 use App\View\Components\Common\Datatables\ActionsColumn;
 use App\View\Components\Common\Datatables\Datatable;
 use App\View\Components\Common\Datatables\RelationColumn;
@@ -22,62 +22,55 @@ use App\View\Components\Traits\ConfirmModelDelete;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
 
-class ClientsList extends Datatable
+class TermsList extends Datatable
 {
     use ConfirmModelDelete;
 
-    public $client = null;
+    public ?Term $term = null;
 
     public function render()
     {
-        return view('clients.list');
+        return view('terms.list');
     }
 
     public function builder()
     {
-        return Client::with(['factor', 'factor.company', 'company', 'identity']);
+        return Term::with([
+            'factor',
+            'factor.company',
+            'clients',
+            'feeRules',
+        ]);
     }
 
     public function columns()
     {
         return [
-            Column::name('ref_code')
+            Column::name('code')
+                ->label('Code')
                 ->searchable()
-                ->filterable()
-                ->truncate(15)
-                ->view('components.tables.email-row'),
+                ->filterable(),
 
-            Column::name('company.name')
+            Column::name('name')
                 ->label('Name')
                 ->filterable()
                 ->searchable(),
 
-            RelationColumn::name('factor.company.name')
-                ->label('Factor')
-                ->alias('factor_company')
-                ->filterable()
-                ->searchable(),
-
-            Column::name('identity.mc_number')
-                ->label('MC Number')
-                ->filterable(),
-            Column::name('identity.dot_number')
-                ->label('DOT Number')
-                ->filterable(),
-
-            Column::name('office')
-                ->label('Office')
-                ->filterable(),
-
-            Column::callback('type', fn (int $type) => ClientType::fromValue($type)->description)
+            Column::callback('type', fn (int $type) => TermType::fromValue($type)->description)
                 ->label('Type')
                 ->filterable(
-                    collect(ClientType::getInstances())->map(fn ($type) => [
-                        'id' => $type,
+                    collect(TermType::getInstances())->map(fn ($type) => [
+                        'id' => $type->key,
                         'name' => $type->description,
                     ])
                     ->all()
                 ),
+
+            RelationColumn::name('factor.company.name')
+                ->alias('factor_company')
+                ->label('Factor')
+                ->filterable()
+                ->searchable(),
 
             Column::callback('status', fn (int $status) => Status::fromValue($status)->description)
                 ->label('Status')
@@ -86,9 +79,8 @@ class ClientsList extends Datatable
                         'id' => $status,
                         'name' => Status::fromValue($status)->description,
                     ])
-                    ->all()
+                        ->all()
                 ),
-
             DateColumn::name('created_at')
                 ->label('Created At')
                 ->format('m/d/Y')
@@ -97,7 +89,7 @@ class ClientsList extends Datatable
             ActionsColumn::actions(['id'], function ($id) {
                 return view(
                     'components.tables.table-actions',
-                    ['id' => $id, 'view' => 'clients.view', 'update' => 'clients.update', 'delete' => 'delete', 'args' => ['client_id' => $id]]
+                    ['id' => $id, 'view' => 'terms.view', 'update' => 'terms.update', 'delete' => 'delete', 'args' => ['term_id' => $id]]
                 );
             }),
         ];
@@ -105,17 +97,17 @@ class ClientsList extends Datatable
 
     public function confirmItemDeletion($id)
     {
-        $this->client = Client::findOrFail($id);
+        $this->term = Term::findOrFail($id);
         $this->confirmDeletion();
     }
 
     public function getDeleteModel()
     {
-        return $this->client;
+        return $this->term;
     }
 
     public function resetDeleteModel()
     {
-        $this->client = null;
+        $this->term = null;
     }
 }

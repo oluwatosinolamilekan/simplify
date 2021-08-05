@@ -37,7 +37,7 @@
                 <livewire:select-searchable :selectOptions="$types" :wire="'client.type'" :value="$client->type->value" class="w-1/2 float-right"/>
                 <x-jet-input-error for="client.type" class="mt-3" />
             </div>
-
+g
             <!-- Status -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="status" value="{{ __('Status') }}" />

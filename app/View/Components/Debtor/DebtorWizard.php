@@ -100,16 +100,6 @@ class DebtorWizard extends CompanyComponent
         $this->creditLimit = $this->debtor->getRelatedInstanceOrNew('creditLimit');
     }
 
-    public function addNote()
-    {
-        // TODO @Jovana: validate only notes
-    }
-
-    public function deleteNote()
-    {
-        // TODO @Jovana: implement
-    }
-
     /**
      * @return Application|Factory|View
      */

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 $datatable_id = isset($table_id) ? $table_id : '';
 ?>
 <div class="inline-block w-full my-4">

@@ -62,7 +62,6 @@ class ClientDetails extends CompanyComponent
 
         return ValidationRules::merge(
             parent::getRules(),
-            ValidationRules::forModel('client', $this->client),
             ValidationRules::forModel('credit', $this->credit, false),
             ValidationRules::forModel('fundingInstructions', $this->fundingInstructions, false),
             ValidationRules::forModel('analysis', $this->analysis, false),

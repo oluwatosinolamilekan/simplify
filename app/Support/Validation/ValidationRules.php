@@ -56,7 +56,7 @@ class ValidationRules
      */
     public static function forCollection(string $property, Model $instance)
     {
-        return self::model("{$property}.*", $instance, false);
+        return self::forModel("{$property}.*", $instance, false);
     }
 
     /**

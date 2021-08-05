@@ -18,11 +18,11 @@ use App\Enums\FloatDaysType;
 use App\Enums\RateBaseType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
- * App\Models\TermFeeRules.
+ * App\Models\TermSettings.
  *
  * @property int $id
  * @property int $term_id
@@ -34,7 +34,6 @@ use Illuminate\Support\Carbon;
  * @property CollectionFeeRule $collection_fee_rule
  * @property EscrowRebateRule $escrow_rebate_rule
  * @property BaseDateType $fee_base_date
- * @property BaseDateType $first_day_date
  * @property RateBaseType $rate_base_type
  * @property bool $prioritize_minimum_fee
  * @property FloatDaysType $float_days_type
@@ -44,7 +43,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Term $term
- * @property FeeRule[] $feeRules
  * @property User $creator
  * @property User $updater
  * @method static Builder|User   createdBy($userId)
@@ -52,7 +50,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Model  createdBetween(string $from, string $to)
  * @method static Builder|Model  updatedBetween(string $from, string $to)
  */
-class TermFeeRules extends Model
+class TermSettings extends Model
 {
     /**
      * @var array
@@ -67,7 +65,6 @@ class TermFeeRules extends Model
         'collection_fee_rule',
         'escrow_rebate_rule',
         'fee_base_date',
-        'first_day_date',
         'rate_base_type',
         'prioritize_minimum_fee',
         'float_days_type',
@@ -79,6 +76,20 @@ class TermFeeRules extends Model
     ];
 
     /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'minimum_fee_per_invoice' => 0,
+        'minimum_fee_applied_to_non_advanced_loads' => false,
+        'collection_fee_rule' => CollectionFeeRule::PartialPayment,
+        'escrow_rebate_rule' => CollectionFeeRule::FullPayment,
+        'fee_base_date' => BaseDateType::PurchaseDate,
+        'rate_base_type' => RateBaseType::InvoiceAmount,
+        'prioritize_minimum_fee' => false,
+        'float_days_type' => FloatDaysType::CalendarDays,
+    ];
+
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -87,7 +98,6 @@ class TermFeeRules extends Model
         'collection_fee_rule' => 'int',
         'escrow_rebate_rule' => 'int',
         'fee_base_date' => 'int',
-        'first_day_date' => 'int',
         'rate_base_type' => 'int',
         'float_days_type' => 'int',
         'meta' => 'array',
@@ -112,14 +122,32 @@ class TermFeeRules extends Model
      */
     public function term()
     {
-        return $this->belongsTo(Term::class);
+        return $this->belongsTo(Term::class, 'term_id');
     }
 
-    /**
-     * @return HasMany
-     */
-    public function feeRules()
+    public function getRules(bool $required = true)
     {
-        return $this->hasMany(FeeRule::class, 'term_fee_rules_id');
+        return [
+            'advance_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100', Rule::in([100 - $this->purchase_fee_rate - $this->escrow_rate])],
+            'purchase_fee_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100', Rule::in([100 - $this->advance_rate - $this->escrow_rate])],
+            'escrow_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100', Rule::in([100 - $this->advance_rate - $this->purchase_fee_rate])],
+            'minimum_fee_per_invoice' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:10000'],
+            'minimum_fee_applied_to_non_advanced_loads' => [Rule::requiredIf($required), 'boolean'],
+            'collection_fee_rule' => [Rule::requiredIf($required), 'int', Rule::in(CollectionFeeRule::getValues())],
+            'escrow_rebate_rule' => [Rule::requiredIf($required), 'int', Rule::in(EscrowRebateRule::getValues())],
+            'fee_base_date' => [Rule::requiredIf($required), 'int', Rule::in(BaseDateType::getValues())],
+            'rate_base_type' => [Rule::requiredIf($required), 'int', Rule::in(RateBaseType::getValues())],
+            'float_days_type' => [Rule::requiredIf($required), 'int', Rule::in(FloatDaysType::getValues())],
+            'term_id' => ['int', 'exists:terms,id'],
+        ];
+    }
+
+    public function getMessages()
+    {
+        return [
+            'settings.advance_rate.in' => 'Sum of all rates must be 100.',
+            'settings.purchase_fee_rate.in' => 'Sum of all rates must be 100.',
+            'settings.escrow_rate.in' => 'Sum of all rates must be 100.',
+        ];
     }
 }
