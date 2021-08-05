@@ -13,6 +13,7 @@
             <!-- Status -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="factor-status" value="{{ __('Status') }}" />
+
                 @php
                     $statuses = collect(\App\Enums\StatusTypesList::Client)
                                 ->map(fn ($status) => [
@@ -20,6 +21,7 @@
                                     'description' => \App\Enums\Status::fromValue($status)->description
                                 ])
                 @endphp
+
                 <livewire:select-searchable :selectOptions="$statuses" :wire="'factor.status'" :value="$factor->status->value" class="w-1/2 float-right"/>
                 <x-jet-input-error for="factor.status" class="mt-3" />
             </div>
