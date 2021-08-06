@@ -44,12 +44,12 @@
                 @php
                     $statuses = collect(\App\Enums\StatusTypesList::Client)
                                 ->map(fn ($status) => [
-                                    'value' => $status,
-                                    'description' => \App\Enums\Status::fromValue($status)->description
+                                    'id' => $status,
+                                    'name' => \App\Enums\Status::fromValue($status)->description ,
+                                    'selected' => $client->status === $status
                                 ])
                 @endphp
-
-                <livewire:select-searchable :selectOptions="$statuses" :wire="'client.status'" :value="$client->status->value" class="w-1/2 float-right"/>
+                <x-searchable-select :values="$statuses" wire:model="client.status"  class="w-1/2 float-right"/>
                 <x-jet-input-error for="client.status" class="mt-3" />
             </div>
 

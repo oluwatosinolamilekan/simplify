@@ -1,15 +1,4 @@
-<?php
-
-declare(strict_types=1);
-
-/*
- * This file is part of the 2amigos/addio
- *
- * For the full copyright and license information, please view
- * the LICENSE file that was distributed with this source code.
- */
-
-return [
+<?php return array (
   'address.address-form' => 'App\\View\\Components\\Address\\AddressForm',
   'bank-information.bank-information-form' => 'App\\View\\Components\\BankInformation\\BankInformationForm',
   'client.client-analysis-form' => 'App\\View\\Components\\Client\\ClientAnalysisForm',
@@ -50,6 +39,7 @@ return [
   'factor.factor-wizard' => 'App\\View\\Components\\Factor\\FactorWizard',
   'factor.factors-list' => 'App\\View\\Components\\Factor\\FactorsList',
   'factor.subscription-plan-form' => 'App\\View\\Components\\Factor\\SubscriptionPlanForm',
+  'select-searchable' => 'App\\View\\Components\\SelectSearchable',
   'term.term-details' => 'App\\View\\Components\\Term\\TermDetails',
   'term.term-settings-form' => 'App\\View\\Components\\Term\\TermSettingsForm',
   'term.term-wizard' => 'App\\View\\Components\\Term\\TermWizard',
@@ -61,4 +51,4 @@ return [
   'vendor.vendor-settings-form' => 'App\\View\\Components\\Vendor\\VendorSettingsForm',
   'vendor.vendor-wizard' => 'App\\View\\Components\\Vendor\\VendorWizard',
   'vendor.vendors-list' => 'App\\View\\Components\\Vendor\\VendorsList',
-];
+);
