@@ -30,11 +30,12 @@
                 @php
                     $types = collect(\App\Enums\ClientType::getInstances())
                                 ->map(fn ($type) => [
-                                    'value' => $type->value,
-                                    'description' => $type->description
+                                    'id' => $type->value,
+                                    'name' => $type->description,
+                                    'selected' => $client->type === $type
                                 ])
                 @endphp
-                <livewire:select-searchable :selectOptions="$types" :wire="'client.type'" :value="$client->type->value" class="w-1/2 float-right"/>
+                <x-searchable-select :values="$types" wire:model="client.type"  class="w-1/2 float-right"/>
                 <x-jet-input-error for="client.type" class="mt-3" />
             </div>
 

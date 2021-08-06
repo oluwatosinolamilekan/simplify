@@ -100,7 +100,7 @@
                                                     'name' => $type->description
                                                 ])
                                 @endphp
-
+                                Fee Rules
                                 <x-searchable-select :values="$types" wire:change="selectFeeRuleType($event.target.value)" class="w-1/2 float-right"/>
                             </div>
 
