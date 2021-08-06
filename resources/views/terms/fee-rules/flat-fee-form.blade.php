@@ -9,7 +9,7 @@
                     ])
     @endphp
 
-    <x-searchable-select :values="$types" wire:model="feeRules.{{$index}}.configuration.rate_type" class="w-1/2 float-right"/>
+    <x-searchable :values="$types" wire:model="feeRules.{{$index}}.configuration.rate_type" class="w-1/2 float-right"/>
 </div>
 
 <div class="col-span-6 sm:col-span-3">

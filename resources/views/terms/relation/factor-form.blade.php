@@ -15,7 +15,7 @@
                                 ])
                 @endphp
 
-                <x-searchable-select :values="$factors" wire:model="term.factor_id" class="w-1/2 float-right"/>
+                <x-searchable :values="$factors" wire:model="term.factor_id" class="w-1/2 float-right"/>
 
                 <x-jet-input-error for="term.factor_id" class="mt-3" />
             </div>

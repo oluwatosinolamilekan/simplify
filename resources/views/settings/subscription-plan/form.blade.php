@@ -23,7 +23,7 @@
                         'name' => \App\Enums\Status::fromValue($status)->description
                     ])
     @endphp
-    <x-searchable-select :values="$statuses" wire:model="subscriptionPlans.{{$index}}.status" class="w-1/2 float-right"/>
+    <x-searchable :values="$statuses" wire:model="subscriptionPlans.{{$index}}.status" class="w-1/2 float-right"/>
     <x-jet-input-error for="subscriptionPlans.{{$index}}.status" class="mt-3" />
 </div>
 
