@@ -50,6 +50,8 @@ return [
   'factor.factor-wizard' => 'App\\View\\Components\\Factor\\FactorWizard',
   'factor.factors-list' => 'App\\View\\Components\\Factor\\FactorsList',
   'factor.subscription-plan-form' => 'App\\View\\Components\\Factor\\SubscriptionPlanForm',
+  'settings.settings-form' => 'App\\View\\Components\\Settings\\SettingsForm',
+  'settings.subscription-plans-form' => 'App\\View\\Components\\Settings\\SubscriptionPlansForm',
   'term.term-details' => 'App\\View\\Components\\Term\\TermDetails',
   'term.term-settings-form' => 'App\\View\\Components\\Term\\TermSettingsForm',
   'term.term-wizard' => 'App\\View\\Components\\Term\\TermWizard',

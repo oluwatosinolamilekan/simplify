@@ -12,9 +12,11 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\Status;
+use App\Enums\StatusTypesList;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\SubscriptionPlan.
@@ -74,10 +76,36 @@ class SubscriptionPlan extends Model
     ];
 
     /**
+     * @var  array Default values for attributes
+     */
+    protected $attributes = [
+        'price' => 0,
+        'status' => Status::Active,
+    ];
+
+    /**
      * @return HasMany
      */
     public function factors()
     {
         return $this->hasMany(Factor::class);
+    }
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'name' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'price' => [Rule::requiredIf($required), 'numeric', 'min:0'],
+            'status' => [Rule::requiredIf($required), 'int', Rule::in(StatusTypesList::SubscriptionPlan)],
+        ];
+    }
+
+    public function getValidationAttributes(string $property = '')
+    {
+        return [
+            "{$property}.name" => 'name',
+            "{$property}.price" => 'price',
+            "{$property}.status" => 'status',
+        ];
     }
 }

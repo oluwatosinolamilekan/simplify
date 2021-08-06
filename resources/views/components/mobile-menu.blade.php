@@ -48,5 +48,11 @@
                 <div class="menu__title"> {{ __('Terms') }} </div>
             </a>
         </li>
+        <li>
+            <a href="{{ route('settings.update') }}" class="menu text-gray-600">
+                <div class="menu__icon"> <i data-feather="users"></i> </div>
+                <div class="menu__title"> {{ __('Settings') }} </div>
+            </a>
+        </li>
     </ul>
 </div>
