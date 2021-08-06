@@ -13,6 +13,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 
 /**
  * App\Models\NFEModel.
@@ -36,6 +37,8 @@ use Illuminate\Support\Carbon;
  */
 class NFEModel extends Model
 {
+    protected $table = 'nfe_models';
+
     /**
      * @var array
      */
@@ -64,8 +67,28 @@ class NFEModel extends Model
      * @var array
      */
     protected $dates = [
-        'date',
+        'date:Y-m-d',
         'created_at',
         'updated_at',
     ];
+
+    public function getRules(bool $required = true)
+    {
+        return [
+            'name' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'base_rate' => [Rule::requiredIf($required), 'numeric', 'min:0'],
+            'date' => [Rule::requiredIf($required), 'date'],
+            'country' => [Rule::requiredIf($required), 'string', 'min:2', 'max:125'],
+        ];
+    }
+
+    public function getValidationAttributes(string $property = '')
+    {
+        return [
+            "{$property}.name" => 'name',
+            "{$property}.base_rate" => 'base_rate',
+            "{$property}.date" => 'date',
+            "{$property}.country" => 'country',
+        ];
+    }
 }

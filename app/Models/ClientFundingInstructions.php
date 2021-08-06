@@ -125,7 +125,7 @@ class ClientFundingInstructions extends Model
             'send_email_remittances' => [Rule::requiredIf($required), 'boolean'],
             'schedule_submission_email' => [Rule::requiredIf($required), 'string', 'email', 'min:2', 'max:255'],
             'warning_notes' => ['array'],
-            'warning_notes.*' => ['string', 'min:2', 'max:255'],
+            'warning_notes.*' => ['required', 'string', 'min:2', 'max:255'],
         ];
     }
 }

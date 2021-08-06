@@ -36,14 +36,13 @@
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="status" value="{{ __('Status') }}" />
                 @php
-                    $statuses = collect([\App\Enums\Status::Active(), \App\Enums\Status::NotActive()])
+                    $statuses = collect(\App\Enums\StatusTypesList::Term)
                                 ->map(fn ($status) => [
-                                    'id' => $status->value,
-                                    'name' => $status->description ,
-                                    'selected' => $term->status->is($status->value)
+                                    'id' => $status,
+                                    'name' => \App\Enums\Status::fromValue($status)->description
                                 ])
                 @endphp
-                <x-searchable-select :values="$statuses" wire:model="term.status"  class="w-1/2 float-right"/>
+                <x-searchable-select :values="$statuses" wire:model="term.status" class="w-1/2 float-right"/>
                 <x-jet-input-error for="term.status" class="mt-3" />
             </div>
 

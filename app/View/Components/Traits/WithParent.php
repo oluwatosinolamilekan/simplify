@@ -49,7 +49,7 @@ trait WithParent
 
     /**
      * Component's validateOnly method throws exception that prevents further actions and therefore changes are not propagated to the parent
-     * Yet parent component needs to be aware of invalid input during the save action for example
+     * Yet parent component needs to be aware of invalid input (during the save action for example)
      * This method overrides validateOnly so that it pass property value to the parent component first.
      * @param $field
      * @param null $rules

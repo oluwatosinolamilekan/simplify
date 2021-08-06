@@ -69,4 +69,9 @@ class StatusTypesList
         Status::Active,
         Status::NotActive,
     ];
+
+    public const SubscriptionPlan = [
+        Status::Active,
+        Status::NotActive,
+    ];
 }

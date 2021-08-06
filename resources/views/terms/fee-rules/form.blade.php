@@ -15,8 +15,8 @@
             <div class="grid grid-cols-6 gap-6">
                 <!-- Label -->
                 <div class="col-span-6 sm:col-span-3">
-                    <x-jet-label for="name" value="{{ __('Label') }}" />
-                    <x-jet-input id="name" type="text" class="w-1/2 float-right" wire:model="feeRules.{{$index}}.label" />
+                    <x-jet-label for="feeRules.{{$index}}.label" value="{{ __('Label') }}" />
+                    <x-jet-input type="text" class="w-1/2 float-right" wire:model="feeRules.{{$index}}.label" />
                     <x-jet-input-error for="feeRules.{{$index}}.label" class="mt-3" />
                 </div>
 
