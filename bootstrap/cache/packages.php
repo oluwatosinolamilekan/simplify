@@ -10,14 +10,6 @@ declare(strict_types=1);
  */
 
 return [
-  'asantibanez/livewire-select' => [
-    'providers' => [
-      0 => 'Asantibanez\\LivewireSelect\\LivewireSelectServiceProvider',
-    ],
-    'aliases' => [
-      'LivewireSelect' => 'Asantibanez\\LivewireSelect\\LivewireSelectFacade',
-    ],
-  ],
   'barryvdh/laravel-ide-helper' => [
     'providers' => [
       0 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
