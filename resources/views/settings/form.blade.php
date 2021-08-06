@@ -11,6 +11,8 @@
         <x-slot name="subscription_plans">
             <livewire:settings.subscription-plans-form :partial="false" :nested="false"/>
         </x-slot>
-        <x-slot name="nfe_models"></x-slot>
+        <x-slot name="nfe_models">
+            <livewire:settings.nfe-models-form :partial="false" :nested="false"/>
+        </x-slot>
     </x-tabs>
 </div>
