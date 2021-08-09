@@ -8,5 +8,5 @@
             ]);
         @endphp
 
-        <x-searchable :values="$clients" wire:change="assignClient($event.target.value)" class="w-1/2 float-right" id="client"/>
+        <x-select-option :values="$clients" wire:change="assignClient($event.target.value)" class="w-1/2 float-right" id="client"/>
     </div>

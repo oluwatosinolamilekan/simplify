@@ -21,7 +21,7 @@
                                        'selected' => $factor->status === $status
                                    ])
                 @endphp
-                <x-searchable :values="$statuses" wire:model="factor.status"  class="w-1/2 float-right"/>
+                <x-select-option :values="$statuses" wire:model="factor.status"  class="w-1/2 float-right"/>
                 <x-jet-input-error for="factor.status" class="mt-3" />
             </div>
 

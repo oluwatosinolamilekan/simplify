@@ -100,7 +100,7 @@
                                                     'name' => $type->description
                                                 ])
                                 @endphp
-                                <x-searchable :values="$types" wire:change="selectFeeRuleType($event.target.value)" class="w-1/2 float-right"/>
+                                <x-select-option :values="$types" wire:change="selectFeeRuleType($event.target.value)" class="w-1/2 float-right"/>
                             </div>
 
                             <div class="col-span-6 sm:col-span-6">
