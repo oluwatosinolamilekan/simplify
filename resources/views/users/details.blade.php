@@ -50,7 +50,7 @@
                         <x-icons.check-circle class="text-green-600 mx-0 inline" />
                         <span>{{$user->email_verified_at->format('d M, Y H:i:s')}}</span>
                     @else
-                        <x-icons.x-circle class="text-red-300 mx-0" />
+                        <x-icons.x-circle class="text-red-300 mx-0 inline" />
                     @endif
                 </div>
 
