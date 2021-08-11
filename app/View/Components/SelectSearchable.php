@@ -79,6 +79,7 @@ class SelectSearchable extends LivewireSelect
         return $this->selectOptions->where('value', $value)->first();
     }
 
+
     public function styles()
     {
         return [
