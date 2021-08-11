@@ -24,7 +24,6 @@
                 <x-select-option :values="$statuses" wire:model="factor.status"  class="w-1/2 float-right"/>
                 <x-jet-input-error for="factor.status" class="mt-3" />
             </div>
-
         </div>
     </div>
 </div>
