@@ -108,9 +108,9 @@ class NfeModelsForm extends Component
     // Custom validation attribute names
     public function getValidationAttributes()
     {
-        return array_merge(
-            (new NFEModel())->getValidationAttributes('models.*'),
-            (new NFEModelRate())->getValidationAttributes('rates.*')
+        return ValidationRules::mergeAttributes(
+            ValidationRules::attributesForModel(new NFEModel(), 'models.*'),
+            ValidationRules::attributesForModel(new NFEModelRate(), 'rates.*')
         );
     }
 

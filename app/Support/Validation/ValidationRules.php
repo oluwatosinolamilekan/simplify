@@ -87,6 +87,15 @@ class ValidationRules
         return $this->property;
     }
 
+    public static function attributesForModel(Model $model, string $property)
+    {
+        if (method_exists($model, 'getValidationAttributes')) {
+            return $model->getValidationAttributes($property);
+        }
+
+        return [];
+    }
+
     /**
      * @param mixed ...$params
      * @return array
@@ -95,6 +104,18 @@ class ValidationRules
     {
         return collect($params)
             ->map(fn ($item) => $item instanceof self ? $item->getRules() : $item)
+            ->collapse()
+            ->all();
+    }
+
+    /**
+     * @param mixed ...$params
+     * @return array
+     */
+    public static function mergeAttributes(...$params)
+    {
+        return collect($params)
+            ->map(fn ($item) => $item instanceof Model ? $item->getValidationAttributes() : $item)
             ->collapse()
             ->all();
     }

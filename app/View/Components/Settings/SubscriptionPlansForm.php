@@ -79,7 +79,7 @@ class SubscriptionPlansForm extends Component
     // Custom validation attribute names
     public function getValidationAttributes()
     {
-        return (new SubscriptionPlan())->getValidationAttributes('subscriptionPlans.*');
+        return ValidationRules::attributesForModel(new SubscriptionPlan(), 'subscriptionPlans.*');
     }
 
     public function render()

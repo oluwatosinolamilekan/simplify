@@ -177,6 +177,6 @@ class TermWizard extends Component
     // Custom validation attribute names
     public function getValidationAttributes()
     {
-        return (new FeeRule())->getValidationAttributes('feeRules.*');
+        return ValidationRules::attributesForModel(new FeeRule(), 'feeRules.*');
     }
 }
