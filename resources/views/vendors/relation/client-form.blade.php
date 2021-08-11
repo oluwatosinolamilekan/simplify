@@ -9,13 +9,13 @@
                                 ->with('company')
                                 ->get()
                                 ->map(fn ($client) => [
-                                    'id' => $client->id,
-                                    'name' => "{$client->ref_code} {$client->company->name}",
+                                    'value' => $client->id,
+                                    'description' => "{$client->ref_code} {$client->company->name}",
                                     'selected' => $client->id == $vendor->client_id
                                 ])
                 @endphp
-
-                <x-select-option :values="$clients" wire:model="vendor.client_id" class="w-1/2 float-right"/>
+                <livewire:select-searchable :selectOptions="$clients" :wire="'vendor.client_id'" :value="$vendor->client_id" class="w-1/2 float-right"/>
+{{--                <x-select-option :values="$clients" wire:model="vendor.client_id" class="w-1/2 float-right"/>--}}
 
                 <x-jet-input-error for="vendor.client_id" class="mt-3" />
             </div>
