@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\View\Components\Settings;
 
 use App\Models\NFEModel;
+use App\Models\NFEModelRate;
 use App\Support\Validation\ValidationRules;
 use App\View\Components\Component;
 use DB;
@@ -21,12 +22,20 @@ use Throwable;
 class NfeModelsForm extends Component
 {
     public Collection $models;
-    public Collection $deleted;
+    public Collection $deletedModels;
+    public Collection $rates;
+    public Collection $deletedRates;
 
     public function mount()
     {
-        $this->models = NFEModel::get();
-        $this->deleted = new Collection();
+        $this->models = NFEModel::with(['rates'])->get();
+        $this->deletedModels = new Collection();
+        $this->deletedRates = new Collection();
+
+        $this->rates = new Collection();
+        foreach ($this->models as $model) {
+            $this->rates->merge($model->rates);
+        }
     }
 
     public function save()
@@ -37,7 +46,9 @@ class NfeModelsForm extends Component
             DB::beginTransaction();
 
             $this->models->each(fn ($item) => $item->save());
-            $this->deleted->each(fn ($item) => $item->delete());
+            $this->deletedModels->each(fn ($item) => $item->delete());
+            $this->rates->each(fn ($item) => $item->save());
+            $this->deletedRates->each(fn ($item) => $item->delete());
 
             DB::commit();
 
@@ -55,8 +66,32 @@ class NfeModelsForm extends Component
 
     public function deleteModel($index)
     {
-        $this->deleted->add($this->models->get($index));
+        $this->deletedModels->add($this->models->get($index));
         $this->models->forget($index);
+    }
+
+    public function getModelRates($index)
+    {
+        $model = $this->models->get($index);
+
+        return $this->rates->where('nfe_model_id', $model->id);
+    }
+
+    public function addModelRate($index)
+    {
+        $model = $this->models->get($index);
+        $this->rates->add($model->rates()->make());
+    }
+
+    public function deleteModelRate($index)
+    {
+        $rate = $this->rates->get($index);
+
+        if ($rate->id) {
+            $this->deletedRates->add($rate);
+        }
+
+        $this->rates->forget($index);
     }
 
     /**
@@ -65,14 +100,18 @@ class NfeModelsForm extends Component
     public function getRules()
     {
         return ValidationRules::merge(
-            ValidationRules::forCollection('models', new NFEModel())
+            ValidationRules::forCollection('models', new NFEModel()),
+            ValidationRules::forCollection('rates', new NFEModelRate())
         );
     }
 
     // Custom validation attribute names
     public function getValidationAttributes()
     {
-        return (new NFEModel())->getValidationAttributes('models.*');
+        return array_merge(
+            (new NFEModel())->getValidationAttributes('models.*'),
+            (new NFEModelRate())->getValidationAttributes('rates.*')
+        );
     }
 
     public function render()

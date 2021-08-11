@@ -12,15 +12,15 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 
 /**
- * App\Models\NFEModel.
+ * App\Models\NFEModelRate.
  *
  * @property int $id
- * @property string $name
+ * @property int $nfe_model_id
  * @property float $base_rate
  * @property string $date
  * @property string $country
@@ -31,20 +31,23 @@ use Illuminate\Validation\Rule;
  * @property int $updated_by
  * @property User $creator
  * @property User $updater
+ * @property NFEModel $nfeModel
  * @method static Builder|User   createdBy($userId)
  * @method static Builder|User   updatedBy($userId)
  * @method static Builder|Model  createdBetween(string $from, string $to)
  * @method static Builder|Model  updatedBetween(string $from, string $to)
  */
-class NFEModel extends Model
+class NFEModelRate extends Model
 {
-    protected $table = 'nfe_models';
+    protected $table = 'nfe_model_rates';
 
     /**
      * @var array
      */
     protected $fillable = [
-        'name',
+        'nfe_model_id',
+        'base_rate',
+        'date',
         'meta',
         'created_by',
         'updated_by',
@@ -71,24 +74,27 @@ class NFEModel extends Model
     ];
 
     /**
-     * @return HasMany
+     * @return BelongsTo
      */
-    public function rates()
+    public function nfeModel()
     {
-        return $this->hasMany(NFEModelRate::class, 'nfe_model_id', 'id');
+        return $this->belongsTo(NFEModel::class, 'nfe_model_id');
     }
 
     public function getRules(bool $required = true)
     {
         return [
-            'name' => [Rule::requiredIf($required), 'string', 'min:2', 'max:255'],
+            'nfe_model_id' => ['int'],
+            'base_rate' => [Rule::requiredIf($required), 'numeric', 'min:0'],
+            'date' => [Rule::requiredIf($required), 'date'],
         ];
     }
 
     public function getValidationAttributes(string $property = '')
     {
         return [
-            "{$property}.name" => 'name',
+            "{$property}.base_rate" => 'base rate',
+            "{$property}.date" => 'date',
         ];
     }
 }

@@ -128,9 +128,9 @@ class TermSettings extends Model
     public function getRules(bool $required = true)
     {
         return [
-            'advance_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100', Rule::in([100 - $this->purchase_fee_rate - $this->escrow_rate])],
-            'purchase_fee_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100', Rule::in([100 - $this->advance_rate - $this->escrow_rate])],
-            'escrow_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100', Rule::in([100 - $this->advance_rate - $this->purchase_fee_rate])],
+            'advance_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100', Rule::in([100 - (int) $this->purchase_fee_rate - (int) $this->escrow_rate])],
+            'purchase_fee_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100', Rule::in([100 - (int) $this->advance_rate - (int) $this->escrow_rate])],
+            'escrow_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100', Rule::in([100 - (int) $this->advance_rate - (int) $this->purchase_fee_rate])],
             'minimum_fee_per_invoice' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:10000'],
             'minimum_fee_applied_to_non_advanced_loads' => [Rule::requiredIf($required), 'boolean'],
             'collection_fee_rule' => [Rule::requiredIf($required), 'int', Rule::in(CollectionFeeRule::getValues())],
