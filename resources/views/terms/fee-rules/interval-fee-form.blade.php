@@ -32,5 +32,5 @@
                     ])
     @endphp
 
-    <x-searchable-select :values="$types" wire:model="feeRules.{{$index}}.configuration.calculate_age_based_on" class="w-1/2 float-right"/>
+    <x-select-option :values="$types" wire:model="feeRules.{{$index}}.configuration.calculate_age_based_on" class="w-1/2 float-right"/>
 </div>

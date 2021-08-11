@@ -28,7 +28,7 @@
                                     'selected' => $debtor->status->is($status->value)
                                 ])
                 @endphp
-                <x-searchable-select :values="$statuses" wire:model="debtor.status"  class="w-1/2 float-right"/>
+                <x-select-option :values="$statuses" wire:model="debtor.status"  class="w-1/2 float-right"/>
                 <x-jet-input-error for="debtor.status" class="mt-3" />
             </div>
 

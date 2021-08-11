@@ -66,7 +66,7 @@
                                         'selected' => $settings->collection_fee_rule->is($rule->value)
                                     ])
                     @endphp
-                    <x-searchable-select :values="$rules" wire:model="settings.collection_fee_rule"  class="w-1/2 float-right"/>
+                    <x-select-option :values="$rules" wire:model="settings.collection_fee_rule"  class="w-1/2 float-right"/>
                     <x-jet-input-error for="settings.collection_fee_rule" class="mt-3" />
                 </div>
 
@@ -81,7 +81,7 @@
                                         'selected' => $settings->escrow_rebate_rule->is($rule->value)
                                     ])
                     @endphp
-                    <x-searchable-select :values="$rules" wire:model="settings.escrow_rebate_rule"  class="w-1/2 float-right"/>
+                    <x-select-option :values="$rules" wire:model="settings.escrow_rebate_rule"  class="w-1/2 float-right"/>
                     <x-jet-input-error for="settings.escrow_rebate_rule" class="mt-3" />
                 </div>
 
@@ -96,7 +96,7 @@
                                         'selected' => $settings->fee_base_date->is($type->value)
                                     ])
                     @endphp
-                    <x-searchable-select :values="$types" wire:model="settings.fee_base_date"  class="w-1/2 float-right"/>
+                    <x-select-option :values="$types" wire:model="settings.fee_base_date"  class="w-1/2 float-right"/>
                     <x-jet-input-error for="settings.fee_base_date" class="mt-3" />
                 </div>
 
@@ -111,7 +111,7 @@
                                         'selected' => $settings->rate_base_type->is($type->value)
                                     ])
                     @endphp
-                    <x-searchable-select :values="$types" wire:model="settings.rate_base_type"  class="w-1/2 float-right"/>
+                    <x-select-option :values="$types" wire:model="settings.rate_base_type"  class="w-1/2 float-right"/>
                     <x-jet-input-error for="settings.rate_base_type" class="mt-3" />
                 </div>
 
@@ -126,7 +126,7 @@
                                         'selected' => $settings->float_days_type->is($type->value)
                                     ])
                     @endphp
-                    <x-searchable-select :values="$types" wire:model="settings.float_days_type"  class="w-1/2 float-right"/>
+                    <x-select-option :values="$types" wire:model="settings.float_days_type"  class="w-1/2 float-right"/>
                     <x-jet-input-error for="settings.float_days_type" class="mt-3" />
                 </div>
 

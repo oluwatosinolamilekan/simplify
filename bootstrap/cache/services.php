@@ -1,16 +1,6 @@
-<?php
-
-declare(strict_types=1);
-
-/*
- * This file is part of the 2amigos/addio
- *
- * For the full copyright and license information, please view
- * the LICENSE file that was distributed with this source code.
- */
-
-return [
-  'providers' => [
+<?php return array (
+  'providers' => 
+  array (
     0 => 'Illuminate\\Auth\\AuthServiceProvider',
     1 => 'Illuminate\\Broadcasting\\BroadcastServiceProvider',
     2 => 'Illuminate\\Bus\\BusServiceProvider',
@@ -33,42 +23,44 @@ return [
     19 => 'Illuminate\\Translation\\TranslationServiceProvider',
     20 => 'Illuminate\\Validation\\ValidationServiceProvider',
     21 => 'Illuminate\\View\\ViewServiceProvider',
-    22 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
-    23 => 'BenSampo\\Enum\\EnumServiceProvider',
-    24 => 'Facade\\Ignition\\IgnitionServiceProvider',
-    25 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-    26 => 'Fruitcake\\Cors\\CorsServiceProvider',
-    27 => 'Jantinnerezo\\LivewireAlert\\LivewireAlertServiceProvider',
-    28 => 'Jenssegers\\Agent\\AgentServiceProvider',
-    29 => 'Krlove\\EloquentModelGenerator\\Provider\\GeneratorServiceProvider',
-    30 => 'Laracasts\\Cypress\\CypressServiceProvider',
-    31 => 'Laravel\\Fortify\\FortifyServiceProvider',
-    32 => 'Laravel\\Jetstream\\JetstreamServiceProvider',
-    33 => 'Laravel\\Sail\\SailServiceProvider',
-    34 => 'Laravel\\Sanctum\\SanctumServiceProvider',
-    35 => 'Laravel\\Telescope\\TelescopeServiceProvider',
-    36 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    37 => 'Livewire\\LivewireServiceProvider',
-    38 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
-    39 => 'Mediconesystems\\LivewireDatatables\\LivewireDatatablesServiceProvider',
-    40 => 'Carbon\\Laravel\\ServiceProvider',
-    41 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    42 => 'Protoqol\\Prequel\\PrequelServiceProvider',
-    43 => 'RichanFongdasen\\EloquentBlameable\\ServiceProvider',
-    44 => 'TechTailor\\RPG\\RPGServiceProvider',
-    45 => 'RichanFongdasen\\EloquentBlameable\\ServiceProvider',
-    46 => 'App\\Providers\\AppServiceProvider',
-    47 => 'App\\Providers\\AuthServiceProvider',
-    48 => 'App\\Providers\\EventServiceProvider',
-    49 => 'App\\Providers\\RouteServiceProvider',
-    50 => 'App\\Providers\\FortifyServiceProvider',
-    51 => 'App\\Providers\\JetstreamServiceProvider',
-    52 => 'App\\Providers\\ComponentServiceProvider',
-    53 => 'App\\Providers\\TelescopeServiceProvider',
-    54 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
-    55 => 'App\\Providers\\BlueprintMacroServiceProvider',
-  ],
-  'eager' => [
+    22 => 'Asantibanez\\LivewireSelect\\LivewireSelectServiceProvider',
+    23 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
+    24 => 'BenSampo\\Enum\\EnumServiceProvider',
+    25 => 'Facade\\Ignition\\IgnitionServiceProvider',
+    26 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+    27 => 'Fruitcake\\Cors\\CorsServiceProvider',
+    28 => 'Jantinnerezo\\LivewireAlert\\LivewireAlertServiceProvider',
+    29 => 'Jenssegers\\Agent\\AgentServiceProvider',
+    30 => 'Krlove\\EloquentModelGenerator\\Provider\\GeneratorServiceProvider',
+    31 => 'Laracasts\\Cypress\\CypressServiceProvider',
+    32 => 'Laravel\\Fortify\\FortifyServiceProvider',
+    33 => 'Laravel\\Jetstream\\JetstreamServiceProvider',
+    34 => 'Laravel\\Sail\\SailServiceProvider',
+    35 => 'Laravel\\Sanctum\\SanctumServiceProvider',
+    36 => 'Laravel\\Telescope\\TelescopeServiceProvider',
+    37 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    38 => 'Livewire\\LivewireServiceProvider',
+    39 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    40 => 'Mediconesystems\\LivewireDatatables\\LivewireDatatablesServiceProvider',
+    41 => 'Carbon\\Laravel\\ServiceProvider',
+    42 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    43 => 'Protoqol\\Prequel\\PrequelServiceProvider',
+    44 => 'RichanFongdasen\\EloquentBlameable\\ServiceProvider',
+    45 => 'TechTailor\\RPG\\RPGServiceProvider',
+    46 => 'RichanFongdasen\\EloquentBlameable\\ServiceProvider',
+    47 => 'App\\Providers\\AppServiceProvider',
+    48 => 'App\\Providers\\AuthServiceProvider',
+    49 => 'App\\Providers\\EventServiceProvider',
+    50 => 'App\\Providers\\RouteServiceProvider',
+    51 => 'App\\Providers\\FortifyServiceProvider',
+    52 => 'App\\Providers\\JetstreamServiceProvider',
+    53 => 'App\\Providers\\ComponentServiceProvider',
+    54 => 'App\\Providers\\TelescopeServiceProvider',
+    55 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
+    56 => 'App\\Providers\\BlueprintMacroServiceProvider',
+  ),
+  'eager' => 
+  array (
     0 => 'Illuminate\\Auth\\AuthServiceProvider',
     1 => 'Illuminate\\Cookie\\CookieServiceProvider',
     2 => 'Illuminate\\Database\\DatabaseServiceProvider',
@@ -79,38 +71,40 @@ return [
     7 => 'Illuminate\\Pagination\\PaginationServiceProvider',
     8 => 'Illuminate\\Session\\SessionServiceProvider',
     9 => 'Illuminate\\View\\ViewServiceProvider',
-    10 => 'BenSampo\\Enum\\EnumServiceProvider',
-    11 => 'Facade\\Ignition\\IgnitionServiceProvider',
-    12 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-    13 => 'Fruitcake\\Cors\\CorsServiceProvider',
-    14 => 'Jantinnerezo\\LivewireAlert\\LivewireAlertServiceProvider',
-    15 => 'Jenssegers\\Agent\\AgentServiceProvider',
-    16 => 'Krlove\\EloquentModelGenerator\\Provider\\GeneratorServiceProvider',
-    17 => 'Laracasts\\Cypress\\CypressServiceProvider',
-    18 => 'Laravel\\Fortify\\FortifyServiceProvider',
-    19 => 'Laravel\\Jetstream\\JetstreamServiceProvider',
-    20 => 'Laravel\\Sanctum\\SanctumServiceProvider',
-    21 => 'Laravel\\Telescope\\TelescopeServiceProvider',
-    22 => 'Livewire\\LivewireServiceProvider',
-    23 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
-    24 => 'Mediconesystems\\LivewireDatatables\\LivewireDatatablesServiceProvider',
-    25 => 'Carbon\\Laravel\\ServiceProvider',
-    26 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    27 => 'Protoqol\\Prequel\\PrequelServiceProvider',
-    28 => 'RichanFongdasen\\EloquentBlameable\\ServiceProvider',
-    29 => 'TechTailor\\RPG\\RPGServiceProvider',
-    30 => 'RichanFongdasen\\EloquentBlameable\\ServiceProvider',
-    31 => 'App\\Providers\\AppServiceProvider',
-    32 => 'App\\Providers\\AuthServiceProvider',
-    33 => 'App\\Providers\\EventServiceProvider',
-    34 => 'App\\Providers\\RouteServiceProvider',
-    35 => 'App\\Providers\\FortifyServiceProvider',
-    36 => 'App\\Providers\\JetstreamServiceProvider',
-    37 => 'App\\Providers\\ComponentServiceProvider',
-    38 => 'App\\Providers\\TelescopeServiceProvider',
-    39 => 'App\\Providers\\BlueprintMacroServiceProvider',
-  ],
-  'deferred' => [
+    10 => 'Asantibanez\\LivewireSelect\\LivewireSelectServiceProvider',
+    11 => 'BenSampo\\Enum\\EnumServiceProvider',
+    12 => 'Facade\\Ignition\\IgnitionServiceProvider',
+    13 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+    14 => 'Fruitcake\\Cors\\CorsServiceProvider',
+    15 => 'Jantinnerezo\\LivewireAlert\\LivewireAlertServiceProvider',
+    16 => 'Jenssegers\\Agent\\AgentServiceProvider',
+    17 => 'Krlove\\EloquentModelGenerator\\Provider\\GeneratorServiceProvider',
+    18 => 'Laracasts\\Cypress\\CypressServiceProvider',
+    19 => 'Laravel\\Fortify\\FortifyServiceProvider',
+    20 => 'Laravel\\Jetstream\\JetstreamServiceProvider',
+    21 => 'Laravel\\Sanctum\\SanctumServiceProvider',
+    22 => 'Laravel\\Telescope\\TelescopeServiceProvider',
+    23 => 'Livewire\\LivewireServiceProvider',
+    24 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    25 => 'Mediconesystems\\LivewireDatatables\\LivewireDatatablesServiceProvider',
+    26 => 'Carbon\\Laravel\\ServiceProvider',
+    27 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    28 => 'Protoqol\\Prequel\\PrequelServiceProvider',
+    29 => 'RichanFongdasen\\EloquentBlameable\\ServiceProvider',
+    30 => 'TechTailor\\RPG\\RPGServiceProvider',
+    31 => 'RichanFongdasen\\EloquentBlameable\\ServiceProvider',
+    32 => 'App\\Providers\\AppServiceProvider',
+    33 => 'App\\Providers\\AuthServiceProvider',
+    34 => 'App\\Providers\\EventServiceProvider',
+    35 => 'App\\Providers\\RouteServiceProvider',
+    36 => 'App\\Providers\\FortifyServiceProvider',
+    37 => 'App\\Providers\\JetstreamServiceProvider',
+    38 => 'App\\Providers\\ComponentServiceProvider',
+    39 => 'App\\Providers\\TelescopeServiceProvider',
+    40 => 'App\\Providers\\BlueprintMacroServiceProvider',
+  ),
+  'deferred' => 
+  array (
     'Illuminate\\Broadcasting\\BroadcastManager' => 'Illuminate\\Broadcasting\\BroadcastServiceProvider',
     'Illuminate\\Contracts\\Broadcasting\\Factory' => 'Illuminate\\Broadcasting\\BroadcastServiceProvider',
     'Illuminate\\Contracts\\Broadcasting\\Broadcaster' => 'Illuminate\\Broadcasting\\BroadcastServiceProvider',
@@ -234,37 +228,53 @@ return [
     'Laravel\\Sail\\Console\\InstallCommand' => 'Laravel\\Sail\\SailServiceProvider',
     'Laravel\\Sail\\Console\\PublishCommand' => 'Laravel\\Sail\\SailServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
-  ],
-  'when' => [
-    'Illuminate\\Broadcasting\\BroadcastServiceProvider' => [
-    ],
-    'Illuminate\\Bus\\BusServiceProvider' => [
-    ],
-    'Illuminate\\Cache\\CacheServiceProvider' => [
-    ],
-    'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider' => [
-    ],
-    'Illuminate\\Hashing\\HashServiceProvider' => [
-    ],
-    'Illuminate\\Mail\\MailServiceProvider' => [
-    ],
-    'Illuminate\\Pipeline\\PipelineServiceProvider' => [
-    ],
-    'Illuminate\\Queue\\QueueServiceProvider' => [
-    ],
-    'Illuminate\\Redis\\RedisServiceProvider' => [
-    ],
-    'Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider' => [
-    ],
-    'Illuminate\\Translation\\TranslationServiceProvider' => [
-    ],
-    'Illuminate\\Validation\\ValidationServiceProvider' => [
-    ],
-    'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider' => [
-    ],
-    'Laravel\\Sail\\SailServiceProvider' => [
-    ],
-    'Laravel\\Tinker\\TinkerServiceProvider' => [
-    ],
-  ],
-];
+  ),
+  'when' => 
+  array (
+    'Illuminate\\Broadcasting\\BroadcastServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Bus\\BusServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Cache\\CacheServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Hashing\\HashServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Mail\\MailServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Pipeline\\PipelineServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Queue\\QueueServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Redis\\RedisServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Translation\\TranslationServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Validation\\ValidationServiceProvider' => 
+    array (
+    ),
+    'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Sail\\SailServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Tinker\\TinkerServiceProvider' => 
+    array (
+    ),
+  ),
+);

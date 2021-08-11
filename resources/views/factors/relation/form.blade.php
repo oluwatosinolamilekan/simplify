@@ -13,14 +13,15 @@
             <!-- Status -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="factor-status" value="{{ __('Status') }}" />
-                <select id="factor-status" wire:model="factor.status" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                    <option value="{{\App\Enums\Status::Active}}" @if($factor->status->is(\App\Enums\Status::Active)) selected @endif>
-                        {{ \App\Enums\Status::Active()->description }}
-                    </option>
-                    <option value="{{\App\Enums\Status::NotActive}}" @if($factor->status->is(\App\Enums\Status::NotActive)) selected @endif>
-                        {{ \App\Enums\Status::NotActive()->description }}
-                    </option>
-                </select>
+                @php
+                    $statuses = collect(\App\Enums\StatusTypesList::Client)
+                                   ->map(fn ($status) => [
+                                       'id' => $status,
+                                       'name' => \App\Enums\Status::fromValue($status)->description ,
+                                       'selected' => $factor->status === $status
+                                   ])
+                @endphp
+                <x-select-option :values="$statuses" wire:model="factor.status"  class="w-1/2 float-right"/>
                 <x-jet-input-error for="factor.status" class="mt-3" />
             </div>
 
