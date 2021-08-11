@@ -133,6 +133,7 @@ class TermSettings extends Model
             'escrow_rate' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:100', Rule::in([100 - (int) $this->advance_rate - (int) $this->purchase_fee_rate])],
             'minimum_fee_per_invoice' => [Rule::requiredIf($required), 'numeric', 'min:0', 'max:10000'],
             'minimum_fee_applied_to_non_advanced_loads' => [Rule::requiredIf($required), 'boolean'],
+            'prioritize_minimum_fee' => [Rule::requiredIf($required), 'boolean'],
             'collection_fee_rule' => [Rule::requiredIf($required), 'int', Rule::in(CollectionFeeRule::getValues())],
             'escrow_rebate_rule' => [Rule::requiredIf($required), 'int', Rule::in(EscrowRebateRule::getValues())],
             'fee_base_date' => [Rule::requiredIf($required), 'int', Rule::in(BaseDateType::getValues())],
