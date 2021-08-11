@@ -7,13 +7,14 @@
             <!-- Business Type -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="business_type" value="{{ __('Business Type') }}" />
-                <select id="business_type" wire:model="analysis.business_type" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                    @foreach(\App\Enums\BusinessType::getInstances() as $type)
-                    <option value="{{$type->value}}" @if($analysis->business_type->is($type->value)) selected @endif>
-                        {{ $type->description }}
-                    </option>
-                    @endforeach
-                </select>
+                @php
+                    $businesses = collect(\App\Enums\BusinessType::getInstances())
+                                ->map(fn ($type) => [
+                                    'id' => $type->value,
+                                    'name' => $type->description,
+                                ])
+                @endphp
+                <x-select-option :values="$businesses" wire:model="analysis.business_type"  class=""/>
                 <x-jet-input-error for="analysis.business_type" class="mt-3" />
             </div>
 

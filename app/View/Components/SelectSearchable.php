@@ -67,7 +67,6 @@ class SelectSearchable extends LivewireSelect
         if (empty($searchTerm)) {
             return $this->selectOptions;
         }
-
         return $this->selectOptions
             ->filter(fn ($item) => str_contains(strtolower($item['description']), strtolower($searchTerm)));
     }
