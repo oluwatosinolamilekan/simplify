@@ -9,7 +9,6 @@
                 <x-jet-input id="ref_code" type="text" class="mt-1 block w-full" wire:model="factor.ref_code" />
                 <x-jet-input-error for="factor.ref_code" class="mt-3" />
             </div>
-
             <!-- Status -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="factor-status" value="{{ __('Status') }}" />
