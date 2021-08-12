@@ -6,17 +6,14 @@
                 <x-jet-label for="client_id" value="{{ __('Client') }}" />
                 @php
                     $clients = App\Models\Client::active()
-                                ->with('company')
-                                ->get()
-                                ->map(fn ($client) => [
-                                    'id' => $client->id,
-                                    'name' => "{$client->ref_code} {$client->company->name}",
-                                    'selected' => $client->id == $debtor->client_id
-                                ])
+                                   ->with('company')
+                                   ->get()
+                                   ->map(fn ($client) => [
+                                       'value' => $client->id,
+                                       'description' => "{$client->ref_code} {$client->company->name}",
+                                   ])
                 @endphp
-
-                <x-select-option :values="$clients" wire:model="debtor.client_id" class="w-1/2 float-right"/>
-
+                <livewire:select-searchable :selectOptions="$clients" :wire="'debtor.client_id'" :value="$debtor->factor_id" class="w-1/2 float-right"/>
                 <x-jet-input-error for="debtor.client_id" class="mt-3" />
             </div>
         </div>
