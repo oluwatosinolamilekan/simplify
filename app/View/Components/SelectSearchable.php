@@ -79,6 +79,28 @@ class SelectSearchable extends LivewireSelect
         return $this->selectOptions->where('value', $value)->first();
     }
 
+
+    public function styles()
+    {
+        return [
+            'default' => 'p-2 rounded border w-full appearance-none',
+
+            'searchSelectedOption' => 'p-2 rounded border w-full bg-white flex items-center',
+            'searchSelectedOptionTitle' => 'w-full text-gray-900 text-left',
+            'searchSelectedOptionReset' => 'h-4 w-4 text-gray-500',
+
+            'search' => 'relative',
+            'searchInput' => 'p-2 rounded border w-full rounded',
+            'searchOptionsContainer' => 'absolute top-0 left-0 mt-12 w-full z-10',
+
+            'searchOptionItem' => 'py-3 px-4 border-gray-300',
+            'searchOptionItemActive' => 'bg-indigo-600 text-white font-medium',
+            'searchOptionItemInactive' => 'bg-white text-gray-600',
+
+            'searchNoResults' => 'p-8 w-full bg-white border text-center text-xs text-gray-600',
+        ];
+    }
+
     public function render()
     {
 
