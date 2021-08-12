@@ -39,8 +39,6 @@
                 <x-jet-input-error for="client.type" class="mt-3" />
             </div>
 
-
-
             <!-- Status -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="status" value="{{ __('Status') }}" />
