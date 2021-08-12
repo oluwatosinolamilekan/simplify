@@ -16,7 +16,7 @@
                 <x-collapsible-container :header="$header" :collapsed="(bool)$plan->id">
                     <x-slot name="form">
                         <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
-                            <livewire:settings.subscription-plan-form :plan="$plan" :partial="false" :nested="false" wire:key="plan-{{$index}}"/>
+                            <livewire:settings.subscription-plan-form :plan="$plan" :index="$index" wire:key="plan-{{$index}}"/>
                         </div>
                     </x-slot>
                 </x-collapsible-container>
@@ -29,7 +29,7 @@
                 <x-collapsible-container :header="$model->name" :collapsed="(bool)$model->id">
                     <x-slot name="form">
                         <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
-                            <livewire:settings.nfe-model-form :model="$model" :partial="false" :nested="false" wire:key="model-{{$index}}"/>
+                            <livewire:settings.nfe-model-form :model="$model" :index="$index" wire:key="model-{{$index}}"/>
                         </div>
                     </x-slot>
                 </x-collapsible-container>

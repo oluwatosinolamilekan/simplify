@@ -19,6 +19,7 @@ use Throwable;
 class SubscriptionPlanForm extends ModelForm
 {
     public SubscriptionPlan $plan;
+    public int $index;
 
     public function mount($plan)
     {
@@ -33,6 +34,10 @@ class SubscriptionPlanForm extends ModelForm
     public function deleteModel()
     {
         try {
+            if (! $this->plan->exists) {
+                $this->emitUp('removePlan', $this->index);
+            }
+
             if ($this->plan->factors()->exists()) {
                 throw new Exception('This plan is in use and can not be deleted!');
             }

@@ -22,6 +22,7 @@ use Throwable;
 class NfeModelForm extends ModelForm
 {
     public NFEModel $model;
+    public int $index;
 
     public Collection $rates;
     public Collection $deletedRates;
@@ -86,14 +87,22 @@ class NfeModelForm extends ModelForm
         );
     }
 
+    public function deleteModel()
+    {
+        try {
+            if (! $this->model->exists) {
+                $this->emitUp('removeModel', $this->index);
+            }
+
+            $this->model->delete();
+        } catch (Throwable $exception) {
+            $this->exceptionAlert($exception);
+        }
+    }
+
     public function getProperty()
     {
         return 'model';
-    }
-
-    public function getDeleteModel()
-    {
-        return $this->model;
     }
 
     public function render()

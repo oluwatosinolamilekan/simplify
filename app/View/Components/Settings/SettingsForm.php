@@ -21,7 +21,10 @@ class SettingsForm extends Component
     public Collection $models;
     public Collection $plans;
 
-    protected $listeners = ['planDeleted' => 'deletePlan', 'modelDeleted' => 'deleteModel'];
+    protected $listeners = [
+        'removePlan' => 'removePlan',
+        'removeModel' => 'removeModel',
+    ];
 
     public function mount()
     {
@@ -37,6 +40,16 @@ class SettingsForm extends Component
     public function addPlan()
     {
         $this->plans->add(new SubscriptionPlan());
+    }
+
+    public function removeModel($index)
+    {
+        $this->models->forget($index);
+    }
+
+    public function removePlan($index)
+    {
+        $this->plans->forget($index);
     }
 
     public function render()
