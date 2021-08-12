@@ -28,7 +28,7 @@
                                     'selected' => $vendor->status->is($status->value)
                                 ])
                 @endphp
-                <x-select-option :values="$statuses" wire:model="vendor.status"  class="w-1/2 float-right"/>
+                <x-select :values="$statuses" wire:model="vendor.status"  class="w-1/2 float-right"/>
                 <x-jet-input-error for="vendor.status" class="mt-3" />
             </div>
 

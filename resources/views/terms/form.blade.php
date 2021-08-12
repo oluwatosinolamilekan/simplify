@@ -28,7 +28,7 @@
                                     'selected' => $term->type->is($type->value)
                                 ])
                 @endphp
-                <x-select-option :values="$types" wire:model="term.type"  class="w-1/2 float-right"/>
+                <x-select :values="$types" wire:model="term.type"  class="w-1/2 float-right"/>
                 <x-jet-input-error for="term.type" class="mt-3" />
             </div>
 
@@ -42,7 +42,7 @@
                                     'name' => \App\Enums\Status::fromValue($status)->description
                                 ])
                 @endphp
-                <x-select-option :values="$statuses" wire:model="term.status" class="w-1/2 float-right"/>
+                <x-select :values="$statuses" wire:model="term.status" class="w-1/2 float-right"/>
                 <x-jet-input-error for="term.status" class="mt-3" />
             </div>
 
