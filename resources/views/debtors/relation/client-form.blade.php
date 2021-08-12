@@ -15,7 +15,7 @@
                                 ])
                 @endphp
 
-                <x-select :values="$clients" wire:model="debtor.client_id" class="w-1/2 float-right"/>
+                <x-select-option :values="$clients" wire:model="debtor.client_id" class="w-1/2 float-right"/>
 
                 <x-jet-input-error for="debtor.client_id" class="mt-3" />
             </div>

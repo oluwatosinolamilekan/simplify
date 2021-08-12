@@ -35,7 +35,7 @@
                                     'selected' => $client->type === $type
                                 ])
                 @endphp
-                <x-select :values="$types" wire:model="client.type"  class="w-1/2 float-right"/>
+                <x-select-option :values="$types" wire:model="client.type"  class="w-1/2 float-right"/>
                 <x-jet-input-error for="client.type" class="mt-3" />
             </div>
 
@@ -50,7 +50,7 @@
                                     'selected' => $client->status === $status
                                 ])
                 @endphp
-                <x-select :values="$statuses" wire:model="client.status"  class="w-1/2 float-right"/>
+                <x-select-option :values="$statuses" wire:model="client.status"  class="w-1/2 float-right"/>
                 <x-jet-input-error for="client.status" class="mt-3" />
             </div>
 

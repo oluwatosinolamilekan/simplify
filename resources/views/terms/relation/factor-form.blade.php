@@ -15,7 +15,7 @@
                                 ])
                 @endphp
 
-                <x-select :values="$factors" wire:model="term.factor_id" class="w-1/2 float-right"/>
+                <x-select-option :values="$factors" wire:model="term.factor_id" class="w-1/2 float-right"/>
 
                 <x-jet-input-error for="term.factor_id" class="mt-3" />
             </div>

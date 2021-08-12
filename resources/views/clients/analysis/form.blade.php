@@ -14,7 +14,7 @@
                                     'name' => $type->description,
                                 ])
                 @endphp
-                <x-select :values="$businesses" wire:model="analysis.business_type"  class=""/>
+                <x-select-option :values="$businesses" wire:model="analysis.business_type"  class=""/>
                 <x-jet-input-error for="analysis.business_type" class="mt-3" />
             </div>
 

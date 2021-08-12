@@ -31,7 +31,7 @@
                             'selected' => $role === $userCompanyAccess->role->value
                         ])
         @endphp
-        <x-select :values="$roles" wire:model="userCompanyAccess.role"/>
+        <x-select-option :values="$roles" wire:model="userCompanyAccess.role"/>
 
         <x-jet-input-error for="userCompanyAccess.role" class="mt-3" />
     </div>
@@ -47,7 +47,7 @@
                             'selected' => $userCompanyAccess->status === $status
                         ])
         @endphp
-        <x-select :values="$statuses" wire:model="userCompanyAccess.status"/>
+        <x-select-option :values="$statuses" wire:model="userCompanyAccess.status"/>
         <x-jet-input-error for="userCompanyAccess.status" class="mt-3" />
     </div>
 
