@@ -20,10 +20,11 @@ trait WithParent
      */
     public function getListeners()
     {
-        return array_merge($this->listeners ?? [], [
+        return array_merge(parent::getListeners() ?? [], [
             'validationFail' => 'validationFail',
         ]);
     }
+
     /**
      * Livewire "updated" hook
      * Informs parent component about property changes

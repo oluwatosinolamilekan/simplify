@@ -21,9 +21,6 @@ use Illuminate\Validation\Rule;
  *
  * @property int $id
  * @property string $name
- * @property float $base_rate
- * @property string $date
- * @property string $country
  * @property array|null $meta
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -31,6 +28,7 @@ use Illuminate\Validation\Rule;
  * @property int $updated_by
  * @property User $creator
  * @property User $updater
+ * @property NFEModelRate[] $rates
  * @method static Builder|User   createdBy($userId)
  * @method static Builder|User   updatedBy($userId)
  * @method static Builder|Model  createdBetween(string $from, string $to)
@@ -65,10 +63,16 @@ class NFEModel extends Model
      * @var array
      */
     protected $dates = [
-        'date:Y-m-d',
         'created_at',
         'updated_at',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(fn ($model) => $model->rates()->delete());
+    }
 
     /**
      * @return HasMany

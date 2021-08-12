@@ -84,7 +84,7 @@ class NFEModelRate extends Model
     public function getRules(bool $required = true)
     {
         return [
-            'nfe_model_id' => ['int'],
+            'nfe_model_id' => [Rule::requiredIf($required)],
             'base_rate' => [Rule::requiredIf($required), 'numeric', 'min:0'],
             'date' => [Rule::requiredIf($required), 'date'],
         ];

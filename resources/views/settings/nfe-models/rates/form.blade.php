@@ -14,7 +14,7 @@
 
 <div class="col-span-6 sm:col-span-6">
     <x-jet-section-border />
-    <x-danger-button wire:click="deleteModelRate({{$index}})" class="float-right">
+    <x-danger-button wire:click="deleteRate({{$index}})" class="float-right">
         {{ $rates[$index]->id ? 'Delete' : 'Cancel' }}
     </x-danger-button>
 </div>

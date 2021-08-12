@@ -1,6 +1,6 @@
 
 
-@foreach($this->getModelRates($index) as $rateIndex => $rate)
+@foreach($this->rates as $index => $rate)
     @php
         $header = $rate->date ?? 'New Rate On Day';
         $collapsed = $rate->id ? 1 : 0;
@@ -9,7 +9,7 @@
         <x-slot name="form">
             <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
                 <div class="grid grid-cols-6 gap-6">
-                    @include('settings.nfe-models.rates.form', ['index' => $rateIndex])
+                    @include('settings.nfe-models.rates.form', ['index' => $index])
                 </div>
             </div>
         </x-slot>
