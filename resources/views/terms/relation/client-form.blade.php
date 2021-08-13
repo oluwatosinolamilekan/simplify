@@ -7,7 +7,6 @@
                 'description' => "{$client->ref_code} {$client->company->name}"
             ]);
         @endphp
-        <livewire:select-searchable :selectOptions="$clients" :wire="''" :value="assignClient($event.target.value)" class=""/>
-
-        <x-select-option :values="$clients" wire:change="assignClient($event.target.value)" class="w-1/2 float-right" id="client"/>
+        <livewire:onchange-select :selectOptions="$clients" class="" :selected="selectedItem($event.target.value)"/>
+{{--        <x-select-option :values="$clients" wire:change="assignClient($event.target.value)" class="w-1/2 float-right" id="client"/>--}}
     </div>
