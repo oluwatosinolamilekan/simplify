@@ -7,9 +7,9 @@
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="ref_code" value="{{ __('Approved') }}" />
                 @if($credit->approved)
-                    <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                    <x-icons.circle-check class="text-green-600 mx-0 inline" />
                 @else
-                    <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                    <x-icons.circle-x class="text-red-300 mx-0 inline" />
                 @endif
             </div>
 
@@ -71,9 +71,9 @@
             <div class="col-span-3 sm:col-span-3">
                 <x-jet-label for="report_charge" value="{{ __('Charge Report') }}"  class="sm:inline-block"/>
                 @if($credit->report_charge)
-                    <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                    <x-icons.circle-check class="text-green-600 mx-0 inline" />
                 @else
-                    <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                    <x-icons.circle-x class="text-red-300 mx-0 inline" />
                 @endif
             </div>
 

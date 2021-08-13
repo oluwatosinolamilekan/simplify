@@ -36,7 +36,7 @@
                         <div class="col-span-6 sm:col-span-3">
                             <x-jet-label for="status" value="{{ __('Status') }}" />
                             @if($term->status->is(\App\Enums\Status::Active))
-                                <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                                <x-icons.circle-check class="text-green-600 mx-0 inline" />
                             @else
                                 <x-icons.x-circle class="text-red-300 mx-0 inline" />
                             @endif
