@@ -37,8 +37,7 @@ class SelectSearchable extends LivewireSelect
         $searchSelectedOptionView = 'livewire-select::search-selected-option',
         $searchNoResultsView = 'livewire-select::search-no-results',
         $extras = []
-    )
-    {
+    ) {
         $this->wire = $wire;
 
         parent::mount(
@@ -79,7 +78,6 @@ class SelectSearchable extends LivewireSelect
         return $this->selectOptions->where('value', $value)->first();
     }
 
-
     public function styles()
     {
         return [
@@ -103,7 +101,6 @@ class SelectSearchable extends LivewireSelect
 
     public function render()
     {
-
         $options = $this->options($this->searchTerm);
 
         $this->optionsValues = $options->pluck('value')->toArray();

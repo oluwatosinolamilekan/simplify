@@ -27,7 +27,7 @@
                                 'name' => \App\Enums\Status::fromValue($status)->description
                             ])
             @endphp
-            <x-select-option :values="$statuses" wire:model="plan.status" class="w-1/2 float-right"/>
+            <x-select :values="$statuses" wire:model="plan.status" class="w-1/2 float-right"/>
             <x-jet-input-error for="plan.status" class="mt-3" />
         </div>
 

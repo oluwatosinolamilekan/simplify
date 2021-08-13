@@ -29,7 +29,6 @@
                 <!-- Factor Information -->
                 <div class="mt-10 sm:mt-0">
                     <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
-
                         <x-jet-section-title>
                             <x-slot name="title">{{ __('Factor Information') }}</x-slot>
                             <x-slot name="description">{{ __('Fill factor information.') }}</x-slot>
