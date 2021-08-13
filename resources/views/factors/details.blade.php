@@ -103,19 +103,19 @@
         <x-slot name="clients">
             <!-- Clients -->
             <div>
-                <livewire:factor.factor-clients-list :factor="$factor"/>
+                <livewire:factor.factor-clients-list :factor="$factor" :identifier="'factor-clients-list'"/>
             </div>
         </x-slot>
         <x-slot name="vendors">
             <!-- Vendors -->
             <div>
-                <livewire:factor.factor-vendors-list :factor="$factor"/>
+                <livewire:factor.factor-vendors-list :factor="$factor" :identifier="'factor-vendors-list'"/>
             </div>
         </x-slot>
         <x-slot name="debtors">
             <!-- Debtors -->
             <div>
-                <livewire:factor.factor-debtors-list :factor="$factor"/>
+                <livewire:factor.factor-debtors-list :factor="$factor" :identifier="'factor-debtors-list'"/>
             </div>
         </x-slot>
         <x-slot name="users">
@@ -123,7 +123,7 @@
             <div>
                 <x-jet-nav-link href="{{route('companies.users.create', ['company_id' => $company->id])}}" :active="true">+ Add new user</x-jet-nav-link>
 
-                <livewire:company.user.company-users-list :company="$company"/>
+                <livewire:company.user.company-users-list :company="$company" :identifier="'factor-users-list'"/>
             </div>
         </x-slot>
 

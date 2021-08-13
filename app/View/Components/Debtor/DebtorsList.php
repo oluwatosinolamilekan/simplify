@@ -89,7 +89,8 @@ class DebtorsList extends Datatable
             DateColumn::name('created_at')
                 ->label('Created At')
                 ->format('m/d/Y')
-                ->filterable(),
+                ->filterable()
+                ->defaultSort(false),
 
             ActionsColumn::actions(['id'], function ($id) {
                 return view(

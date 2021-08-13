@@ -156,7 +156,7 @@
             <div>
                 <x-jet-nav-link href="{{route('companies.users.create', ['company_id' => $company->id])}}" :active="true">+ Add new user</x-jet-nav-link>
 
-                <livewire:company.user.company-users-list :company="$company"/>
+                <livewire:company.user.company-users-list :company="$company" :identifier="'debtor-users-list'"/>
             </div>
         </x-slot>
     </x-tabs>

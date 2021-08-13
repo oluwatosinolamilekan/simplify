@@ -13,43 +13,64 @@ namespace App\View\Components\Traits;
 
 trait WithPersistentFilters
 {
-    public function initializeWithPersistentFilters()
-    {
-        $this->restoreFiltersFromSession();
-    }
+    public $filtersPersistent = true;
+    public $sortPersistent = true;
+    public string $identifier;
 
     public function buildDatabaseQuery($export = false)
     {
-        $this->storeFiltersInSession();
+        $this->storeInSession();
 
         parent::buildDatabaseQuery($export);
     }
 
-    public function storeFiltersInSession()
+    public function storeInSession()
     {
-        if (! $this->filtersPersistent) {
+        if (! ($id = $this->getIdentifier())) {
             return;
         }
 
-        session()->put("filters.{$this->route}.{$this->name}", [
-            'search' => $this->search,
-            'activeDateFilters' => $this->activeDateFilters,
-            'activeTimeFilters' => $this->activeTimeFilters,
-            'activeSelectFilters' => $this->activeSelectFilters,
-            'activeBooleanFilters' => $this->activeBooleanFilters,
-            'activeTextFilters' => $this->activeTextFilters,
-            'activeNumberFilters' => $this->activeNumberFilters,
-        ]);
+        $data = [];
+
+        if ($this->filtersPersistent) {
+            $data['filters'] = [
+                'search' => $this->search,
+                'activeDateFilters' => $this->activeDateFilters,
+                'activeTimeFilters' => $this->activeTimeFilters,
+                'activeSelectFilters' => $this->activeSelectFilters,
+                'activeBooleanFilters' => $this->activeBooleanFilters,
+                'activeTextFilters' => $this->activeTextFilters,
+                'activeNumberFilters' => $this->activeNumberFilters,
+            ];
+        }
+
+        if ($this->sortPersistent) {
+            $data['sort'] = [
+                'column' => $this->sort,
+                'direction' => $this->direction,
+            ];
+        }
+
+        session()->put("datatables.{$id}", $data);
     }
 
-    public function restoreFiltersFromSession()
+    public function restoreFromSession()
     {
-        if (! $this->filtersPersistent) {
+        if (! ($id = $this->getIdentifier())) {
             return;
         }
 
-        foreach (session()->get("filters.{$this->route}.{$this->name}", []) as $property => $value) {
-            $this->{$property} = $value;
+        $data = session()->get("datatables.{$id}", []);
+
+        if ($this->filtersPersistent & isset($data['filters'])) {
+            foreach ($data['filters'] as $property => $value) {
+                $this->{$property} = $value;
+            }
+        }
+
+        if ($this->sortPersistent & isset($data['sort'])) {
+            $this->sort = $data['sort']['column'];
+            $this->direction = $data['sort']['direction'];
         }
     }
 }

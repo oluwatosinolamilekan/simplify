@@ -47,10 +47,10 @@
                     <x-jet-label for="role" value="{{ __('Email verified') }}" />
 
                     @if($user->email_verified_at)
-                        <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                        <x-icons.check-circle class="text-green-600 mx-0 inline" data-value="true"/>
                         <span>{{$user->email_verified_at->format('d M, Y H:i:s')}}</span>
                     @else
-                        <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                        <x-icons.x-circle class="text-red-300 mx-0 inline" data-value="false"/>
                     @endif
                 </div>
 
@@ -58,9 +58,9 @@
                 <div class="col-span-6 sm:col-span-4">
                     <x-jet-label for="status" value="{{ __('Status') }}" />
                     @if($user->status->is(\App\Enums\Status::Active))
-                        <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                        <x-icons.check-circle class="text-green-600 mx-0 inline" data-value="{{$user->status->description}}"/>
                     @else
-                        <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                        <x-icons.x-circle class="text-red-300 mx-0 inline" data-value="{{$user->status->description}}"/>
                     @endif
                     <span class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                         {{$user->status->description}}
@@ -71,9 +71,9 @@
                 <div class="col-span-6 sm:col-span-4">
                     <x-jet-label for="role" value="{{ __('Two Factor Enabled') }}" />
                     @if($user->two_factor_secret)
-                        <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                        <x-icons.check-circle class="text-green-600 mx-0 inline" data-value="true"/>
                     @else
-                        <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                        <x-icons.x-circle class="text-red-300 mx-0 inline" data-value="false"/>
                     @endif
                 </div>
             </div>
