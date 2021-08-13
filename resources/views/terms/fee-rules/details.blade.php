@@ -6,7 +6,7 @@
         FeeRuleType::IntervalFee => 'terms.fee-rules.interval-fee-details',
         FeeRuleType::FlatFee => 'terms.fee-rules.flat-fee-details',
         FeeRuleType::NegativeReserveFee => 'terms.fee-rules.negative-reserve-fee-details',
-        FeeRuleType::NFEFee => 'terms.fee-rules.nfe-fee-details',
+        FeeRuleType::NfeFee => 'terms.fee-rules.nfe-fee-details',
     ];
     $header = "{$feeRule->label} [ {$feeRule->type->description} ]";
 @endphp

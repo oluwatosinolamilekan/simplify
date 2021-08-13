@@ -16,6 +16,7 @@ use App\Models\NFEModelRate;
 use App\Support\Validation\ValidationRules;
 use App\View\Components\ModelForm;
 use DB;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Throwable;
 
@@ -92,6 +93,10 @@ class NfeModelForm extends ModelForm
         try {
             if (! $this->model->exists) {
                 $this->emitUp('removeModel', $this->index);
+            }
+
+            if ($this->model->feeRules()->exist()) {
+                throw new Exception('This model is in use and can not be deleted!');
             }
 
             $this->model->delete();

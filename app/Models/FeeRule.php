@@ -146,6 +146,8 @@ class FeeRule extends Model
             'calculate_age_based_on' => ['required_if:type,2', 'int', Rule::in(BaseDateType::getValues())],
             'interval' => ['required_if:type,2', 'int', 'min:1', 'max:90'],
             'max_rate' => ['required_if:type,2', 'numeric', 'min:0', 'max:100'],
+            'float_days' => ['required_if:type,5', 'int', 'min:1', 'max:90'],
+            'nfe_model_id' => ['required_if:type,5', 'int', 'exists:nfe_models,id'],
         ];
     }
 
@@ -159,6 +161,8 @@ class FeeRule extends Model
             "{$property}.configuration.calculate_age_based_on" => 'calculate age based on',
             "{$property}.configuration.rate_type" => 'rate type',
             "{$property}.configuration.max_rate" => 'max rate',
+            "{$property}.configuration.float_days" => 'float days',
+            "{$property}.configuration.nfe_model_id" => 'nfe model',
         ];
     }
 }

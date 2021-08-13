@@ -82,6 +82,11 @@ class NFEModel extends Model
         return $this->hasMany(NFEModelRate::class, 'nfe_model_id', 'id');
     }
 
+    public function feeRules()
+    {
+        return $this->hasMany(FeeRule::class, 'configuration->nfe_model_id', 'id');
+    }
+
     public function getRules(bool $required = true)
     {
         return [
