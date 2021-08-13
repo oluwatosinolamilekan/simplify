@@ -179,12 +179,6 @@ class Datatable extends LivewireDatatable
             return ($alias ?? $table).'.'.$relationColumn;
         }
 
-        if ($model instanceof HasMany) {
-            return;
-        }
-
-        if ($model instanceof BelongsToMany) {
-            return;
-        }
+        return $relationColumn;
     }
 }

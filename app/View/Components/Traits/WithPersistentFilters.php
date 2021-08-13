@@ -11,6 +11,9 @@ declare(strict_types=1);
 
 namespace App\View\Components\Traits;
 
+use Illuminate\Support\Str;
+use Log;
+
 trait WithPersistentFilters
 {
     public function initializeWithPersistentFilters()
@@ -27,11 +30,15 @@ trait WithPersistentFilters
 
     public function storeFiltersInSession()
     {
-        if (! $this->filtersPersistent) {
+        $name = $this->name ?? Str::snake(Str::afterLast(get_called_class(), '\\'));
+
+        Log::debug("filters.{$this->route}.{$name}");
+
+        if (! $this->filtersPersistent || ! $this->route || ! $name) {
             return;
         }
 
-        session()->put("filters.{$this->route}.{$this->name}", [
+        session()->put("filters.{$this->route}.{$name}", [
             'search' => $this->search,
             'activeDateFilters' => $this->activeDateFilters,
             'activeTimeFilters' => $this->activeTimeFilters,
@@ -44,11 +51,13 @@ trait WithPersistentFilters
 
     public function restoreFiltersFromSession()
     {
-        if (! $this->filtersPersistent) {
+        $name = $this->name ?? Str::snake(Str::afterLast(get_called_class(), '\\'));
+
+        if (! $this->filtersPersistent || ! $this->route || ! $name) {
             return;
         }
 
-        foreach (session()->get("filters.{$this->route}.{$this->name}", []) as $property => $value) {
+        foreach (session()->get("filters.{$this->route}.{$name}", []) as $property => $value) {
             $this->{$property} = $value;
         }
     }
