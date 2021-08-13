@@ -15,6 +15,7 @@
                                         'selected' => $factor->id == $term->factor_id
                                     ])
                 @endphp
+
                 <livewire:select-searchable :selectOptions="$factors" :wire="'term.factor_id'" :value="$term->factor_id" class=""/>
                 <x-jet-input-error for="term.factor_id" class="mt-3" />
             </div>

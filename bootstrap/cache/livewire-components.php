@@ -39,6 +39,7 @@
   'factor.factor-wizard' => 'App\\View\\Components\\Factor\\FactorWizard',
   'factor.factors-list' => 'App\\View\\Components\\Factor\\FactorsList',
   'factor.subscription-plan-form' => 'App\\View\\Components\\Factor\\SubscriptionPlanForm',
+  'onchange-select' => 'App\\View\\Components\\OnchangeSelect',
   'select-searchable' => 'App\\View\\Components\\SelectSearchable',
   'settings.nfe-models-form' => 'App\\View\\Components\\Settings\\NfeModelsForm',
   'settings.settings-form' => 'App\\View\\Components\\Settings\\SettingsForm',
