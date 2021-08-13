@@ -196,13 +196,13 @@
         <x-slot name="vendors">
             <!-- Vendors -->
             <div>
-                <livewire:client.client-vendors-list :client="$client"/>
+                <livewire:client.client-vendors-list :client="$client" :identifier="'client-vendors-list'" />
             </div>
         </x-slot>
         <x-slot name="debtors">
             <!-- Debtors -->
             <div>
-                <livewire:client.client-debtors-list :client="$client"/>
+                <livewire:client.client-debtors-list :client="$client" :identifier="'client-debtors-list'" />
             </div>
         </x-slot>
         <x-slot name="users">
@@ -218,7 +218,7 @@
                 </div>
             </div>
             <div>
-                <livewire:company.user.company-users-list :company="$company" :user="$user"/>
+                <livewire:company.user.company-users-list :company="$company" :user="$user" :identifier="'client-users-list'"/>
             </div>
         </x-slot>
     </x-tabs>
