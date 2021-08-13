@@ -43,7 +43,7 @@
                     @if ($settings->exists)
                         @include('vendors.settings.details', ['settings' => $settings])
                     @else
-                        <x-collapsible-container>
+                        <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                             <x-slot name="form">
                                 <livewire:vendor.vendor-settings-form :settings="$settings" :partial="false" :nested="true"/>
                             </x-slot>
@@ -67,7 +67,7 @@
                     @if ($identity->exists)
                         @include('companies.identity.details', ['identity' => $identity])
                     @else
-                        <x-collapsible-container>
+                        <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                             <x-slot name="form">
                                 <livewire:company.company-identity-form :identity="$identity" :partial="false" :nested="true"/>
                             </x-slot>
@@ -91,7 +91,7 @@
                     @if ($address->exists)
                         @include('address.details', ['address' => $address])
                     @else
-                        <x-collapsible-container>
+                        <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                             <x-slot name="form">
                                 <livewire:address.address-form :address="$address" :partial="false" :nested="true"/>
                             </x-slot>
@@ -112,7 +112,7 @@
                     @if ($contact->exists)
                         @include('contact.details', ['contact' => $vendor->company->contact])
                     @else
-                        <x-collapsible-container>
+                        <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                             <x-slot name="form">
                                 <livewire:contact.contact-form :contact="$contact" :partial="false" :nested="true"/>
                             </x-slot>
@@ -136,7 +136,7 @@
                     @if ($bankInformation->exists)
                         @include('bank-information.details', ['bankInformation' => $bankInformation])
                     @else
-                        <x-collapsible-container>
+                        <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                             <x-slot name="form">
                                 <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false" :nested="true"/>
                             </x-slot>

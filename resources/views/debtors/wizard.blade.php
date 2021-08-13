@@ -168,7 +168,7 @@
                             <x-slot name="description">{{ 'Fill administrator account information.'}}</x-slot>
                         </x-jet-section-title>
 
-                        <x-collapsible-container>
+                        <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                             <x-slot name="form">
                                 <livewire:company.user.company-user-form :company="$company" :partial="false" :nested="true"/>
                             </x-slot>

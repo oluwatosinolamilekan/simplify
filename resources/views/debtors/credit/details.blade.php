@@ -12,7 +12,7 @@
                 @include('debtors.credit.partials.credit-details', ['credit' => $credit])
             @else
                 <div class="mt-5 md:mt-0 md:col-span-2" >
-                    <x-collapsible-container>
+                    <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                         <x-slot name="form">
                             <livewire:debtor.debtor-credit-form :credit="$credit" :partial="false" :nested="true"/>
                         </x-slot>
@@ -35,7 +35,7 @@
             @if ($creditLimit->exists)
                 @include('debtors.credit.partials.credit-limit-details', ['creditLimit' => $creditLimit])
             @else
-                <x-collapsible-container>
+                <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                     <x-slot name="form">
                         <livewire:debtor.debtor-credit-limit-form :creditLimit="$creditLimit" :partial="false" :nested="true"/>
                     </x-slot>

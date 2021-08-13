@@ -26,7 +26,7 @@ trait WithNested
      */
     public function getListeners()
     {
-        return array_merge($this->listeners ?? [], [
+        return array_merge(parent::getListeners() ?? [], [
             'update' => 'update',
             'saved' => 'saved',
         ]);
@@ -44,13 +44,11 @@ trait WithNested
      */
     public function saved(string $property, $id)
     {
-        if (! $this->propertyIsPublicAndNotDefinedOnBaseClass($property)) {
-            return;
-        }
-
-        if ($this->{$property} instanceof Model) {
-            $this->{$property}->exists = true;
-            $this->{$property}->id = $id;
+        if ($this->propertyIsPublicAndNotDefinedOnBaseClass($property)) {
+            if ($this->{$property} instanceof Model) {
+                $this->{$property}->exists = true;
+                $this->{$property}->id = $id;
+            }
         }
 
         $method = 'saved'.ucfirst($property);

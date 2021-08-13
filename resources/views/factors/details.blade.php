@@ -45,7 +45,7 @@
                     @if ($address->exists)
                         @include('address.details', ['address' => $address])
                     @else
-                        <x-collapsible-container>
+                        <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                             <x-slot name="form">
                                 <livewire:address.address-form :address="$address" :partial="false"/>
                             </x-slot>
@@ -66,7 +66,7 @@
                     @if ($contact->exists)
                         @include('contact.details', ['contact' => $client->company->contact])
                     @else
-                        <x-collapsible-container>
+                        <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                             <x-slot name="form">
                                 <livewire:contact.contact-form :contact="$contact" :partial="false"/>
                             </x-slot>
@@ -90,7 +90,7 @@
                     @if ($bankInformation->exists)
                         @include('bank-information.details', ['bankInformation' => $bankInformation])
                     @else
-                        <x-collapsible-container>
+                        <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                             <x-slot name="form">
                                 <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false"/>
                             </x-slot>

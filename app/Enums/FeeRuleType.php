@@ -18,7 +18,7 @@ use BenSampo\Enum\Enum;
  * @method static static IntervalFee()
  * @method static static FlatFee()
  * @method static static NegativeReserveFee()
- * @method static static NFEFee()
+ * @method static static NfeFee()
  */
 final class FeeRuleType extends Enum
 {
@@ -26,5 +26,5 @@ final class FeeRuleType extends Enum
     const IntervalFee = 2;
     const FlatFee = 3;
     const NegativeReserveFee = 4;
-    const NFEFee = 5;
+    const NfeFee = 5;
 }
