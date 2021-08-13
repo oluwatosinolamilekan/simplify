@@ -20,10 +20,9 @@
                                        'selected' => $factor->status === $status
                                    ])
                 @endphp
-                <x-select-option :values="$statuses" wire:model="factor.status"  class=""/>
+                <x-select-option :values="$statuses" wire:model="factor.status"/>
                 <x-jet-input-error for="factor.status" class="mt-3" />
             </div>
-
         </div>
     </div>
 </div>

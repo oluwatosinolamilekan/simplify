@@ -29,7 +29,7 @@
             <!-- Country -->
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="country" value="{{ __('Country') }}" />
-                <select id="country" wire:model="address.country" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                <select id="country" wire:model="address.country" class="form-select bg-white py-3 px-4 border-gray-300 dark:bg-dark-1 block mt-1 focus:border-theme-18 focus:ring-offset-theme-18 focus:ring-theme-18 focus:ring-opacity-50">
                     <option value="">Select Country</option>
                     <option value="us">US</option>
                     <option value="es">Spain</option>
