@@ -40,11 +40,20 @@ class TermWizard extends Component
     public Collection $clients;
     public Collection $feeRules;
 
+    public $client_id;
+
+    protected $listeners = ['update'];
+
+    public function update($wire, $value)
+    {
+        $this->assignClient($value);
+    }
+
     /**
      * @param  $term_id
      * @throws Exception
      */
-    public function mount($term_id = null)
+    public function mount($term_id = null, $client_id = null)
     {
         $this->term = Term::with([
             'factor',
@@ -55,6 +64,7 @@ class TermWizard extends Component
             'settings',
         ])->findOrNew($term_id);
 
+        $this->client_id = $client_id;
         $this->initRelated();
     }
 
