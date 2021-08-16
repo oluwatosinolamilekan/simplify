@@ -51,6 +51,8 @@ class NfeModelForm extends ModelForm
             DB::commit();
 
             $this->successAlert();
+
+            $this->emitUp('saved', $this->getProperty(), $this->getModel()->id);
         } catch (Throwable $exception) {
             DB::rollBack();
             $this->exceptionAlert($exception);
@@ -95,7 +97,7 @@ class NfeModelForm extends ModelForm
                 $this->emitUp('removeModel', $this->index);
             }
 
-            if ($this->model->feeRules()->exist()) {
+            if ($this->model->feeRules()->exists()) {
                 throw new Exception('This model is in use and can not be deleted!');
             }
 

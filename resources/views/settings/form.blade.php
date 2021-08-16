@@ -12,7 +12,7 @@
             <x-success-button wire:click="addPlan" type="button"> + Add New Subscription Plan </x-success-button>
 
             @foreach($plans as $index => $plan)
-                @php $header = $plan->id ? "{$plan->name} {$plan->price}$ {$plan->status->description}" : ""; @endphp
+                @php $header = $plan->name ? $plan->name : ""; @endphp
                 <x-collapsible-container :header="$header" :collapsed="(bool)$plan->id">
                     <x-slot name="form">
                         <div class="px-4 py-5 bg-white dark:bg-dark-2 sm:p-6 shadow sm:rounded-md">
