@@ -3,7 +3,7 @@
     <div class="mt-10 sm:mt-0">
         <div class="mt-6 md:grid md:grid-cols-3 md:gap-6">
             @if(isset($titleSection)) @yield($titleSection) @endif
-            <div class="mt-5 md:mt-0 md:col-span-2">
+            <div class="mt-5 md:mt-0 md:col-span-6">
 @endif
 
 @if (!isset($partial) || !$partial)
@@ -14,7 +14,7 @@
 
 @if (!isset($partial) || !$partial)
         <!-- Actions -->
-        @include('components.forms.form-actions', ['delete' => false])
+        @include('components.forms.form-actions', ['delete' => isset($delete)])
     </form>
 @endif
 

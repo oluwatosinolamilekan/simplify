@@ -1,4 +1,15 @@
-<?php return array (
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the 2amigos/addio
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+return [
   'address.address-form' => 'App\\View\\Components\\Address\\AddressForm',
   'bank-information.bank-information-form' => 'App\\View\\Components\\BankInformation\\BankInformationForm',
   'client.client-analysis-form' => 'App\\View\\Components\\Client\\ClientAnalysisForm',
@@ -40,9 +51,9 @@
   'factor.factors-list' => 'App\\View\\Components\\Factor\\FactorsList',
   'factor.subscription-plan-form' => 'App\\View\\Components\\Factor\\SubscriptionPlanForm',
   'select-searchable' => 'App\\View\\Components\\SelectSearchable',
-  'settings.nfe-models-form' => 'App\\View\\Components\\Settings\\NfeModelsForm',
+  'settings.nfe-model-form' => 'App\\View\\Components\\Settings\\NfeModelForm',
   'settings.settings-form' => 'App\\View\\Components\\Settings\\SettingsForm',
-  'settings.subscription-plans-form' => 'App\\View\\Components\\Settings\\SubscriptionPlansForm',
+  'settings.subscription-plan-form' => 'App\\View\\Components\\Settings\\SubscriptionPlanForm',
   'term.term-details' => 'App\\View\\Components\\Term\\TermDetails',
   'term.term-settings-form' => 'App\\View\\Components\\Term\\TermSettingsForm',
   'term.term-wizard' => 'App\\View\\Components\\Term\\TermWizard',
@@ -54,4 +65,4 @@
   'vendor.vendor-settings-form' => 'App\\View\\Components\\Vendor\\VendorSettingsForm',
   'vendor.vendor-wizard' => 'App\\View\\Components\\Vendor\\VendorWizard',
   'vendor.vendors-list' => 'App\\View\\Components\\Vendor\\VendorsList',
-);
+];

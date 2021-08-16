@@ -12,13 +12,11 @@ declare(strict_types=1);
 namespace App\View\Components\Common\Datatables;
 
 use App\View\Components\Traits\WithPersistentFilters;
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
-use Illuminate\Routing\Route;
 use Illuminate\Support\Str;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 
@@ -28,14 +26,47 @@ class Datatable extends LivewireDatatable
 
     public $hideable = 'select';
     public $exportable = true;
-    public $filtersPersistent = true;
-    public $route = null;
 
-    public function __invoke(Container $container, Route $route)
+    public function mount(
+        $model = null,
+        $include = [],
+        $exclude = [],
+        $hide = [],
+        $dates = [],
+        $times = [],
+        $searchable = [],
+        $sort = null,
+        $hideHeader = null,
+        $hidePagination = null,
+        $perPage = null,
+        $exportable = false,
+        $hideable = false,
+        $beforeTableSlot = false,
+        $afterTableSlot = false,
+        $params = []
+    ) {
+        foreach (['model', 'include', 'exclude', 'hide', 'dates', 'times', 'searchable', 'sort', 'hideHeader', 'hidePagination', 'exportable', 'hideable', 'beforeTableSlot', 'afterTableSlot'] as $property) {
+            $this->$property = $this->$property ?? $$property;
+        }
+
+        $this->params = $params;
+
+        $this->columns = $this->getViewColumns();
+
+        $this->initialiseSort();
+
+        $this->restoreFromSession();
+
+        $this->perPage = $perPage ?? $this->perPage ?? config('livewire-datatables.default_per_page', 10);
+    }
+
+    public function getIdentifier()
     {
-        $this->route = $route->getName();
+        if (isset($this->identifier)) {
+            return $this->identifier;
+        }
 
-        return parent::__invoke($container, $route);
+        return Str::snake(Str::afterLast(get_called_class(), '\\'));
     }
 
     public function applyFilter($filter, ...$arguments)
@@ -98,6 +129,19 @@ class Datatable extends LivewireDatatable
             'activeDateFilters',
             'activeTimeFilters',
         );
+    }
+
+    /** Override Livewire defaultSort method since it's not working properly */
+    public function defaultSort()
+    {
+        $columnIndex = collect($this->freshColumns)->search(function ($column) {
+            return isset($column['defaultSort']);
+        });
+
+        return is_numeric($columnIndex) ? [
+            'key' => $columnIndex,
+            'direction' => $this->freshColumns[$columnIndex]['defaultSort'],
+        ] : null;
     }
 
     /** Override Livewire datatable methods to enable multiple relational columns that are using the same table */
@@ -179,12 +223,6 @@ class Datatable extends LivewireDatatable
             return ($alias ?? $table).'.'.$relationColumn;
         }
 
-        if ($model instanceof HasMany) {
-            return;
-        }
-
-        if ($model instanceof BelongsToMany) {
-            return;
-        }
+        return $relationColumn;
     }
 }

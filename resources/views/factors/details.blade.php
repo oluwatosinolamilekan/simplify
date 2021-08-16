@@ -45,7 +45,7 @@
                     @if ($address->exists)
                         @include('address.details', ['address' => $address])
                     @else
-                        <x-collapsible-container>
+                        <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                             <x-slot name="form">
                                 <livewire:address.address-form :address="$address" :partial="false"/>
                             </x-slot>
@@ -66,7 +66,7 @@
                     @if ($contact->exists)
                         @include('contact.details', ['contact' => $client->company->contact])
                     @else
-                        <x-collapsible-container>
+                        <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                             <x-slot name="form">
                                 <livewire:contact.contact-form :contact="$contact" :partial="false"/>
                             </x-slot>
@@ -90,7 +90,7 @@
                     @if ($bankInformation->exists)
                         @include('bank-information.details', ['bankInformation' => $bankInformation])
                     @else
-                        <x-collapsible-container>
+                        <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                             <x-slot name="form">
                                 <livewire:bank-information.bank-information-form :bankInformation="$bankInformation" :partial="false"/>
                             </x-slot>
@@ -103,19 +103,19 @@
         <x-slot name="clients">
             <!-- Clients -->
             <div>
-                <livewire:factor.factor-clients-list :factor="$factor"/>
+                <livewire:factor.factor-clients-list :factor="$factor" :identifier="'factor-clients-list'"/>
             </div>
         </x-slot>
         <x-slot name="vendors">
             <!-- Vendors -->
             <div>
-                <livewire:factor.factor-vendors-list :factor="$factor"/>
+                <livewire:factor.factor-vendors-list :factor="$factor" :identifier="'factor-vendors-list'"/>
             </div>
         </x-slot>
         <x-slot name="debtors">
             <!-- Debtors -->
             <div>
-                <livewire:factor.factor-debtors-list :factor="$factor"/>
+                <livewire:factor.factor-debtors-list :factor="$factor" :identifier="'factor-debtors-list'"/>
             </div>
         </x-slot>
         <x-slot name="users">
@@ -123,7 +123,7 @@
             <div>
                 <x-jet-nav-link href="{{route('companies.users.create', ['company_id' => $company->id])}}" :active="true">+ Add new user</x-jet-nav-link>
 
-                <livewire:company.user.company-users-list :company="$company"/>
+                <livewire:company.user.company-users-list :company="$company" :identifier="'factor-users-list'"/>
             </div>
         </x-slot>
 

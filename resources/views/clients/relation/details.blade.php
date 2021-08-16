@@ -36,9 +36,9 @@
             <div class="col-span-6 sm:col-span-3">
                 <x-jet-label for="status" value="{{ __('Status') }}" />
                 @if($client->status->is(\App\Enums\Status::Active))
-                    <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                    <x-icons.circle-check class="text-green-600 mx-0 inline" />
                 @else
-                    <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                    <x-icons.circle-x class="text-red-300 mx-0 inline" />
                 @endif
                 <span class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                     {{$client->status->description}}

@@ -191,7 +191,7 @@
                         </x-jet-section-title>
 
                         <div class="mt-5 md:mt-0 md:col-span-2">
-                            <x-collapsible-container>
+                            <x-collapsible-container  :collapseButton="'Cancel'" :expandButton="'+Add'">llapsible-container>
                                 <x-slot name="form">
                                     <livewire:company.user.company-user-form :company="$company" :partial="false" :nested="true"/>
                                 </x-slot>

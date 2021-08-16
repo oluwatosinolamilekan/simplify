@@ -22,6 +22,9 @@ trait ConfirmModelDelete
     /* Previous URL for redirection after delete  */
     public $previous = null;
 
+    /* Id of component that triggered deletion. Needed for purpose on identifying events target */
+    public $callingComponentId = null;
+
     /**
      * Previous URL is saved on mounting because Laravel back() method doesn't work with Livewire.
      *
@@ -30,7 +33,14 @@ trait ConfirmModelDelete
     public function mountConfirmModelDelete()
     {
         $this->previous = URL::previous();
-        $this->listeners = array_merge($this->listeners, ['deleteConfirmed' => 'deleteConfirmed', 'deleteCancelled' => 'deleteCancelled']);
+    }
+
+    public function getListeners()
+    {
+        return array_merge(parent::getListeners() ?? [], [
+            'deleteConfirmed' => 'deleteConfirmed',
+            'deleteCancelled' => 'deleteCancelled',
+        ]);
     }
 
     /**
@@ -40,6 +50,9 @@ trait ConfirmModelDelete
      */
     public function confirmDeletion()
     {
+        /* Identify source of the delete request */
+        $this->callingComponentId = $this->id;
+
         $this->confirm('Delete item', [
             'position' =>  'center',
             'timer' =>  10000,
@@ -58,10 +71,15 @@ trait ConfirmModelDelete
 
     public function deleteConfirmed()
     {
+        /* onConfirmed and onCancelled events are emitted to ALL components. Checking source id to */
+        if ($this->callingComponentId != $this->id) {
+            return;
+        }
+
         try {
             if (method_exists($this, 'deleteModel')) {
                 $this->deleteModel();
-            } else {
+            } elseif (method_exists($this, 'getDeleteModel')) {
                 $this->getDeleteModel()->delete();
             }
         } catch (Throwable $exception) {
@@ -70,22 +88,15 @@ trait ConfirmModelDelete
             return;
         }
 
+        $this->alert('success', 'Item deleted', [
+            'position' =>  'top-end',
+            'timer' =>  3000,
+            'toast' =>  true,
+            'text' =>  'Item successfully deleted.',
+        ]);
+
         if ($this instanceof Datatable) {
-            $this->alert('success', 'Item deleted', [
-                'position' =>  'top-end',
-                'timer' =>  3000,
-                'toast' =>  true,
-                'text' =>  'Item successfully deleted.',
-            ]);
             $this->emit('refreshLivewireDatatable');
-        } else {
-            $this->flash('success', 'Item deleted', [
-                'position' =>  'top-end',
-                'timer' =>  3000,
-                'toast' =>  true,
-                'text' =>  'Item successfully deleted.',
-            ]);
-            $this->redirect($this->previous);
         }
     }
 
