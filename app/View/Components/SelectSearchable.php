@@ -62,7 +62,6 @@ class SelectSearchable extends LivewireSelect
         );
     }
 
-
     public function options($searchTerm = null): Collection
     {
         if (empty($searchTerm)) {

@@ -12,7 +12,6 @@
                                     ->map(fn ($factor) => [
                                         'value' => $factor->id,
                                         'description' => "{$factor->ref_code} {$factor->company->name}",
-                                        'selected' => $factor->id == $term->factor_id
                                     ])
                 @endphp
 

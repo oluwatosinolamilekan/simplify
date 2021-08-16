@@ -15,8 +15,6 @@
                                 ])
                 @endphp
                 <livewire:select-searchable :selectOptions="$clients" :wire="'vendor.client_id'" :value="$vendor->client_id" class="w-1/2 float-right"/>
-{{--                <x-select-option :values="$clients" wire:model="vendor.client_id" class="w-1/2 float-right"/>--}}
-
                 <x-jet-input-error for="vendor.client_id" class="mt-3" />
             </div>
         </div>
