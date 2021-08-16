@@ -7,9 +7,9 @@
             <div class="col-span-3 sm:col-span-3">
                 <x-jet-label for="generate_invoice" value="{{ __('Generate Invoice') }}"  class="sm:inline-block"/>
                 @if($fundingInstructions->generate_invoice)
-                    <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                    <x-icons.circle-check class="text-green-600 mx-0 inline" />
                 @else
-                    <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                    <x-icons.circle-x class="text-red-300 mx-0 inline" />
                 @endif
             </div>
 
@@ -17,9 +17,9 @@
             <div class="col-span-3 sm:col-span-3">
                 <x-jet-label for="send_invoice" value="{{ __('Send Invoice') }}" class="sm:inline-block"/>
                 @if($fundingInstructions->send_invoice)
-                    <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                    <x-icons.circle-check class="text-green-600 mx-0 inline" />
                 @else
-                    <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                    <x-icons.circle-x class="text-red-300 mx-0 inline" />
                 @endif
             </div>
 
@@ -35,9 +35,9 @@
             <div class="col-span-3 sm:col-span-3">
                 <x-jet-label for="efs_available" value="{{ __('EFS Available') }}"/>
                 @if($fundingInstructions->efs_available)
-                    <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                    <x-icons.circle-check class="text-green-600 mx-0 inline" />
                 @else
-                    <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                    <x-icons.circle-x class="text-red-300 mx-0 inline" />
                 @endif
             </div>
 
@@ -61,9 +61,9 @@
             <div class="col-span-3 sm:col-span-3">
                 <x-jet-label for="allow_fundings" value="{{ __('Allow Fundings') }}"/>
                 @if($fundingInstructions->allow_fundings)
-                    <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                    <x-icons.circle-check class="text-green-600 mx-0 inline" />
                 @else
-                    <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                    <x-icons.circle-x class="text-red-300 mx-0 inline" />
                 @endif
             </div>
 
@@ -71,9 +71,9 @@
             <div class="col-span-3 sm:col-span-3">
                 <x-jet-label for="allow_reserve_releases" value="{{ __('Allow Reserve Releases') }}"/>
                 @if($fundingInstructions->allow_reserve_releases)
-                    <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                    <x-icons.circle-check class="text-green-600 mx-0 inline" />
                 @else
-                    <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                    <x-icons.circle-x class="text-red-300 mx-0 inline" />
                 @endif
             </div>
 
@@ -89,9 +89,9 @@
             <div class="col-span-3 sm:col-span-3">
                 <x-jet-label for="send_email_remittances" value="{{ __('Send Email Remittances') }}"/>
                 @if($fundingInstructions->send_email_remittances)
-                    <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                    <x-icons.circle-check class="text-green-600 mx-0 inline" />
                 @else
-                    <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                    <x-icons.circle-x class="text-red-300 mx-0 inline" />
                 @endif
             </div>
 

@@ -7,9 +7,9 @@
             <div class="col-span-3 sm:col-span-3">
                 <x-jet-label for="buy_status" value="{{ __('Buy / No Buy') }}"  class="sm:inline-block"/>
                 @if($settings->buy_status)
-                    <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                    <x-icons.circle-check class="text-green-600 mx-0 inline" />
                 @else
-                    <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                    <x-icons.circle-x class="text-red-300 mx-0 inline" />
                 @endif
             </div>
 
@@ -17,9 +17,9 @@
             <div class="col-span-3 sm:col-span-3">
                 <x-jet-label for="send_email_remittances" value="{{ __('Send Email Remittances') }}" class="sm:inline-block"/>
                 @if($settings->send_email_remittances)
-                    <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                    <x-icons.circle-check class="text-green-600 mx-0 inline" />
                 @else
-                    <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                    <x-icons.circle-x class="text-red-300 mx-0 inline" />
                 @endif
             </div>
 
