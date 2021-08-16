@@ -63,7 +63,7 @@
 
 
                 <div class="mt-5 md:mt-0 md:col-span-2">
-                    <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
+                    <div class="px-4 py-5 bg-white dark:bg-dark-2 sm:p-6 shadow sm:rounded-md">
                         <div class="grid grid-cols-6 gap-6">
                             @include('terms.relation.client-form', ['term' => $term])
                             @include('terms.relation.client-list', ['clients' => $clients])
@@ -86,7 +86,7 @@
 
 
                 <div class="mt-5 md:mt-0 md:col-span-2">
-                    <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
+                    <div class="px-4 py-5 bg-white dark:bg-dark-2 sm:p-6 shadow sm:rounded-md">
                         <div class="grid grid-cols-6 gap-6">
 
                             <!-- Rule type selection -->
