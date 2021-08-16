@@ -16,13 +16,11 @@ use App\Models\DebtorCredit;
 use App\Models\DebtorCreditLimit;
 use App\Support\Validation\ValidationRules;
 use App\View\Components\Component;
-use App\View\Components\Traits\ConfirmModelDelete;
 use App\View\Components\Traits\WithNested;
 use Exception;
 
 class DebtorCreditDetails extends Component
 {
-    use ConfirmModelDelete;
     use WithNested;
 
     public Debtor $debtor;
