@@ -11,7 +11,7 @@
 @endphp
 <x-collapsible-container :header="$feeRule->type->description" :collapsed="$feeRule->id ? 1 : 0" x-cloak>
     <x-slot name="form">
-        <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
+        <div class="px-4 py-5 bg-white dark:bg-dark-2 sm:p-6 shadow sm:rounded-md">
             <div class="grid grid-cols-6 gap-6">
                 <!-- Label -->
                 <div class="col-span-6 sm:col-span-3">

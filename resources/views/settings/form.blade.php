@@ -15,7 +15,7 @@
                 @php $header = $plan->name ? $plan->name : ""; @endphp
                 <x-collapsible-container :header="$header" :collapsed="(bool)$plan->id">
                     <x-slot name="form">
-                        <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
+                        <div class="px-4 py-5 bg-white dark:bg-dark-2 sm:p-6 shadow sm:rounded-md">
                             <livewire:settings.subscription-plan-form :plan="$plan" :index="$index" wire:key="plan-{{$index}}"/>
                         </div>
                     </x-slot>
@@ -28,7 +28,7 @@
             @foreach($models as $index => $model)
                 <x-collapsible-container :header="$model->name" :collapsed="(bool)$model->id">
                     <x-slot name="form">
-                        <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
+                        <div class="px-4 py-5 bg-white dark:bg-dark-2 sm:p-6 shadow sm:rounded-md">
                             <livewire:settings.nfe-model-form :model="$model" :index="$index" wire:key="model-{{$index}}"/>
                         </div>
                     </x-slot>

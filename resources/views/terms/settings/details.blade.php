@@ -42,9 +42,9 @@
             <div class="col-span-3 sm:col-span-4">
                 <x-jet-label for="minimum_fee_applied_to_non_advanced_loads" value="{{ __('Applied To Non Advanced Loads') }}" class="sm:inline-block"/>
                 @if($settings->minimum_fee_applied_to_non_advanced_loads)
-                    <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                    <x-icons.circle-check class="text-green-600 mx-0 inline" />
                 @else
-                    <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                    <x-icons.circle-x class="text-red-300 mx-0 inline" />
                 @endif
             </div>
 
@@ -52,9 +52,9 @@
             <div class="col-span-3 sm:col-span-4">
                 <x-jet-label for="prioritize_minimum_fee" value="{{ __('Minimum Fee Calculated Before Extra Fees') }}" class="sm:inline-block"/>
                 @if($settings->prioritize_minimum_fee)
-                    <x-icons.check-circle class="text-green-600 mx-0 inline" />
+                    <x-icons.circle-check class="text-green-600 mx-0 inline" />
                 @else
-                    <x-icons.x-circle class="text-red-300 mx-0 inline" />
+                    <x-icons.circle-x class="text-red-300 mx-0 inline" />
                 @endif
             </div>
 
