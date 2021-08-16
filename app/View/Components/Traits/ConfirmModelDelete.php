@@ -88,21 +88,15 @@ trait ConfirmModelDelete
             return;
         }
 
+        $this->alert('success', 'Item deleted', [
+            'position' =>  'top-end',
+            'timer' =>  3000,
+            'toast' =>  true,
+            'text' =>  'Item successfully deleted.',
+        ]);
+
         if ($this instanceof Datatable) {
-            $this->alert('success', 'Item deleted', [
-                'position' =>  'top-end',
-                'timer' =>  3000,
-                'toast' =>  true,
-                'text' =>  'Item successfully deleted.',
-            ]);
             $this->emit('refreshLivewireDatatable');
-        } else {
-            $this->flash('success', 'Item deleted', [
-                'position' =>  'top-end',
-                'timer' =>  3000,
-                'toast' =>  true,
-                'text' =>  'Item successfully deleted.',
-            ]);
         }
     }
 

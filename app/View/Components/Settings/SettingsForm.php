@@ -14,10 +14,13 @@ namespace App\View\Components\Settings;
 use App\Models\NFEModel;
 use App\Models\SubscriptionPlan;
 use App\View\Components\Component;
+use App\View\Components\Traits\WithNested;
 use Illuminate\Database\Eloquent\Collection;
 
 class SettingsForm extends Component
 {
+    use WithNested;
+
     public Collection $models;
     public Collection $plans;
 
@@ -50,6 +53,16 @@ class SettingsForm extends Component
     public function removePlan($index)
     {
         $this->plans->forget($index);
+    }
+
+    public function savedPlan()
+    {
+        $this->plans = SubscriptionPlan::get();
+    }
+
+    public function savedModel()
+    {
+        $this->models = NFEModel::get();
     }
 
     public function render()
