@@ -16,6 +16,7 @@ use App\Enums\RoleTypesList;
 use App\Enums\Status;
 use App\Enums\StatusTypesList;
 use App\Models\Company;
+use App\View\Components\Common\Datatables\ActionsColumn;
 use App\View\Components\Common\Datatables\Datatable;
 use App\View\Components\Traits\ConfirmModelDelete;
 use Mediconesystems\LivewireDatatables\Column;
@@ -79,8 +80,7 @@ class CompanyUsersList extends Datatable
                 ->label('Created At')
                 ->format('m/d/Y')
                 ->filterable(),
-
-            Column::callback(['id', 'user_company_access.company_id'], function ($id, $companyId) {
+            ActionsColumn::actions(['id', 'user_company_access.company_id'], function ($id, $companyId) {
                 return view(
                     'components.tables.table-actions',
                     [
