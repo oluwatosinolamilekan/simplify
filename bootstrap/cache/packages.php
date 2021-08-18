@@ -174,6 +174,16 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
+  'ph7jack/wireui' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'WireUi\\Providers\\WireUiServiceProvider',
+    ),
+    'aliases' => 
+    array (
+    ),
+  ),
   'protoqol/prequel' => 
   array (
     'providers' => 

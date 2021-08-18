@@ -7,5 +7,6 @@
                 'name' => "{$client->ref_code} {$client->company->name}"
             ]);
         @endphp
+
         <x-select-option :values="$clients" wire:change="assignClient($event.target.value)" class="w-1/2 float-right" id="client"/>
     </div>
