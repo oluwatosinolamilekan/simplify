@@ -1,13 +1,13 @@
 <?php return array (
-  'asantibanez/livewire-select' => 
+  'aabosham/livewire-multi-select' => 
   array (
     'providers' => 
     array (
-      0 => 'Asantibanez\\LivewireSelect\\LivewireSelectServiceProvider',
+      0 => 'Aabosham\\LivewireSelect\\LivewireSelectServiceProvider',
     ),
     'aliases' => 
     array (
-      'LivewireSelect' => 'Asantibanez\\LivewireSelect\\LivewireSelectFacade',
+      'LivewireSelect' => 'Aabosham\\LivewireSelect\\LivewireSelectFacade',
     ),
   ),
   'barryvdh/laravel-ide-helper' => 

@@ -4,45 +4,45 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f7e94830ce29790acfb619758fafdc64",
+    "content-hash": "3a574ce1fb6537c715804305f8eff002",
     "packages": [
         {
-            "name": "asantibanez/livewire-select",
-            "version": "v2.1.0",
+            "name": "aabosham/livewire-multi-select",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/asantibanez/livewire-select.git",
-                "reference": "9bdc4f1367f06323d7906177ee3ab587d01d360f"
+                "url": "https://github.com/AAbosham/livewire-multi-select.git",
+                "reference": "3af5e0392a966de92c62ae821ff6e08ae99e5f2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/asantibanez/livewire-select/zipball/9bdc4f1367f06323d7906177ee3ab587d01d360f",
-                "reference": "9bdc4f1367f06323d7906177ee3ab587d01d360f",
+                "url": "https://api.github.com/repos/AAbosham/livewire-multi-select/zipball/3af5e0392a966de92c62ae821ff6e08ae99e5f2e",
+                "reference": "3af5e0392a966de92c62ae821ff6e08ae99e5f2e",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "^6.0|^7.0|^8.0",
                 "livewire/livewire": "^2.0",
-                "php": "^7.2|^7.3|^7.4|^8.0"
+                "php": "^7.2|^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^5.0|^6.0|^7.0",
-                "phpunit/phpunit": "^8.0|^9.0"
+                "orchestra/testbench": "^5.0|^6.0",
+                "phpunit/phpunit": "^8.0"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Asantibanez\\LivewireSelect\\LivewireSelectServiceProvider"
+                        "Aabosham\\LivewireSelect\\LivewireSelectServiceProvider"
                     ],
                     "aliases": {
-                        "LivewireSelect": "Asantibanez\\LivewireSelect\\LivewireSelectFacade"
+                        "LivewireSelect": "Aabosham\\LivewireSelect\\LivewireSelectFacade"
                     }
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Asantibanez\\LivewireSelect\\": "src"
+                    "Aabosham\\LivewireSelect\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -51,22 +51,22 @@
             ],
             "authors": [
                 {
-                    "name": "Andrés Santibáñez",
-                    "email": "santibanez.andres@gmail.com",
+                    "name": "Abobaker",
+                    "email": "albaakr@gmail.com",
                     "role": "Developer"
                 }
             ],
             "description": "Livewire dropdown select component",
-            "homepage": "https://github.com/asantibanez/livewire-select",
+            "homepage": "https://github.com/aabosham/livewire-multi-select",
             "keywords": [
-                "asantibanez",
-                "livewire-select"
+                "aabosham",
+                "livewire-multi-select"
             ],
             "support": {
-                "issues": "https://github.com/asantibanez/livewire-select/issues",
-                "source": "https://github.com/asantibanez/livewire-select/tree/v2.1.0"
+                "issues": "https://github.com/AAbosham/livewire-multi-select/issues",
+                "source": "https://github.com/AAbosham/livewire-multi-select/tree/v1.0.2"
             },
-            "time": "2021-07-31T22:42:23+00:00"
+            "time": "2021-03-25T07:47:26+00:00"
         },
         {
             "name": "asm89/stack-cors",

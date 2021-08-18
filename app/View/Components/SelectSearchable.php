@@ -11,19 +11,20 @@ declare(strict_types=1);
 
 namespace App\View\Components;
 
-use Asantibanez\LivewireSelect\LivewireSelect;
+use Aabosham\LivewireSelect\LivewireSelect;
 use Illuminate\Support\Collection;
 
 class SelectSearchable extends LivewireSelect
 {
     public $selectOptions;
     public $wire;
-
+    public $multiple;
     public function mount(
         $wire,
-        $value = null,
+        $value = [],
         $placeholder = 'Select an option',
         $searchable = false,
+        $multiple = false,
         $dependsOn = [],
         $dependsOnValues = [],
         $waitForDependenciesToShow = false,
@@ -37,14 +38,17 @@ class SelectSearchable extends LivewireSelect
         $searchSelectedOptionView = 'livewire-select::search-selected-option',
         $searchNoResultsView = 'livewire-select::search-no-results',
         $extras = []
-    ) {
+    )
+    {
         $this->wire = $wire;
+        $this->multiple = $multiple;
 
         parent::mount(
             $wire,
             $value,
             $placeholder,
             true,
+            $multiple,
             $dependsOn,
             $dependsOnValues,
             $waitForDependenciesToShow,
@@ -81,46 +85,24 @@ class SelectSearchable extends LivewireSelect
     public function styles()
     {
         return [
-            'default' => 'p-2 rounded border w-full appearance-none',
+            'default' => 'p-2 input w-full appearance-none',
 
-            'searchSelectedOption' => 'p-2 rounded border w-full bg-white flex items-center',
-            'searchSelectedOptionTitle' => 'w-full text-gray-900 text-left',
-            'searchSelectedOptionReset' => 'h-4 w-4 text-gray-500',
+            'searchSelectedOption' => 'bg-blue-700 mx-1 my-2 border border-gray-400 flex items-center',
+            'searchSelectedOptionTitle' => 'text-blue-100 text-start px-2',
+            'searchSelectedOptionReset' => 'h-4 w-4 text-blue-100 mx-1',
 
-            'search' => 'relative',
-            'searchInput' => 'p-2 rounded border w-full rounded',
-            'searchOptionsContainer' => 'absolute top-0 left-0 mt-12 w-full z-10',
+            'search' => 'w-full relative',
+            'searchInput' => 'input shadow-sm p-2 w-full border border-gray-400',
+            'searchOptionsContainer' => 'bg-gray-100  border border-gray-400 absolute top-0 start-0 mt-12 w-full z-20 h-96 overflow-y-auto',
+            'searchContainer' => 'flex flex-wrap border border-gray-400',
 
-            'searchOptionItem' => 'py-3 px-4 border-gray-300',
-            'searchOptionItemActive' => 'bg-indigo-600 text-white font-medium',
+            'searchOptionItem' => 'p-3 hover:bg-gray-300 hover:text-gray-700 cursor-pointer',
+            'searchOptionItemActive' => 'bg-gray-300 text-black font-medium',
             'searchOptionItemInactive' => 'bg-white text-gray-600',
 
-            'searchNoResults' => 'p-8 w-full bg-white border text-center text-xs text-gray-600',
+            'searchNoResults' => 'p-8 w-full bg-gray-100 text-center text-gray-600',
         ];
     }
 
-    public function render()
-    {
-        $options = $this->options($this->searchTerm);
 
-        $this->optionsValues = $options->pluck('value')->toArray();
-
-        if ($this->value != null) {
-            $selectedOption = $this->selectedOption($this->value);
-        }
-
-        $shouldShow = $this->waitForDependenciesToShow
-            ? $this->allDependenciesMet()
-            : true;
-
-        $styles = $this->styles();
-
-        return view($this->selectView)
-            ->with([
-                'options' => $options,
-                'selectedOption' => $selectedOption ?? null,
-                'shouldShow' => $shouldShow,
-                'styles' => $styles,
-            ]);
-    }
 }
