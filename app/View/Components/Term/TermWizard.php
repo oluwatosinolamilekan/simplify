@@ -113,6 +113,11 @@ class TermWizard extends Component
         $this->clients->add($this->factor->clients->where('id', $id)->first());
     }
 
+    public function updatedProperty($id)
+    {
+        $this->assignClient($id);
+    }
+
     public function detachClient($id)
     {
         $this->clients = $this->clients->reject(fn ($item) => $item->id == $id);
