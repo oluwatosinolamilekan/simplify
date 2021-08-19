@@ -19,7 +19,7 @@ class SelectSearchable extends LivewireSelect
     public $selectOptions;
     public $wire;
     public $multiple;
-//    public $changeEvent;
+    public $foo;
 
     public function mount(
         $wire,
@@ -75,12 +75,13 @@ class SelectSearchable extends LivewireSelect
         return $this->selectOptions
             ->filter(fn ($item) => str_contains(strtolower($item['description']), strtolower($searchTerm)));
     }
-
-    public function updatedProperty($value)
+    public function updatedFoo($value)
     {
-        
-//        $this->changeEvent = $value;
-        dd($value);
+        dd('sed');
+        if($value !== 'searchTerm'){
+            dd('sdf');
+//            $this->changeEvent[] = $value;
+        }
     }
 
     public function selectedOption($value)
