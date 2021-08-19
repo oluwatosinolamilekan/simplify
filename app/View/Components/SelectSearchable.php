@@ -19,7 +19,7 @@ class SelectSearchable extends LivewireSelect
     public $selectOptions;
     public $wire;
     public $multiple;
-    public $changeEvent;
+//    public $changeEvent;
 
     public function mount(
         $wire,
@@ -72,14 +72,15 @@ class SelectSearchable extends LivewireSelect
         if (empty($searchTerm)) {
             return $this->selectOptions;
         }
-
         return $this->selectOptions
             ->filter(fn ($item) => str_contains(strtolower($item['description']), strtolower($searchTerm)));
     }
 
     public function updatedProperty($value)
     {
-        $this->changeEvent = $value;
+        
+//        $this->changeEvent = $value;
+        dd($value);
     }
 
     public function selectedOption($value)
@@ -111,5 +112,40 @@ class SelectSearchable extends LivewireSelect
         ];
     }
 
+    public function render()
+    {
+        if ($this->searchable) {
+            if ($this->isSearching()) {
+                $options = $this->options($this->searchTerm);
+            } else {
+                $options = collect();
+            }
+        } else {
+            $options = $this->options($this->searchTerm);
+        }
+        $options = $this->options($this->searchTerm);
+
+        $this->optionsValues = $options->pluck('value')->toArray();
+
+        if ($this->value != null) {
+            $selectedOption = $this->value;
+        }
+
+        $shouldShow = $this->waitForDependenciesToShow
+            ? $this->allDependenciesMet()
+            : true;
+
+        $styles = $this->styles();
+
+        $options = $options->whereNotIn('value',collect($this->value)->pluck('value'));
+
+        return view($this->selectView)
+            ->with([
+                'options' => $options,
+                'selectedOption' => $selectedOption ?? null,
+                'shouldShow' => $shouldShow,
+                'styles' => $styles,
+            ]);
+    }
 
 }
