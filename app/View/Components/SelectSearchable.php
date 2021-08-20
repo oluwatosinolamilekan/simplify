@@ -19,7 +19,7 @@ class SelectSearchable extends LivewireSelect
     public $selectOptions;
     public $wire;
     public $multiple;
-    public $change;
+    public $change = [];
 
     public function mount(
         $wire,
@@ -77,7 +77,7 @@ class SelectSearchable extends LivewireSelect
     }
     public function updatedChange($value)
     {
-        $this->change = $value;
+        $this->change[] = $value;
     }
 
     public function selectedOption($value)
