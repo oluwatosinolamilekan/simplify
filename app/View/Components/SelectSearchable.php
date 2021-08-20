@@ -19,7 +19,7 @@ class SelectSearchable extends LivewireSelect
     public $selectOptions;
     public $wire;
     public $multiple;
-    public $change  = [];
+    public $change;
 
     public function mount(
         $wire,
@@ -69,7 +69,7 @@ class SelectSearchable extends LivewireSelect
 
     public function options($searchTerm = null): Collection
     {
-        if (empty($searchTerm)) {
+        if (empty($searchTerm) ) {
             return $this->selectOptions;
         }
         return $this->selectOptions
@@ -111,15 +111,7 @@ class SelectSearchable extends LivewireSelect
 
     public function render()
     {
-        if ($this->searchable) {
-            if ($this->isSearching()) {
-                $options = $this->options($this->searchTerm);
-            } else {
-                $options = collect();
-            }
-        } else {
-            $options = $this->options($this->searchTerm);
-        }
+
         $options = $this->options($this->searchTerm);
 
         $this->optionsValues = $options->pluck('value')->toArray();
