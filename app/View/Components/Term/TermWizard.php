@@ -83,7 +83,6 @@ class TermWizard extends Component
             $this->settings->save();
 
             $attributes = ['factor_id' => $this->term->factor_id, 'created_by' => Auth::user()->id];
-
             $this->term->clients()->syncWithPivotValues($this->clients, $attributes);
 
             $this->term->syncFeeRules($this->feeRules);

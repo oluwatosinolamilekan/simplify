@@ -22,7 +22,7 @@ class SelectSearchable extends LivewireSelect
 
     public function mount(
         $wire,
-        $value = [],
+        $value = [] ,
         $placeholder = 'Select an option',
         $searchable = false,
         $multiple = false,
