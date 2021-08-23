@@ -14,7 +14,7 @@
                                 ])
                 @endphp
 
-                <livewire:select-searchable :selectOptions="$factors" :wire="'client.factor_id'"  class="w-1/2 float-right"/>
+                <livewire:select-searchable :selectOptions="$factors" :wire="'client.factor_id'" wire:model="factors" class="w-1/2 float-right"/>
 
                 <x-jet-input-error for="client.factor_id" class="mt-3" />
             </div>

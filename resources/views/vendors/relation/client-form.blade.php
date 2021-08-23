@@ -14,7 +14,7 @@
                                     'selected' => $client->id == $vendor->client_id
                                 ])
                 @endphp
-                <livewire:select-searchable :selectOptions="$clients" :wire="'vendor.client_id'" :value="$vendor->client_id" :multiple="false"  class="w-1/2 float-right"/>
+                <livewire:select-searchable :selectOptions="$clients" :wire="'vendor.client_id'"  wire:model="clients"  class="w-1/2 float-right"/>
                 <x-jet-input-error for="vendor.client_id" class="mt-3" />
             </div>
         </div>

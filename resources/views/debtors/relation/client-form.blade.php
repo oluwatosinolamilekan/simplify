@@ -13,7 +13,7 @@
                                        'description' => "{$client->ref_code} {$client->company->name}",
                                    ])
                 @endphp
-                <livewire:select-searchable :selectOptions="$clients" :wire="'debtor.client_id'"  class="w-1/2 float-right"/>
+                <livewire:select-searchable :selectOptions="$clients" :wire="'debtor.client_id'" wire:model="clients" class="w-1/2 float-right"/>
                 <x-jet-input-error for="debtor.client_id" class="mt-3" />
             </div>
         </div>
