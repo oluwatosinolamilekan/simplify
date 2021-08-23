@@ -86,16 +86,19 @@ class SelectSearchable extends LivewireSelect
     {
         if($this->multiple){
             $values = $this->value;
-
             array_push($values ,[
                 'value' => $value,
                 'name' => $description,
                 'description' => $description
             ]);
-
             $this->value = collect($values)->unique()->filter()->toArray();
+        }else{
+            $this->value[0] = [
+                'value' => $value,
+                'name' => $description,
+                'description' => $description
+            ];
         }
-         $this->value = $value;
 
         if ($this->searchable && $this->value == null) {
             $this->emit('livewire-select-focus-search', ['name' => $this->name]);
