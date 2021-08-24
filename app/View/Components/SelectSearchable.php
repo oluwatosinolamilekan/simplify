@@ -68,19 +68,19 @@ class SelectSearchable extends LivewireSelect
 
     public function options($searchTerm = null): Collection
     {
-        if (empty($searchTerm) ) {
+        if (empty($searchTerm)) {
             return $this->selectOptions;
         }
         return $this->selectOptions
             ->filter(fn ($item) => str_contains(strtolower($item['description']), strtolower($searchTerm)));
+
     }
 
-    public function selectedOption($value)
-    {
-        $this->emitUp('update', $this->wire, $value);
-
-        return $this->selectOptions->where('value', $value)->first();
-    }
+//    public function selectedOption($value)
+//    {
+//        $this->emitUp('update', $this->wire, $value);
+//        return $this->selectOptions->where('value', $value)->first();
+//    }
 
     public function selectValue($value,$description = null)
     {
@@ -131,17 +131,16 @@ class SelectSearchable extends LivewireSelect
 
             'searchNoResults' => 'p-8 w-full bg-gray-100 text-center text-gray-600',
         ];
+
     }
 
     public function render()
     {
-
         $options = $this->options($this->searchTerm);
-
         $this->optionsValues = $options->pluck('value')->toArray();
 
         if ($this->value != null) {
-            $selectedOption = $this->value;
+            $selectedOption = $this->selectedOption($this->value);
         }
 
         $shouldShow = $this->waitForDependenciesToShow
@@ -149,8 +148,6 @@ class SelectSearchable extends LivewireSelect
             : true;
 
         $styles = $this->styles();
-
-        $options = $options->whereNotIn('value',collect($this->value)->pluck('value'));
 
         return view($this->selectView)
             ->with([
@@ -160,5 +157,6 @@ class SelectSearchable extends LivewireSelect
                 'styles' => $styles,
             ]);
     }
+
 
 }
